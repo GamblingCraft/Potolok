@@ -212,6 +212,11 @@
               </template>
             </div>
 
+            <div v-if="promoDiscount > 0" class="calc-result__row calc-result__row--promo">
+              <span>Скидка по промокоду ({{ foundPromo!.discount }})</span>
+              <span>−{{ fmt(promoDiscount) }} ₽</span>
+            </div>
+
             <div class="calc-result__total-line">
               <span>Итого</span>
               <Transition name="flip" mode="out-in">
@@ -219,10 +224,22 @@
               </Transition>
             </div>
 
-            <div class="calc-result__badge" :class="{ active: promoCode.trim() }">
-              <Icon name="lucide:tag" size="15"/>
-              <template v-if="promoCode.trim()">
-                Промокод <strong>{{ promoCode.trim().toUpperCase() }}</strong> применён
+            <!-- Статус промокода -->
+            <div class="calc-result__badge"
+              :class="{
+                'calc-result__badge--valid':   promoStatus === 'valid',
+                'calc-result__badge--invalid': promoStatus === 'invalid',
+              }"
+            >
+              <Icon
+                :name="promoStatus === 'valid' ? 'lucide:badge-check' : promoStatus === 'invalid' ? 'lucide:x-circle' : 'lucide:tag'"
+                size="15"
+              />
+              <template v-if="promoStatus === 'valid'">
+                Промокод <strong>{{ foundPromo!.code }}</strong> применён — скидка <strong>{{ foundPromo!.discount }}</strong>
+              </template>
+              <template v-else-if="promoStatus === 'invalid'">
+                Промокод <strong>«{{ promoCode.trim().toUpperCase() }}»</strong> не найден
               </template>
               <template v-else>
                 Есть промокод? Введите ниже
@@ -268,6 +285,7 @@
 
 <script setup lang="ts">
 import { faktury, vidy as vidyData, tsveta as tsvetaData, extraWorks, pomeshcheniya as pomData } from '~/data/catalog'
+import { promoCodes } from '~/data/promotions'
 
 let _id = 0
 
@@ -305,6 +323,25 @@ const formPhone = ref('')
 const promoCode = ref('')
 const sent = ref(false)
 
+/* ── Промокод ── */
+const activePromoCodes = promoCodes.filter(p => {
+  if (!p.active) return false
+  if (p.dateEnd && new Date(p.dateEnd) < new Date()) return false
+  return true
+})
+
+const foundPromo = computed(() => {
+  const code = promoCode.value.trim().toUpperCase()
+  if (!code) return null
+  return activePromoCodes.find(p => p.code.toUpperCase() === code) ?? undefined
+})
+
+const promoStatus = computed<'empty' | 'valid' | 'invalid'>(() => {
+  const code = promoCode.value.trim()
+  if (!code) return 'empty'
+  return foundPromo.value ? 'valid' : 'invalid'
+})
+
 /* ── Helpers ── */
 const currentTexture = computed(() => textures.find(t => t.id === sel.texture))
 const currentView    = computed(() => views.find(v => v.id === sel.view))
@@ -326,10 +363,17 @@ function roomCost(r: any) {
   return Math.round(roomArea(r) * priceM2) + roomExtrasTotal(r)
 }
 
-const totalArea = computed(() => +rooms.reduce((s, r) => s + roomArea(r), 0).toFixed(1))
-const costBase  = computed(() => Math.round(totalArea.value * ((currentTexture.value?.price ?? 159) + (currentTexture.value?.mountPrice ?? 0))))
-const costView  = computed(() => Math.round(totalArea.value * (currentView.value?.extra ?? 0)))
-const total     = computed(() => rooms.reduce((s, r) => s + roomCost(r), 0))
+const totalArea  = computed(() => +rooms.reduce((s, r) => s + roomArea(r), 0).toFixed(1))
+const costBase   = computed(() => Math.round(totalArea.value * ((currentTexture.value?.price ?? 159) + (currentTexture.value?.mountPrice ?? 0))))
+const costView   = computed(() => Math.round(totalArea.value * (currentView.value?.extra ?? 0)))
+const totalRaw   = computed(() => rooms.reduce((s, r) => s + roomCost(r), 0))
+const promoDiscount = computed(() => {
+  if (!foundPromo.value) return 0
+  if (foundPromo.value.discountType === 'percent')
+    return Math.round(totalRaw.value * foundPromo.value.discountValue / 100)
+  return Math.min(foundPromo.value.discountValue, totalRaw.value)
+})
+const total = computed(() => totalRaw.value - promoDiscount.value)
 
 function fmt(n: number) { return n.toLocaleString('ru-RU') }
 
@@ -792,12 +836,19 @@ function submitCalc() {
   border-top: 1px solid rgba(245,200,0,.1);
   transition: background .2s, color .2s;
 }
-.calc-result__badge.active {
-  background: rgba(245,200,0,.15);
-  color: var(--accent);
-  border-top-color: rgba(245,200,0,.25);
+.calc-result__badge--valid {
+  background: rgba(52,211,153,.12);
+  color: #34d399;
+  border-top-color: rgba(52,211,153,.25);
+}
+.calc-result__badge--invalid {
+  background: rgba(255,80,80,.1);
+  color: #ff6060;
+  border-top-color: rgba(255,80,80,.2);
 }
 .calc-result__badge strong { font-weight: 800; }
+.calc-result__row--promo span:first-child { color: #34d399 !important; }
+.calc-result__row--promo span:last-child  { color: #34d399 !important; font-weight: 700 !important; }
 .calc-result__disclaimer {
   display: flex; align-items: flex-start; gap: 9px;
   background: rgba(255, 180, 0, .08);

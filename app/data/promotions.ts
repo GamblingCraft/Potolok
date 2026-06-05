@@ -20,9 +20,11 @@ export interface Promotion {
 
 export interface PromoCode {
   id: number
-  code: string
+  code: string               // Сам промокод (в верхнем регистре)
   description: string
-  discount: string           // «10%», «500 ₽» и т.д.
+  discount: string           // Отображаемая строка: «10%», «500 ₽»
+  discountType: 'percent' | 'fixed'  // тип скидки
+  discountValue: number      // число: 10 = 10%, 500 = 500 ₽
   conditions: string
   dateEnd: string | null
   active: boolean
@@ -150,6 +152,8 @@ export const promoCodes: PromoCode[] = [
     code: 'НОВОСЕЛ10',
     description: 'Для новосёлов — скидка на первый заказ',
     discount: '10%',
+    discountType: 'percent',
+    discountValue: 10,
     conditions: 'Только для новых клиентов, первый заказ',
     dateEnd: null,
     active: true,
@@ -159,17 +163,43 @@ export const promoCodes: PromoCode[] = [
     code: 'ДРУГ500',
     description: 'Скидка за рекомендацию друга',
     discount: '500 ₽',
-    conditions: 'Передайте другу, оба получают скидку',
+    discountType: 'fixed',
+    discountValue: 500,
+    conditions: 'Передайте другу — оба получат скидку 500 ₽',
     dateEnd: null,
     active: true,
   },
   {
     id: 3,
-    code: 'ЛЕТО2024',
-    description: 'Летняя акция — скидка на матовые потолки',
+    code: 'САЙТ7',
+    description: 'Скидка за заявку с сайта',
     discount: '7%',
-    conditions: 'Только матовые полотна, от 15 м²',
-    dateEnd: '2024-08-31',
-    active: false,
+    discountType: 'percent',
+    discountValue: 7,
+    conditions: 'При оформлении заявки через сайт, любой заказ',
+    dateEnd: null,
+    active: true,
+  },
+  {
+    id: 4,
+    code: 'ПЕНСИОНЕР5',
+    description: 'Скидка для пенсионеров',
+    discount: '5%',
+    discountType: 'percent',
+    discountValue: 5,
+    conditions: 'По предъявлению пенсионного удостоверения',
+    dateEnd: null,
+    active: true,
+  },
+  {
+    id: 5,
+    code: 'ЛЕТО2026',
+    description: 'Летняя акция 2026',
+    discount: '12%',
+    discountType: 'percent',
+    discountValue: 12,
+    conditions: 'Действует при заказе в летний период',
+    dateEnd: '2026-08-31',
+    active: true,
   },
 ]

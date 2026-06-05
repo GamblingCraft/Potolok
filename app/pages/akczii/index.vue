@@ -201,7 +201,13 @@ const openFaq = ref<number | null>(null)
 const copiedCode = ref<string | null>(null)
 
 const activePromos     = computed(() => promotions.filter(p => p.active))
-const activePromoCodes = computed(() => promoCodes.filter(p => p.active))
+const activePromoCodes = computed(() =>
+  promoCodes.filter(p => {
+    if (!p.active) return false
+    if (p.dateEnd && new Date(p.dateEnd) < new Date()) return false
+    return true
+  })
+)
 
 const stats = [
   { val: 'до 20%',      label: 'максимальная скидка' },
