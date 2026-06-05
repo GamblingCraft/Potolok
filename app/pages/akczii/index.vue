@@ -101,9 +101,6 @@
                 </Transition>
               </div>
             </div>
-            <div class="ak-promo-card__date" v-if="promo.dateEnd">
-              До {{ formatDate(promo.dateEnd) }}
-            </div>
           </div>
         </div>
 

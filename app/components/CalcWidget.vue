@@ -212,11 +212,6 @@
               </template>
             </div>
 
-            <div v-if="promoDiscount > 0" class="calc-result__row calc-result__row--promo">
-              <span>Скидка по промокоду ({{ foundPromo!.discount }})</span>
-              <span>−{{ fmt(promoDiscount) }} ₽</span>
-            </div>
-
             <div class="calc-result__total-line">
               <span>Итого</span>
               <Transition name="flip" mode="out-in">
@@ -236,7 +231,7 @@
                 size="15"
               />
               <template v-if="promoStatus === 'valid'">
-                Промокод <strong>{{ foundPromo!.code }}</strong> применён — скидка <strong>{{ foundPromo!.discount }}</strong>
+                Промокод <strong>{{ foundPromo!.code }}</strong> применён
               </template>
               <template v-else-if="promoStatus === 'invalid'">
                 Промокод <strong>«{{ promoCode.trim().toUpperCase() }}»</strong> не найден
@@ -363,17 +358,10 @@ function roomCost(r: any) {
   return Math.round(roomArea(r) * priceM2) + roomExtrasTotal(r)
 }
 
-const totalArea  = computed(() => +rooms.reduce((s, r) => s + roomArea(r), 0).toFixed(1))
-const costBase   = computed(() => Math.round(totalArea.value * ((currentTexture.value?.price ?? 159) + (currentTexture.value?.mountPrice ?? 0))))
-const costView   = computed(() => Math.round(totalArea.value * (currentView.value?.extra ?? 0)))
-const totalRaw   = computed(() => rooms.reduce((s, r) => s + roomCost(r), 0))
-const promoDiscount = computed(() => {
-  if (!foundPromo.value) return 0
-  if (foundPromo.value.discountType === 'percent')
-    return Math.round(totalRaw.value * foundPromo.value.discountValue / 100)
-  return Math.min(foundPromo.value.discountValue, totalRaw.value)
-})
-const total = computed(() => totalRaw.value - promoDiscount.value)
+const totalArea = computed(() => +rooms.reduce((s, r) => s + roomArea(r), 0).toFixed(1))
+const costBase  = computed(() => Math.round(totalArea.value * ((currentTexture.value?.price ?? 159) + (currentTexture.value?.mountPrice ?? 0))))
+const costView  = computed(() => Math.round(totalArea.value * (currentView.value?.extra ?? 0)))
+const total     = computed(() => rooms.reduce((s, r) => s + roomCost(r), 0))
 
 function fmt(n: number) { return n.toLocaleString('ru-RU') }
 
@@ -847,8 +835,6 @@ function submitCalc() {
   border-top-color: rgba(255,80,80,.2);
 }
 .calc-result__badge strong { font-weight: 800; }
-.calc-result__row--promo span:first-child { color: #34d399 !important; }
-.calc-result__row--promo span:last-child  { color: #34d399 !important; font-weight: 700 !important; }
 .calc-result__disclaimer {
   display: flex; align-items: flex-start; gap: 9px;
   background: rgba(255, 180, 0, .08);
