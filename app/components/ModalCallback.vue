@@ -39,7 +39,7 @@
               <input
                 v-model="promoCode"
                 type="text"
-                placeholder="Промокод (необязательно)"
+                placeholder="Промокод"
                 class="modal__input modal__input--promo"
                 @input="promoCode = ($event.target as HTMLInputElement).value.toUpperCase()"
               />
