@@ -279,8 +279,8 @@
 </template>
 
 <script setup lang="ts">
-import { faktury, vidy as vidyData, tsveta as tsvetaData, extraWorks, pomeshcheniya as pomData } from '~/data/catalog'
-import { promoCodes } from '~/data/promotions'
+import { faktury, vidy as vidyData, tsveta as tsvetaData, extraWorks } from '~/data/catalog'
+import { activePromoCodes } from '~/data/promo'
 
 let _id = 0
 
@@ -289,8 +289,19 @@ const textures = faktury.map(f => ({ id: f.id, name: f.title, price: f.price, mo
 const views    = vidyData.map(v => ({ id: v.id, name: v.title, extra: v.extra ?? 0, img: v.img }))
 const colors   = tsvetaData.map(c => ({ id: c.id, name: c.title, hex: c.hex, extra: c.extra ?? 0 }))
 const extras   = extraWorks
-const roomTypes = pomData.map(p => ({ id: p.id, name: p.title.replace(/^[ВНа]+ /, ''), icon: p.icon }))
-  .concat([{ id: 'other', name: 'Другое', icon: 'lucide:home' }])
+const roomTypes = [
+  { id: 'living',  name: 'Гостиная',  icon: 'lucide:sofa' },
+  { id: 'bedroom', name: 'Спальня',   icon: 'lucide:bed' },
+  { id: 'kitchen', name: 'Кухня',     icon: 'lucide:utensils' },
+  { id: 'bath',    name: 'Ванная',    icon: 'lucide:droplets' },
+  { id: 'kids',    name: 'Детская',   icon: 'lucide:baby' },
+  { id: 'hall',    name: 'Прихожая',  icon: 'lucide:door-open' },
+  { id: 'toilet',  name: 'Туалет',    icon: 'lucide:square' },
+  { id: 'office',  name: 'Офис',      icon: 'lucide:building-2' },
+  { id: 'balcony', name: 'Балкон',    icon: 'lucide:wind' },
+  { id: 'flat',    name: 'Квартира',  icon: 'lucide:building' },
+  { id: 'other',   name: 'Другое',    icon: 'lucide:home' },
+]
 
 
 /* ── Carousel refs ── */
@@ -319,12 +330,6 @@ const promoCode = ref('')
 const sent = ref(false)
 
 /* ── Промокод ── */
-const activePromoCodes = promoCodes.filter(p => {
-  if (!p.active) return false
-  if (p.dateEnd && new Date(p.dateEnd) < new Date()) return false
-  return true
-})
-
 const foundPromo = computed(() => {
   const code = promoCode.value.trim().toUpperCase()
   if (!code) return null
