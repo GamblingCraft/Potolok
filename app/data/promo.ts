@@ -38,16 +38,6 @@ export const promoCodes: PromoCode[] = [
     active: true,
     public: true,
   },
-  {
-    id: 3,
-    code: 'САЙТ7',
-    description: 'Скидка за заявку с сайта',
-    discount: '7%',
-    conditions: 'При оформлении заявки через сайт, любой заказ',
-    active: true,
-    public: true,
-  },
-
   // ─── НЕПУБЛИЧНЫЕ (только для валидации) ──────────────────────
   {
     id: 4,
@@ -60,7 +50,7 @@ export const promoCodes: PromoCode[] = [
   },
   {
     id: 5,
-    code: 'ПАРТНЕР15',
+    code: '2ГИСПРО',
     description: 'Партнёрский промокод',
     discount: '15%',
     conditions: 'Только для партнёров компании',
@@ -69,16 +59,16 @@ export const promoCodes: PromoCode[] = [
   },
   {
     id: 6,
-    code: 'СОТРУДНИК',
+    code: 'ЦЕНТР25',
     description: 'Скидка для сотрудников',
-    discount: '20%',
+    discount: '10%',
     conditions: 'Только для сотрудников ПроПотолок',
     active: true,
     public: false,
   },
   {
     id: 7,
-    code: 'ЛЕТО2026',
+    code: 'НОВОЛЕНИНО2026',
     description: 'Летняя акция 2026',
     discount: '12%',
     conditions: 'Действует при заказе в летний период 2026',
