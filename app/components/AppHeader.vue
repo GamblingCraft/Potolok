@@ -3,8 +3,8 @@
 
     <div class="topmenu-forphone">
       <div class="topmenu-forphone--inner container">
-        <div>г. Иркутск</div>
-        <div class="withdot"><span class="dot"></span>Ежедневно 8:00—20:00</div>
+        <div>{{ site.city }}</div>
+        <div class="withdot"><span class="dot"></span>{{ site.schedule }}</div>
       </div>
     </div>
 
@@ -47,12 +47,12 @@
         </nav>
 
         <div class="top-info">
-          <div>Город: <strong>Иркутск</strong></div>
-          <div class="withdot"><span class="dot"></span>Ежедневно 8:00—20:00</div>
+          <div>Город: <strong>{{ site.city }}</strong></div>
+          <div class="withdot"><span class="dot"></span>{{ site.schedule }}</div>
         </div>
 
         <div class="top-phone">
-          <a href="tel:+73952000000" class="nav__phone">+7 (3952) 00-00-00</a>
+          <a :href="'tel:' + site.phoneRaw" class="nav__phone">{{ site.phone }}</a>
           <div class="nav-bars" :class="{ open: mobileOpen }" @click="mobileOpen = !mobileOpen">
             <span></span><span></span><span></span>
           </div>
@@ -82,7 +82,7 @@
         <div class="bottom-info">
           <div class="nav__phone withdot">
             <span class="dot"></span>
-            <a href="tel:+73952000000">+7 (3952) 00-00-00</a>
+            <a :href="'tel:' + site.phoneRaw">{{ site.phone }}</a>
           </div>
           <button class="nav-btn" @click="$emit('openCallback')">Заказать звонок</button>
         </div>
@@ -335,7 +335,7 @@
       </nav>
 
       <div class="mobile-menu__callback">
-        <a href="tel:+73952000000" class="mobile-menu__callback-phone">+7 (3952) 00-00-00</a>
+        <a :href="'tel:' + site.phoneRaw" class="mobile-menu__callback-phone">{{ site.phone }}</a>
         <button class="nav-btn" @click="mobileOpen = false; $emit('openCallback')">Заказать звонок</button>
         <div class="mobile-menu__socials">
           <a href="https://t.me/propotolok" target="_blank" class="mobile-menu__social mobile-menu__social--tg" aria-label="Telegram">
@@ -353,6 +353,7 @@
 </template>
 
 <script setup lang="ts">
+import { site } from '~/data/site'
 defineEmits(['openCallback'])
 
 const megaOpen = ref(false)

@@ -84,7 +84,7 @@
               </div>
               <div class="ms-aside-card__title">Позвоните прямо сейчас</div>
               <p class="ms-aside-card__desc">Принимаем заявки ежедневно с 8:00 до 22:00, в экстренных случаях — круглосуточно</p>
-              <a href="tel:+73952000000" class="ms-aside-card__phone">+7 (3952) 00-00-00</a>
+              <a :href="'tel:' + site.phoneRaw" class="ms-aside-card__phone">{{ site.phone }}</a>
               <ul class="ms-aside-list">
                 <li v-for="i in asideItems" :key="i">
                   <Icon name="lucide:check-circle" size="14" class="ms-check"/>{{ i }}
@@ -226,6 +226,7 @@
 </template>
 
 <script setup lang="ts">
+import { site } from '~/data/site'
 import { services } from '~/data/services'
 
 const service = services.find(s => s.slug === 'srochnyj-montazh-24-chasa')!

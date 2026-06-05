@@ -83,8 +83,8 @@
           <p class="fq-cta__desc">Позвоните или напишите нам — ответим на любой вопрос и бесплатно приедем на замер</p>
         </div>
         <div class="fq-cta__btns">
-          <a href="tel:+73952000000" class="nav-btn fq-btn"><Icon name="lucide:phone-call" size="16"/>Позвонить</a>
-          <a href="mailto:info@пропотолок.рф" class="fq-btn-outline"><Icon name="lucide:mail" size="16"/>Написать</a>
+          <a :href="'tel:' + site.phoneRaw" class="nav-btn fq-btn"><Icon name="lucide:phone-call" size="16"/>Позвонить</a>
+          <a :href="site.emailHref" class="fq-btn-outline"><Icon name="lucide:mail" size="16"/>Написать</a>
         </div>
       </div>
     </section>
@@ -93,6 +93,7 @@
 </template>
 
 <script setup lang="ts">
+import { site } from '~/data/site'
 useHead({
   title: 'Вопросы и ответы о натяжных потолках — ПроПотолок Иркутск',
   meta: [{ name: 'description', content: 'Ответы на частые вопросы о натяжных потолках: цены, монтаж, уход, гарантия, сравнение материалов. Иркутск.' }],

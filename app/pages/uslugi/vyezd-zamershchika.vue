@@ -226,6 +226,7 @@
 </template>
 
 <script setup lang="ts">
+import { site } from '~/data/site'
 import { services } from '~/data/services'
 
 const service = services.find(s => s.slug === 'vyezd-zamershchika')!

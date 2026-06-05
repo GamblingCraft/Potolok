@@ -76,7 +76,7 @@
           <h2 class="sc-cta__title">Нужны оригиналы сертификатов?</h2>
           <p class="sc-cta__desc">Предоставим полный пакет документов по запросу — для юридических лиц и гос. организаций</p>
         </div>
-        <a href="mailto:info@пропотолок.рф" class="nav-btn sc-cta__btn">
+        <a :href="site.emailHref" class="nav-btn sc-cta__btn">
           <Icon name="lucide:mail" size="16"/>Запросить документы
         </a>
       </div>
@@ -101,6 +101,7 @@
 </template>
 
 <script setup lang="ts">
+import { site } from '~/data/site'
 useHead({
   title: 'Сертификаты и лицензии ПроПотолок — Иркутск',
   meta: [{ name: 'description', content: 'Сертификаты соответствия, гигиенические заключения и лицензии компании ПроПотолок. Все материалы проверены и сертифицированы.' }],

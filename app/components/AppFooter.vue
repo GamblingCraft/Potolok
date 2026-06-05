@@ -11,18 +11,18 @@
           <div class="footer__h1">Контакты</div>
 
           <ul class="footer-info">
-            <li>г. Иркутск</li>
-            <li>Ежедневно с 8:00 до 20:00</li>
-            <li>E-mail: info@пропотолок.рф</li>
-            <li>ООО «ПроПотолок»</li>
-            <li>ИНН: 3800000000</li>
-            <li>ОГРН: 1153800000000</li>
+            <li>{{ site.city }}</li>
+            <li>{{ site.schedule }}</li>
+            <li>E-mail: {{ site.email }}</li>
+            <li>{{ site.nameFull }}</li>
+            <li>ИНН: {{ site.inn }}</li>
+            <li>ОГРН: {{ site.ogrn }}</li>
             <li>Выполняем замеры по городу и области</li>
           </ul>
 
           <div class="footer__tel">
             <span>Получить консультацию, подобрать материал или оформить вызов мастера, Вы можете по телефону:</span>
-            <a href="tel:+73952000000">+7 (3952) 00-00-00</a>
+            <a :href="'tel:' + site.phoneRaw">{{ site.phone }}</a>
           </div>
           <div class="footer__callme nav-btn" @click="$emit('openCallback')">Заказать звонок</div>
         </div>
@@ -130,5 +130,6 @@
 </template>
 
 <script setup lang="ts">
+import { site } from '~/data/site'
 defineEmits(['openCallback'])
 </script>

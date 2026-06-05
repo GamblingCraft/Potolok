@@ -130,10 +130,10 @@
           <p class="rv-cta__desc">Выставим счёт, подготовим договор и закрывающие документы для юридических лиц</p>
         </div>
         <div class="rv-cta__btns">
-          <a href="mailto:info@пропотолок.рф" class="nav-btn rv-btn">
+          <a :href="site.emailHref" class="nav-btn rv-btn">
             <Icon name="lucide:mail" size="16"/>Написать на email
           </a>
-          <a href="tel:+73952000000" class="rv-btn-outline">
+          <a :href="'tel:' + site.phoneRaw" class="rv-btn-outline">
             <Icon name="lucide:phone-call" size="16"/>Позвонить
           </a>
         </div>
@@ -144,6 +144,7 @@
 </template>
 
 <script setup lang="ts">
+import { site } from '~/data/site'
 useHead({
   title: 'Реквизиты ООО «ПроПотолок» — ИНН, ОГРН, банковские данные | Иркутск',
   meta: [{ name: 'description', content: 'Официальные реквизиты компании ПроПотолок: ИНН, ОГРН, КПП, расчётный счёт, банк. Скачать PDF или скопировать.' }],
@@ -154,35 +155,35 @@ const copiedAll = ref(false)
 const toastMsg  = ref('')
 
 const mainData = [
-  { label: 'Полное наименование', val: 'Общество с ограниченной ответственностью «ПроПотолок»' },
-  { label: 'Краткое наименование', val: 'ООО «ПроПотолок»' },
-  { label: 'ИНН',   val: '3800000000' },
-  { label: 'КПП',   val: '380001001' },
-  { label: 'ОГРН',  val: '1153800000000' },
-  { label: 'ОКПО',  val: '00000000' },
-  { label: 'ОКВЭД', val: '43.33 — Работы по устройству покрытий полов и облицовке стен' },
+  { label: 'Полное наименование',  val: `Общество с ограниченной ответственностью «${site.name}»` },
+  { label: 'Краткое наименование', val: site.nameFull },
+  { label: 'ИНН',   val: site.inn },
+  { label: 'КПП',   val: site.kpp },
+  { label: 'ОГРН',  val: site.ogrn },
+  { label: 'ОКПО',  val: site.okpo },
+  { label: 'ОКВЭД', val: site.okved },
 ]
 
 const bankData = [
-  { label: 'Банк',             val: 'ПАО «Сбербанк России»' },
-  { label: 'БИК',              val: '044525225' },
-  { label: 'Расчётный счёт',   val: '40702810XXXXXXXXXX' },
-  { label: 'Корр. счёт',       val: '30101810400000000225' },
-  { label: 'Отделение банка',  val: 'Байкальский банк ПАО Сбербанк, г. Иркутск' },
+  { label: 'Банк',             val: site.bank },
+  { label: 'БИК',              val: site.bankBik },
+  { label: 'Расчётный счёт',   val: site.bankAccount },
+  { label: 'Корр. счёт',       val: site.bankKorr },
+  { label: 'Отделение банка',  val: site.bankBranch },
 ]
 
-const contactData = [
-  { label: 'Телефон',       val: '+7 (3952) 00-00-00' },
-  { label: 'Email',         val: 'info@пропотолок.рф' },
-  { label: 'Сайт',          val: 'пропотолок.рф' },
-  { label: 'Режим работы',  val: 'Ежедневно 8:00 — 20:00' },
-]
+const contactData = computed(() => [
+  { label: 'Телефон',       val: site.phone },
+  { label: 'Email',         val: site.email },
+  { label: 'Сайт',          val: site.siteDomain },
+  { label: 'Режим работы',  val: site.schedule },
+])
 
 const addressData = [
-  { label: 'Юридический адрес',   val: '664000, г. Иркутск, ул. Примерная, д. 1, оф. 1' },
-  { label: 'Фактический адрес',   val: '664000, г. Иркутск, ул. Примерная, д. 1, оф. 1' },
-  { label: 'Почтовый адрес',      val: '664000, г. Иркутск, ул. Примерная, д. 1, оф. 1' },
-  { label: 'Генеральный директор', val: 'Иванов Иван Иванович' },
+  { label: 'Юридический адрес',    val: site.addressLegal },
+  { label: 'Фактический адрес',    val: site.addressFull },
+  { label: 'Почтовый адрес',       val: site.addressFull },
+  { label: 'Генеральный директор', val: site.director },
 ]
 
 function copy(val: string, label: string) {
@@ -219,7 +220,7 @@ function savePdf() {
 }
 
 async function shareRekvizity() {
-  const text = `Реквизиты ООО «ПроПотолок»\nИНН: 3800000000\nОГРН: 1153800000000\nТел: +7 (3952) 00-00-00\nEmail: info@пропотолок.рф`
+  const text = `Реквизиты ${site.nameFull}\nИНН: ${site.inn}\nОГРН: ${site.ogrn}\nТел: ${site.phone}\nEmail: ${site.email}`
   if (navigator.share) {
     await navigator.share({ title: 'Реквизиты ПроПотолок', text })
   } else {

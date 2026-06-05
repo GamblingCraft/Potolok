@@ -70,7 +70,7 @@
           </div>
         </div>
         <div class="gr-steps-cta">
-          <a href="tel:+73952000000" class="nav-btn gr-btn">
+          <a :href="'tel:' + site.phoneRaw" class="nav-btn gr-btn">
             <Icon name="lucide:phone-call" size="16"/>Сообщить о дефекте
           </a>
         </div>
@@ -114,6 +114,7 @@
 </template>
 
 <script setup lang="ts">
+import { site } from '~/data/site'
 useHead({
   title: 'Гарантия на натяжные потолки 12 лет — ПроПотолок Иркутск',
   meta: [{ name: 'description', content: 'Гарантия на натяжные потолки 12 лет по договору. Устраняем любой дефект по нашей вине бесплатно. Выезд в течение 24 часов.' }],
@@ -148,7 +149,7 @@ const warrantyNo = [
 
 const steps = [
   { icon: 'lucide:camera',      title: 'Сфотографируйте', desc: 'Сделайте фото дефекта и опишите, когда и как он появился.' },
-  { icon: 'lucide:phone-call',  title: 'Позвоните нам',   desc: 'Звоните по номеру +7 (3952) 00-00-00 или отправьте фото на email.' },
+  { icon: 'lucide:phone-call',  title: 'Позвоните нам',   desc: `Звоните по номеру ${site.phone} или отправьте фото на email.` },
   { icon: 'lucide:car',         title: 'Выезд мастера',   desc: 'Мастер приедет в течение 24 часов после обращения.' },
   { icon: 'lucide:wrench',      title: 'Бесплатный ремонт', desc: 'Устраним дефект за наш счёт. Оплата с вас — ноль рублей.' },
 ]

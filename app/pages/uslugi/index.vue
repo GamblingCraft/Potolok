@@ -176,6 +176,7 @@
 </template>
 
 <script setup lang="ts">
+import { site } from '~/data/site'
 import { services, serviceCategories } from '~/data/services'
 
 useHead({

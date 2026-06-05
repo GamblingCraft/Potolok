@@ -64,7 +64,7 @@
           </div>
         </div>
         <div class="ov-steps__cta">
-          <a href="tel:+73952000000" class="nav-btn ov-btn">
+          <a :href="'tel:' + site.phoneRaw" class="nav-btn ov-btn">
             <Icon name="lucide:phone-call" size="16"/>Позвонить по вопросу возврата
           </a>
         </div>
@@ -100,8 +100,8 @@
           <p class="ov-cta__desc">Свяжитесь с нами — объясним ситуацию и найдём оптимальное решение</p>
         </div>
         <div class="ov-cta__btns">
-          <a href="tel:+73952000000" class="nav-btn ov-btn"><Icon name="lucide:phone-call" size="16"/>Позвонить</a>
-          <a href="mailto:info@пропотолок.рф" class="ov-btn-outline"><Icon name="lucide:mail" size="16"/>Написать email</a>
+          <a :href="'tel:' + site.phoneRaw" class="nav-btn ov-btn"><Icon name="lucide:phone-call" size="16"/>Позвонить</a>
+          <a :href="site.emailHref" class="ov-btn-outline"><Icon name="lucide:mail" size="16"/>Написать email</a>
         </div>
       </div>
     </section>
@@ -110,6 +110,7 @@
 </template>
 
 <script setup lang="ts">
+import { site } from '~/data/site'
 useHead({
   title: 'Обмен и возврат — ПроПотолок Иркутск',
   meta: [{ name: 'description', content: 'Условия обмена и возврата в компании ПроПотолок. Работаем по Закону о защите прав потребителей. Возврат средств в течение 10 дней.' }],

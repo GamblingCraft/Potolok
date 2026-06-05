@@ -78,7 +78,7 @@
               <div class="ms-aside-card__badge"><Icon name="lucide:alert-triangle" size="14"/>Залили? Не паникуйте</div>
               <div class="ms-aside-card__title">Звоните прямо сейчас</div>
               <p class="ms-aside-card__desc">Не пытайтесь самостоятельно проколоть или вскрыть потолок — это приведёт к повреждению полотна</p>
-              <a href="tel:+73952000000" class="ms-aside-card__phone">+7 (3952) 00-00-00</a>
+              <a :href="'tel:' + site.phoneRaw" class="ms-aside-card__phone">{{ site.phone }}</a>
               <ul class="ms-aside-list">
                 <li v-for="i in asideItems" :key="i"><Icon name="lucide:check-circle" size="14" class="ms-check"/>{{ i }}</li>
               </ul>
@@ -197,6 +197,7 @@
 </template>
 
 <script setup lang="ts">
+import { site } from '~/data/site'
 import { services } from '~/data/services'
 const service = services.find(s => s.slug === 'sliv-vody-s-natyazhnogo-potolka')!
 
