@@ -128,8 +128,8 @@
         </div>
         <div class="ab-team">
           <div v-for="member in team" :key="member.name" class="ab-team-card">
-            <div class="ab-team-card__avatar" :style="{ background: member.color }">
-              <Icon :name="member.icon" size="28"/>
+            <div class="ab-team-card__avatar-wrap">
+              <img :src="member.photo" :alt="member.name" class="ab-team-card__photo"/>
             </div>
             <div class="ab-team-card__name">{{ member.name }}</div>
             <div class="ab-team-card__role">{{ member.role }}</div>
@@ -139,10 +139,6 @@
             </ul>
           </div>
         </div>
-        <p class="ab-team-note">
-          <Icon name="lucide:info" size="14"/>
-          Фото команды появятся после фотосессии. Карточки отражают реальные роли и опыт сотрудников.
-        </p>
       </div>
     </section>
 
@@ -307,32 +303,28 @@ const team = [
     name: 'Александр',
     role: 'Старший замерщик',
     exp: '12 лет',
-    color: '#f5c800',
-    icon: 'lucide:ruler',
+    photo: 'https://images.unsplash.com/photo-1566753323558-f4e0952af115?w=300&h=300&fit=crop&q=80',
     skills: ['Сложные помещения', 'Дизайн-консультация', 'Коммерческие объекты'],
   },
   {
     name: 'Дмитрий',
     role: 'Ведущий монтажник',
     exp: '10 лет',
-    color: '#4a9eff',
-    icon: 'lucide:hammer',
+    photo: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=300&h=300&fit=crop&q=80',
     skills: ['Многоуровневые потолки', 'Световые линии', 'Парящие ниши'],
   },
   {
     name: 'Михаил',
     role: 'Монтажник',
     exp: '7 лет',
-    color: '#34d399',
-    icon: 'lucide:wrench',
+    photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&q=80',
     skills: ['Стандартный монтаж', 'Ванные и кухни', 'Срочные заказы'],
   },
   {
     name: 'Ирина',
     role: 'Менеджер по заказам',
     exp: '6 лет',
-    color: '#f97316',
-    icon: 'lucide:headphones',
+    photo: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=300&fit=crop&q=80',
     skills: ['Консультации клиентов', 'Подбор материалов', 'Оформление договоров'],
   },
 ]
@@ -495,10 +487,15 @@ const schemaOrg = computed(() => JSON.stringify({
   transition: border-color .15s;
 }
 .ab-team-card:hover { border-color: var(--accent); }
-.ab-team-card__avatar {
-  width: 72px; height: 72px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 14px; color: var(--dark);
+.ab-team-card__avatar-wrap {
+  width: 90px; height: 90px; border-radius: 50%;
+  margin: 0 auto 16px;
+  overflow: hidden;
+  border: 3px solid var(--accent);
+  box-shadow: 0 4px 16px rgba(0,0,0,.1);
+}
+.ab-team-card__photo {
+  width: 100%; height: 100%; object-fit: cover; display: block;
 }
 .ab-team-card__name { font-size: 18px; font-weight: 800; color: var(--dark); margin-bottom: 4px; }
 .ab-team-card__role { font-size: 13px; color: var(--gray); margin-bottom: 4px; }

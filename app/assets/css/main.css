@@ -57,12 +57,7 @@ h2, .h2 { font-size: 35px; font-weight: 600; }
   font-family: var(--font); cursor: pointer; font-weight: 600;
   white-space: nowrap; transition: background .15s, color .15s;
 }
-.nav-btn:hover { background: transparent; color: var(--dark); }
-.section--footer .nav-btn:hover,
-.cookie-banner .nav-btn:hover,
-.hero .nav-btn:hover { color: #fff; }
-.ms-cta .nav-btn:hover,
-.ms-hero .nav-btn:hover { background: var(--accent-hover); color: var(--dark); }
+.nav-btn:hover { background: var(--accent-hover); color: var(--dark); }
 
 /* ══════════════════════════════════════
    HEADER
