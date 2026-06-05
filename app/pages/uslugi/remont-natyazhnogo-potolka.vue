@@ -1,0 +1,380 @@
+<template>
+  <div itemscope itemtype="https://schema.org/Service">
+    <section class="ms-hero">
+      <div class="ms-hero__bg" :style="{ backgroundImage: `url('${service.img}')` }"></div>
+      <div class="ms-hero__overlay"></div>
+      <div class="container ms-hero__inner">
+        <div class="ms-hero__content">
+          <div class="ms-pretitle">Диагностика бесплатно</div>
+          <h1 class="ms-hero__title" itemprop="name">Ремонт натяжного потолка в&nbsp;Иркутске</h1>
+          <p class="ms-hero__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
+            <meta itemprop="price" content="500"/><meta itemprop="priceCurrency" content="RUB"/><meta itemprop="availability" content="https://schema.org/InStock"/>
+            <strong>{{ service.price }}</strong> — бесплатная диагностика при выезде
+          </p>
+          <p class="ms-hero__desc" itemprop="description">{{ service.description }}</p>
+          <div class="ms-hero__facts">
+            <div class="ms-fact" v-for="f in heroFacts" :key="f.text"><Icon :name="f.icon" size="15" class="ms-fact__icon"/>{{ f.text }}</div>
+          </div>
+          <form class="ms-hero__form" @submit.prevent="submitHero">
+            <input v-model="formName" class="ms-inp" type="text" placeholder="Ваше имя"/>
+            <input :value="formPhone" class="ms-inp" type="tel" placeholder="+7 (999) 999-99-99" required @input="formPhone = maskPhone($event)"/>
+            <button type="submit" class="nav-btn ms-hero__btn"><Icon name="lucide:wrench" size="16"/>Вызвать мастера</button>
+          </form>
+          <p class="ms-policy">Нажимая кнопку, вы соглашаетесь с обработкой персональных данных</p>
+        </div>
+        <div class="ms-hero__nums">
+          <div class="ms-num" v-for="n in heroNums" :key="n.label"><div class="ms-num__val">{{ n.val }}</div><div class="ms-num__label">{{ n.label }}</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ВИДЫ ДЕФЕКТОВ -->
+    <section class="ms-section ms-defects">
+      <div class="container">
+        <div class="ms-head">
+          <div class="ms-pretitle ms-pretitle--dark">Что мы устраняем</div>
+          <h2 class="ms-title">Виды дефектов натяжных потолков</h2>
+          <p class="ms-desc">Устраним любой дефект — от провисания до порыва полотна. Бесплатная диагностика при выезде</p>
+        </div>
+        <div class="ms-defects-grid">
+          <div class="ms-defect-card" v-for="d in defects" :key="d.title">
+            <div class="ms-defect-card__icon"><Icon :name="d.icon" size="22"/></div>
+            <div class="ms-defect-card__title">{{ d.title }}</div>
+            <div class="ms-defect-card__desc">{{ d.desc }}</div>
+            <div class="ms-defect-card__price">{{ d.price }}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ЧТО ВХОДИТ + САЙДБАР -->
+    <section class="ms-section ms-included">
+      <div class="container">
+        <div class="ms-two-col">
+          <div class="ms-two-col__text">
+            <div class="ms-pretitle ms-pretitle--dark">Наш подход</div>
+            <h2 class="ms-title ms-title--left">Как мы выполняем ремонт</h2>
+            <p class="ms-body-text">Ремонтируем потолки любых производителей — MSD, Bauf, Descor, отечественные. Сначала проводим бесплатную диагностику, затем согласовываем стоимость и только после вашего одобрения приступаем к работе.</p>
+            <div class="ms-include-grid">
+              <div class="ms-include-item" v-for="item in includedItems" :key="item.title">
+                <div class="ms-include-item__icon"><Icon :name="item.icon" size="20"/></div>
+                <div><div class="ms-include-item__title">{{ item.title }}</div><div class="ms-include-item__desc">{{ item.desc }}</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="ms-two-col__aside">
+            <div class="ms-aside-card">
+              <div class="ms-aside-card__title">Вызвать мастера</div>
+              <p class="ms-aside-card__desc">Мастер приедет, диагностирует неисправность и озвучит стоимость до начала работ</p>
+              <ul class="ms-aside-list">
+                <li v-for="i in asideItems" :key="i"><Icon name="lucide:check-circle" size="14" class="ms-check"/>{{ i }}</li>
+              </ul>
+              <button class="nav-btn ms-aside-card__btn" @click="callbackOpen = true"><Icon name="lucide:phone-call" size="15"/>Заказать звонок</button>
+              <NuxtLink to="/kalkulyator" class="ms-aside-card__calc"><Icon name="lucide:calculator" size="14"/>Рассчитать онлайн</NuxtLink>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ЭТАПЫ -->
+    <section class="ms-section ms-steps" itemscope itemtype="https://schema.org/HowTo">
+      <meta itemprop="name" content="Как происходит ремонт натяжного потолка"/>
+      <div class="container">
+        <div class="ms-head">
+          <div class="ms-pretitle ms-pretitle--light">Процесс</div>
+          <h2 class="ms-title ms-title--light">Этапы ремонта натяжного потолка</h2>
+          <p class="ms-desc ms-desc--light">От диагностики до готового результата</p>
+        </div>
+        <div class="ms-steps-grid ms-steps-grid--4">
+          <div class="ms-step" v-for="(step, i) in steps" :key="step.title" itemprop="step" itemscope itemtype="https://schema.org/HowToStep">
+            <meta itemprop="position" :content="String(i + 1)"/><meta itemprop="name" :content="step.title"/><meta itemprop="text" :content="step.desc"/>
+            <div class="ms-step__num">{{ String(i + 1).padStart(2, '0') }}</div>
+            <div class="ms-step__icon"><Icon :name="step.icon" size="24"/></div>
+            <div class="ms-step__title">{{ step.title }}</div>
+            <div class="ms-step__desc">{{ step.desc }}</div>
+            <div class="ms-step__time" v-if="step.time"><Icon name="lucide:clock" size="12"/>{{ step.time }}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ПОЧЕМУ МЫ -->
+    <section class="ms-section ms-why">
+      <div class="container">
+        <div class="ms-head">
+          <div class="ms-pretitle ms-pretitle--dark">Почему мы</div>
+          <h2 class="ms-title">Ремонт потолка с гарантией</h2>
+        </div>
+        <div class="ms-why-grid">
+          <div class="ms-why-card" v-for="w in whyCards" :key="w.title">
+            <div class="ms-why-card__icon"><Icon :name="w.icon" size="22"/></div>
+            <div class="ms-why-card__title">{{ w.title }}</div>
+            <div class="ms-why-card__desc">{{ w.desc }}</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="ms-cta">
+      <div class="container ms-cta__inner">
+        <div>
+          <h2 class="ms-cta__title">Проблемы с натяжным потолком?</h2>
+          <p class="ms-cta__desc">Приедем, диагностируем бесплатно и устраним любой дефект в Иркутске</p>
+        </div>
+        <div class="ms-cta__btns">
+          <button class="nav-btn ms-cta__btn" @click="callbackOpen = true"><Icon name="lucide:phone-call" size="16"/>Заказать звонок</button>
+          <NuxtLink to="/kalkulyator" class="ms-cta__outline"><Icon name="lucide:calculator" size="16"/>Калькулятор</NuxtLink>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="ms-section ms-faq" itemscope itemtype="https://schema.org/FAQPage">
+      <div class="container">
+        <div class="ms-head">
+          <div class="ms-pretitle ms-pretitle--dark">Вопросы и ответы</div>
+          <h2 class="ms-title">Частые вопросы о ремонте потолка</h2>
+        </div>
+        <div class="ms-faq-list">
+          <div class="ms-faq-item" v-for="(q, i) in faqItems" :key="q.q" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question" :class="{ open: faqOpen === i }" @click="faqOpen = faqOpen === i ? -1 : i">
+            <div class="ms-faq-item__q" itemprop="name">{{ q.q }}<Icon :name="faqOpen === i ? 'lucide:chevron-up' : 'lucide:chevron-down'" size="18" class="ms-faq-item__arrow"/></div>
+            <div class="ms-faq-item__a" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer"><div itemprop="text">{{ q.a }}</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEO -->
+    <section class="ms-section ms-seo">
+      <div class="container">
+        <div class="ms-seo-inner">
+          <div class="ms-seo-content">
+            <h2>Ремонт натяжного потолка в Иркутске</h2>
+            <p>Компания <strong>ПроПотолок</strong> ремонтирует натяжные потолки в Иркутске с гарантией. Устраняем провисания, порывы, проблемы с багетом и крепежом. Ремонтируем потолки всех производителей.</p>
+            <h3>Провисание натяжного потолка</h3>
+            <p>Провисание чаще всего вызвано ослаблением крепления полотна в багете или деформацией профиля. В большинстве случаев полотно повторно заправляется в профиль без замены. Если полотно утратило эластичность — потребуется замена.</p>
+            <h3>Порыв натяжного полотна</h3>
+            <p>При небольшом порыве возможна локальная заплатка — стоимость значительно ниже полной замены. При крупном повреждении производится замена полотна: профиль и конструкция сохраняются, меняется только плёнка.</p>
+            <h3>Гарантийный ремонт</h3>
+            <p>Если вы устанавливали потолок у нас — ремонт в гарантийный период (12 лет) выполняется бесплатно. Обратитесь к нам с фотографией дефекта, и мы организуем гарантийный выезд.</p>
+          </div>
+          <div class="ms-seo-links">
+            <div class="ms-seo-links__title">Другие услуги</div>
+            <nav>
+              <NuxtLink v-for="l in seoLinks" :key="l.to" :to="l.to" class="ms-seo-link"><Icon name="lucide:arrow-right" size="13"/>{{ l.label }}</NuxtLink>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <ModalCallback v-model="callbackOpen"/>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { services } from '~/data/services'
+const service = services.find(s => s.slug === 'remont-natyazhnogo-potolka')!
+
+useHead({
+  title: 'Ремонт натяжного потолка в Иркутске — от 500 ₽, бесплатная диагностика | ПроПотолок',
+  meta: [
+    { name: 'description', content: 'Ремонт натяжного потолка в Иркутске от 500 ₽. Устраняем провисания, порывы, проблемы с багетом. Бесплатная диагностика. Любой производитель.' },
+    { property: 'og:title', content: 'Ремонт натяжного потолка в Иркутске | ПроПотолок' },
+    { property: 'og:type', content: 'website' },
+  ],
+  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'Service', name: 'Ремонт натяжного потолка', provider: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' }, telephone: '+73952000000' }, areaServed: { '@type': 'City', name: 'Иркутск' }, offers: { '@type': 'Offer', price: '500', priceCurrency: 'RUB', availability: 'https://schema.org/InStock' } }) }],
+})
+
+const callbackOpen = ref(false)
+const faqOpen = ref(-1)
+const formName = ref('')
+const formPhone = ref('')
+
+const heroFacts = [
+  { icon: 'lucide:search',       text: 'Диагностика бесплатно' },
+  { icon: 'lucide:badge-check',  text: 'Любой производитель' },
+  { icon: 'lucide:clock',        text: 'Выезд в день обращения' },
+  { icon: 'lucide:shield-check', text: 'Гарантия на ремонт' },
+  { icon: 'lucide:banknote',     text: 'От 500 ₽' },
+]
+const heroNums = [
+  { val: '0 ₽',    label: 'диагностика' },
+  { val: '1 день', label: 'выезд мастера' },
+  { val: '100%',   label: 'любой производитель' },
+  { val: '12 лет', label: 'гарантия на работы' },
+]
+const defects = [
+  { icon: 'lucide:arrow-down',    title: 'Провисание полотна',    desc: 'Полотно отошло от профиля или провисает в центре', price: 'от 500 ₽' },
+  { icon: 'lucide:scissors',      title: 'Порыв или прокол',      desc: 'Механическое повреждение — дыра, порез, прокол', price: 'от 800 ₽' },
+  { icon: 'lucide:minus',         title: 'Проблема с багетом',    desc: 'Профиль отошёл от стены, деформирован или сломан', price: 'от 600 ₽' },
+  { icon: 'lucide:droplets',      title: 'Желтизна от воды',      desc: 'Следы затопления, пятна на полотне после слива', price: 'оценка на месте' },
+  { icon: 'lucide:zap-off',       title: 'Проблемы со светильником', desc: 'Выпал спот, повреждено термокольцо, нет контакта', price: 'от 300 ₽' },
+  { icon: 'lucide:move',          title: 'Деформация полотна',    desc: 'Волны, складки, неравномерное натяжение', price: 'оценка на месте' },
+]
+const includedItems = [
+  { icon: 'lucide:search',       title: 'Бесплатная диагностика',   desc: 'Мастер осматривает дефект и устанавливает причину — бесплатно при выезде' },
+  { icon: 'lucide:wrench',       title: 'Устранение дефекта',       desc: 'Выполняем ремонт: заправляем полотно, устраняем провисание или повреждение' },
+  { icon: 'lucide:shield-check', title: 'Гарантия на ремонт',       desc: 'На выполненный ремонт предоставляем гарантию сроком 12 месяцев' },
+  { icon: 'lucide:file-text',    title: 'Акт выполненных работ',    desc: 'Оформляем документы — необходимо для страховки и гарантийных случаев' },
+]
+const asideItems = [
+  'Диагностика при выезде бесплатно',
+  'Согласование до начала работ',
+  'Любой производитель',
+  'Гарантия на ремонт',
+  'Оплата после приёмки',
+]
+const steps = [
+  { icon: 'lucide:phone-call',  title: 'Заявка',         desc: 'Опишите проблему по телефону или прикрепите фото — предварительно оценим стоимость.', time: '5 минут' },
+  { icon: 'lucide:search',      title: 'Диагностика',    desc: 'Мастер приедет, осмотрит дефект и определит причину. Диагностика бесплатна.', time: 'В день обращения' },
+  { icon: 'lucide:wrench',      title: 'Ремонт',         desc: 'После согласования цены выполняем ремонт. Большинство дефектов устраняется за 1–3 часа.', time: '1–3 часа' },
+  { icon: 'lucide:check-circle', title: 'Приёмка',       desc: 'Вы осматриваете результат, подписываете акт и производите оплату.', time: 'После работы' },
+]
+const whyCards = [
+  { icon: 'lucide:search',       title: 'Бесплатная диагностика', desc: 'Приедем, осмотрим и скажем точную причину дефекта без предоплаты и обязательств.' },
+  { icon: 'lucide:badge-check',  title: 'Любой производитель',    desc: 'Ремонтируем потолки всех марок: MSD, Bauf, Descor, отечественные и безымянные.' },
+  { icon: 'lucide:shield-check', title: 'Гарантия на ремонт',     desc: '12 месяцев гарантии на выполненный ремонт. При установке от нас — гарантийный выезд бесплатно.' },
+  { icon: 'lucide:clock',        title: 'Выезд в день обращения', desc: 'Принимаем заявки ежедневно. Мастер приедет в день звонка или в согласованное время.' },
+  { icon: 'lucide:banknote',     title: 'Честная цена',           desc: 'Стоимость озвучивается после диагностики и до начала работ. Скрытых доплат нет.' },
+  { icon: 'lucide:refresh-cw',   title: 'Если нельзя починить',   desc: 'Если ремонт нецелесообразен — предложим замену полотна по выгодной цене.' },
+]
+const faqItems = [
+  { q: 'Можно ли отремонтировать провисший натяжной потолок?', a: 'В большинстве случаев — да. Если полотно отошло от профиля, мастер повторно заправит его. Если причина в деформации профиля — заменит участок. Стоимость такого ремонта значительно ниже полной замены.' },
+  { q: 'Можно ли починить порванный натяжной потолок?', a: 'Небольшой прокол или порез можно устранить с помощью специальной заплатки — место повреждения становится практически незаметным. При крупном разрыве производится замена полотна: конструкция сохраняется, меняется только плёнка.' },
+  { q: 'Ремонтируете ли вы потолки других компаний?', a: 'Да. Ремонтируем потолки любых производителей и любых компаний-установщиков. Для диагностики достаточно осмотра на месте.' },
+  { q: 'Сколько стоит ремонт натяжного потолка?', a: 'От 500 ₽ в зависимости от вида и сложности дефекта. Точную стоимость называем после бесплатной диагностики. Согласовываем цену до начала работ.' },
+  { q: 'Если потолок установлен у вас — ремонт бесплатный?', a: 'Если дефект возник в гарантийный период (12 лет) и по нашей вине — ремонт бесплатный. Отправьте фото дефекта, и мы организуем гарантийный выезд.' },
+]
+const seoLinks = [
+  { to: '/uslugi/zamena-polotna',                 label: 'Замена натяжного полотна' },
+  { to: '/uslugi/demontazh-natyazhnogo-potolka',  label: 'Демонтаж потолка' },
+  { to: '/uslugi/sliv-vody-s-natyazhnogo-potolka', label: 'Слив воды с потолка' },
+  { to: '/uslugi/montazh-natyazhnyh-potolkov',    label: 'Монтаж натяжных потолков' },
+  { to: '/uslugi/ustanovka-svetilnikov',          label: 'Установка светильников' },
+]
+
+function maskPhone(e: Event) {
+  const input = e.target as HTMLInputElement
+  let val = input.value.replace(/\D/g, '')
+  if (val.startsWith('7') || val.startsWith('8')) val = val.slice(1)
+  val = '7' + val.slice(0, 10)
+  let r = '+7'
+  if (val.length > 1) r += ' (' + val.slice(1, 4)
+  if (val.length >= 4) r += ') ' + val.slice(4, 7)
+  if (val.length >= 7) r += '-' + val.slice(7, 9)
+  if (val.length >= 9) r += '-' + val.slice(9, 11)
+  input.value = r; return r
+}
+function submitHero() { callbackOpen.value = true }
+</script>
+
+<style scoped>
+.ms-pretitle { display: inline-block; font-size: 12px; font-weight: 700; padding: 3px 14px; border-radius: 20px; margin-bottom: 14px; text-transform: uppercase; letter-spacing: .5px; }
+.ms-pretitle--dark  { background: var(--accent); color: var(--dark); }
+.ms-pretitle--light { background: rgba(245,200,0,.15); color: var(--accent); }
+.ms-head { text-align: center; margin-bottom: 44px; }
+.ms-title { font-size: 34px; font-weight: 800; color: var(--dark); margin: 0 0 12px; line-height: 1.2; }
+.ms-title--left { text-align: left; } .ms-title--light { color: #fff; }
+.ms-desc { font-size: 16px; color: var(--gray); max-width: 560px; margin: 0 auto; line-height: 1.6; }
+.ms-desc--light { color: rgba(255,255,255,.5); }
+.ms-check { color: var(--accent); flex-shrink: 0; }
+.ms-body-text { font-size: 15px; color: #555; line-height: 1.75; margin-bottom: 24px; }
+.ms-section { padding: 72px 0; }
+.ms-hero { position: relative; min-height: 520px; display: flex; align-items: center; }
+.ms-hero__bg { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 0; }
+.ms-hero__overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.6) 60%, rgba(0,0,0,.3) 100%); z-index: 1; }
+.ms-hero__inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr auto; gap: 60px; align-items: center; padding-top: 60px; padding-bottom: 60px; }
+.ms-hero__content { max-width: 620px; }
+.ms-hero__title { font-size: 44px; font-weight: 900; color: #fff; line-height: 1.15; margin-bottom: 10px; }
+.ms-hero__price { font-size: 20px; color: rgba(255,255,255,.7); margin-bottom: 16px; }
+.ms-hero__price strong { color: var(--accent); }
+.ms-hero__desc  { font-size: 16px; color: rgba(255,255,255,.65); line-height: 1.65; margin-bottom: 24px; }
+.ms-hero__facts { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+.ms-fact { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: rgba(255,255,255,.6); }
+.ms-fact__icon { color: var(--accent); }
+.ms-hero__form { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.ms-inp { flex: 1; min-width: 160px; padding: 13px 16px; border: none; border-radius: 10px; font-size: 15px; font-family: var(--font); color: var(--dark); outline: none; background: rgba(255,255,255,.95); }
+.ms-inp:focus { background: #fff; }
+.ms-hero__btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px; font-size: 15px; border-radius: 10px; white-space: nowrap; }
+.ms-policy { font-size: 11px; color: rgba(255,255,255,.35); margin: 0; }
+.ms-hero__nums { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.ms-num { background: rgba(255,255,255,.08); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,.12); border-radius: 14px; padding: 18px 20px; text-align: center; min-width: 130px; }
+.ms-num__val   { font-size: 26px; font-weight: 900; color: var(--accent); line-height: 1; margin-bottom: 5px; }
+.ms-num__label { font-size: 12px; color: rgba(255,255,255,.45); line-height: 1.3; }
+.ms-defects { background: #f7f7f7; }
+.ms-defects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.ms-defect-card { background: #fff; border-radius: 16px; padding: 24px 20px; border: 1.5px solid transparent; transition: border-color .15s, box-shadow .15s; }
+.ms-defect-card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(245,200,0,.1); }
+.ms-defect-card__icon { width: 46px; height: 46px; background: rgba(245,200,0,.12); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--dark); margin-bottom: 12px; transition: background .15s; }
+.ms-defect-card:hover .ms-defect-card__icon { background: var(--accent); }
+.ms-defect-card__title { font-size: 14px; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
+.ms-defect-card__desc  { font-size: 13px; color: var(--gray); line-height: 1.5; margin-bottom: 10px; }
+.ms-defect-card__price { font-size: 13px; font-weight: 700; color: var(--accent); }
+.ms-included { background: #fff; }
+.ms-two-col { display: grid; grid-template-columns: 1fr 300px; gap: 56px; align-items: start; }
+.ms-include-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.ms-include-item { display: flex; align-items: flex-start; gap: 14px; padding: 18px; background: #f7f7f7; border-radius: 14px; border: 1.5px solid transparent; transition: border-color .15s; }
+.ms-include-item:hover { border-color: var(--accent); }
+.ms-include-item__icon { width: 42px; height: 42px; flex-shrink: 0; background: var(--accent); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--dark); }
+.ms-include-item__title { font-size: 14px; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+.ms-include-item__desc  { font-size: 13px; color: var(--gray); line-height: 1.5; }
+.ms-aside-card { background: #f7f7f7; border-radius: 18px; padding: 26px; border: 1.5px solid #ececec; position: sticky; top: 100px; }
+.ms-aside-card__title { font-size: 18px; font-weight: 800; color: var(--dark); margin-bottom: 10px; }
+.ms-aside-card__desc  { font-size: 14px; color: var(--gray); line-height: 1.55; margin-bottom: 18px; }
+.ms-aside-list { list-style: none; padding: 0; margin: 0 0 20px; display: flex; flex-direction: column; gap: 9px; }
+.ms-aside-list li { display: flex; align-items: center; gap: 9px; font-size: 14px; color: #444; }
+.ms-aside-card__btn  { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 13px; font-size: 14px; margin-bottom: 10px; }
+.ms-aside-card__calc { display: flex; align-items: center; justify-content: center; gap: 7px; font-size: 14px; font-weight: 600; color: var(--gray); text-decoration: none; transition: color .15s; }
+.ms-aside-card__calc:hover { color: var(--dark); }
+.ms-steps { background: #141414; }
+.ms-steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.ms-steps-grid--4 { grid-template-columns: repeat(4, 1fr); }
+.ms-step { background: #1e1e1e; border: 1px solid #2a2a2a; border-radius: 18px; padding: 26px 22px; position: relative; transition: border-color .2s; }
+.ms-step:hover { border-color: var(--accent); }
+.ms-step__num { position: absolute; top: 18px; right: 18px; font-size: 36px; font-weight: 900; color: rgba(245,200,0,.08); font-family: 'Gilroy', sans-serif; line-height: 1; }
+.ms-step__icon { width: 50px; height: 50px; background: rgba(245,200,0,.12); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: var(--accent); margin-bottom: 16px; transition: background .2s; }
+.ms-step:hover .ms-step__icon { background: var(--accent); color: var(--dark); }
+.ms-step__title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+.ms-step__desc  { font-size: 13px; color: rgba(255,255,255,.45); line-height: 1.6; margin-bottom: 12px; }
+.ms-step__time  { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; color: var(--accent); background: rgba(245,200,0,.1); padding: 3px 10px; border-radius: 20px; }
+.ms-why { background: #f7f7f7; }
+.ms-why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.ms-why-card { background: #fff; border-radius: 16px; padding: 26px 22px; border: 1.5px solid transparent; transition: border-color .15s, box-shadow .15s; }
+.ms-why-card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(245,200,0,.1); }
+.ms-why-card__icon { width: 50px; height: 50px; background: var(--accent); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: var(--dark); margin-bottom: 14px; }
+.ms-why-card__title { font-size: 15px; font-weight: 700; color: var(--dark); margin-bottom: 7px; }
+.ms-why-card__desc  { font-size: 13px; color: var(--gray); line-height: 1.6; }
+.ms-cta { background: #141414; padding: 64px 0; }
+.ms-cta__inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+.ms-cta__title { font-size: 30px; font-weight: 900; color: #fff; margin-bottom: 8px; }
+.ms-cta__desc  { font-size: 15px; color: rgba(255,255,255,.4); max-width: 440px; }
+.ms-cta__btns  { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+.ms-cta__btn   { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; font-size: 15px; }
+.ms-cta__outline { display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; font-size: 15px; font-weight: 700; font-family: var(--font); background: none; border: 2px solid rgba(255,255,255,.2); border-radius: 10px; color: #fff; cursor: pointer; text-decoration: none; transition: border-color .15s, color .15s; }
+.ms-cta__outline:hover { border-color: var(--accent); color: var(--accent); }
+.ms-faq { background: #f7f7f7; }
+.ms-faq-list { display: flex; flex-direction: column; gap: 10px; max-width: 860px; margin: 0 auto; }
+.ms-faq-item { background: #fff; border-radius: 14px; border: 1.5px solid #eee; overflow: hidden; cursor: pointer; transition: border-color .15s; }
+.ms-faq-item.open { border-color: var(--accent); }
+.ms-faq-item__q { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 22px; font-size: 15px; font-weight: 700; color: var(--dark); user-select: none; }
+.ms-faq-item__arrow { flex-shrink: 0; color: var(--gray); }
+.ms-faq-item.open .ms-faq-item__arrow { color: var(--accent); }
+.ms-faq-item__a { max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .3s; font-size: 14px; color: #555; line-height: 1.7; padding: 0 22px; }
+.ms-faq-item.open .ms-faq-item__a { max-height: 300px; padding: 0 22px 18px; }
+.ms-seo { background: #fff; }
+.ms-seo-inner { display: grid; grid-template-columns: 1fr 240px; gap: 56px; align-items: start; }
+.ms-seo-content h2 { font-size: 22px; font-weight: 800; color: var(--dark); margin: 0 0 14px; }
+.ms-seo-content h3 { font-size: 16px; font-weight: 700; color: var(--dark); margin: 20px 0 8px; }
+.ms-seo-content p  { font-size: 15px; color: #555; line-height: 1.75; margin-bottom: 10px; }
+.ms-seo-content strong { color: var(--dark); }
+.ms-seo-links { position: sticky; top: 100px; }
+.ms-seo-links__title { font-size: 14px; font-weight: 800; color: var(--dark); margin-bottom: 14px; text-transform: uppercase; letter-spacing: .4px; }
+.ms-seo-link { display: flex; align-items: center; gap: 7px; padding: 9px 0; font-size: 14px; font-weight: 500; color: var(--gray); text-decoration: none; border-bottom: 1px solid #f0f0f0; transition: color .15s, padding-left .15s; }
+.ms-seo-link:hover { color: var(--dark); padding-left: 4px; }
+@media (max-width: 1100px) { .ms-hero__inner { grid-template-columns: 1fr; } .ms-hero__nums { grid-template-columns: repeat(4, 1fr); } .ms-defects-grid { grid-template-columns: repeat(2, 1fr); } .ms-steps-grid--4 { grid-template-columns: repeat(2, 1fr); } .ms-why-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 860px) { .ms-two-col { grid-template-columns: 1fr; } .ms-aside-card { position: static; } .ms-seo-inner { grid-template-columns: 1fr; } .ms-seo-links { position: static; } }
+@media (max-width: 640px) { .ms-hero__title { font-size: 30px; } .ms-hero__nums { grid-template-columns: repeat(2, 1fr); } .ms-hero__form { flex-direction: column; } .ms-inp, .ms-hero__btn { width: 100%; } .ms-defects-grid { grid-template-columns: 1fr; } .ms-include-grid { grid-template-columns: 1fr; } .ms-steps-grid--4 { grid-template-columns: 1fr; } .ms-why-grid { grid-template-columns: 1fr; } .ms-title { font-size: 26px; } .ms-cta__inner { flex-direction: column; align-items: flex-start; } }
+</style>
