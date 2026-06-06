@@ -245,7 +245,7 @@
       </div>
       <div class="steps-grid">
         <div v-for="(step, i) in steps" :key="step.title" class="step-card">
-          <div class="step-card__num">{{ String(i + 1).padStart(2, '0') }}</div>
+          <div class="step-card__num">{{ i + 1 }}</div>
           <div class="step-card__icon"><Icon :name="step.icon" size="28"/></div>
           <div class="step-card__title">{{ step.title }}</div>
           <div class="step-card__desc">{{ step.desc }}</div>
@@ -1000,20 +1000,22 @@ function submitForm() {
 .idx-steps .idx-title { color: #fff; }
 .idx-steps .idx-desc { color: rgba(255,255,255,.4); }
 .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; position: relative; }
-.step-card { background: #1e1e1e; border: 1px solid #2a2a2a; border-radius: 16px; padding: 28px 22px; position: relative; z-index: 1; transition: border-color .2s; }
+.step-card { background: #1e1e1e; border: 1px solid #2a2a2a; border-radius: 16px; padding: 28px 22px; position: relative; overflow: hidden; z-index: 1; transition: border-color .2s; }
 .step-card:hover { border-color: rgba(245,200,0,.35); }
 .step-card__num {
-  font-size: 96px;
+  position: absolute;
+  bottom: -24px;
+  right: 10px;
+  font-size: 160px;
   font-weight: 900;
   font-family: var(--font);
   line-height: 1;
-  margin-bottom: -16px;
-  /* Контурная цифра — только обводка, без заливки */
   color: transparent;
   -webkit-text-stroke: 2px var(--accent);
   text-stroke: 2px var(--accent);
+  opacity: .25;
   user-select: none;
-  letter-spacing: -4px;
+  pointer-events: none;
 }
 .step-card__icon { width: 52px; height: 52px; background: var(--accent); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: var(--dark); margin-bottom: 16px; }
 .step-card__title { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 8px; }
