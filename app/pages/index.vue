@@ -169,11 +169,313 @@
   </section>
 
   <CalcWidget />
+
+  <!-- ═══ АКЦИИ ═══ -->
+  <section class="idx-section idx-promos">
+    <div class="container">
+      <div class="idx-head">
+        <div class="idx-pretitle">Выгодные условия</div>
+        <h2 class="idx-title">Акции и скидки</h2>
+        <p class="idx-desc">Успейте воспользоваться текущими предложениями — часть акций ограничена по времени</p>
+      </div>
+      <div class="promo-grid">
+        <div v-for="p in promoCards" :key="p.id" class="promo-card">
+          <div class="promo-card__icon" :style="{ background: p.color + '22', color: p.color }">
+            <Icon :name="p.icon" size="26"/>
+          </div>
+          <div v-if="p.badge" class="promo-card__badge">{{ p.badge }}</div>
+          <div class="promo-card__discount">{{ p.discount }}</div>
+          <div class="promo-card__title">{{ p.title }}</div>
+          <div class="promo-card__sub">{{ p.subtitle }}</div>
+          <ul class="promo-card__list">
+            <li v-for="c in p.conditions.slice(0,3)" :key="c">
+              <Icon name="lucide:check" size="13" class="promo-card__check"/>{{ c }}
+            </li>
+          </ul>
+          <button class="nav-btn promo-card__btn" @click="callbackOpenIdx = true">Получить скидку</button>
+        </div>
+      </div>
+      <div class="idx-more">
+        <NuxtLink to="/akczii" class="idx-more-link">
+          Все акции и скидки <Icon name="lucide:arrow-right" size="15"/>
+        </NuxtLink>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ПОРТФОЛИО ═══ -->
+  <section class="idx-section idx-portfolio">
+    <div class="container">
+      <div class="idx-head">
+        <div class="idx-pretitle">Наши работы</div>
+        <h2 class="idx-title">Готовые проекты с ценами</h2>
+        <p class="idx-desc">Реальные работы наших мастеров в Иркутске — с указанием площади и итоговой стоимости</p>
+      </div>
+      <div class="port-grid">
+        <div v-for="item in portfolioCards" :key="item.id" class="port-card" @click="openLightbox(item.photos[0], item.title)">
+          <div class="port-card__img" :style="{ backgroundImage: `url('${item.photos[0]}')` }"></div>
+          <div class="port-card__overlay"></div>
+          <div class="port-card__zoom"><Icon name="lucide:zoom-in" size="18"/></div>
+          <div class="port-card__body">
+            <div class="port-card__title">{{ item.title }}</div>
+            <div class="port-card__meta">
+              <span>{{ item.area }} м²</span>
+              <span>{{ item.texture }}</span>
+              <span v-if="item.view !== 'Обычный'">{{ item.view }}</span>
+            </div>
+            <div class="port-card__price">{{ fmt(item.price) }} ₽</div>
+          </div>
+        </div>
+      </div>
+      <div class="idx-more">
+        <NuxtLink to="/portfolio" class="idx-more-link">
+          Смотреть все работы <Icon name="lucide:arrow-right" size="15"/>
+        </NuxtLink>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ КАК МЫ РАБОТАЕМ ═══ -->
+  <section class="idx-section idx-steps">
+    <div class="container">
+      <div class="idx-head">
+        <div class="idx-pretitle">Просто и прозрачно</div>
+        <h2 class="idx-title">Как происходит заказ</h2>
+        <p class="idx-desc">4 простых шага от звонка до готового потолка — всё за 1–2 дня</p>
+      </div>
+      <div class="steps-grid">
+        <div v-for="(step, i) in steps" :key="step.title" class="step-card">
+          <div class="step-card__num">{{ String(i + 1).padStart(2, '0') }}</div>
+          <div class="step-card__icon"><Icon :name="step.icon" size="28"/></div>
+          <div class="step-card__title">{{ step.title }}</div>
+          <div class="step-card__desc">{{ step.desc }}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ПОЧЕМУ МЫ ═══ -->
+  <section class="idx-section idx-why">
+    <div class="container">
+      <div class="idx-head">
+        <div class="idx-pretitle">ПроПотолок Иркутск</div>
+        <h2 class="idx-title">Почему выбирают нас</h2>
+        <p class="idx-desc">Работаем с 2009 года. Более 3 000 довольных клиентов в Иркутске и области</p>
+      </div>
+      <div class="why-grid">
+        <div v-for="w in whyCards" :key="w.title" class="why-card">
+          <div class="why-card__icon"><Icon :name="w.icon" size="24"/></div>
+          <div class="why-card__title">{{ w.title }}</div>
+          <div class="why-card__desc">{{ w.desc }}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ОТЗЫВЫ ═══ -->
+  <section class="idx-section idx-reviews">
+    <div class="container">
+      <div class="idx-head-row">
+        <div>
+          <div class="idx-pretitle">Реальные клиенты</div>
+          <h2 class="idx-title">Отзывы о нашей работе</h2>
+        </div>
+        <div class="idx-rating-badges">
+          <div v-for="(stat, key) in platformStats" :key="key" class="rating-badge">
+            <div class="rating-badge__stars">
+              <Icon v-for="n in 5" :key="n" name="lucide:star" size="12" :class="n <= Math.round(stat.rating) ? 'star-filled' : 'star-empty'"/>
+            </div>
+            <div class="rating-badge__val">{{ stat.rating }}</div>
+            <div class="rating-badge__name">{{ stat.name }}</div>
+            <div class="rating-badge__count">{{ stat.count }} отзывов</div>
+          </div>
+        </div>
+      </div>
+      <div class="reviews-grid">
+        <div v-for="r in reviewsSlice" :key="r.id" class="review-card">
+          <div class="review-card__head">
+            <div class="review-card__avatar">{{ r.author[0] }}</div>
+            <div>
+              <div class="review-card__author">{{ r.author }}</div>
+              <div class="review-card__meta">
+                <span class="review-card__room" v-if="r.roomType">{{ r.roomType }}</span>
+                <span class="review-card__date">{{ fmtDate(r.date) }}</span>
+              </div>
+            </div>
+            <div class="review-card__stars">
+              <Icon v-for="n in r.rating" :key="n" name="lucide:star" size="13" class="star-filled"/>
+            </div>
+          </div>
+          <div class="review-card__text">{{ r.text }}</div>
+          <div v-if="r.reply" class="review-card__reply">
+            <Icon name="lucide:corner-down-right" size="13"/>{{ r.reply }}
+          </div>
+        </div>
+      </div>
+      <div class="idx-more">
+        <NuxtLink to="/otzyvy" class="idx-more-link">
+          Все отзывы <Icon name="lucide:arrow-right" size="15"/>
+        </NuxtLink>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ РАССРОЧКА ═══ -->
+  <section class="idx-section idx-credit">
+    <div class="container idx-credit__inner">
+      <div class="idx-credit__text">
+        <div class="idx-pretitle">Без переплат</div>
+        <h2 class="idx-title">Не хватает денег на потолок?</h2>
+        <p class="idx-credit__desc">Оформим рассрочку без переплаты прямо в день замера. Первый взнос — 0%. Монтаж сразу после подписания договора.</p>
+        <ul class="idx-credit__list">
+          <li v-for="item in creditItems" :key="item"><Icon name="lucide:check-circle" size="16" class="idx-credit__check"/>{{ item }}</li>
+        </ul>
+        <button class="nav-btn idx-credit__btn" @click="callbackOpenIdx = true">
+          <Icon name="lucide:credit-card" size="16"/>Оформить рассрочку
+        </button>
+      </div>
+      <div class="idx-credit__cards">
+        <div v-for="c in creditCards" :key="c.title" class="credit-card">
+          <div class="credit-card__val">{{ c.val }}</div>
+          <div class="credit-card__label">{{ c.title }}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FAQ ═══ -->
+  <section class="idx-section idx-faq">
+    <div class="container">
+      <div class="idx-head">
+        <div class="idx-pretitle">Вопросы и ответы</div>
+        <h2 class="idx-title">Часто задаваемые вопросы</h2>
+      </div>
+      <div class="faq-list">
+        <div
+          v-for="(q, i) in faqs" :key="i"
+          class="faq-item"
+          :class="{ open: faqOpen === i }"
+          @click="faqOpen = faqOpen === i ? -1 : i"
+        >
+          <div class="faq-item__q">
+            <span>{{ q.q }}</span>
+            <Icon :name="faqOpen === i ? 'lucide:chevron-up' : 'lucide:chevron-down'" size="18" class="faq-item__arr"/>
+          </div>
+          <div class="faq-item__a">{{ q.a }}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ФИНАЛЬНЫЙ CTA ═══ -->
+  <section class="idx-cta">
+    <div class="container idx-cta__inner">
+      <div>
+        <h2 class="idx-cta__title">Готовы сделать потолок вашей мечты?</h2>
+        <p class="idx-cta__desc">Вызовите замерщика бесплатно — приедет в удобное время, покажет образцы и рассчитает стоимость на месте</p>
+      </div>
+      <div class="idx-cta__btns">
+        <button class="nav-btn idx-cta__btn" @click="callbackOpenIdx = true">
+          <Icon name="lucide:phone-call" size="17"/>Заказать звонок
+        </button>
+        <NuxtLink to="/kalkulyator" class="idx-cta__outline">
+          <Icon name="lucide:calculator" size="17"/>Калькулятор
+        </NuxtLink>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox -->
+  <Teleport to="body">
+    <Transition name="lb">
+      <div v-if="lightbox.open" class="idx-lightbox" @click.self="lightbox.open = false">
+        <div class="idx-lightbox__box">
+          <button class="idx-lightbox__close" @click="lightbox.open = false"><Icon name="lucide:x" size="22"/></button>
+          <img :src="lightbox.img" :alt="lightbox.title" class="idx-lightbox__img"/>
+          <div class="idx-lightbox__title" v-if="lightbox.title">{{ lightbox.title }}</div>
+        </div>
+      </div>
+    </Transition>
+  </Teleport>
+
+  <ModalCallback v-model="callbackOpenIdx"/>
 </template>
 
 <script setup lang="ts">
+import { promotions } from '~/data/promotions'
+import { reviews, platformStats } from '~/data/reviews'
+import { portfolio } from '~/data/portfolio'
+
 const formName = ref('')
 const formPhone = ref('')
+
+// ── Новые секции ────────────────────────────────────────────────
+const callbackOpenIdx = ref(false)
+const faqOpen = ref(-1)
+const lightbox = reactive({ open: false, img: '', title: '' })
+
+const promoCards = promotions.filter(p => p.active).slice(0, 3)
+const portfolioCards = portfolio.slice(0, 6)
+const reviewsSlice = reviews.slice(0, 6)
+
+function openLightbox(img: string, title: string) {
+  lightbox.img = img; lightbox.title = title; lightbox.open = true
+}
+function fmt(n: number) { return n.toLocaleString('ru-RU') }
+function fmtDate(d: string) {
+  return new Date(d).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })
+}
+
+onMounted(() => {
+  const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') lightbox.open = false }
+  document.addEventListener('keydown', onKey)
+  onUnmounted(() => document.removeEventListener('keydown', onKey))
+})
+
+const steps = [
+  { icon: 'lucide:phone-call',   title: 'Заявка и замер',       desc: 'Оставьте заявку — замерщик приедет в удобное время, бесплатно измерит помещение и покажет образцы.' },
+  { icon: 'lucide:clipboard',    title: 'Договор и расчёт',     desc: 'Подписываем договор с фиксированной ценой. Никаких скрытых доплат — всё включено.' },
+  { icon: 'lucide:package',      title: 'Изготовление полотна', desc: 'Полотно нарезается точно под ваши размеры на производстве. Срок — 1–3 рабочих дня.' },
+  { icon: 'lucide:hammer',       title: 'Монтаж за 1 день',     desc: 'Мастера приезжают и монтируют потолок за 2–4 часа. Убирают за собой. Сдают работу под ключ.' },
+]
+
+const whyCards = [
+  { icon: 'lucide:shield-check',  title: 'Гарантия 12 лет',         desc: 'Письменная гарантия по договору на полотно и монтаж. Без ограничений и мелкого шрифта.' },
+  { icon: 'lucide:banknote',      title: 'Без предоплаты',           desc: 'Оплата только после монтажа и вашей приёмки работы. Наличными, картой или безналом.' },
+  { icon: 'lucide:ruler',         title: 'Бесплатный замер',         desc: 'Замерщик приедет в любой район Иркутска бесплатно и привезёт образцы всех фактур.' },
+  { icon: 'lucide:leaf',          title: 'Без запаха',               desc: 'Монтаж методом холодного натяжения. Въезжать можно сразу после завершения работ.' },
+  { icon: 'lucide:globe',         title: 'Европейские материалы',    desc: 'Работаем с MSD, Bauf, Pongs, Clipso, Cerutti — сертифицированные полотна в наличии на складе.' },
+  { icon: 'lucide:clock',         title: 'Монтаж за 1 день',         desc: 'Всю квартиру монтируем за 1 рабочий день. Мастера работают без выходных.' },
+  { icon: 'lucide:droplets',      title: 'Водонепроницаемость',      desc: 'ПВХ-полотно удерживает до 100 л/м² при затоплении. Незаменимо для кухонь и ванных.' },
+  { icon: 'lucide:badge-check',   title: 'Опыт с 2009 года',         desc: 'Более 3 000 установленных потолков в Иркутске. Сертифицированные мастера с опытом 5+ лет.' },
+  { icon: 'lucide:star',          title: 'Рейтинг 4.9 на Яндексе',  desc: 'Более 190 отзывов на Яндекс Картах, 2ГИС и Авито. 97% клиентов рекомендуют нас друзьям.' },
+]
+
+const creditItems = [
+  'Рассрочка 0% на срок до 12 месяцев',
+  'Первый взнос — 0 рублей',
+  'Монтаж сразу после подписания договора',
+  'Оформление за 15 минут прямо на замере',
+  'Без справок и поручителей',
+]
+
+const creditCards = [
+  { val: '0%',    title: 'Переплата' },
+  { val: '0 ₽',  title: 'Первый взнос' },
+  { val: '12',   title: 'Месяцев рассрочки' },
+  { val: '15',   title: 'Минут на оформление' },
+]
+
+const faqs = [
+  { q: 'Сколько стоит натяжной потолок в Иркутске?',      a: 'Стоимость зависит от фактуры, площади и дополнительных работ. Минимальная цена — от 159 ₽/м² за матовое белое полотно. Монтаж включён. Точная цена — после бесплатного замера.' },
+  { q: 'Сколько времени занимает монтаж?',                 a: 'Стандартная комната до 20 м² монтируется за 2–4 часа. Всю квартиру из 3–4 комнат выполняем за 1 рабочий день. Мебель выносить не нужно — достаточно отодвинуть от стен на 30 см.' },
+  { q: 'Нужно ли выравнивать потолок перед монтажом?',    a: 'Нет. Натяжной потолок скрывает все неровности базового потолка — трещины, перепады, коммуникации. Специальной подготовки не требуется.' },
+  { q: 'Чем отличаются матовые и глянцевые потолки?',     a: 'Матовые равномерно рассеивают свет, скрывают неровности, подходят для любых помещений. Глянцевые создают зеркальный эффект и визуально увеличивают пространство. Глянец сложнее в уходе, но эффектнее смотрится в гостиных.' },
+  { q: 'Выдержит ли потолок затопление от соседей?',      a: 'Да. ПВХ-полотно удерживает до 100 литров воды на 1 м². Потолок не рухнет — после слива воды мастер приедет и вернёт полотно в форму.' },
+  { q: 'Вредны ли натяжные потолки для здоровья?',        a: 'Нет. Мы используем сертифицированные европейские полотна с санитарно-эпидемиологическим заключением. Тканевые потолки без ПВХ рекомендованы для детских и спален.' },
+  { q: 'Какую гарантию вы даёте?',                        a: 'Гарантия 12 лет по договору на полотно и монтажные работы. Реальный срок службы полотна — 25–30 лет.' },
+  { q: 'Можно ли оплатить в рассрочку?',                  a: 'Да. Оформляем рассрочку 0% на срок до 12 месяцев прямо на замере. Первый взнос — 0 рублей. Монтаж сразу после подписания договора.' },
+]
 
 const catalog = [
   { slug: '/catalog/faktury/matovye-natyazhnye-potolki',           title: 'Матовые',         price: 159, badge: 'Хит',   img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=75' },
@@ -618,5 +920,253 @@ function submitForm() {
   .cat-card { height: 160px; }
   .cat-card__title { font-size: 15px; }
   .rooms-row { gap: 10px; }
+}
+
+/* ════════════════════════════════════════
+   НОВЫЕ СЕКЦИИ
+════════════════════════════════════════ */
+
+/* Общие утилиты */
+.idx-section { padding: 64px 0; }
+.idx-head { text-align: center; margin-bottom: 44px; }
+.idx-head-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 32px; flex-wrap: wrap; margin-bottom: 44px; }
+.idx-pretitle {
+  display: inline-block; background: var(--accent); color: var(--dark);
+  font-size: 12px; font-weight: 700; padding: 3px 14px; border-radius: 20px;
+  margin-bottom: 12px; text-transform: uppercase; letter-spacing: .5px;
+}
+.idx-title { font-size: 34px; font-weight: 800; color: var(--dark); line-height: 1.2; margin-bottom: 10px; }
+.idx-desc  { font-size: 16px; color: var(--gray); max-width: 560px; margin: 0 auto; line-height: 1.65; }
+.idx-more  { text-align: center; margin-top: 36px; }
+.idx-more-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 15px; font-weight: 700; color: var(--dark);
+  text-decoration: none; border-bottom: 2px solid var(--accent); padding-bottom: 2px;
+  transition: color .15s;
+}
+.idx-more-link:hover { color: var(--accent); }
+
+/* ── АКЦИИ ── */
+.idx-promos { background: #fff; }
+.promo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.promo-card {
+  background: #f7f7f7; border-radius: 20px; padding: 28px 24px;
+  border: 1.5px solid #ececec; position: relative; display: flex; flex-direction: column; gap: 10px;
+  transition: border-color .2s, box-shadow .2s;
+}
+.promo-card:hover { border-color: var(--accent); box-shadow: 0 6px 24px rgba(245,200,0,.12); }
+.promo-card__icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; }
+.promo-card__badge {
+  position: absolute; top: 16px; right: 16px;
+  background: var(--accent); color: var(--dark); font-size: 10px; font-weight: 800;
+  padding: 2px 10px; border-radius: 20px; text-transform: uppercase;
+}
+.promo-card__discount { font-size: 36px; font-weight: 900; color: var(--dark); line-height: 1; font-family: var(--font); }
+.promo-card__title { font-size: 17px; font-weight: 800; color: var(--dark); }
+.promo-card__sub   { font-size: 13px; color: var(--gray); }
+.promo-card__list  { list-style: none; padding: 0; margin: 4px 0 6px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.promo-card__list li { display: flex; align-items: center; gap: 7px; font-size: 13px; color: #555; }
+.promo-card__check { color: var(--accent); flex-shrink: 0; }
+.promo-card__btn { display: inline-flex; align-items: center; justify-content: center; padding: 11px; font-size: 13px; margin-top: 4px; }
+
+/* ── ПОРТФОЛИО ── */
+.idx-portfolio { background: #f7f7f7; }
+.port-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.port-card {
+  position: relative; border-radius: 16px; overflow: hidden; height: 260px;
+  cursor: pointer; border: 2px solid transparent;
+  transition: transform .2s, box-shadow .2s, border-color .2s;
+}
+.port-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(0,0,0,.15); border-color: var(--accent); }
+.port-card__img { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform .4s ease; }
+.port-card:hover .port-card__img { transform: scale(1.06); }
+.port-card__overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.02) 0%, rgba(0,0,0,.72) 100%); }
+.port-card__zoom {
+  position: absolute; top: 14px; right: 14px; width: 36px; height: 36px;
+  background: rgba(255,255,255,.15); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; color: #fff;
+  opacity: 0; transition: opacity .2s;
+}
+.port-card:hover .port-card__zoom { opacity: 1; }
+.port-card__body { position: absolute; bottom: 0; left: 0; right: 0; padding: 16px 18px; }
+.port-card__title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 5px; line-height: 1.3; }
+.port-card__meta  { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 6px; }
+.port-card__meta span { font-size: 11px; color: rgba(255,255,255,.65); background: rgba(255,255,255,.1); padding: 2px 8px; border-radius: 10px; }
+.port-card__price { font-size: 16px; font-weight: 800; color: var(--accent); }
+
+/* ── ШАГИ ── */
+.idx-steps { background: #141414; }
+.idx-steps .idx-pretitle { background: rgba(245,200,0,.15); color: var(--accent); }
+.idx-steps .idx-title { color: #fff; }
+.idx-steps .idx-desc { color: rgba(255,255,255,.4); }
+.steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; position: relative; }
+.steps-grid::before {
+  content: ''; position: absolute; top: 52px; left: 10%; right: 10%; height: 2px;
+  background: linear-gradient(90deg, var(--accent) 0%, rgba(245,200,0,.2) 100%);
+  z-index: 0;
+}
+.step-card { background: #1e1e1e; border: 1px solid #2a2a2a; border-radius: 16px; padding: 28px 22px; position: relative; z-index: 1; transition: border-color .2s; }
+.step-card:hover { border-color: rgba(245,200,0,.35); }
+.step-card__num { font-size: 48px; font-weight: 900; color: rgba(245,200,0,.12); line-height: 1; margin-bottom: -6px; font-family: var(--font); }
+.step-card__icon { width: 52px; height: 52px; background: var(--accent); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: var(--dark); margin-bottom: 16px; }
+.step-card__title { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+.step-card__desc  { font-size: 13px; color: rgba(255,255,255,.4); line-height: 1.6; }
+
+/* ── ПОЧЕМУ МЫ ── */
+.idx-why { background: #fff; }
+.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.why-card {
+  background: #f7f7f7; border-radius: 16px; padding: 24px 20px;
+  border: 1.5px solid transparent; transition: border-color .15s, box-shadow .15s;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.why-card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(245,200,0,.1); }
+.why-card__icon { width: 48px; height: 48px; background: var(--accent); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: var(--dark); flex-shrink: 0; }
+.why-card__title { font-size: 15px; font-weight: 700; color: var(--dark); }
+.why-card__desc  { font-size: 13px; color: var(--gray); line-height: 1.6; }
+
+/* ── ОТЗЫВЫ ── */
+.idx-reviews { background: #f7f7f7; }
+.idx-rating-badges { display: flex; gap: 12px; flex-wrap: wrap; }
+.rating-badge {
+  background: #fff; border-radius: 14px; padding: 14px 18px;
+  border: 1.5px solid #eee; text-align: center; min-width: 120px;
+}
+.rating-badge__stars { display: flex; gap: 2px; justify-content: center; margin-bottom: 4px; }
+.rating-badge__val   { font-size: 22px; font-weight: 900; color: var(--dark); line-height: 1; }
+.rating-badge__name  { font-size: 12px; font-weight: 600; color: var(--dark); margin: 2px 0; }
+.rating-badge__count { font-size: 11px; color: var(--gray); }
+.star-filled { color: #f5c800; }
+.star-empty  { color: #ddd; }
+.reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.review-card {
+  background: #fff; border-radius: 16px; padding: 22px;
+  border: 1.5px solid #eee; display: flex; flex-direction: column; gap: 12px;
+  transition: border-color .15s, box-shadow .15s;
+}
+.review-card:hover { border-color: var(--accent); box-shadow: 0 4px 16px rgba(0,0,0,.07); }
+.review-card__head { display: flex; align-items: flex-start; gap: 12px; }
+.review-card__avatar {
+  width: 42px; height: 42px; border-radius: 50%; background: var(--accent);
+  color: var(--dark); font-size: 18px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.review-card__author { font-size: 14px; font-weight: 700; color: var(--dark); }
+.review-card__meta   { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 3px; }
+.review-card__room   { font-size: 11px; color: var(--accent); background: rgba(245,200,0,.1); padding: 1px 7px; border-radius: 10px; font-weight: 600; }
+.review-card__date   { font-size: 11px; color: var(--gray); }
+.review-card__stars  { display: flex; gap: 2px; margin-left: auto; flex-shrink: 0; }
+.review-card__text   { font-size: 13px; color: #444; line-height: 1.7; flex: 1; }
+.review-card__reply  {
+  display: flex; align-items: flex-start; gap: 7px;
+  font-size: 12px; color: var(--gray); background: #f7f7f7;
+  border-radius: 10px; padding: 10px 12px; line-height: 1.5;
+}
+
+/* ── РАССРОЧКА ── */
+.idx-credit { background: #141414; padding: 64px 0; }
+.idx-credit__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.idx-credit .idx-pretitle { background: rgba(245,200,0,.15); color: var(--accent); }
+.idx-credit .idx-title { color: #fff; margin-bottom: 14px; }
+.idx-credit__desc { font-size: 16px; color: rgba(255,255,255,.5); line-height: 1.7; margin-bottom: 22px; }
+.idx-credit__list { list-style: none; padding: 0; margin: 0 0 28px; display: flex; flex-direction: column; gap: 10px; }
+.idx-credit__list li { display: flex; align-items: center; gap: 10px; font-size: 14px; color: rgba(255,255,255,.75); }
+.idx-credit__check { color: var(--accent); flex-shrink: 0; }
+.idx-credit__btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; font-size: 15px; }
+.idx-credit__cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.credit-card {
+  background: #1e1e1e; border: 1px solid #2a2a2a; border-radius: 18px;
+  padding: 28px 20px; text-align: center;
+  transition: border-color .2s;
+}
+.credit-card:hover { border-color: rgba(245,200,0,.3); }
+.credit-card__val   { font-size: 44px; font-weight: 900; color: var(--accent); line-height: 1; font-family: var(--font); }
+.credit-card__label { font-size: 13px; color: rgba(255,255,255,.4); margin-top: 8px; }
+
+/* ── FAQ ── */
+.idx-faq { background: #f7f7f7; }
+.faq-list { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 8px; }
+.faq-item {
+  background: #fff; border-radius: 14px; border: 1.5px solid transparent;
+  overflow: hidden; cursor: pointer; transition: border-color .15s;
+}
+.faq-item.open { border-color: var(--accent); }
+.faq-item__q {
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  padding: 18px 22px; font-size: 16px; font-weight: 700; color: var(--dark);
+  user-select: none;
+}
+.faq-item__arr { color: var(--gray); flex-shrink: 0; }
+.faq-item.open .faq-item__arr { color: var(--accent); }
+.faq-item__a {
+  max-height: 0; overflow: hidden;
+  transition: max-height .3s ease, padding .3s;
+  font-size: 14px; color: #555; line-height: 1.75; padding: 0 22px;
+}
+.faq-item.open .faq-item__a { max-height: 300px; padding: 0 22px 18px; }
+
+/* ── ФИНАЛЬНЫЙ CTA ── */
+.idx-cta { background: var(--accent); padding: 60px 0; }
+.idx-cta__inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+.idx-cta__title { font-size: 30px; font-weight: 900; color: var(--dark); margin-bottom: 8px; line-height: 1.2; }
+.idx-cta__desc  { font-size: 16px; color: rgba(0,0,0,.55); max-width: 480px; }
+.idx-cta__btns  { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; flex-shrink: 0; }
+.idx-cta__btn   { background: var(--dark); color: #fff; display: inline-flex; align-items: center; gap: 8px; padding: 15px 30px; font-size: 15px; border-radius: 10px; cursor: pointer; border: none; font-family: var(--font); font-weight: 700; transition: opacity .15s; }
+.idx-cta__btn:hover { opacity: .85; }
+.idx-cta__outline {
+  display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px;
+  font-size: 15px; font-weight: 700; font-family: var(--font);
+  background: rgba(0,0,0,.1); border: 2px solid rgba(0,0,0,.25);
+  border-radius: 10px; color: var(--dark); text-decoration: none;
+  transition: background .15s, border-color .15s;
+}
+.idx-cta__outline:hover { background: rgba(0,0,0,.18); border-color: rgba(0,0,0,.4); }
+
+/* ── LIGHTBOX ── */
+.idx-lightbox {
+  position: fixed; inset: 0; z-index: 600; background: rgba(0,0,0,.85);
+  display: flex; align-items: center; justify-content: center; padding: 20px;
+  backdrop-filter: blur(4px);
+}
+.idx-lightbox__box { position: relative; max-width: 1000px; width: 100%; }
+.idx-lightbox__close {
+  position: absolute; top: -44px; right: 0;
+  background: rgba(255,255,255,.15); border: none; border-radius: 50%;
+  width: 36px; height: 36px; cursor: pointer; color: #fff;
+  display: flex; align-items: center; justify-content: center; transition: background .15s;
+}
+.idx-lightbox__close:hover { background: rgba(255,255,255,.25); }
+.idx-lightbox__img   { width: 100%; max-height: 80vh; object-fit: contain; border-radius: 10px; display: block; }
+.idx-lightbox__title { text-align: center; color: rgba(255,255,255,.7); font-size: 14px; margin-top: 12px; }
+.lb-enter-active { transition: opacity .2s ease, transform .2s ease; }
+.lb-leave-active { transition: opacity .15s ease; }
+.lb-enter-from   { opacity: 0; transform: scale(.97); }
+.lb-leave-to     { opacity: 0; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1100px) {
+  .port-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 900px) {
+  .steps-grid { grid-template-columns: repeat(2, 1fr); }
+  .steps-grid::before { display: none; }
+  .why-grid  { grid-template-columns: repeat(2, 1fr); }
+  .idx-credit__inner { grid-template-columns: 1fr; gap: 40px; }
+}
+@media (max-width: 768px) {
+  .idx-title { font-size: 26px; }
+  .promo-grid { grid-template-columns: 1fr; }
+  .port-grid  { grid-template-columns: repeat(2, 1fr); }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .idx-head-row { flex-direction: column; }
+  .idx-rating-badges { justify-content: center; }
+  .idx-cta__inner { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+  .steps-grid { grid-template-columns: 1fr; }
+  .port-grid  { grid-template-columns: 1fr; }
+  .why-grid   { grid-template-columns: 1fr; }
+  .idx-credit__cards { grid-template-columns: repeat(2, 1fr); }
+  .faq-item__q { font-size: 14px; }
 }
 </style>

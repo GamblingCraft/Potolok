@@ -223,6 +223,108 @@ export const tsveta = [
 ]
 
 // ─────────────────────────────────────────
+// БРЕНДЫ / ПРОИЗВОДИТЕЛИ
+// ─────────────────────────────────────────
+export const brendy = [
+  {
+    id: 'msd',
+    slug: '/catalog/brendy/natyazhnye-potolki-msd',
+    title: 'MSD',
+    country: 'Китай / EU',
+    countryIcon: 'lucide:factory',
+    type: 'ПВХ',
+    badge: 'Хит',
+    desc: 'Три серии: Classic, Evolution, Premium. Один из самых популярных брендов на рынке — соотношение цены и качества.',
+    price: 159,
+    img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=75',
+  },
+  {
+    id: 'bauf',
+    slug: '/catalog/brendy/natyazhnye-potolki-bauf',
+    title: 'Bauf',
+    country: 'Германия',
+    countryIcon: 'lucide:flag',
+    type: 'ПВХ',
+    badge: null,
+    desc: 'Немецкие технологии, 4 сертификата экологичности. Маркировка A+ — воздух в помещении остаётся абсолютно чистым.',
+    price: 189,
+    img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=600&q=75',
+  },
+  {
+    id: 'lumfer',
+    slug: '/catalog/brendy/natyazhnye-potolki-lumfer',
+    title: 'LumFer',
+    country: 'Германия',
+    countryIcon: 'lucide:flag',
+    type: 'ПВХ двухслойный',
+    badge: null,
+    desc: 'Двухслойное полотно Ferico GBR. Толщина 32 мм, не просвечивает, не вибрирует на сквозняках. Не воспламеняется.',
+    price: 249,
+    img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&q=75',
+  },
+  {
+    id: 'teqtum',
+    slug: '/catalog/brendy/natyazhnye-potolki-teqtum',
+    title: 'Teqtum',
+    country: 'Россия / EU',
+    countryIcon: 'lucide:shield-check',
+    type: 'ПВХ',
+    badge: 'МЧС ✓',
+    desc: 'Единственная плёнка, прошедшая испытания МЧС России. Без формальдегидов, допущена в медучреждения и детские сады.',
+    price: 279,
+    img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=600&q=75',
+  },
+  {
+    id: 'descor',
+    slug: '/catalog/brendy/natyazhnye-potolki-descor',
+    title: 'Descor',
+    country: 'Германия',
+    countryIcon: 'lucide:flag',
+    type: 'Тканевый',
+    badge: null,
+    desc: 'Тканевое полотно из волокна Trevira CS. Огнеупорное, жаростойкое, легко моется. Без ПВХ.',
+    price: 319,
+    img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=600&q=75',
+  },
+  {
+    id: 'pongs',
+    slug: '/catalog/brendy/natyazhnye-potolki-pongs',
+    title: 'Pongs',
+    country: 'Германия',
+    countryIcon: 'lucide:flag',
+    type: 'ПВХ премиум',
+    badge: 'Премиум',
+    desc: 'Безупречное немецкое качество. Пластификатор DOTP вместо токсичного DOP. Выдерживает 100 л/м² при затоплении.',
+    price: 349,
+    img: 'https://images.unsplash.com/photo-1600573472559-240e53e0e27a?w=600&q=75',
+  },
+  {
+    id: 'clipso',
+    slug: '/catalog/brendy/natyazhnye-potolki-clipso',
+    title: 'Clipso',
+    country: 'Франция',
+    countryIcon: 'lucide:flag',
+    type: 'Тканевый',
+    badge: null,
+    desc: 'Французское тканевое полотно. Монтаж без нагрева, дышит, не образует конденсат. Акустические и цветные варианты.',
+    price: 389,
+    img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=75',
+  },
+  {
+    id: 'cerutti',
+    slug: '/catalog/brendy/natyazhnye-potolki-cerutti',
+    title: 'Cerutti',
+    country: 'Швейцария',
+    countryIcon: 'lucide:gem',
+    type: 'Тканевый люкс',
+    badge: 'Люкс',
+    desc: 'Швейцарский дом текстиля. Люкс-сегмент: безупречно ровное покрытие, максимальная экологичность, влагозащитный лак.',
+    price: 490,
+    img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=75',
+  },
+]
+
+// ─────────────────────────────────────────
 // ДОП. РАБОТЫ
 // ─────────────────────────────────────────
 export const extraWorks = [

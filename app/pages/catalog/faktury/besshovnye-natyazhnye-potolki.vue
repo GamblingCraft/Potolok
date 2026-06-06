@@ -1,9 +1,6 @@
 ﻿<template>
   <div itemscope itemtype="https://schema.org/Product">
 
-    <!-- ══════════════════════════════════════
-         HERO / BANNER
-    ══════════════════════════════════════ -->
     <section class="cp-hero">
       <div class="cp-hero__bg" :style="{ backgroundImage: `url('${item.img}')` }"></div>
       <div class="cp-hero__overlay"></div>
@@ -11,11 +8,11 @@
         <div class="cp-hero__content">
           <div class="cp-pretitle">Фактура полотна</div>
           <h1 class="cp-hero__title" itemprop="name">
-            Глянцевые натяжные потолки в&nbsp;Иркутске
+            Бесшовные натяжные потолки в&nbsp;Иркутске
           </h1>
           <p class="cp-hero__price">
             Акция: <span>3-й потолок в подарок!</span> Гарантия 12 лет.<br>
-            Потолки без запаха. Монтаж за 1 день. Без предоплаты.
+            Ширина до 5 м — без швов. Монтаж за 1 день. Без предоплаты.
           </p>
           <div class="cp-hero__price-badge" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
             <meta itemprop="priceCurrency" content="RUB"/>
@@ -34,35 +31,30 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         ОПИСАНИЕ + ПРЕИМУЩЕСТВА + САЙДБАР
-    ══════════════════════════════════════ -->
     <section class="cp-section cp-about">
       <div class="container">
         <div class="cp-two-col">
-
           <div class="cp-main">
-            <h2 class="cp-h2">Глянцевые натяжные потолки — преимущества, фото</h2>
+            <h2 class="cp-h2">Бесшовные натяжные потолки — идеально ровная поверхность без стыков</h2>
             <div class="cp-text" itemprop="description">
-              <p>После установки глянцевого натяжного потолка комната визуально увеличивается — вся световая масса отражается от идеально гладкой поверхности и делает пространство ярче и просторнее. Зеркальный эффект полотна создаёт ощущение второго этажа и дополнительного источника света.</p>
-              <p>Изготавливаются из специальной поливинилхлоридной плёнки с идеально гладкой поверхностью. Она зеркально отражает все предметы в помещении — мебель, светильники, декор. Доступна в более чем 100 цветах и оттенках.</p>
+              <p>Бесшовный натяжной потолок — это полотно шириной до 5 метров, которое перекрывает помещение одним куском без единого шва. Швы выглядят некрасиво даже в замаскированном виде — бесшовные потолки полностью исключают эту проблему.</p>
+              <p>Бывают двух видов: ПВХ и тканевые. ПВХ — влагостойкие, богатая цветовая палитра. Тканевые — дышащие, без ПВХ, ширина до 5.2 м, рекомендуются для жилых помещений.</p>
 
               <h3>Что мы предлагаем</h3>
-              <p>Реализуем глянцевые полотна европейских брендов: <strong>MSD, Bauf (Германия), Descor, Clipso, Teqtum, Lumfer</strong>. В каталоге — 100+ цветов на ваш выбор. Ширина полотна до 5 метров, что позволяет монтировать бесшовный потолок в большинстве помещений.</p>
+              <p>Бесшовный монтаж в помещениях до 5 метров шириной без спайки. Для более широких — профессиональная невидимая спайка в тон полотна.</p>
 
-              <h3>Преимущества глянцевых натяжных потолков</h3>
+              <h3>Преимущества бесшовных натяжных потолков</h3>
               <ul class="cp-list">
                 <li v-for="adv in advantages" :key="adv.title">
                   <strong>{{ adv.title }}.</strong> {{ adv.desc }}
                 </li>
               </ul>
 
-              <h3>Цвета и применение</h3>
-              <p>Цветовая палитра неограниченная: белые, бежевые, серебристые, золотые, бледно-голубые — любые оттенки есть в нашем каталоге. Глянцевые потолки универсальны — хорошо сочетаются как с классическим, так и с современным дизайном. Используются на кухне, в зале, в спальне, в ванной и прихожей.</p>
+              <h3>Применение</h3>
+              <p>Бесшовные потолки — лучший выбор для больших гостиных, открытых планировок, залов и коммерческих пространств, где важна безупречная ровность поверхности.</p>
             </div>
           </div>
 
-          <!-- Сайдбар -->
           <aside class="cp-aside">
             <div class="cp-aside-card">
               <div class="cp-aside-card__title">Вызвать замерщика</div>
@@ -78,8 +70,6 @@
                 <Icon name="lucide:calculator" size="14"/>Рассчитать онлайн
               </NuxtLink>
             </div>
-
-            <!-- Другие фактуры -->
             <div class="cp-aside-nav">
               <div class="cp-aside-nav__title">Другие фактуры</div>
               <nav>
@@ -89,14 +79,10 @@
               </nav>
             </div>
           </aside>
-
         </div>
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         ГОТОВЫЕ РАБОТЫ С ЦЕНАМИ
-    ══════════════════════════════════════ -->
     <section class="cp-section cp-works" v-if="worksWithPrice.length">
       <div class="container">
         <div class="cp-section-head">
@@ -130,14 +116,11 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         ССЫЛКА НА КАЛЬКУЛЯТОР
-    ══════════════════════════════════════ -->
     <section class="cp-calc-cta">
       <div class="container cp-calc-cta__inner">
         <div class="cp-calc-cta__icon"><Icon name="lucide:calculator" size="28"/></div>
         <div>
-          <div class="cp-calc-cta__title">Рассчитайте стоимость глянцевого потолка онлайн</div>
+          <div class="cp-calc-cta__title">Рассчитайте стоимость бесшовного потолка онлайн</div>
           <p class="cp-calc-cta__desc">Укажите площадь, фактуру и дополнительные работы — калькулятор покажет предварительную цену за 1 минуту</p>
         </div>
         <NuxtLink to="/kalkulyator" class="nav-btn cp-calc-cta__btn">
@@ -146,39 +129,27 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         ФОТОГАЛЕРЕЯ
-    ══════════════════════════════════════ -->
     <section class="cp-section cp-gallery" v-if="gallery.length">
       <div class="container">
         <div class="cp-section-head">
-          <div class="cp-pretitle cp-pretitle--dark">100% без запаха</div>
-          <h2 class="cp-h2 cp-h2--center">Фотографии глянцевых натяжных потолков</h2>
+          <div class="cp-pretitle cp-pretitle--dark">Без единого шва</div>
+          <h2 class="cp-h2 cp-h2--center">Фотографии бесшовных натяжных потолков</h2>
           <p class="cp-section-desc">Наши реализованные проекты в Иркутске — нажмите на фото для просмотра</p>
         </div>
         <div class="cp-gallery-grid">
-          <div
-            v-for="photo in gallery" :key="'g-'+photo.id"
-            class="cp-gallery-item"
-            @click="openLightbox(photo.img, photo.title)"
-          >
+          <div v-for="photo in gallery" :key="'g-'+photo.id" class="cp-gallery-item" @click="openLightbox(photo.img, photo.title)">
             <img :src="photo.img" :alt="photo.title" loading="lazy" class="cp-gallery-img"/>
-            <div class="cp-gallery-overlay">
-              <Icon name="lucide:zoom-in" size="22"/>
-            </div>
+            <div class="cp-gallery-overlay"><Icon name="lucide:zoom-in" size="22"/></div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         АКЦИИ
-    ══════════════════════════════════════ -->
     <section class="cp-section cp-promo">
       <div class="container">
         <div class="cp-section-head">
           <div class="cp-pretitle cp-pretitle--dark">Выгодные условия</div>
-          <h2 class="cp-h2 cp-h2--center">Акции и скидки на глянцевые потолки</h2>
+          <h2 class="cp-h2 cp-h2--center">Акции и скидки на бесшовные потолки</h2>
         </div>
         <div class="cp-promo-grid">
           <div class="cp-promo-card" v-for="p in promos" :key="p.title">
@@ -192,9 +163,6 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         ПОЧЕМУ МЫ
-    ══════════════════════════════════════ -->
     <section class="cp-section cp-why">
       <div class="container">
         <div class="cp-section-head">
@@ -211,23 +179,14 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         FAQ — FAQPage schema
-    ══════════════════════════════════════ -->
     <section class="cp-section cp-faq" itemscope itemtype="https://schema.org/FAQPage">
       <div class="container">
         <div class="cp-section-head">
           <div class="cp-pretitle cp-pretitle--dark">Вопросы и ответы</div>
-          <h2 class="cp-h2 cp-h2--center">Частые вопросы про глянцевые натяжные потолки</h2>
+          <h2 class="cp-h2 cp-h2--center">Частые вопросы про бесшовные натяжные потолки</h2>
         </div>
         <div class="cp-faq-list">
-          <div
-            class="cp-faq-item"
-            v-for="(q, i) in faqItems" :key="q.q"
-            itemprop="mainEntity" itemscope itemtype="https://schema.org/Question"
-            :class="{ open: faqOpen === i }"
-            @click="faqOpen = faqOpen === i ? -1 : i"
-          >
+          <div class="cp-faq-item" v-for="(q, i) in faqItems" :key="q.q" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question" :class="{ open: faqOpen === i }" @click="faqOpen = faqOpen === i ? -1 : i">
             <div class="cp-faq-item__q" itemprop="name">
               {{ q.q }}
               <Icon :name="faqOpen === i ? 'lucide:chevron-up' : 'lucide:chevron-down'" size="18" class="cp-faq-item__arrow"/>
@@ -240,21 +199,16 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════════════
-         SEO-ТЕКСТ
-    ══════════════════════════════════════ -->
     <section class="cp-section cp-seo">
       <div class="container">
         <div class="cp-seo-inner">
           <div class="cp-seo-content">
-            <h2>Глянцевые натяжные потолки в Иркутске — цены с установкой</h2>
-            <p>Компания <strong>ПроПотолок</strong> реализует и устанавливает глянцевые натяжные потолки в Иркутске с 2009 года. Работаем с европейскими материалами, монтируем без предоплаты, даём письменную гарантию 12 лет.</p>
-            <h3>Особенности глянцевых потолков</h3>
-            <p>Глянцевая поверхность создаёт зеркальный эффект — визуально увеличивает комнату и усиливает освещённость. Особенно эффектно смотрится в небольших помещениях: кухне, ванной, прихожей. В гостиных с высокими потолками создаёт впечатление величия и простора.</p>
-            <h3>Уход за глянцевым потолком</h3>
-            <p>Поверхность не притягивает пыль и легко очищается. Для протирки используйте мягкую слегка влажную ткань без абразивных средств. Не допускайте попадания острых предметов и длительного воздействия прямых солнечных лучей.</p>
-            <h3>Монтаж глянцевого потолка в 2026 году</h3>
-            <p>Современные глянцевые потолки монтируются методом холодного натяжения — без нагрева, без запаха, без необходимости убирать мебель. Монтаж стандартной комнаты занимает 2–4 часа. После завершения мастера убирают за собой.</p>
+            <h2>Бесшовные натяжные потолки в Иркутске — цены с установкой</h2>
+            <p>Компания <strong>ПроПотолок</strong> реализует и устанавливает бесшовные натяжные потолки в Иркутске с 2009 года. Монтируем без предоплаты, даём письменную гарантию 12 лет.</p>
+            <h3>Особенности бесшовных потолков</h3>
+            <p>Полотно шириной до 5 метров перекрывает большинство помещений без единого шва. Идеально ровная поверхность без видимых соединений — максимально чистый результат.</p>
+            <h3>Монтаж в Иркутске</h3>
+            <p>Устанавливаем бесшовные потолки по всему Иркутску. Замер бесплатный. Монтаж — 2–4 часа. Оплата после приёмки. Гарантия 12 лет.</p>
           </div>
           <div class="cp-seo-links">
             <div class="cp-seo-links__title">Смотрите также</div>
@@ -268,11 +222,10 @@
       </div>
     </section>
 
-    <!-- CTA -->
     <section class="cp-cta">
       <div class="container cp-cta__inner">
         <div>
-          <h2 class="cp-cta__title">Хотите глянцевый натяжной потолок?</h2>
+          <h2 class="cp-cta__title">Хотите бесшовный натяжной потолок?</h2>
           <p class="cp-cta__desc">Вызовите замерщика — приедет бесплатно, покажет образцы и рассчитает стоимость на месте</p>
         </div>
         <div class="cp-cta__btns">
@@ -286,7 +239,6 @@
       </div>
     </section>
 
-    <!-- LIGHTBOX -->
     <Teleport to="body">
       <Transition name="lb">
         <div v-if="lightbox.open" class="cp-lightbox" @click.self="lightbox.open = false">
@@ -302,7 +254,6 @@
     </Teleport>
 
     <ModalCallback v-model="callbackOpen"/>
-
   </div>
 </template>
 
@@ -310,18 +261,16 @@
 import { faktury } from '~/data/catalog'
 import { catalogGallery } from '~/data/gallery'
 
-// ── Данные страницы из catalog.ts ──────────────────────────────
-const item = faktury.find(f => f.id === 'gly')!
-const gallery = catalogGallery['glyancevye-natyazhnye-potolki'] ?? []
+const item = faktury.find(f => f.id === 'bess')!
+const gallery = catalogGallery['besshovnye-natyazhnye-potolki'] ?? []
 const worksWithPrice = gallery.filter(g => g.price)
 
-// ── SEO ────────────────────────────────────────────────────────
 useHead({
-  title: 'Глянцевые натяжные потолки в Иркутске — цены от 209 ₽/м² с монтажом | ПроПотолок',
+  title: 'Бесшовные натяжные потолки в Иркутске — от 229 ₽/м² | ПроПотолок',
   meta: [
-    { name: 'description', content: 'Глянцевые натяжные потолки в Иркутске от 209 ₽/м² с монтажом. 100+ цветов, европейские полотна MSD и Bauf. Монтаж за 1 день, гарантия 12 лет, без предоплаты.' },
-    { property: 'og:title', content: 'Глянцевые натяжные потолки в Иркутске | ПроПотолок' },
-    { property: 'og:description', content: 'Глянцевые потолки от 209 ₽/м². Монтаж за 1 день, гарантия 12 лет, бесплатный замер.' },
+    { name: 'description', content: 'Бесшовные натяжные потолки в Иркутске от 229 ₽/м². Ширина полотна до 5 м — идеально ровная поверхность без стыков в любом помещении. Гарантия 12 лет.' },
+    { property: 'og:title', content: 'Бесшовные натяжные потолки в Иркутске | ПроПотолок' },
+    { property: 'og:description', content: 'Бесшовные потолки от 229 ₽/м². Ширина до 5 м, без стыков. Гарантия 12 лет.' },
     { property: 'og:image', content: item.img },
     { property: 'og:type', content: 'product' },
   ],
@@ -331,8 +280,8 @@ useHead({
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'Product',
-        name: 'Глянцевые натяжные потолки',
-        description: 'Глянцевые натяжные потолки из ПВХ-плёнки с зеркальным эффектом. 100+ цветов, монтаж в Иркутске.',
+        name: 'Бесшовные натяжные потолки',
+        description: 'Бесшовные натяжные потолки шириной до 5 метров. Идеально ровная поверхность без стыков. Монтаж в Иркутске.',
         brand: { '@type': 'Brand', name: 'ПроПотолок' },
         offers: {
           '@type': 'Offer',
@@ -346,7 +295,6 @@ useHead({
   ],
 })
 
-// ── State ──────────────────────────────────────────────────────
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)
 const formName = ref('')
@@ -357,12 +305,9 @@ const lightbox = reactive({ open: false, img: '', title: '' })
 const visibleWorks = computed(() => worksWithPrice.slice(0, visibleWorksCount.value))
 
 function openLightbox(img: string, title: string) {
-  lightbox.img = img
-  lightbox.title = title
-  lightbox.open = true
+  lightbox.img = img; lightbox.title = title; lightbox.open = true
 }
 
-// ── Данные ─────────────────────────────────────────────────────
 const otherFaktury = faktury.map(f => ({ id: f.id, slug: f.slug, title: f.title }))
 
 const asideItems = [
@@ -374,12 +319,12 @@ const asideItems = [
 ]
 
 const advantages = [
-  { title: 'Простота в уходе',        desc: 'ПВХ-плёнка не притягивает пыль; при загрязнении достаточно протереть мягкой влажной тряпкой без химии.' },
-  { title: 'Быстрый монтаж',          desc: 'Одна комната — 2–3 часа, двухкомнатная квартира — за 1 день. Без шума и пыли.' },
-  { title: 'Водонепроницаемость',     desc: 'Плёнка не пропускает воду — при затоплении сверху потолок удержит до 100 л/м².' },
-  { title: 'Экологическая безопасность', desc: 'Нетоксичны, без запаха после монтажа. Установлены в детских садах и медучреждениях Иркутска.' },
-  { title: 'Зеркальный эффект',       desc: 'Весь свет от светильников отражается от потолка — комната становится визуально просторнее и ярче.' },
-  { title: 'Широкие возможности',     desc: '100+ цветов и оттенков. Совместимы с фотопечатью, можно напечатать любой рисунок.' },
+  { title: 'Ширина до 5 метров',         desc: 'Одно полотно перекрывает большинство комнат — никаких стыков и швов на виду.' },
+  { title: 'Идеально ровная поверхность', desc: 'Равномерное натяжение без морщин, волн и видимых соединений.' },
+  { title: 'Для больших помещений',       desc: 'Незаменимы для просторных гостиных, залов, бассейнов, спортзалов и апартаментов.' },
+  { title: 'Два варианта материала',      desc: 'ПВХ — влагостойкий, яркие цвета. Тканевый — дышащий, без ПВХ, рекомендован для спален.' },
+  { title: 'Скрывает коммуникации',       desc: 'Ровное полотно полностью прячет трубы, проводку и неровности базового потолка.' },
+  { title: 'Долговечность',               desc: 'Полотно не деформируется, не провисает, сохраняет натяжение на весь срок службы.' },
 ]
 
 const promos = [
@@ -398,24 +343,21 @@ const whyCards = [
 ]
 
 const faqItems = [
-  { q: 'Надо ли выровнять потолок перед монтажом?',    a: 'Нет. Если нет больших трещин глубиной более 1 см — специальной подготовки не требуется. Мастер самостоятельно очистит основание от осыпающейся штукатурки.' },
-  { q: 'Будет ли запах от глянцевого потолка?',         a: 'Метод холодного натяжения не предполагает нагрева, поэтому запаха нет. Полотна изготовлены из нетоксичного ПВХ, прошли санитарно-эпидемиологическую проверку.' },
-  { q: 'На сколько визуально уменьшает высоту потолок?', a: 'Натяжной потолок забирает 3–5 см от высоты помещения. При стандартной высоте 2,7 м останется 2,65–2,67 м — практически незаметно.' },
-  { q: 'Можно ли мыть глянцевый потолок?',              a: 'Да. Протирайте мягкой слегка влажной тряпкой без абразивных и химически активных средств. Избегайте острых предметов и прямых солнечных лучей длительное время.' },
-  { q: 'Сколько цветов доступно в глянцевой фактуре?',  a: 'Более 100 цветов и оттенков: белые, бежевые, серебристые, золотые, цветные. Замерщик привезёт полную коллекцию образцов, чтобы вы могли оценить цвет в вашем интерьере.' },
-  { q: 'Выдержит ли потолок затопление?',               a: 'Да. ПВХ-полотно водонепроницаемо и удерживает до 100 литров воды на 1 м². Если вас затопили — звоните нам, мастер приедет и аккуратно сольёт воду без повреждения потолка.' },
+  { q: 'Чем бесшовный потолок отличается от обычного?',  a: 'Ширина полотна до 5 метров позволяет перекрыть помещение без единого шва. В обычных потолках при ширине более 2.8 м приходится спаивать полотна — шов может быть заметен.' },
+  { q: 'Что если комната шире 5 метров?',                a: 'Делаем профессиональную спайку: шов располагается максимально незаметно (у стены, вдоль линии мебели) и выполняется в тон полотна. При нормальном освещении не виден.' },
+  { q: 'Какой материал выбрать — ПВХ или тканевый?',     a: 'ПВХ: влагостойкий, богатая палитра, подходит для кухонь и ванных. Тканевый: без ПВХ, дышащий, рекомендован для спален, детских и аллергиков.' },
+  { q: 'Подходит ли бесшовный потолок для высокого помещения?', a: 'Да, бесшовные потолки устанавливаются в помещениях любой высоты, включая бассейны, спортзалы и апартаменты с высокими потолками.' },
+  { q: 'Сколько стоит бесшовный потолок в Иркутске?',    a: 'От 229 ₽/м² с монтажом. Зависит от материала (ПВХ или тканевый) и площади. Точный расчёт после замера.' },
 ]
 
 const seoLinks = [
-  { to: '/catalog/faktury/matovye-natyazhnye-potolki',   label: 'Матовые натяжные потолки' },
-  { to: '/catalog/faktury/satinovye-natyazhnye-potolki', label: 'Сатиновые натяжные потолки' },
-  { to: '/catalog/faktury/tkanevye-natyazhnye-potolki',  label: 'Тканевые натяжные потолки' },
-  { to: '/catalog/vidy/paryashchie-natyazhnye-potolki',  label: 'Парящие потолки' },
-  { to: '/catalog/vidy/natyazhnye-potolki-s-podsvetkoy', label: 'С подсветкой' },
-  { to: '/uslugi/montazh-natyazhnyh-potolkov',           label: 'Монтаж натяжных потолков' },
+  { to: '/catalog/faktury/matovye-natyazhnye-potolki',       label: 'Матовые натяжные потолки' },
+  { to: '/catalog/faktury/glyancevye-natyazhnye-potolki',    label: 'Глянцевые натяжные потолки' },
+  { to: '/catalog/faktury/tkanevye-natyazhnye-potolki',      label: 'Тканевые натяжные потолки' },
+  { to: '/catalog/vidy/dvuhurovnevye-natyazhnye-potolki',    label: 'Двухуровневые потолки' },
+  { to: '/catalog/faktury',                                  label: 'Все фактуры' },
 ]
 
-// ── Хелперы ────────────────────────────────────────────────────
 function fmt(n: number) { return n.toLocaleString('ru-RU') }
 
 function maskPhone(e: Event) {
@@ -433,7 +375,6 @@ function maskPhone(e: Event) {
 
 function submitHero() { callbackOpen.value = true }
 
-// Закрытие lightbox по Escape
 onMounted(() => {
   const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') lightbox.open = false }
   document.addEventListener('keydown', onKey)
@@ -442,13 +383,7 @@ onMounted(() => {
 </script>
 
 <style scoped>
-/* ═══ Общие утилиты ═══ */
-.cp-pretitle {
-  display: inline-block; font-size: 12px; font-weight: 700;
-  padding: 3px 14px; border-radius: 20px; margin-bottom: 14px;
-  text-transform: uppercase; letter-spacing: .5px;
-  background: var(--accent); color: var(--dark);
-}
+.cp-pretitle { display: inline-block; font-size: 12px; font-weight: 700; padding: 3px 14px; border-radius: 20px; margin-bottom: 14px; text-transform: uppercase; letter-spacing: .5px; background: var(--accent); color: var(--dark); }
 .cp-pretitle--dark { background: var(--accent); color: var(--dark); }
 .cp-check { color: var(--accent); flex-shrink: 0; }
 .cp-section { padding: 64px 0; }
@@ -456,20 +391,9 @@ onMounted(() => {
 .cp-h2 { font-size: 30px; font-weight: 800; color: var(--dark); margin: 0 0 10px; line-height: 1.2; }
 .cp-h2--center { text-align: center; }
 .cp-section-desc { font-size: 15px; color: var(--gray); max-width: 560px; margin: 0 auto; line-height: 1.6; }
-
-/* ═══ HERO ═══ */
-.cp-hero {
-  position: relative; min-height: 480px; display: flex; align-items: center;
-}
-.cp-hero__bg {
-  position: absolute; inset: 0;
-  background-size: cover; background-position: center; z-index: 0;
-}
-.cp-hero__overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(90deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.55) 55%, rgba(0,0,0,.2) 100%);
-  z-index: 1;
-}
+.cp-hero { position: relative; min-height: 480px; display: flex; align-items: center; }
+.cp-hero__bg { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 0; }
+.cp-hero__overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.55) 55%, rgba(0,0,0,.2) 100%); z-index: 1; }
 .cp-hero__inner { position: relative; z-index: 2; padding-top: 56px; padding-bottom: 56px; }
 .cp-hero__content { max-width: 620px; }
 .cp-hero__title { font-size: 42px; font-weight: 900; color: #fff; line-height: 1.15; margin-bottom: 14px; }
@@ -482,8 +406,6 @@ onMounted(() => {
 .cp-inp:focus { background: #fff; }
 .cp-hero__btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px; font-size: 15px; border-radius: 10px; white-space: nowrap; }
 .cp-policy { font-size: 11px; color: rgba(255,255,255,.35); margin: 0; }
-
-/* ═══ ОПИСАНИЕ ═══ */
 .cp-about { background: #fff; }
 .cp-two-col { display: grid; grid-template-columns: 1fr 300px; gap: 56px; align-items: start; }
 .cp-main .cp-h2 { margin-bottom: 20px; }
@@ -493,8 +415,6 @@ onMounted(() => {
 .cp-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
 .cp-list li { font-size: 14px; color: #555; line-height: 1.6; padding-left: 16px; position: relative; }
 .cp-list li::before { content: '—'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
-
-/* Сайдбар */
 .cp-aside { position: sticky; top: 100px; display: flex; flex-direction: column; gap: 20px; }
 .cp-aside-card { background: #f7f7f7; border-radius: 18px; padding: 24px; border: 1.5px solid #ececec; }
 .cp-aside-card__title { font-size: 17px; font-weight: 800; color: var(--dark); margin-bottom: 8px; }
@@ -512,8 +432,6 @@ onMounted(() => {
 .cp-aside-nav__link { display: flex; align-items: center; gap: 6px; padding: 7px 0; font-size: 13px; font-weight: 500; color: var(--gray); text-decoration: none; border-bottom: 1px solid #f5f5f5; transition: color .15s; }
 .cp-aside-nav__link:last-child { border-bottom: none; }
 .cp-aside-nav__link:hover, .cp-aside-nav__link.active { color: var(--dark); font-weight: 700; }
-
-/* ═══ ГОТОВЫЕ РАБОТЫ ═══ */
 .cp-works { background: #f7f7f7; }
 .cp-works-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
 .cp-work-card { background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,.06); border: 1.5px solid transparent; transition: border-color .2s, box-shadow .2s; }
@@ -521,11 +439,7 @@ onMounted(() => {
 .cp-work-card__img-wrap { position: relative; aspect-ratio: 4/3; overflow: hidden; cursor: pointer; }
 .cp-work-card__img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
 .cp-work-card:hover .cp-work-card__img { transform: scale(1.06); }
-.cp-work-card__zoom {
-  position: absolute; inset: 0; background: rgba(0,0,0,.35);
-  display: flex; align-items: center; justify-content: center;
-  color: #fff; opacity: 0; transition: opacity .2s;
-}
+.cp-work-card__zoom { position: absolute; inset: 0; background: rgba(0,0,0,.35); display: flex; align-items: center; justify-content: center; color: #fff; opacity: 0; transition: opacity .2s; }
 .cp-work-card__img-wrap:hover .cp-work-card__zoom { opacity: 1; }
 .cp-work-card__body { padding: 14px 14px 12px; }
 .cp-work-card__title { font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 8px; line-height: 1.3; }
@@ -535,45 +449,21 @@ onMounted(() => {
 .cp-work-card__area  { font-size: 12px; color: var(--gray); }
 .cp-work-card__price { font-size: 14px; font-weight: 800; color: var(--dark); }
 .cp-works-more { text-align: center; }
-.cp-more-btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 12px 32px; font-size: 14px; font-weight: 700;
-  font-family: var(--font); background: #fff; border: 1.5px solid #ddd;
-  border-radius: 50px; cursor: pointer; color: var(--gray);
-  transition: border-color .15s, color .15s;
-}
+.cp-more-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 32px; font-size: 14px; font-weight: 700; font-family: var(--font); background: #fff; border: 1.5px solid #ddd; border-radius: 50px; cursor: pointer; color: var(--gray); transition: border-color .15s, color .15s; }
 .cp-more-btn:hover { border-color: var(--accent); color: var(--dark); }
-
-/* ═══ КАЛЬКУЛЯТОР CTA ═══ */
 .cp-calc-cta { background: #141414; padding: 32px 0; }
 .cp-calc-cta__inner { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
 .cp-calc-cta__icon { width: 56px; height: 56px; flex-shrink: 0; background: var(--accent); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: var(--dark); }
 .cp-calc-cta__title { font-size: 17px; font-weight: 800; color: #fff; margin-bottom: 4px; }
 .cp-calc-cta__desc  { font-size: 13px; color: rgba(255,255,255,.4); line-height: 1.5; }
 .cp-calc-cta__btn   { margin-left: auto; display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; font-size: 14px; white-space: nowrap; flex-shrink: 0; }
-
-/* ═══ ГАЛЕРЕЯ ═══ */
 .cp-gallery { background: #fff; }
-.cp-gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-}
-.cp-gallery-item {
-  position: relative; aspect-ratio: 4/3; overflow: hidden;
-  border-radius: 10px; cursor: pointer;
-  background: #f0f0f0;
-}
+.cp-gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.cp-gallery-item { position: relative; aspect-ratio: 4/3; overflow: hidden; border-radius: 10px; cursor: pointer; background: #f0f0f0; }
 .cp-gallery-img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
 .cp-gallery-item:hover .cp-gallery-img { transform: scale(1.07); }
-.cp-gallery-overlay {
-  position: absolute; inset: 0; background: rgba(0,0,0,.35);
-  display: flex; align-items: center; justify-content: center;
-  color: #fff; opacity: 0; transition: opacity .2s;
-}
+.cp-gallery-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.35); display: flex; align-items: center; justify-content: center; color: #fff; opacity: 0; transition: opacity .2s; }
 .cp-gallery-item:hover .cp-gallery-overlay { opacity: 1; }
-
-/* ═══ АКЦИИ ═══ */
 .cp-promo { background: #f7f7f7; }
 .cp-promo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .cp-promo-card { background: #fff; border-radius: 16px; padding: 26px 22px; border: 1.5px solid #eee; display: flex; flex-direction: column; gap: 10px; transition: border-color .15s; }
@@ -583,8 +473,6 @@ onMounted(() => {
 .cp-promo-card__desc  { font-size: 13px; color: var(--gray); line-height: 1.6; flex: 1; }
 .cp-promo-card__date  { font-size: 12px; color: var(--accent); font-weight: 700; }
 .cp-promo-card__btn   { display: inline-flex; align-items: center; justify-content: center; padding: 10px 18px; font-size: 13px; margin-top: 4px; }
-
-/* ═══ ПОЧЕМУ МЫ ═══ */
 .cp-why { background: #fff; }
 .cp-why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .cp-why-card { background: #f7f7f7; border-radius: 16px; padding: 24px 20px; border: 1.5px solid transparent; transition: border-color .15s, box-shadow .15s; }
@@ -592,8 +480,6 @@ onMounted(() => {
 .cp-why-card__icon { width: 48px; height: 48px; background: var(--accent); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: var(--dark); margin-bottom: 12px; }
 .cp-why-card__title { font-size: 14px; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
 .cp-why-card__desc  { font-size: 13px; color: var(--gray); line-height: 1.6; }
-
-/* ═══ FAQ ═══ */
 .cp-faq { background: #f7f7f7; }
 .cp-faq-list { display: flex; flex-direction: column; gap: 10px; max-width: 860px; margin: 0 auto; }
 .cp-faq-item { background: #fff; border-radius: 12px; border: 1.5px solid #eee; overflow: hidden; cursor: pointer; transition: border-color .15s; }
@@ -603,8 +489,6 @@ onMounted(() => {
 .cp-faq-item.open .cp-faq-item__arrow { color: var(--accent); }
 .cp-faq-item__a { max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .3s; font-size: 14px; color: #555; line-height: 1.7; padding: 0 20px; }
 .cp-faq-item.open .cp-faq-item__a { max-height: 300px; padding: 0 20px 16px; }
-
-/* ═══ SEO ═══ */
 .cp-seo { background: #fff; }
 .cp-seo-inner { display: grid; grid-template-columns: 1fr 240px; gap: 56px; align-items: start; }
 .cp-seo-content h2 { font-size: 20px; font-weight: 800; color: var(--dark); margin: 0 0 14px; }
@@ -615,8 +499,6 @@ onMounted(() => {
 .cp-seo-links__title { font-size: 12px; font-weight: 800; color: var(--dark); margin-bottom: 12px; text-transform: uppercase; letter-spacing: .4px; }
 .cp-seo-link { display: flex; align-items: center; gap: 6px; padding: 8px 0; font-size: 13px; font-weight: 500; color: var(--gray); text-decoration: none; border-bottom: 1px solid #f0f0f0; transition: color .15s, padding-left .15s; }
 .cp-seo-link:hover { color: var(--dark); padding-left: 4px; }
-
-/* ═══ CTA ═══ */
 .cp-cta { background: #141414; padding: 60px 0; }
 .cp-cta__inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
 .cp-cta__title { font-size: 28px; font-weight: 900; color: #fff; margin-bottom: 8px; }
@@ -625,24 +507,9 @@ onMounted(() => {
 .cp-cta__btn   { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; font-size: 15px; }
 .cp-cta__outline { display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; font-size: 15px; font-weight: 700; font-family: var(--font); background: none; border: 2px solid rgba(255,255,255,.2); border-radius: 10px; color: #fff; cursor: pointer; text-decoration: none; transition: border-color .15s, color .15s; }
 .cp-cta__outline:hover { border-color: var(--accent); color: var(--accent); }
-
-/* ═══ LIGHTBOX ═══ */
-.cp-lightbox {
-  position: fixed; inset: 0; z-index: 600;
-  background: rgba(0,0,0,.85); display: flex; align-items: center; justify-content: center; padding: 20px;
-  backdrop-filter: blur(4px);
-}
-.cp-lightbox__box {
-  position: relative; max-width: 1000px; width: 100%;
-  max-height: 90vh; display: flex; flex-direction: column;
-}
-.cp-lightbox__close {
-  position: absolute; top: -44px; right: 0;
-  background: rgba(255,255,255,.15); border: none; border-radius: 50%;
-  width: 36px; height: 36px; cursor: pointer; color: #fff;
-  display: flex; align-items: center; justify-content: center;
-  transition: background .15s;
-}
+.cp-lightbox { position: fixed; inset: 0; z-index: 600; background: rgba(0,0,0,.85); display: flex; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px); }
+.cp-lightbox__box { position: relative; max-width: 1000px; width: 100%; max-height: 90vh; display: flex; flex-direction: column; }
+.cp-lightbox__close { position: absolute; top: -44px; right: 0; background: rgba(255,255,255,.15); border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; color: #fff; display: flex; align-items: center; justify-content: center; transition: background .15s; }
 .cp-lightbox__close:hover { background: rgba(255,255,255,.25); }
 .cp-lightbox__img { width: 100%; height: auto; max-height: 80vh; object-fit: contain; border-radius: 10px; display: block; }
 .cp-lightbox__title { text-align: center; color: rgba(255,255,255,.7); font-size: 14px; margin-top: 12px; }
@@ -650,37 +517,10 @@ onMounted(() => {
 .lb-leave-active { transition: opacity .15s ease; }
 .lb-enter-from   { opacity: 0; transform: scale(.97); }
 .lb-leave-to     { opacity: 0; }
-
-/* ═══ Responsive ═══ */
-@media (max-width: 1100px) {
-  .cp-works-grid { grid-template-columns: repeat(3, 1fr); }
-  .cp-gallery-grid { grid-template-columns: repeat(3, 1fr); }
-}
-@media (max-width: 860px) {
-  .cp-two-col    { grid-template-columns: 1fr; }
-  .cp-aside      { position: static; }
-  .cp-seo-inner  { grid-template-columns: 1fr; }
-  .cp-seo-links  { position: static; }
-  .cp-promo-grid { grid-template-columns: 1fr 1fr; }
-}
-@media (max-width: 768px) {
-  .cp-works-grid   { grid-template-columns: repeat(2, 1fr); }
-  .cp-gallery-grid { grid-template-columns: repeat(2, 1fr); }
-  .cp-why-grid     { grid-template-columns: repeat(2, 1fr); }
-  .cp-hero__title  { font-size: 32px; }
-}
-@media (max-width: 640px) {
-  .cp-hero__title  { font-size: 26px; }
-  .cp-hero__form   { flex-direction: column; }
-  .cp-inp, .cp-hero__btn { width: 100%; }
-  .cp-works-grid   { grid-template-columns: repeat(2, 1fr); }
-  .cp-gallery-grid { grid-template-columns: repeat(2, 1fr); }
-  .cp-promo-grid   { grid-template-columns: 1fr; }
-  .cp-why-grid     { grid-template-columns: 1fr; }
-  .cp-h2           { font-size: 24px; }
-  .cp-cta__inner   { flex-direction: column; align-items: flex-start; }
-  .cp-calc-cta__btn { margin-left: 0; width: 100%; justify-content: center; }
-}
+@media (max-width: 1100px) { .cp-works-grid { grid-template-columns: repeat(3, 1fr); } .cp-gallery-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 860px) { .cp-two-col { grid-template-columns: 1fr; } .cp-aside { position: static; } .cp-seo-inner { grid-template-columns: 1fr; } .cp-seo-links { position: static; } .cp-promo-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 768px) { .cp-works-grid { grid-template-columns: repeat(2, 1fr); } .cp-gallery-grid { grid-template-columns: repeat(2, 1fr); } .cp-why-grid { grid-template-columns: repeat(2, 1fr); } .cp-hero__title { font-size: 32px; } }
+@media (max-width: 640px) { .cp-hero__title { font-size: 26px; } .cp-hero__form { flex-direction: column; } .cp-inp, .cp-hero__btn { width: 100%; } .cp-works-grid { grid-template-columns: repeat(2, 1fr); } .cp-gallery-grid { grid-template-columns: repeat(2, 1fr); } .cp-promo-grid { grid-template-columns: 1fr; } .cp-why-grid { grid-template-columns: 1fr; } .cp-h2 { font-size: 24px; } .cp-cta__inner { flex-direction: column; align-items: flex-start; } .cp-calc-cta__btn { margin-left: 0; width: 100%; justify-content: center; } }
 
 @media (max-width: 768px) { .cp-aside-nav { display: none; } }
 </style>

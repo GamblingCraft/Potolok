@@ -909,7 +909,16 @@ function submitCalc() {
   .calc-result  { max-width: 600px; margin: 0 auto; }
 }
 @media (max-width: 640px) {
-.calc-title { font-size: 28px; }
+  .calc-title { font-size: 28px; }
   .calc-room__dims { flex-wrap: wrap; }
+
+  /* Карточки фактур и видов — 2 широких вместо 4 сжатых */
+  .calc-card {
+    flex: 0 0 calc((100% - 10px) / 2);
+    width: calc((100% - 10px) / 2);
+    height: 120px;
+  }
+  .calc-card__name { font-size: 14px; }
+  .calc-card__sub  { font-size: 12px; }
 }
 </style>

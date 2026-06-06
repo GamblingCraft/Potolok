@@ -11,7 +11,7 @@
         <div class="cp-hero__content">
           <div class="cp-pretitle">Фактура полотна</div>
           <h1 class="cp-hero__title" itemprop="name">
-            Глянцевые натяжные потолки в&nbsp;Иркутске
+            Сатиновые натяжные потолки в&nbsp;Иркутске
           </h1>
           <p class="cp-hero__price">
             Акция: <span>3-й потолок в подарок!</span> Гарантия 12 лет.<br>
@@ -42,15 +42,15 @@
         <div class="cp-two-col">
 
           <div class="cp-main">
-            <h2 class="cp-h2">Глянцевые натяжные потолки — преимущества, фото</h2>
+            <h2 class="cp-h2">Сатиновые натяжные потолки — преимущества, фото</h2>
             <div class="cp-text" itemprop="description">
-              <p>После установки глянцевого натяжного потолка комната визуально увеличивается — вся световая масса отражается от идеально гладкой поверхности и делает пространство ярче и просторнее. Зеркальный эффект полотна создаёт ощущение второго этажа и дополнительного источника света.</p>
-              <p>Изготавливаются из специальной поливинилхлоридной плёнки с идеально гладкой поверхностью. Она зеркально отражает все предметы в помещении — мебель, светильники, декор. Доступна в более чем 100 цветах и оттенках.</p>
+              <p>Сатиновый потолок занимает золотую середину между матовым и глянцевым. Поверхность имеет мягкий, еле уловимый шёлковый блеск — она не создаёт зеркального эффекта, но при этом красиво переливается в зависимости от угла освещения.</p>
+              <p>Идеальный выбор для тех, кто хочет чего-то интереснее матового, но без резкого блеска глянца. Сатин гармонично смотрится в гостиных, спальнях, кухнях и офисах.</p>
 
               <h3>Что мы предлагаем</h3>
-              <p>Реализуем глянцевые полотна европейских брендов: <strong>MSD, Bauf (Германия), Descor, Clipso, Teqtum, Lumfer</strong>. В каталоге — 100+ цветов на ваш выбор. Ширина полотна до 5 метров, что позволяет монтировать бесшовный потолок в большинстве помещений.</p>
+              <p>100+ оттенков сатина от <strong>MSD, Bauf, Pongs</strong>. Ширина полотна до 5 метров — бесшовный монтаж в большинстве помещений.</p>
 
-              <h3>Преимущества глянцевых натяжных потолков</h3>
+              <h3>Преимущества сатиновых натяжных потолков</h3>
               <ul class="cp-list">
                 <li v-for="adv in advantages" :key="adv.title">
                   <strong>{{ adv.title }}.</strong> {{ adv.desc }}
@@ -58,7 +58,7 @@
               </ul>
 
               <h3>Цвета и применение</h3>
-              <p>Цветовая палитра неограниченная: белые, бежевые, серебристые, золотые, бледно-голубые — любые оттенки есть в нашем каталоге. Глянцевые потолки универсальны — хорошо сочетаются как с классическим, так и с современным дизайном. Используются на кухне, в зале, в спальне, в ванной и прихожей.</p>
+              <p>Особенно эффектно сатиновые потолки смотрятся в спальне и гостиной — мягкий блеск создаёт атмосферу уюта и стиля. Хорошо сочетается с системами точечного и скрытого освещения.</p>
             </div>
           </div>
 
@@ -137,7 +137,7 @@
       <div class="container cp-calc-cta__inner">
         <div class="cp-calc-cta__icon"><Icon name="lucide:calculator" size="28"/></div>
         <div>
-          <div class="cp-calc-cta__title">Рассчитайте стоимость глянцевого потолка онлайн</div>
+          <div class="cp-calc-cta__title">Рассчитайте стоимость сатинового потолка онлайн</div>
           <p class="cp-calc-cta__desc">Укажите площадь, фактуру и дополнительные работы — калькулятор покажет предварительную цену за 1 минуту</p>
         </div>
         <NuxtLink to="/kalkulyator" class="nav-btn cp-calc-cta__btn">
@@ -153,7 +153,7 @@
       <div class="container">
         <div class="cp-section-head">
           <div class="cp-pretitle cp-pretitle--dark">100% без запаха</div>
-          <h2 class="cp-h2 cp-h2--center">Фотографии глянцевых натяжных потолков</h2>
+          <h2 class="cp-h2 cp-h2--center">Фотографии сатиновых натяжных потолков</h2>
           <p class="cp-section-desc">Наши реализованные проекты в Иркутске — нажмите на фото для просмотра</p>
         </div>
         <div class="cp-gallery-grid">
@@ -178,7 +178,7 @@
       <div class="container">
         <div class="cp-section-head">
           <div class="cp-pretitle cp-pretitle--dark">Выгодные условия</div>
-          <h2 class="cp-h2 cp-h2--center">Акции и скидки на глянцевые потолки</h2>
+          <h2 class="cp-h2 cp-h2--center">Акции и скидки на сатиновые потолки</h2>
         </div>
         <div class="cp-promo-grid">
           <div class="cp-promo-card" v-for="p in promos" :key="p.title">
@@ -218,7 +218,7 @@
       <div class="container">
         <div class="cp-section-head">
           <div class="cp-pretitle cp-pretitle--dark">Вопросы и ответы</div>
-          <h2 class="cp-h2 cp-h2--center">Частые вопросы про глянцевые натяжные потолки</h2>
+          <h2 class="cp-h2 cp-h2--center">Частые вопросы про сатиновые натяжные потолки</h2>
         </div>
         <div class="cp-faq-list">
           <div
@@ -247,14 +247,12 @@
       <div class="container">
         <div class="cp-seo-inner">
           <div class="cp-seo-content">
-            <h2>Глянцевые натяжные потолки в Иркутске — цены с установкой</h2>
-            <p>Компания <strong>ПроПотолок</strong> реализует и устанавливает глянцевые натяжные потолки в Иркутске с 2009 года. Работаем с европейскими материалами, монтируем без предоплаты, даём письменную гарантию 12 лет.</p>
-            <h3>Особенности глянцевых потолков</h3>
-            <p>Глянцевая поверхность создаёт зеркальный эффект — визуально увеличивает комнату и усиливает освещённость. Особенно эффектно смотрится в небольших помещениях: кухне, ванной, прихожей. В гостиных с высокими потолками создаёт впечатление величия и простора.</p>
-            <h3>Уход за глянцевым потолком</h3>
-            <p>Поверхность не притягивает пыль и легко очищается. Для протирки используйте мягкую слегка влажную ткань без абразивных средств. Не допускайте попадания острых предметов и длительного воздействия прямых солнечных лучей.</p>
-            <h3>Монтаж глянцевого потолка в 2026 году</h3>
-            <p>Современные глянцевые потолки монтируются методом холодного натяжения — без нагрева, без запаха, без необходимости убирать мебель. Монтаж стандартной комнаты занимает 2–4 часа. После завершения мастера убирают за собой.</p>
+            <h2>Сатиновые натяжные потолки в Иркутске — цены с установкой</h2>
+            <p>Компания <strong>ПроПотолок</strong> реализует и устанавливает сатиновые натяжные потолки в Иркутске с 2009 года. Работаем с европейскими материалами, монтируем без предоплаты, даём письменную гарантию 12 лет.</p>
+            <h3>Особенности сатиновых потолков</h3>
+            <p>Сатин сочетает лучшее от матового и глянцевого: равномерно распределяет свет и при этом имеет лёгкий привлекательный блеск. Не требует специального ухода.</p>
+            <h3>Монтаж в Иркутске</h3>
+            <p>Устанавливаем сатиновые потолки по всему Иркутску. Замер бесплатный. Монтаж — 2–4 часа. Гарантия 12 лет по договору.</p>
           </div>
           <div class="cp-seo-links">
             <div class="cp-seo-links__title">Смотрите также</div>
@@ -272,7 +270,7 @@
     <section class="cp-cta">
       <div class="container cp-cta__inner">
         <div>
-          <h2 class="cp-cta__title">Хотите глянцевый натяжной потолок?</h2>
+          <h2 class="cp-cta__title">Хотите сатиновый натяжной потолок?</h2>
           <p class="cp-cta__desc">Вызовите замерщика — приедет бесплатно, покажет образцы и рассчитает стоимость на месте</p>
         </div>
         <div class="cp-cta__btns">
@@ -310,18 +308,16 @@
 import { faktury } from '~/data/catalog'
 import { catalogGallery } from '~/data/gallery'
 
-// ── Данные страницы из catalog.ts ──────────────────────────────
-const item = faktury.find(f => f.id === 'gly')!
-const gallery = catalogGallery['glyancevye-natyazhnye-potolki'] ?? []
+const item = faktury.find(f => f.id === 'sat')!
+const gallery = catalogGallery['satinovye-natyazhnye-potolki'] ?? []
 const worksWithPrice = gallery.filter(g => g.price)
 
-// ── SEO ────────────────────────────────────────────────────────
 useHead({
-  title: 'Глянцевые натяжные потолки в Иркутске — цены от 209 ₽/м² с монтажом | ПроПотолок',
+  title: 'Сатиновые натяжные потолки в Иркутске — от 189 ₽/м² | ПроПотолок',
   meta: [
-    { name: 'description', content: 'Глянцевые натяжные потолки в Иркутске от 209 ₽/м² с монтажом. 100+ цветов, европейские полотна MSD и Bauf. Монтаж за 1 день, гарантия 12 лет, без предоплаты.' },
-    { property: 'og:title', content: 'Глянцевые натяжные потолки в Иркутске | ПроПотолок' },
-    { property: 'og:description', content: 'Глянцевые потолки от 209 ₽/м². Монтаж за 1 день, гарантия 12 лет, бесплатный замер.' },
+    { name: 'description', content: 'Сатиновые натяжные потолки в Иркутске от 189 ₽/м² с монтажом. Мягкий шёлковый блеск, 100+ оттенков, универсальный выбор. Монтаж за 1 день, гарантия 12 лет.' },
+    { property: 'og:title', content: 'Сатиновые натяжные потолки в Иркутске | ПроПотолок' },
+    { property: 'og:description', content: 'Сатиновые потолки от 189 ₽/м². Монтаж за 1 день, гарантия 12 лет, бесплатный замер.' },
     { property: 'og:image', content: item.img },
     { property: 'og:type', content: 'product' },
   ],
@@ -331,8 +327,8 @@ useHead({
       innerHTML: JSON.stringify({
         '@context': 'https://schema.org',
         '@type': 'Product',
-        name: 'Глянцевые натяжные потолки',
-        description: 'Глянцевые натяжные потолки из ПВХ-плёнки с зеркальным эффектом. 100+ цветов, монтаж в Иркутске.',
+        name: 'Сатиновые натяжные потолки',
+        description: 'Сатиновые натяжные потолки с мягким шёлковым блеском. 100+ оттенков, монтаж в Иркутске.',
         brand: { '@type': 'Brand', name: 'ПроПотолок' },
         offers: {
           '@type': 'Offer',
@@ -346,7 +342,6 @@ useHead({
   ],
 })
 
-// ── State ──────────────────────────────────────────────────────
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)
 const formName = ref('')
@@ -362,7 +357,6 @@ function openLightbox(img: string, title: string) {
   lightbox.open = true
 }
 
-// ── Данные ─────────────────────────────────────────────────────
 const otherFaktury = faktury.map(f => ({ id: f.id, slug: f.slug, title: f.title }))
 
 const asideItems = [
@@ -374,12 +368,12 @@ const asideItems = [
 ]
 
 const advantages = [
-  { title: 'Простота в уходе',        desc: 'ПВХ-плёнка не притягивает пыль; при загрязнении достаточно протереть мягкой влажной тряпкой без химии.' },
-  { title: 'Быстрый монтаж',          desc: 'Одна комната — 2–3 часа, двухкомнатная квартира — за 1 день. Без шума и пыли.' },
-  { title: 'Водонепроницаемость',     desc: 'Плёнка не пропускает воду — при затоплении сверху потолок удержит до 100 л/м².' },
-  { title: 'Экологическая безопасность', desc: 'Нетоксичны, без запаха после монтажа. Установлены в детских садах и медучреждениях Иркутска.' },
-  { title: 'Зеркальный эффект',       desc: 'Весь свет от светильников отражается от потолка — комната становится визуально просторнее и ярче.' },
-  { title: 'Широкие возможности',     desc: '100+ цветов и оттенков. Совместимы с фотопечатью, можно напечатать любой рисунок.' },
+  { title: 'Мягкий шёлковый блеск',             desc: 'Поверхность красиво переливается в свете — без резкого зеркального отражения, свойственного глянцу.' },
+  { title: 'Универсальность',                    desc: 'Подходит для любых помещений и стилей — от классики до современного минимализма.' },
+  { title: 'Визуально увеличивает пространство', desc: 'Лёгкий блеск добавляет глубины и воздушности, визуально поднимая высоту потолка.' },
+  { title: '100+ оттенков',                      desc: 'Широкая палитра, включая белые, бежевые, серые и цветные оттенки.' },
+  { title: 'Водонепроницаемость',                desc: 'ПВХ-полотно не пропускает воду. Подходит для кухонь и ванных.' },
+  { title: 'Совместим с любым освещением',       desc: 'Отлично смотрится с точечными светильниками, трековыми системами и LED-подсветкой.' },
 ]
 
 const promos = [
@@ -398,24 +392,21 @@ const whyCards = [
 ]
 
 const faqItems = [
-  { q: 'Надо ли выровнять потолок перед монтажом?',    a: 'Нет. Если нет больших трещин глубиной более 1 см — специальной подготовки не требуется. Мастер самостоятельно очистит основание от осыпающейся штукатурки.' },
-  { q: 'Будет ли запах от глянцевого потолка?',         a: 'Метод холодного натяжения не предполагает нагрева, поэтому запаха нет. Полотна изготовлены из нетоксичного ПВХ, прошли санитарно-эпидемиологическую проверку.' },
-  { q: 'На сколько визуально уменьшает высоту потолок?', a: 'Натяжной потолок забирает 3–5 см от высоты помещения. При стандартной высоте 2,7 м останется 2,65–2,67 м — практически незаметно.' },
-  { q: 'Можно ли мыть глянцевый потолок?',              a: 'Да. Протирайте мягкой слегка влажной тряпкой без абразивных и химически активных средств. Избегайте острых предметов и прямых солнечных лучей длительное время.' },
-  { q: 'Сколько цветов доступно в глянцевой фактуре?',  a: 'Более 100 цветов и оттенков: белые, бежевые, серебристые, золотые, цветные. Замерщик привезёт полную коллекцию образцов, чтобы вы могли оценить цвет в вашем интерьере.' },
-  { q: 'Выдержит ли потолок затопление?',               a: 'Да. ПВХ-полотно водонепроницаемо и удерживает до 100 литров воды на 1 м². Если вас затопили — звоните нам, мастер приедет и аккуратно сольёт воду без повреждения потолка.' },
+  { q: 'В чём отличие сатина от матового и глянцевого?', a: 'Матовый — полное отсутствие блеска. Глянцевый — зеркальное отражение. Сатин — между ними: мягкий шёлковый блеск без резких отражений. Универсальный вариант для большинства интерьеров.' },
+  { q: 'Подходит ли сатин для спальни?',                 a: 'Идеально. Мягкий переливающийся блеск создаёт атмосферу уюта. В сочетании с точечными светильниками или LED-лентой за карнизом — очень эффектно.' },
+  { q: 'Легко ли ухаживать за сатиновым потолком?',      a: 'Да. Протирайте мягкой влажной тряпкой без абразивных средств. Поверхность не притягивает пыль и долго остаётся чистой.' },
+  { q: 'Сколько цветов доступно в сатиновой фактуре?',   a: 'Более 100 оттенков. Замерщик привезёт полную коллекцию образцов — вы сможете оценить блеск при вашем освещении.' },
+  { q: 'Можно ли использовать сатин в ванной?',          a: 'Да, ПВХ-полотно водонепроницаемо. Сатиновый потолок отлично смотрится в ванной, добавляя пространству элегантности.' },
 ]
 
 const seoLinks = [
-  { to: '/catalog/faktury/matovye-natyazhnye-potolki',   label: 'Матовые натяжные потолки' },
-  { to: '/catalog/faktury/satinovye-natyazhnye-potolki', label: 'Сатиновые натяжные потолки' },
-  { to: '/catalog/faktury/tkanevye-natyazhnye-potolki',  label: 'Тканевые натяжные потолки' },
-  { to: '/catalog/vidy/paryashchie-natyazhnye-potolki',  label: 'Парящие потолки' },
-  { to: '/catalog/vidy/natyazhnye-potolki-s-podsvetkoy', label: 'С подсветкой' },
-  { to: '/uslugi/montazh-natyazhnyh-potolkov',           label: 'Монтаж натяжных потолков' },
+  { to: '/catalog/faktury/matovye-natyazhnye-potolki',    label: 'Матовые натяжные потолки' },
+  { to: '/catalog/faktury/glyancevye-natyazhnye-potolki', label: 'Глянцевые натяжные потолки' },
+  { to: '/catalog/faktury/tkanevye-natyazhnye-potolki',   label: 'Тканевые натяжные потолки' },
+  { to: '/catalog/vidy/paryashchie-natyazhnye-potolki',   label: 'Парящие потолки' },
+  { to: '/uslugi/montazh-natyazhnyh-potolkov',            label: 'Монтаж натяжных потолков' },
 ]
 
-// ── Хелперы ────────────────────────────────────────────────────
 function fmt(n: number) { return n.toLocaleString('ru-RU') }
 
 function maskPhone(e: Event) {
@@ -433,7 +424,6 @@ function maskPhone(e: Event) {
 
 function submitHero() { callbackOpen.value = true }
 
-// Закрытие lightbox по Escape
 onMounted(() => {
   const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') lightbox.open = false }
   document.addEventListener('keydown', onKey)
@@ -458,18 +448,9 @@ onMounted(() => {
 .cp-section-desc { font-size: 15px; color: var(--gray); max-width: 560px; margin: 0 auto; line-height: 1.6; }
 
 /* ═══ HERO ═══ */
-.cp-hero {
-  position: relative; min-height: 480px; display: flex; align-items: center;
-}
-.cp-hero__bg {
-  position: absolute; inset: 0;
-  background-size: cover; background-position: center; z-index: 0;
-}
-.cp-hero__overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(90deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.55) 55%, rgba(0,0,0,.2) 100%);
-  z-index: 1;
-}
+.cp-hero { position: relative; min-height: 480px; display: flex; align-items: center; }
+.cp-hero__bg { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 0; }
+.cp-hero__overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.55) 55%, rgba(0,0,0,.2) 100%); z-index: 1; }
 .cp-hero__inner { position: relative; z-index: 2; padding-top: 56px; padding-bottom: 56px; }
 .cp-hero__content { max-width: 620px; }
 .cp-hero__title { font-size: 42px; font-weight: 900; color: #fff; line-height: 1.15; margin-bottom: 14px; }
@@ -521,11 +502,7 @@ onMounted(() => {
 .cp-work-card__img-wrap { position: relative; aspect-ratio: 4/3; overflow: hidden; cursor: pointer; }
 .cp-work-card__img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
 .cp-work-card:hover .cp-work-card__img { transform: scale(1.06); }
-.cp-work-card__zoom {
-  position: absolute; inset: 0; background: rgba(0,0,0,.35);
-  display: flex; align-items: center; justify-content: center;
-  color: #fff; opacity: 0; transition: opacity .2s;
-}
+.cp-work-card__zoom { position: absolute; inset: 0; background: rgba(0,0,0,.35); display: flex; align-items: center; justify-content: center; color: #fff; opacity: 0; transition: opacity .2s; }
 .cp-work-card__img-wrap:hover .cp-work-card__zoom { opacity: 1; }
 .cp-work-card__body { padding: 14px 14px 12px; }
 .cp-work-card__title { font-size: 13px; font-weight: 700; color: var(--dark); margin-bottom: 8px; line-height: 1.3; }
@@ -535,13 +512,7 @@ onMounted(() => {
 .cp-work-card__area  { font-size: 12px; color: var(--gray); }
 .cp-work-card__price { font-size: 14px; font-weight: 800; color: var(--dark); }
 .cp-works-more { text-align: center; }
-.cp-more-btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 12px 32px; font-size: 14px; font-weight: 700;
-  font-family: var(--font); background: #fff; border: 1.5px solid #ddd;
-  border-radius: 50px; cursor: pointer; color: var(--gray);
-  transition: border-color .15s, color .15s;
-}
+.cp-more-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 32px; font-size: 14px; font-weight: 700; font-family: var(--font); background: #fff; border: 1.5px solid #ddd; border-radius: 50px; cursor: pointer; color: var(--gray); transition: border-color .15s, color .15s; }
 .cp-more-btn:hover { border-color: var(--accent); color: var(--dark); }
 
 /* ═══ КАЛЬКУЛЯТОР CTA ═══ */
@@ -554,23 +525,11 @@ onMounted(() => {
 
 /* ═══ ГАЛЕРЕЯ ═══ */
 .cp-gallery { background: #fff; }
-.cp-gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-}
-.cp-gallery-item {
-  position: relative; aspect-ratio: 4/3; overflow: hidden;
-  border-radius: 10px; cursor: pointer;
-  background: #f0f0f0;
-}
+.cp-gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.cp-gallery-item { position: relative; aspect-ratio: 4/3; overflow: hidden; border-radius: 10px; cursor: pointer; background: #f0f0f0; }
 .cp-gallery-img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
 .cp-gallery-item:hover .cp-gallery-img { transform: scale(1.07); }
-.cp-gallery-overlay {
-  position: absolute; inset: 0; background: rgba(0,0,0,.35);
-  display: flex; align-items: center; justify-content: center;
-  color: #fff; opacity: 0; transition: opacity .2s;
-}
+.cp-gallery-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.35); display: flex; align-items: center; justify-content: center; color: #fff; opacity: 0; transition: opacity .2s; }
 .cp-gallery-item:hover .cp-gallery-overlay { opacity: 1; }
 
 /* ═══ АКЦИИ ═══ */
@@ -627,22 +586,9 @@ onMounted(() => {
 .cp-cta__outline:hover { border-color: var(--accent); color: var(--accent); }
 
 /* ═══ LIGHTBOX ═══ */
-.cp-lightbox {
-  position: fixed; inset: 0; z-index: 600;
-  background: rgba(0,0,0,.85); display: flex; align-items: center; justify-content: center; padding: 20px;
-  backdrop-filter: blur(4px);
-}
-.cp-lightbox__box {
-  position: relative; max-width: 1000px; width: 100%;
-  max-height: 90vh; display: flex; flex-direction: column;
-}
-.cp-lightbox__close {
-  position: absolute; top: -44px; right: 0;
-  background: rgba(255,255,255,.15); border: none; border-radius: 50%;
-  width: 36px; height: 36px; cursor: pointer; color: #fff;
-  display: flex; align-items: center; justify-content: center;
-  transition: background .15s;
-}
+.cp-lightbox { position: fixed; inset: 0; z-index: 600; background: rgba(0,0,0,.85); display: flex; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px); }
+.cp-lightbox__box { position: relative; max-width: 1000px; width: 100%; max-height: 90vh; display: flex; flex-direction: column; }
+.cp-lightbox__close { position: absolute; top: -44px; right: 0; background: rgba(255,255,255,.15); border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; color: #fff; display: flex; align-items: center; justify-content: center; transition: background .15s; }
 .cp-lightbox__close:hover { background: rgba(255,255,255,.25); }
 .cp-lightbox__img { width: 100%; height: auto; max-height: 80vh; object-fit: contain; border-radius: 10px; display: block; }
 .cp-lightbox__title { text-align: center; color: rgba(255,255,255,.7); font-size: 14px; margin-top: 12px; }
