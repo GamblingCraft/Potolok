@@ -1004,9 +1004,9 @@ function submitForm() {
 .step-card:hover { border-color: rgba(245,200,0,.35); }
 .step-card__num {
   position: absolute;
-  bottom: -24px;
-  right: 10px;
-  font-size: 160px;
+  bottom: -74px;
+  right: -10px;
+  font-size: 260px;
   font-weight: 900;
   font-family: var(--font);
   line-height: 1;
