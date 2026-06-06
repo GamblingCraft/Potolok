@@ -173,6 +173,14 @@
             <nav class="nav-item nav-item--forphone"><NuxtLink to="/kontakty" @click="megaOpen = false">Контакты</NuxtLink></nav>
 
           </div>
+
+          <!-- Кнопка "Перейти в каталог" — только десктоп -->
+          <div class="submenu__catalog-cta">
+            <NuxtLink to="/catalog" class="nav-btn submenu__catalog-btn" @click="megaOpen = false">
+              <Icon name="lucide:layout-grid" size="16"/>
+              Перейти в каталог
+            </NuxtLink>
+          </div>
         </div>
       </div>
       </Transition>
@@ -375,3 +383,23 @@ onMounted(() => {
   onUnmounted(() => document.removeEventListener('keydown', onKey))
 })
 </script>
+
+<style scoped>
+.submenu__catalog-cta {
+  display: flex;
+  justify-content: center;
+  padding: 16px 0 4px;
+  border-top: 1px solid rgba(255,255,255,.07);
+  margin-top: 8px;
+}
+
+.submenu__catalog-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 36px;
+  font-size: 14px;
+  border-radius: 10px;
+  text-decoration: none;
+}
+</style>

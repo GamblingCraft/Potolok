@@ -999,15 +999,22 @@ function submitForm() {
 .idx-steps .idx-pretitle { background: rgba(245,200,0,.15); color: var(--accent); }
 .idx-steps .idx-title { color: #fff; }
 .idx-steps .idx-desc { color: rgba(255,255,255,.4); }
-.steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; position: relative; }
-.steps-grid::before {
-  content: ''; position: absolute; top: 52px; left: 10%; right: 10%; height: 2px;
-  background: linear-gradient(90deg, var(--accent) 0%, rgba(245,200,0,.2) 100%);
-  z-index: 0;
-}
+.steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; position: relative; }
 .step-card { background: #1e1e1e; border: 1px solid #2a2a2a; border-radius: 16px; padding: 28px 22px; position: relative; z-index: 1; transition: border-color .2s; }
 .step-card:hover { border-color: rgba(245,200,0,.35); }
-.step-card__num { font-size: 48px; font-weight: 900; color: rgba(245,200,0,.12); line-height: 1; margin-bottom: -6px; font-family: var(--font); }
+.step-card__num {
+  font-size: 96px;
+  font-weight: 900;
+  font-family: var(--font);
+  line-height: 1;
+  margin-bottom: -16px;
+  /* Контурная цифра — только обводка, без заливки */
+  color: transparent;
+  -webkit-text-stroke: 2px var(--accent);
+  text-stroke: 2px var(--accent);
+  user-select: none;
+  letter-spacing: -4px;
+}
 .step-card__icon { width: 52px; height: 52px; background: var(--accent); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: var(--dark); margin-bottom: 16px; }
 .step-card__title { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 8px; }
 .step-card__desc  { font-size: 13px; color: rgba(255,255,255,.4); line-height: 1.6; }
