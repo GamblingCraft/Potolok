@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Централизованный справочник каталога ПроПотолок
  *
  * Когда появится API/админка — заменить на:
@@ -8,7 +8,13 @@
  *   price       — цена полотна, ₽/м²
  *   mountPrice  — монтаж, ₽/м² (0 = бесплатно)
  *   extra       — доплата к базовой цене, ₽/м²
+ *
+ * ⚡ Чтобы изменить минимальную цену — меняйте ТОЛЬКО BASE_PRICE ниже.
+ *    Она используется везде: в каталоге, на страницах видов, в калькуляторе.
  */
+
+/** Базовая цена — матовый потолок, монтаж включён, ₽/м² */
+export const BASE_PRICE = 159
 
 // ─────────────────────────────────────────
 // ФАКТУРЫ
@@ -18,7 +24,7 @@ export const faktury = [
     id: 'mat',
     slug: '/catalog/faktury/matovye-natyazhnye-potolki',
     title: 'Матовые',
-    price: 159,
+    price: BASE_PRICE,
     mountPrice: 0,
     badge: 'Хит',
     img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=75',
@@ -113,7 +119,7 @@ export const vidy = [
     slug: '/catalog/vidy/natyazhnye-potolki-s-podsvetkoy',
     title: 'С подсветкой',
     extra: 220,
-    badge: null,
+    badge: 'Хит',
     img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=600&q=75',
   },
   {
@@ -194,25 +200,25 @@ export const vidy = [
 // ПО ПОМЕЩЕНИЮ
 // ─────────────────────────────────────────
 export const pomeshcheniya = [
-  { id: 'living',  slug: '/catalog/po-pomescheniyu/natyazhnye-potolki-v-gostinoy',      title: 'В гостиной',     icon: 'lucide:sofa',       price: 159, img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=75' },
-  { id: 'bedroom', slug: '/catalog/po-pomescheniyu/natyazhnye-potolki-v-spalne',        title: 'В спальне',      icon: 'lucide:bed',        price: 159, img: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=600&q=75' },
-  { id: 'kitchen', slug: '/catalog/po-pomescheniyu/natyazhnye-potolki-na-kuhne',        title: 'На кухне',       icon: 'lucide:utensils',   price: 159, img: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=75' },
-  { id: 'bath',    slug: '/catalog/po-pomescheniyu/natyazhnye-potolki-v-vannoy',        title: 'В ванной',       icon: 'lucide:droplets',   price: 159, img: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=600&q=75' },
-  { id: 'kids',    slug: '/catalog/po-pomescheniyu/natyazhnye-potolki-v-detskoy',       title: 'В детской',      icon: 'lucide:baby',       price: 159, img: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&q=75' },
-  { id: 'hall',    slug: '/catalog/po-pomescheniyu/natyazhnye-potolki-v-prihozhey',     title: 'В прихожей',     icon: 'lucide:door-open',  price: 159, img: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=600&q=75' },
-  { id: 'flat',    slug: '/catalog/po-pomescheniyu/natyazhnye-potolki-v-kvartire',      title: 'В квартире',     icon: 'lucide:building',   price: 159, img: 'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=600&q=75' },
-  { id: 'house',   slug: '/catalog/po-pomescheniyu/natyazhnye-potolki-v-chastnom-dome', title: 'В частном доме', icon: 'lucide:home',       price: 159, img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=75' },
-  { id: 'toilet',  slug: '/catalog/po-pomescheniyu/natyazhnye-potolki-v-tualete',       title: 'В туалете',      icon: 'lucide:square',     price: 159, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&q=75' },
-  { id: 'office',  slug: '/catalog/po-pomescheniyu/natyazhnye-potolki-v-ofise',         title: 'В офисе',        icon: 'lucide:building-2', price: 159, img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=600&q=75' },
-  { id: 'balcony', slug: '/catalog/po-pomescheniyu/natyazhnye-potolki-na-balkone',      title: 'На балконе',     icon: 'lucide:wind',       price: 159, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=600&q=75' },
-  { id: 'dacha',   slug: '/catalog/po-pomescheniyu/natyazhnye-potolki-na-dache',        title: 'На даче',        icon: 'lucide:trees',      price: 159, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=600&q=75' },
+  { id: 'living',  slug: '/catalog/po-pomescheniyu/natyazhnye-potolki-v-gostinoy',      title: 'В гостиной',     icon: 'lucide:sofa',       price: BASE_PRICE, img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=75' },
+  { id: 'bedroom', slug: '/catalog/po-pomescheniyu/natyazhnye-potolki-v-spalne',        title: 'В спальне',      icon: 'lucide:bed',        price: BASE_PRICE, img: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=600&q=75' },
+  { id: 'kitchen', slug: '/catalog/po-pomescheniyu/natyazhnye-potolki-na-kuhne',        title: 'На кухне',       icon: 'lucide:utensils',   price: BASE_PRICE, img: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=75' },
+  { id: 'bath',    slug: '/catalog/po-pomescheniyu/natyazhnye-potolki-v-vannoy',        title: 'В ванной',       icon: 'lucide:droplets',   price: BASE_PRICE, img: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=600&q=75' },
+  { id: 'kids',    slug: '/catalog/po-pomescheniyu/natyazhnye-potolki-v-detskoy',       title: 'В детской',      icon: 'lucide:baby',       price: BASE_PRICE, img: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&q=75' },
+  { id: 'hall',    slug: '/catalog/po-pomescheniyu/natyazhnye-potolki-v-prihozhey',     title: 'В прихожей',     icon: 'lucide:door-open',  price: BASE_PRICE, img: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=600&q=75' },
+  { id: 'flat',    slug: '/catalog/po-pomescheniyu/natyazhnye-potolki-v-kvartire',      title: 'В квартире',     icon: 'lucide:building',   price: BASE_PRICE, img: 'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=600&q=75' },
+  { id: 'house',   slug: '/catalog/po-pomescheniyu/natyazhnye-potolki-v-chastnom-dome', title: 'В частном доме', icon: 'lucide:home',       price: BASE_PRICE, img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=75' },
+  { id: 'toilet',  slug: '/catalog/po-pomescheniyu/natyazhnye-potolki-v-tualete',       title: 'В туалете',      icon: 'lucide:square',     price: BASE_PRICE, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&q=75' },
+  { id: 'office',  slug: '/catalog/po-pomescheniyu/natyazhnye-potolki-v-ofise',         title: 'В офисе',        icon: 'lucide:building-2', price: BASE_PRICE, img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=600&q=75' },
+  { id: 'balcony', slug: '/catalog/po-pomescheniyu/natyazhnye-potolki-na-balkone',      title: 'На балконе',     icon: 'lucide:wind',       price: BASE_PRICE, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=600&q=75' },
+  { id: 'dacha',   slug: '/catalog/po-pomescheniyu/natyazhnye-potolki-na-dache',        title: 'На даче',        icon: 'lucide:trees',      price: BASE_PRICE, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=600&q=75' },
 ]
 
 // ─────────────────────────────────────────
 // ЦВЕТА
 // ─────────────────────────────────────────
 export const tsveta = [
-  { id: 'white',  slug: '/catalog/tsveta/belye-natyazhnye-potolki',       title: 'Белые',      hex: '#f0f0f0',                                        extra: 0,  price: 159, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=75' },
+  { id: 'white',  slug: '/catalog/tsveta/belye-natyazhnye-potolki',       title: 'Белые',      hex: '#f0f0f0',                                        extra: 0,  price: BASE_PRICE, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=75' },
   { id: 'black',  slug: '/catalog/tsveta/chernye-natyazhnye-potolki',     title: 'Чёрные',     hex: '#1a1a1a',                                        extra: 20, price: 169, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&q=75' },
   { id: 'grey',   slug: '/catalog/tsveta/serye-natyazhnye-potolki',       title: 'Серые',      hex: '#9e9e9e',                                        extra: 10, price: 169, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=600&q=75' },
   { id: 'beige',  slug: '/catalog/tsveta/bezhevye-natyazhnye-potolki',    title: 'Бежевые',    hex: '#d4b896',                                        extra: 10, price: 169, img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=600&q=75' },
@@ -235,7 +241,7 @@ export const brendy = [
     type: 'ПВХ',
     badge: 'Хит',
     desc: 'Три серии: Classic, Evolution, Premium. Один из самых популярных брендов на рынке — соотношение цены и качества.',
-    price: 159,
+    price: BASE_PRICE,
     img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=75',
   },
   {

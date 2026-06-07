@@ -179,6 +179,121 @@ export const catalogGallery: Record<string, GalleryItem[]> = {
   ],
 
   // ─────────────────────────────────────────
+  // ВИДЫ / ТЕХНОЛОГИИ
+  // ─────────────────────────────────────────
+
+  'paryashchie-natyazhnye-potolki': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80', title: 'Парящий потолок в гостиной', area: 24, room: 'Гостиная', price: 12960, details: ['Парящая ниша: 10 м', 'LED-лента RGB', 'Матовое полотно', 'Углы: 4 шт'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80', title: 'Парящий в зале с периметром', area: 32, room: 'Зал', price: 17280, details: ['Парящая ниша: 14 м', 'LED-лента тёплая', 'Сатиновое полотно', 'Двойной периметр'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80', title: 'Парящий потолок в спальне', area: 18, room: 'Спальня', price: 9720, details: ['Парящая ниша: 8 м', 'LED тёплая 3000К', 'Матовое белое', 'Над изголовьем'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=800&q=80', title: 'Парящий двухуровневый', area: 28, room: 'Гостиная', price: 22400, details: ['Парящая ниша: 12 м', '2 уровня', 'LED RGB', 'Матовое + глянцевое'] },
+    { id: 5, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&q=80', title: 'Парящий потолок в коридоре', area: 10, room: 'Прихожая', price: 5400, details: ['Парящая ниша: 6 м', 'LED белая', 'Матовое полотно', 'Профиль FLEXY'] },
+    { id: 6, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', title: 'Парящий в частном доме', area: 40, room: 'Дом', price: 21600, details: ['Парящая ниша: 16 м', 'LED лента 2 цвета', 'Сатиновое полотно', 'Без шва'] },
+    { id: 7, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', title: 'Парящий потолок в кухне', area: 15, room: 'Кухня', price: 8100, details: ['Парящая ниша: 6 м', 'LED тёплая', 'Матовое белое', 'Над островом'] },
+    { id: 8, img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&q=80', title: 'Парящий в детской', area: 14, room: 'Детская', price: 7560, details: ['Парящая ниша: 6 м', 'LED RGB цветная', 'Тканевое полотно', 'Безопасно для детей'] },
+  ],
+
+  'natyazhnye-potolki-s-podsvetkoy': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80', title: 'Точечные споты в гостиной', area: 22, room: 'Гостиная', price: 10560, details: ['Споты: 12 шт', 'LED 4000К', 'Матовое полотно', 'Углы: 6 шт'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80', title: 'LED-подсветка + трек', area: 28, room: 'Зал', price: 15680, details: ['Трек: 6 м', 'LED-лента', 'Матовое белое', 'Диммер'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=800&q=80', title: 'Подсветка в спальне', area: 18, room: 'Спальня', price: 8640, details: ['Споты: 8 шт', 'LED тёплая 2700К', 'Сатиновое полотно', 'Диммер'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80', title: 'RGB подсветка детская', area: 14, room: 'Детская', price: 7420, details: ['LED RGB', 'Споты: 6 шт', 'Тканевое полотно', 'Пульт управления'] },
+    { id: 5, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&q=80', title: 'Трековые светильники офис', area: 45, room: 'Офис', price: 21600, details: ['Треки: 4 шт × 2 м', 'LED 5000К', 'Матовое белое', 'Без шва'] },
+    { id: 6, img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&q=80', title: 'Полупрозрачный с подсветкой', area: 20, room: 'Гостиная', price: 11200, details: ['LED за полотном', 'Полупрозрачное полотно', 'Эффект свечения', 'Диммер'] },
+    { id: 7, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', title: 'Подсветка на кухне', area: 12, room: 'Кухня', price: 6360, details: ['Споты: 9 шт', 'LED 4000К', 'Матовое белое', 'IP44 влагостойкие'] },
+    { id: 8, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', title: 'Контурная подсветка в нише', area: 25, room: 'Гостиная', price: 16250, details: ['Ниша: 10 м', 'LED контурная', 'Глянцевое полотно', 'Двойная подсветка'] },
+  ],
+
+  'dvuhurovnevye-natyazhnye-potolki': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=800&q=80', title: 'Двухуровневый в гостиной', area: 26, room: 'Гостиная', price: 22100, details: ['2 уровня', 'ГКЛ + натяжной', 'LED-ниша: 10 м', 'Споты: 12 шт'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80', title: 'Двухуровневый зонирование', area: 35, room: 'Зал', price: 29750, details: ['2 уровня', 'Зонирование', 'LED RGB: 14 м', 'Матовое + сатиновое'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&q=80', title: 'Двухуровневый в спальне', area: 20, room: 'Спальня', price: 17000, details: ['2 уровня', 'Над кроватью ниша', 'LED тёплая', 'Матовое белое'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', title: 'Двухуровневый чёрно-белый', area: 22, room: 'Гостиная', price: 18700, details: ['2 уровня', 'Матовый белый + чёрный', 'LED-ниша', 'Споты: 10 шт'] },
+    { id: 5, img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80', title: 'Двухуровневый с трековыми', area: 30, room: 'Зал', price: 25500, details: ['2 уровня', 'Трековые: 3 шт', 'LED-ниша: 12 м', 'Без шва'] },
+    { id: 6, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&q=80', title: 'Двухуровневый на кухне', area: 16, room: 'Кухня', price: 13600, details: ['2 уровня', 'Зонирование', 'LED 4000К', 'Споты: 8 шт'] },
+    { id: 7, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80', title: 'Многоуровневый в зале', area: 40, room: 'Зал', price: 40000, details: ['3 уровня', 'LED RGB', 'Профиль FLEXY', 'Без шва'] },
+    { id: 8, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', title: 'Двухуровневый в ванной', area: 9, room: 'Ванная', price: 7650, details: ['2 уровня', 'LED-ниша', 'Глянец + матовый', 'IP44'] },
+  ],
+
+  'natyazhnye-potolki-s-fotopechatyu': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&q=80', title: 'Фотопечать облака в детской', area: 14, room: 'Детская', price: 13720, details: ['Фотопечать', 'Облака', 'УФ-печать', 'Матовое полотно'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80', title: 'Фотопечать звёздное небо', area: 20, room: 'Гостиная', price: 19600, details: ['Фотопечать', 'Звёздное небо', 'HD-разрешение', 'Матовое полотно'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&q=80', title: 'Фотопечать морской пейзаж', area: 22, room: 'Гостиная', price: 21560, details: ['Фотопечать', 'Морской закат', 'УФ-печать', 'Матовое полотно'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', title: 'Фотопечать абстракция', area: 18, room: 'Спальня', price: 17640, details: ['Фотопечать', 'Абстрактный рисунок', 'УФ-печать', 'Матовое'] },
+    { id: 5, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', title: 'Фотопечать лес детская', area: 13, room: 'Детская', price: 12740, details: ['Фотопечать', 'Сказочный лес', 'УФ-печать', 'Тканевое'] },
+    { id: 6, img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80', title: 'Фотопечать в ресторане', area: 55, room: 'Ресторан', price: 53900, details: ['Фотопечать', 'Индивидуальный дизайн', 'УФ-печать', 'Без шва'] },
+    { id: 7, img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80', title: 'Фотопечать паттерн', area: 24, room: 'Гостиная', price: 23520, details: ['Фотопечать', 'Геометрический паттерн', 'УФ-печать', 'Матовое'] },
+    { id: 8, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80', title: 'Фотопечать карта мира', area: 16, room: 'Кабинет', price: 15680, details: ['Фотопечать', 'Карта мира', 'УФ-печать', 'Матовое'] },
+  ],
+
+  'natyazhnye-potolki-zvezdnoe-nebo': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80', title: 'Звёздное небо в детской', area: 14, room: 'Детская', price: 21000, details: ['200 оптоволокон', 'Мерцание', 'Тканевое полотно', 'Пульт управления'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80', title: 'Звёздное небо в спальне', area: 18, room: 'Спальня', price: 27000, details: ['300 оптоволокон', 'Мерцание + цвет', 'Тканевое полотно', 'Диммер'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80', title: 'Звёздное небо в гостиной', area: 25, room: 'Гостиная', price: 37500, details: ['400 оптоволокон', 'RGB мерцание', 'Тканевое полотно', 'Пульт + приложение'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&q=80', title: 'Звёздное небо в детской (синее)', area: 12, room: 'Детская', price: 18000, details: ['150 оптоволокон', 'Синее свечение', 'Тканевое', 'Безопасно для детей'] },
+    { id: 5, img: 'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=800&q=80', title: 'Звёздное небо в ресторане', area: 60, room: 'Ресторан', price: 90000, details: ['1000 оптоволокон', 'RGB + мерцание', 'Без шва', 'Профессиональный монтаж'] },
+    { id: 6, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', title: 'Звёздное небо + парящий', area: 20, room: 'Гостиная', price: 32000, details: ['300 оптоволокон', 'Парящая ниша', 'LED + оптоволокно', 'Пульт управления'] },
+    { id: 7, img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80', title: 'Звёздное небо в SPA', area: 30, room: 'SPA', price: 45000, details: ['500 оптоволокон', 'Мерцание волнами', 'Тканевое полотно', 'Влагостойкое'] },
+    { id: 8, img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&q=80', title: 'Звёздное небо с кометами', area: 16, room: 'Спальня', price: 24000, details: ['250 оптоволокон', 'Эффект падающей звезды', 'Тканевое', 'Диммер'] },
+  ],
+
+  'natyazhnye-potolki-so-svetovymi-liniyami': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80', title: 'Световые линии SLOTT в зале', area: 30, room: 'Зал', price: 23700, details: ['SLOTT: 10 м', 'LED 4000К', 'Матовое белое', 'Без шва'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80', title: 'Световые линии в офисе', area: 45, room: 'Офис', price: 35550, details: ['SLOTT: 18 м', 'LED 5000К', 'Матовое', 'Профессиональный монтаж'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80', title: 'Световые линии в гостиной', area: 25, room: 'Гостиная', price: 19750, details: ['FLEXY: 8 м', 'LED тёплая', 'Матовое белое', 'Диммер'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=800&q=80', title: 'Световые линии + споты', area: 22, room: 'Гостиная', price: 18920, details: ['Световые линии: 8 м', 'Споты: 8 шт', 'Матовое', 'LED 4000К'] },
+    { id: 5, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', title: 'Световые линии ресторан', area: 70, room: 'Ресторан', price: 55300, details: ['SLOTT: 24 м', 'LED 3000К', 'Без шва', 'Диммер'] },
+    { id: 6, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&q=80', title: 'Световые линии в кухне', area: 14, room: 'Кухня', price: 11060, details: ['FLEXY: 5 м', 'LED 4000К', 'Матовое', 'Над рабочей зоной'] },
+    { id: 7, img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&q=80', title: 'Световые линии геометрия', area: 28, room: 'Гостиная', price: 22120, details: ['SLOTT: 10 м', 'Геометрический рисунок', 'LED RGB', 'Матовое'] },
+    { id: 8, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', title: 'Световые линии в спальне', area: 18, room: 'Спальня', price: 14220, details: ['FLEXY: 6 м', 'LED тёплая 2700К', 'Сатиновое', 'Диммер'] },
+  ],
+
+  'tenevye-natyazhnye-potolki': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', title: 'Теневой потолок в гостиной', area: 24, room: 'Гостиная', price: 13440, details: ['Теневой профиль', 'LED-ниша скрытая', 'Матовое белое', 'Бесщелевое примыкание'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=800&q=80', title: 'Теневой в спальне', area: 18, room: 'Спальня', price: 10080, details: ['Теневой профиль', 'LED тёплая', 'Матовое', 'Бесщелевое'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80', title: 'Теневой + световые линии', area: 30, room: 'Зал', price: 21600, details: ['Теневой профиль', 'SLOTT: 10 м', 'Матовое белое', 'LED 4000К'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&q=80', title: 'Теневой в офисе', area: 50, room: 'Офис', price: 28000, details: ['Теневой профиль', 'Трековые: 4 шт', 'Матовое', 'Профиль по периметру'] },
+    { id: 5, img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&q=80', title: 'Теневой в прихожей', area: 10, room: 'Прихожая', price: 5600, details: ['Теневой профиль', 'LED белая', 'Матовое', 'Бесщелевое'] },
+    { id: 6, img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80', title: 'Теневой + парящий', area: 28, room: 'Гостиная', price: 19600, details: ['Теневой профиль', 'Парящая ниша', 'LED RGB', 'Матовое'] },
+    { id: 7, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', title: 'Теневой в кухне', area: 14, room: 'Кухня', price: 7840, details: ['Теневой профиль', 'LED 4000К', 'Матовое белое', 'Споты: 8 шт'] },
+    { id: 8, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80', title: 'Теневой в ванной', area: 8, room: 'Ванная', price: 4480, details: ['Теневой профиль', 'LED IP44', 'Глянцевое', 'Бесщелевое'] },
+  ],
+
+  'konturnye-natyazhnye-potolki': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80', title: 'Контурный потолок в гостиной', area: 26, room: 'Гостиная', price: 16900, details: ['Контурная ниша', 'LED по периметру', 'Матовое белое', 'Двойной контур'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80', title: 'Контурный в спальне', area: 20, room: 'Спальня', price: 13000, details: ['Контурная ниша', 'LED тёплая', 'Сатиновое', 'Один контур'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80', title: 'Контурный RGB в зале', area: 35, room: 'Зал', price: 22750, details: ['Контурная ниша', 'LED RGB', 'Матовое', 'Двойной контур'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', title: 'Контурный в детской', area: 14, room: 'Детская', price: 9100, details: ['Контурная ниша', 'LED RGB цветная', 'Тканевое', 'Безопасно'] },
+    { id: 5, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', title: 'Контурный в офисе', area: 40, room: 'Офис', price: 26000, details: ['Контурная ниша', 'LED 4000К', 'Матовое', 'Трековые светильники'] },
+    { id: 6, img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&q=80', title: 'Контурный + споты', area: 22, room: 'Гостиная', price: 14300, details: ['Контурная ниша', 'Споты: 10 шт', 'LED тёплая', 'Матовое'] },
+  ],
+
+  'mnogourovenye-natyazhnye-potolki': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=800&q=80', title: 'Трёхуровневый в гостиной', area: 32, room: 'Гостиная', price: 38400, details: ['3 уровня', 'LED RGB', 'Матовое + глянцевое', 'Споты: 16 шт'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80', title: 'Многоуровневый в зале', area: 45, room: 'Зал', price: 54000, details: ['4 уровня', 'LED RGB', 'Профиль FLEXY', 'Сложная геометрия'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80', title: 'Многоуровневый с парящим', area: 28, room: 'Гостиная', price: 33600, details: ['3 уровня', 'Парящий элемент', 'LED RGB', 'Матовое + сатиновое'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80', title: 'Многоуровневый в ресторане', area: 80, room: 'Ресторан', price: 96000, details: ['4 уровня', 'LED RGB', 'Без шва', 'Индивидуальный проект'] },
+    { id: 5, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&q=80', title: 'Многоуровневый в холле', area: 40, room: 'Холл', price: 48000, details: ['3 уровня', 'Световые линии', 'LED', 'Глянцевое + матовое'] },
+    { id: 6, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', title: 'Двухуровневый цветной', area: 25, room: 'Гостиная', price: 30000, details: ['2 уровня', 'Цветной нижний', 'LED RGB', 'Матовое + цветное'] },
+  ],
+
+  'krivolinejnye-natyazhnye-potolki': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=800&q=80', title: 'Криволинейный волнообразный', area: 24, room: 'Гостиная', price: 22320, details: ['Спайка по кривой', 'LED-ниша', 'Матовое + сатиновое', 'Профиль FLEXY'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80', title: 'Криволинейный полукруг', area: 18, room: 'Холл', price: 16740, details: ['Полукруглая форма', 'Спайка', 'Матовое белое', 'LED по периметру'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80', title: 'Криволинейный эллипс', area: 30, room: 'Зал', price: 27900, details: ['Эллиптическая форма', 'LED-ниша', 'Глянцевое', 'Споты: 12 шт'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&q=80', title: 'Криволинейный в ресторане', area: 60, room: 'Ресторан', price: 55800, details: ['Сложная геометрия', 'LED RGB', 'Без шва', 'Индивидуальный проект'] },
+    { id: 5, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', title: 'Криволинейный диагональ', area: 22, room: 'Гостиная', price: 20460, details: ['Диагональная спайка', 'LED', 'Матовое + глянцевое', 'Контрастные цвета'] },
+    { id: 6, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&q=80', title: 'Криволинейный каплевидный', area: 16, room: 'Спальня', price: 14880, details: ['Каплевидная форма', 'LED по контуру', 'Сатиновое', 'Профиль FLEXY'] },
+  ],
+
+  'besshchelevye-natyazhnye-potolki': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', title: 'Бесщелевой в гостиной', area: 24, room: 'Гостиная', price: 11040, details: ['Бесщелевой профиль', 'Без видимых зазоров', 'Матовое белое', 'Споты: 10 шт'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', title: 'Бесщелевой в спальне', area: 18, room: 'Спальня', price: 8280, details: ['Бесщелевой профиль', 'Матовое', 'LED-ниша', 'Диммер'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80', title: 'Бесщелевой в офисе', area: 40, room: 'Офис', price: 18400, details: ['Бесщелевой профиль', 'Трековые светильники', 'Матовое', 'Профессиональный'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&q=80', title: 'Бесщелевой в прихожей', area: 9, room: 'Прихожая', price: 4140, details: ['Бесщелевой профиль', 'LED', 'Матовое', 'Чистый минимализм'] },
+  ],
+
+  // ─────────────────────────────────────────
   // БРЕНДЫ
   // Ключ совпадает с сегментом URL: /catalog/brendy/{key}
   // Фото загружаются через админку — структура GalleryItem зафиксирована

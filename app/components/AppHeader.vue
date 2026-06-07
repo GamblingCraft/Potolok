@@ -110,6 +110,8 @@
                 <NuxtLink to="/catalog/faktury/tkanevye-natyazhnye-potolki" @click="megaOpen = false">Тканевые</NuxtLink>
                 <NuxtLink to="/catalog/faktury/fakturnye-natyazhnye-potolki" @click="megaOpen = false">Фактурные</NuxtLink>
                 <NuxtLink to="/catalog/faktury/besshovnye-natyazhnye-potolki" @click="megaOpen = false">Бесшовные</NuxtLink>
+                <NuxtLink to="/catalog/faktury/gipoallergennye-natyazhnye-potolki" @click="megaOpen = false">Гипоаллергенные</NuxtLink>
+                <NuxtLink to="/catalog/faktury/negoryuchie-natyazhnye-potolki" @click="megaOpen = false">Негорючие</NuxtLink>
               </div>
             </nav>
 
