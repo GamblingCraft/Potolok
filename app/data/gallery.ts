@@ -179,6 +179,121 @@ export const catalogGallery: Record<string, GalleryItem[]> = {
   ],
 
   // ─────────────────────────────────────────
+  // ПО ПОМЕЩЕНИЮ
+  // ─────────────────────────────────────────
+
+  'natyazhnye-potolki-v-gostinoy': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80', title: 'Гостиная с парящим потолком', area: 26, room: 'Гостиная', price: 14040, details: ['Парящий', 'LED-ниша: 10 м', 'Матовое белое', 'Споты: 12 шт'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=800&q=80', title: 'Двухуровневый в зале', area: 32, room: 'Гостиная', price: 25600, details: ['2 уровня', 'LED RGB', 'Матовое + глянцевое', 'Споты: 14 шт'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80', title: 'Матовый в гостиной', area: 22, room: 'Гостиная', price: 7920, details: ['Матовое белое', 'Споты: 10 шт', 'Углы: 6 шт', 'Профиль: 24 м'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80', title: 'Световые линии в зале', area: 30, room: 'Гостиная', price: 23700, details: ['SLOTT: 10 м', 'LED 4000К', 'Матовое', 'Без шва'] },
+    { id: 5, img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&q=80', title: 'Теневой потолок', area: 24, room: 'Гостиная', price: 13440, details: ['Теневой профиль', 'LED-ниша', 'Матовое белое', 'Бесщелевое'] },
+    { id: 6, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&q=80', title: 'Глянцевый в гостиной', area: 28, room: 'Гостиная', price: 14280, details: ['Глянцевое белое', 'Споты: 12 шт', 'Углы: 6 шт', 'Без шва'] },
+    { id: 7, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', title: 'Контурный потолок', area: 26, room: 'Гостиная', price: 16900, details: ['Контурная ниша', 'LED RGB', 'Матовое', 'Двойной контур'] },
+    { id: 8, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', title: 'Сатиновый в зале', area: 30, room: 'Гостиная', price: 13500, details: ['Сатиновое белое', 'Споты: 12 шт', 'Без шва', 'Углы: 8 шт'] },
+  ],
+
+  'natyazhnye-potolki-v-spalne': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?w=800&q=80', title: 'Матовый в спальне', area: 17, room: 'Спальня', price: 6120, details: ['Матовое белое', 'Споты: 6 шт', 'Углы: 4 шт', 'Профиль: 17 м'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', title: 'Парящий над кроватью', area: 20, room: 'Спальня', price: 10800, details: ['Парящий', 'LED тёплая 2700К', 'Матовое белое', 'Над изголовьем'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1600573472559-240e53e0e27a?w=800&q=80', title: 'Сатиновый бежевый', area: 18, room: 'Спальня', price: 8100, details: ['Сатиновое бежевое', 'Споты: 6 шт', 'Углы: 4 шт', 'Без шва'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80', title: 'Тканевый Clipso в спальне', area: 17, room: 'Спальня', price: 13600, details: ['Clipso (Франция)', 'Без ПВХ', 'Споты: 6 шт', 'Без шва'] },
+    { id: 5, img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&q=80', title: 'Двухуровневый в спальне', area: 20, room: 'Спальня', price: 17000, details: ['2 уровня', 'Над кроватью ниша', 'LED тёплая', 'Матовое'] },
+    { id: 6, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', title: 'LED подсветка в спальне', area: 16, room: 'Спальня', price: 8960, details: ['Парящая ниша', 'LED 2700К', 'Матовое', 'Споты: 5 шт'] },
+    { id: 7, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80', title: 'Звёздное небо в спальне', area: 18, room: 'Спальня', price: 27000, details: ['300 оптоволокон', 'Мерцание', 'Тканевое', 'Диммер'] },
+    { id: 8, img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80', title: 'Белый глянец в спальне', area: 15, room: 'Спальня', price: 7650, details: ['Глянцевое белое', 'Споты: 5 шт', 'Без шва', 'Углы: 4 шт'] },
+  ],
+
+  'natyazhnye-potolki-na-kuhne': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80', title: 'Матовый на кухне', area: 12, room: 'Кухня', price: 4320, details: ['Матовое белое', 'Споты: 9 шт', 'IP44', 'Углы: 4 шт'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=800&q=80', title: 'Световые линии на кухне', area: 14, room: 'Кухня', price: 11060, details: ['FLEXY: 5 м', 'LED 4000К', 'Матовое', 'Над рабочей зоной'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80', title: 'Глянцевый белый кухня', area: 10, room: 'Кухня', price: 5100, details: ['Глянцевое белое', 'Споты: 7 шт', 'Влагостойкий', 'IP44'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', title: 'Двухуровневый на кухне', area: 16, room: 'Кухня', price: 13600, details: ['2 уровня', 'Зонирование', 'LED 4000К', 'Споты: 8 шт'] },
+    { id: 5, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&q=80', title: 'Парящий на кухне-гостиной', area: 28, room: 'Кухня-гостиная', price: 15120, details: ['Парящий', 'LED тёплая', 'Без шва', 'Споты: 12 шт'] },
+    { id: 6, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', title: 'Сатиновый на кухне', area: 11, room: 'Кухня', price: 4950, details: ['Сатиновое белое', 'Споты: 8 шт', 'IP44', 'Углы: 4 шт'] },
+    { id: 7, img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&q=80', title: 'Студия кухня-гостиная', area: 35, room: 'Студия', price: 18900, details: ['Световые линии', 'Зонирование', 'LED', 'Без шва'] },
+    { id: 8, img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80', title: 'Белый матовый + точечные', area: 13, room: 'Кухня', price: 4680, details: ['Матовое белое', 'Споты: 10 шт', 'IP44', 'Влагостойкий'] },
+  ],
+
+  'natyazhnye-potolki-v-vannoy': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=800&q=80', title: 'Глянцевый белый в ванной', area: 7, room: 'Ванная', price: 3570, details: ['Глянцевое белое', 'IP44 споты: 6 шт', 'Влагостойкий', 'Углы: 4 шт'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', title: 'Двухуровневый в ванной', area: 9, room: 'Ванная', price: 7650, details: ['2 уровня', 'IP44', 'LED-ниша', 'Глянец + матовый'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&q=80', title: 'Матовый с подсветкой', area: 8, room: 'Ванная', price: 4320, details: ['Матовое белое', 'IP44 споты: 6 шт', 'LED-ниша', 'Влагостойкий'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', title: 'Глянец серый ванная', area: 6, room: 'Ванная', price: 3060, details: ['Глянцевое серое', 'IP44 споты: 5 шт', 'Влагостойкий', 'Углы: 4 шт'] },
+    { id: 5, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80', title: 'Ванная с теневым', area: 8, room: 'Ванная', price: 4480, details: ['Теневой профиль', 'IP44', 'Глянцевое', 'Бесщелевое'] },
+    { id: 6, img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&q=80', title: 'Бесшовный в ванной', area: 10, room: 'Ванная', price: 5100, details: ['Без шва', 'Глянцевое белое', 'IP44 споты: 7 шт', 'Влагостойкий'] },
+  ],
+
+  'natyazhnye-potolki-v-detskoy': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80', title: 'Тканевый в детской', area: 14, room: 'Детская', price: 10500, details: ['Clipso без ПВХ', 'Гипоаллергенный', 'Споты: 5 шт', 'Безопасно'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80', title: 'Звёздное небо детская', area: 13, room: 'Детская', price: 19500, details: ['200 оптоволокон', 'Мерцание', 'Тканевое', 'Пульт'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', title: 'Матовый белый детская', area: 12, room: 'Детская', price: 4320, details: ['Матовое белое', 'Без ПВХ Bauf A+', 'Споты: 5 шт', 'Безопасно'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&q=80', title: 'RGB подсветка детская', area: 14, room: 'Детская', price: 7420, details: ['LED RGB', 'Споты: 6 шт', 'Тканевое', 'Пульт управления'] },
+    { id: 5, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&q=80', title: 'Фотопечать облака', area: 14, room: 'Детская', price: 13720, details: ['Фотопечать облака', 'УФ-печать', 'Матовое', 'Споты: 5 шт'] },
+    { id: 6, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', title: 'Голубой тканевый', area: 12, room: 'Детская', price: 9000, details: ['Clipso голубой', 'Без ПВХ', 'Без шва', 'Споты: 5 шт'] },
+    { id: 7, img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80', title: 'Парящий в детской', area: 14, room: 'Детская', price: 7560, details: ['Парящая ниша', 'LED RGB', 'Тканевое', 'Безопасно'] },
+    { id: 8, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80', title: 'Двухцветный детская', area: 13, room: 'Детская', price: 11700, details: ['2 цвета', 'Голубой + белый', 'LED-ниша', 'Tканевое'] },
+  ],
+
+  'natyazhnye-potolki-v-prihozhey': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=800&q=80', title: 'Матовый в прихожей', area: 8, room: 'Прихожая', price: 2880, details: ['Матовое белое', 'Споты: 5 шт', 'Углы: 6 шт', 'Профиль: 11 м'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&q=80', title: 'Глянцевый прихожая', area: 7, room: 'Прихожая', price: 3570, details: ['Глянцевое белое', 'Споты: 5 шт', 'Зеркальный эффект', 'Без шва'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', title: 'Теневой в прихожей', area: 10, room: 'Прихожая', price: 5600, details: ['Теневой профиль', 'LED белая', 'Матовое', 'Бесщелевое'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', title: 'Световые линии коридор', area: 9, room: 'Прихожая', price: 7110, details: ['FLEXY: 4 м', 'LED 4000К', 'Матовое', 'Без шва'] },
+    { id: 5, img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&q=80', title: 'Парящий в коридоре', area: 10, room: 'Прихожая', price: 5400, details: ['Парящая ниша: 6 м', 'LED белая', 'Матовое', 'Профиль FLEXY'] },
+    { id: 6, img: 'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=800&q=80', title: 'Трековые в прихожей', area: 11, room: 'Прихожая', price: 6820, details: ['Трек: 2 м', 'LED 4000К', 'Матовое', 'Гибкое размещение'] },
+  ],
+
+  'natyazhnye-potolki-v-kvartire': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=800&q=80', title: 'Вся квартира за 1 день', area: 65, room: 'Квартира', price: 23400, details: ['Все помещения', 'Матовое белое', 'Монтаж 1 день', 'Споты: 40 шт'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80', title: '3-комнатная квартира', area: 80, room: 'Квартира', price: 28800, details: ['5 помещений', 'Матовое + парящий в зале', 'LED-ниши', 'Споты: 45 шт'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80', title: 'Студия с световыми линиями', area: 35, room: 'Студия', price: 18900, details: ['Световые линии', 'Зонирование', 'LED', 'Без шва'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80', title: 'Квартира-новостройка', area: 55, room: 'Квартира', price: 19800, details: ['4 помещения', 'Матовое белое', 'Споты везде', '1 рабочий день'] },
+    { id: 5, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', title: '2-комнатная + парящий', area: 55, room: 'Квартира', price: 24750, details: ['Парящий в зале', 'Матовое в спальне/кухне', 'LED-ниши', 'Споты: 30 шт'] },
+    { id: 6, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', title: 'Однушка под ключ', area: 38, room: 'Квартира', price: 13680, details: ['3 помещения', 'Матовое белое', 'Споты: 20 шт', '1 рабочий день'] },
+  ],
+
+  'natyazhnye-potolki-v-chastnom-dome': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80', title: 'Весь дом под ключ', area: 120, room: 'Дом', price: 43200, details: ['8 помещений', 'Матовое белое', 'Споты везде', '2 рабочих дня'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80', title: 'Гостиная дом парящий', area: 40, room: 'Гостиная', price: 21600, details: ['Парящая ниша', 'LED RGB', 'Без шва', 'Споты: 14 шт'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80', title: 'Деревянный дом', area: 80, room: 'Дом', price: 28800, details: ['5 помещений', 'Монтаж без гвоздей', 'Матовое', 'Без запаха'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', title: 'Мансарда', area: 30, room: 'Мансарда', price: 10800, details: ['Скошенные стены', 'Специальный монтаж', 'Матовое', 'Споты: 10 шт'] },
+    { id: 5, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&q=80', title: 'Кухня-гостиная в доме', area: 45, room: 'Кухня-гостиная', price: 20250, details: ['Световые линии', 'Зонирование', 'LED', 'Без шва'] },
+    { id: 6, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', title: 'Баня с потолком', area: 20, room: 'Баня', price: 7200, details: ['Влагостойкий ПВХ', 'IP44', 'Споты: 6 шт', 'Термостойкий монтаж'] },
+  ],
+
+  'natyazhnye-potolki-v-tualete': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', title: 'Белый глянец в туалете', area: 3, room: 'Туалет', price: 1530, details: ['Глянцевое белое', 'IP44 спот: 1 шт', 'Влагостойкий', 'Углы: 4 шт'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', title: 'Матовый туалет', area: 4, room: 'Туалет', price: 1440, details: ['Матовое белое', 'IP44 спот: 1 шт', 'Влагостойкий', 'Углы: 4 шт'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=800&q=80', title: 'Серый в туалете', area: 3, room: 'Туалет', price: 1530, details: ['Матовое серое', 'IP44 спот: 1 шт', 'Влагостойкий', 'Современный'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&q=80', title: 'Совмещённый санузел', area: 8, room: 'Санузел', price: 4080, details: ['Глянцевое белое', 'IP44 споты: 4 шт', 'Влагостойкий', 'Без шва'] },
+  ],
+
+  'natyazhnye-potolki-v-ofise': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&q=80', title: 'Офис open-space', area: 80, room: 'Офис', price: 28800, details: ['Матовое белое', 'Трековые: 6 шт', 'LED 5000К', 'Без шва'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80', title: 'Световые линии офис', area: 45, room: 'Офис', price: 35550, details: ['SLOTT: 18 м', 'LED 4000К', 'Матовое', 'Без шва'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', title: 'Переговорная комната', area: 20, room: 'Офис', price: 7200, details: ['Матовое белое', 'Трек: 2 м', 'LED', 'Бесщелевой профиль'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80', title: 'Ресепшн с подсветкой', area: 25, room: 'Офис', price: 14750, details: ['Световые линии', 'LED RGB', 'Матовое', 'Представительский'] },
+    { id: 5, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&q=80', title: 'Кабинет руководителя', area: 30, room: 'Офис', price: 16200, details: ['Теневой профиль', 'LED 3000К', 'Матовое', 'Трековые споты'] },
+    { id: 6, img: 'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=800&q=80', title: 'Офис 2 этажа', area: 160, room: 'Офис', price: 57600, details: ['Матовое белое', 'Трековые системы', 'LED 5000К', 'Без шва'] },
+  ],
+
+  'natyazhnye-potolki-na-balkone': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80', title: 'Балкон матовый', area: 4, room: 'Балкон', price: 1440, details: ['Матовое белое', 'Влагостойкий', 'Споты: 2 шт', 'Углы: 4 шт'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', title: 'Застеклённый балкон', area: 6, room: 'Балкон', price: 2160, details: ['Матовое белое', 'Споты: 3 шт', 'Влагостойкий', 'Без шва'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&q=80', title: 'Лоджия с подсветкой', area: 8, room: 'Лоджия', price: 3480, details: ['LED-лента', 'Матовое', 'Споты: 4 шт', 'IP44'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', title: 'Большая лоджия', area: 12, room: 'Лоджия', price: 4320, details: ['Матовое белое', 'Споты: 6 шт', 'Влагостойкий', 'Утеплённая'] },
+  ],
+
+  'natyazhnye-potolki-na-dache': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80', title: 'Гостиная на даче', area: 25, room: 'Дача', price: 9000, details: ['Матовое белое', 'Споты: 8 шт', 'Влагостойкий', 'Быстрый монтаж'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', title: 'Спальня на даче', area: 15, room: 'Дача', price: 5400, details: ['Матовое белое', 'Споты: 5 шт', 'Углы: 4 шт', 'Без запаха'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80', title: 'Кухня на даче', area: 12, room: 'Дача', price: 4320, details: ['Матовое белое', 'Споты: 6 шт', 'IP44', 'Влагостойкий'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&q=80', title: 'Веранда с потолком', area: 20, room: 'Веранда', price: 7200, details: ['Влагостойкий ПВХ', 'IP44', 'Споты: 8 шт', 'Без шва'] },
+    { id: 5, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', title: 'Вся дача под ключ', area: 60, room: 'Дача', price: 21600, details: ['4 помещения', 'Матовое белое', 'Монтаж 1 день', 'Споты везде'] },
+  ],
+
+  // ─────────────────────────────────────────
   // ВИДЫ / ТЕХНОЛОГИИ
   // ─────────────────────────────────────────
 

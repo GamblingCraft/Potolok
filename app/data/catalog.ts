@@ -13,8 +13,59 @@
  *    Она используется везде: в каталоге, на страницах видов, в калькуляторе.
  */
 
-/** Базовая цена — матовый потолок, монтаж включён, ₽/м² */
-export const BASE_PRICE = 159
+/**
+ * ╔══════════════════════════════════════════════════════╗
+ * ║  ПРАЙС-ЛИСТ — меняй здесь, обновится везде на сайте ║
+ * ╚══════════════════════════════════════════════════════╝
+ *
+ * Когда будет готова админка — заменить на $fetch('/api/prices')
+ */
+export const PRICES = {
+  // ── Фактуры (цена полотна + монтаж), ₽/м² ─────────────
+  matovye:         159,   // Матовые
+  glyancevye:      209,   // Глянцевые
+  satinovye:       189,   // Сатиновые
+  tkanevye:        319,   // Тканевые
+  fakturnye:       259,   // Фактурные
+  besshovnye:      229,   // Бесшовные
+  gipoallergennye: 279,   // Гипоаллергенные
+  negoryuchie:     299,   // Негорючие
+
+  // ── Виды (ДОПЛАТА к базовой цене), ₽/м² ───────────────
+  extra_paryashchie:   180,   // Парящий
+  extra_podsvetka:     220,   // С подсветкой
+  extra_dvuhuroven:    350,   // Двухуровневый
+  extra_fotopechat:    400,   // Фотопечать
+  extra_zvezdnoe:      500,   // Звёздное небо
+  extra_linii:         280,   // Световые линии
+  extra_tenevye:       200,   // Теневой
+  extra_konturnye:     250,   // Контурный
+  extra_mnogo:         450,   // Многоуровневый
+  extra_krivo:         380,   // Криволинейный
+
+  // ── Бренды (цена полотна), ₽/м² ───────────────────────
+  brand_msd:     159,   // MSD
+  brand_bauf:    189,   // Bauf (Германия)
+  brand_lumfer:  249,   // LumFer (Германия)
+  brand_teqtum:  279,   // Teqtum
+  brand_descor:  319,   // Descor (Германия)
+  brand_pongs:   349,   // Pongs (Германия)
+  brand_clipso:  389,   // Clipso (Франция)
+  brand_cerutti: 490,   // Cerutti (Швейцария)
+
+  // ── Цвета (доплата к базовой цене), ₽/м² ──────────────
+  color_white:  0,    // Белый
+  color_black:  20,   // Чёрный
+  color_grey:   10,   // Серый
+  color_beige:  10,   // Бежевый
+  color_color:  30,   // Цветные
+  color_gold:   40,   // Золотые
+  color_blue:   20,   // Голубые
+  color_brown:  20,   // Коричневые
+} as const
+
+/** Базовая цена (алиас для удобства) */
+export const BASE_PRICE = PRICES.matovye
 
 // ─────────────────────────────────────────
 // ФАКТУРЫ
@@ -33,7 +84,7 @@ export const faktury = [
     id: 'gly',
     slug: '/catalog/faktury/glyancevye-natyazhnye-potolki',
     title: 'Глянцевые',
-    price: 209,
+    price: PRICES.glyancevye,
     mountPrice: 0,
     badge: null,
     img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=600&q=75',
@@ -42,7 +93,7 @@ export const faktury = [
     id: 'sat',
     slug: '/catalog/faktury/satinovye-natyazhnye-potolki',
     title: 'Сатиновые',
-    price: 189,
+    price: PRICES.satinovye,
     mountPrice: 0,
     badge: null,
     img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&q=75',
@@ -51,7 +102,7 @@ export const faktury = [
     id: 'tkan',
     slug: '/catalog/faktury/tkanevye-natyazhnye-potolki',
     title: 'Тканевые',
-    price: 319,
+    price: PRICES.tkanevye,
     mountPrice: 0,
     badge: null,
     img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=75',
@@ -60,7 +111,7 @@ export const faktury = [
     id: 'fakt',
     slug: '/catalog/faktury/fakturnye-natyazhnye-potolki',
     title: 'Фактурные',
-    price: 259,
+    price: PRICES.fakturnye,
     mountPrice: 0,
     badge: null,
     img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=600&q=75',
@@ -69,7 +120,7 @@ export const faktury = [
     id: 'bess',
     slug: '/catalog/faktury/besshovnye-natyazhnye-potolki',
     title: 'Бесшовные',
-    price: 229,
+    price: PRICES.besshovnye,
     mountPrice: 0,
     badge: null,
     img: 'https://images.unsplash.com/photo-1600573472559-240e53e0e27a?w=600&q=75',
@@ -78,7 +129,7 @@ export const faktury = [
     id: 'hypo',
     slug: '/catalog/faktury/gipoallergennye-natyazhnye-potolki',
     title: 'Гипоаллергенные',
-    price: 279,
+    price: PRICES.gipoallergennye,
     mountPrice: 0,
     badge: null,
     img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=75',
@@ -87,7 +138,7 @@ export const faktury = [
     id: 'fire',
     slug: '/catalog/faktury/negoryuchie-natyazhnye-potolki',
     title: 'Негорючие',
-    price: 299,
+    price: PRICES.negoryuchie,
     mountPrice: 0,
     badge: null,
     img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=75',
@@ -110,7 +161,7 @@ export const vidy = [
     id: 'pary',
     slug: '/catalog/vidy/paryashchie-natyazhnye-potolki',
     title: 'Парящий',
-    extra: 180,
+    extra: PRICES.extra_paryashchie,
     badge: 'Тренд',
     img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=75',
   },
@@ -118,7 +169,7 @@ export const vidy = [
     id: 'light',
     slug: '/catalog/vidy/natyazhnye-potolki-s-podsvetkoy',
     title: 'С подсветкой',
-    extra: 220,
+    extra: PRICES.extra_podsvetka,
     badge: 'Хит',
     img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=600&q=75',
   },
@@ -126,7 +177,7 @@ export const vidy = [
     id: 'two',
     slug: '/catalog/vidy/dvuhurovnevye-natyazhnye-potolki',
     title: 'Двухуровневый',
-    extra: 350,
+    extra: PRICES.extra_dvuhuroven,
     badge: null,
     img: 'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=600&q=75',
   },
@@ -134,7 +185,7 @@ export const vidy = [
     id: 'photo',
     slug: '/catalog/vidy/natyazhnye-potolki-s-fotopechatyu',
     title: 'Фотопечать',
-    extra: 400,
+    extra: PRICES.extra_fotopechat,
     badge: null,
     img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=600&q=75',
   },
@@ -142,7 +193,7 @@ export const vidy = [
     id: 'star',
     slug: '/catalog/vidy/natyazhnye-potolki-zvezdnoe-nebo',
     title: 'Звёздное небо',
-    extra: 500,
+    extra: PRICES.extra_zvezdnoe,
     badge: null,
     img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=75',
   },
@@ -150,7 +201,7 @@ export const vidy = [
     id: 'lines',
     slug: '/catalog/vidy/natyazhnye-potolki-so-svetovymi-liniyami',
     title: 'Световые линии',
-    extra: 280,
+    extra: PRICES.extra_linii,
     badge: null,
     img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=600&q=75',
   },
@@ -158,7 +209,7 @@ export const vidy = [
     id: 'shadow',
     slug: '/catalog/vidy/tenevye-natyazhnye-potolki',
     title: 'Теневой',
-    extra: 200,
+    extra: PRICES.extra_tenevye,
     badge: null,
     img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&q=75',
   },
@@ -166,7 +217,7 @@ export const vidy = [
     id: 'contour',
     slug: '/catalog/vidy/konturnye-natyazhnye-potolki',
     title: 'Контурный',
-    extra: 250,
+    extra: PRICES.extra_konturnye,
     badge: null,
     img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=75',
   },
@@ -174,7 +225,7 @@ export const vidy = [
     id: 'many',
     slug: '/catalog/vidy/mnogourovenye-natyazhnye-potolki',
     title: 'Многоуровневый',
-    extra: 450,
+    extra: PRICES.extra_mnogo,
     badge: null,
     img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=75',
   },
@@ -182,7 +233,7 @@ export const vidy = [
     id: 'curve',
     slug: '/catalog/vidy/krivolinejnye-natyazhnye-potolki',
     title: 'Криволинейный',
-    extra: 380,
+    extra: PRICES.extra_krivo,
     badge: null,
     img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=600&q=75',
   },
@@ -253,7 +304,7 @@ export const brendy = [
     type: 'ПВХ',
     badge: null,
     desc: 'Немецкие технологии, 4 сертификата экологичности. Маркировка A+ — воздух в помещении остаётся абсолютно чистым.',
-    price: 189,
+    price: PRICES.satinovye,
     img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=600&q=75',
   },
   {
@@ -265,7 +316,7 @@ export const brendy = [
     type: 'ПВХ двухслойный',
     badge: null,
     desc: 'Двухслойное полотно Ferico GBR. Толщина 32 мм, не просвечивает, не вибрирует на сквозняках. Не воспламеняется.',
-    price: 249,
+    price: PRICES.brand_lumfer,
     img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&q=75',
   },
   {
@@ -277,7 +328,7 @@ export const brendy = [
     type: 'ПВХ',
     badge: 'МЧС ✓',
     desc: 'Единственная плёнка, прошедшая испытания МЧС России. Без формальдегидов, допущена в медучреждения и детские сады.',
-    price: 279,
+    price: PRICES.gipoallergennye,
     img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=600&q=75',
   },
   {
@@ -289,7 +340,7 @@ export const brendy = [
     type: 'Тканевый',
     badge: null,
     desc: 'Тканевое полотно из волокна Trevira CS. Огнеупорное, жаростойкое, легко моется. Без ПВХ.',
-    price: 319,
+    price: PRICES.tkanevye,
     img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=600&q=75',
   },
   {
@@ -301,7 +352,7 @@ export const brendy = [
     type: 'ПВХ премиум',
     badge: 'Премиум',
     desc: 'Безупречное немецкое качество. Пластификатор DOTP вместо токсичного DOP. Выдерживает 100 л/м² при затоплении.',
-    price: 349,
+    price: PRICES.brand_pongs,
     img: 'https://images.unsplash.com/photo-1600573472559-240e53e0e27a?w=600&q=75',
   },
   {
@@ -313,7 +364,7 @@ export const brendy = [
     type: 'Тканевый',
     badge: null,
     desc: 'Французское тканевое полотно. Монтаж без нагрева, дышит, не образует конденсат. Акустические и цветные варианты.',
-    price: 389,
+    price: PRICES.brand_clipso,
     img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=75',
   },
   {
@@ -325,7 +376,7 @@ export const brendy = [
     type: 'Тканевый люкс',
     badge: 'Люкс',
     desc: 'Швейцарский дом текстиля. Люкс-сегмент: безупречно ровное покрытие, максимальная экологичность, влагозащитный лак.',
-    price: 490,
+    price: PRICES.brand_cerutti,
     img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=75',
   },
 ]
