@@ -198,7 +198,26 @@
 </template>
 
 <script setup lang="ts">
-import { faktury, vidy, pomeshcheniya, tsveta } from '~/data/catalog'
+import { faktury as _faktury, vidy as _vidy, pomeshcheniya, tsveta as _tsveta } from '~/data/catalog'
+import { useCatalogPrices } from '~/composables/useCatalogPrices'
+
+const _prices = await useCatalogPrices()
+
+const faktury = computed(() => _faktury.map(f => ({
+  ...f,
+  price: _prices.value?.[f.catalogKey] ?? f.price,
+})))
+
+const vidy = computed(() => _vidy.map(v => {
+  const base = _prices.value?.['base'] ?? 159
+  const total = (v.catalogKey ? _prices.value?.[v.catalogKey] : undefined) ?? (base + v.extra)
+  return { ...v, price: total }
+}))
+
+const tsveta = computed(() => _tsveta.map(t => ({
+  ...t,
+  price: (_prices.value?.['base'] ?? 159) + t.extra,
+})))
 
 useHead({
   title: 'Каталог натяжных потолков в Иркутске — все виды, фактуры и цены | ПроПотолок',

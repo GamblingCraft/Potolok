@@ -9,8 +9,8 @@
           <h1 class="cp-hero__title" itemprop="name">Натяжные потолки Cerutti в&nbsp;Иркутске</h1>
           <p class="cp-hero__price">Акция: <span>3-й потолок в подарок!</span> Гарантия 12 лет.<br>Монтаж за 1 день. Без предоплаты.</p>
           <div class="cp-hero__price-badge" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-            <meta itemprop="priceCurrency" content="RUB"/><meta itemprop="price" :content="String(item.price)"/>
-            от <strong>{{ item.price }} ₽/м²</strong> — монтаж включён
+            <meta itemprop="priceCurrency" content="RUB"/><meta itemprop="price" :content="String(price)"/>
+            от <strong>{{ price }} ₽/м²</strong> — монтаж включён
           </div>
           <form class="cp-hero__form" @submit.prevent="callbackOpen = true">
             <input v-model="formName" class="cp-inp" type="text" placeholder="Ваше имя"/>
@@ -47,7 +47,7 @@
             <div class="cp-aside-card">
               <div class="cp-aside-card__title">Вызвать замерщика</div>
               <p class="cp-aside-card__desc">Бесплатно привезём образцы Cerutti, рассчитаем стоимость и оформим договор</p>
-              <div class="cp-aside-price">от <strong>{{ item.price }} ₽</strong><span>/м²</span></div>
+              <div class="cp-aside-price">от <strong>{{ price }} ₽</strong><span>/м²</span></div>
               <ul class="cp-aside-list">
                 <li v-for="i in asideItems" :key="i"><Icon name="lucide:check-circle" size="14" class="cp-check"/>{{ i }}</li>
               </ul>
@@ -192,17 +192,31 @@
       </Transition>
     </Teleport>
 
-    <ModalCallback v-model="callbackOpen"/>
+    <ModalCallback v-model="callbackOpen" :initial-name="formName" :initial-phone="formPhone" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { brendy } from '~/data/catalog'
-import { catalogGallery } from '~/data/gallery'
+import type { GalleryItem } from '~/data/gallery'
+import { usePageContent, usePageGallery, usePagePortfolio } from '~/composables/usePageContent'
+import { useCatalogPrices } from '~/composables/useCatalogPrices'
+
+// Данные страницы из pagesInfo.ts + перезаписи из админки
+const _content = await usePageContent('natyazhnye-potolki-cerutti')
+const faqItems = ref(_content.faqItems ?? [])
+const advantages = ref(_content.advantages ?? [])
+const seoLinks = ref(_content.seoLinks ?? [])
+
+// Галерея из админки (дополнительные фото)
+const gallery = ref(await usePageGallery('natyazhnye-potolki-cerutti'))
+const portfolio = ref(await usePagePortfolio('natyazhnye-potolki-cerutti'))
 const item = brendy.find(b => b.id === 'cerutti')!
+
+const _prices = await useCatalogPrices()
+const price = computed(() => _prices.value?.['base'] ?? item.price)
 const otherBrendy = brendy.map(b => ({ id: b.id, slug: b.slug, title: b.title }))
-const gallery = catalogGallery['natyazhnye-potolki-cerutti'] ?? []
-const worksWithPrice = gallery.filter(g => g.price)
+const worksWithPrice = portfolio.value.filter(g => g.price)
 const visibleWorksCount = ref(4)
 const visibleWorks = computed(() => worksWithPrice.slice(0, visibleWorksCount.value))
 function fmt(n: number) { return n.toLocaleString('ru-RU') }
@@ -224,14 +238,6 @@ const faqOpen = ref(-1)
 const formName = ref('')
 const formPhone = ref('')
 const asideItems = ['Бесплатный замер на дому', 'Монтаж включён в цену', 'Гарантия 12 лет по договору', 'Оплата после монтажа', 'Работаем в выходные']
-const advantages = [
-  { title: 'Швейцарское качество люкс', desc: 'Швейцарский дом текстиля с многолетней историей — стандарты качества на уровне haute couture.' },
-  { title: 'Безупречно ровное покрытие', desc: 'Идеально ровная белоснежная поверхность без волн, стыков и неровностей.' },
-  { title: 'Влагозащитный лак', desc: 'Специальное покрытие не позволяет воде впитываться в ткань при случайном попадании.' },
-  { title: 'Высокопрочное полимерное покрытие', desc: 'Защита от серьёзных протечек сверху — полотно удерживает воду без прорывов.' },
-  { title: 'Экологичное производство', desc: 'Минимизация энергозатрат и сточных вод на всех этапах — ответственное производство.' },
-  { title: 'Идеально для дорогих интерьеров', desc: 'Выбор дизайнеров и владельцев премиум-недвижимости — потолок, соответствующий уровню ремонта.' },
-]
 const whyCards = [
   { icon: 'lucide:gem', title: 'Швейцария — люкс-сегмент', desc: 'Швейцарский дом текстиля высшего класса — каждое полотно соответствует стандартам премиум-рынка.' },
   { icon: 'lucide:sparkles', title: 'Ровное покрытие', desc: 'Безупречно ровная поверхность — идеальная геометрия без волн и неровностей.' },
@@ -239,19 +245,6 @@ const whyCards = [
   { icon: 'lucide:droplets', title: 'Влагозащита', desc: 'Влагозащитный лак и высокопрочное покрытие защищают от протечек и случайного попадания воды.' },
   { icon: 'lucide:banknote', title: 'Без предоплаты', desc: 'Оплата после монтажа и вашей приёмки. Наличными, картой или безналом.' },
   { icon: 'lucide:leaf', title: 'Экология', desc: 'Экологичное производство с минимизацией отходов — ответственный выбор для тех, кто думает о природе.' },
-]
-const faqItems = [
-  { q: 'Чем Cerutti отличается от обычных тканевых потолков?', a: 'Cerutti — швейцарский люкс-сегмент с безупречной ровностью покрытия, которой сложно достичь у массовых брендов. Влагозащитный лак и высокопрочное полимерное покрытие — дополнительные преимущества. Это потолок для интерьеров, где важен каждый визуальный элемент.' },
-  { q: 'Кому подходит Cerutti?', a: 'Cerutti выбирают владельцы дорогих квартир, загородных домов и коммерческих помещений премиум-класса. Дизайнеры интерьеров рекомендуют Cerutti для проектов, где требуется идеальный белый потолок без каких-либо компромиссов по качеству.' },
-  { q: 'Как ухаживать за потолком Cerutti?', a: 'Тканевые потолки Cerutti легко чистятся — влажная губка с нейтральным моющим средством без абразивов. Влагозащитный лак облегчает уход: вода и большинство загрязнений не впитываются в ткань. Пыль удаляется мягкой щёткой пылесоса.' },
-  { q: 'Подходит ли Cerutti для ванной комнаты?', a: 'Cerutti является тканевым полотном с влагозащитным лаком. Для ванных комнат с высокой влажностью рекомендуем уточнить у замерщика — он оценит вентиляцию и порекомендует оптимальный вариант. В санузлах с хорошей вентиляцией Cerutti допустим.' },
-  { q: 'Оправдана ли цена Cerutti от 490 ₽/м²?', a: 'Cerutti — инвестиция в качество, которое видно сразу. Безупречная ровность, швейцарское происхождение, экологичное производство и влагозащита отличают его от более доступных аналогов. Для дорогого ремонта потолок Cerutti — логичный финальный штрих, соответствующий уровню остальной отделки.' },
-]
-const seoLinks = [
-  { to: '/catalog/brendy/natyazhnye-potolki-clipso', label: 'Потолки Clipso (Франция)' },
-  { to: '/catalog/brendy/natyazhnye-potolki-pongs', label: 'Потолки Pongs (Германия)' },
-  { to: '/catalog/faktury/tkanevye-natyazhnye-potolki', label: 'Тканевые натяжные потолки' },
-  { to: '/catalog/brendy', label: 'Все бренды' },
 ]
 function maskPhone(e: Event) {
   const input = e.target as HTMLInputElement

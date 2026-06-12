@@ -1,6 +1,5 @@
 /**
- * Акции, скидки и промокоды
- * Когда появится API/админка → заменить на $fetch('/api/promotions')
+ * Акции, скидки и промокоды — единый файл данных
  */
 
 export interface Promotion {
@@ -9,25 +8,27 @@ export interface Promotion {
   title: string
   subtitle: string
   description: string
-  badge: string | null       // метка: «Хит», «Новинка» и т.д.
-  discount: string           // «10%», «3-й потолок бесплатно» и т.д.
-  conditions: string[]       // условия получения
-  dateEnd: string | null     // дата окончания (null = бессрочно)
-  icon: string               // lucide-иконка
-  color: string              // акцентный цвет карточки
+  badge: string | null
+  discount: string
+  conditions: string[]
+  dateEnd: string | null
+  icon: string
+  color: string
   active: boolean
+  featured: boolean   // показывать на страницах каталога и главной
 }
 
 export interface PromoCode {
   id: number
-  code: string               // Сам промокод (в верхнем регистре)
+  code: string               // в верхнем регистре
   description: string
-  discount: string           // Отображаемая строка: «10%», «500 ₽»
-  discountType: 'percent' | 'fixed'  // тип скидки
-  discountValue: number      // число: 10 = 10%, 500 = 500 ₽
+  discount: string           // отображаемая строка: «10%», «500 ₽»
+  discountType: 'percent' | 'fixed'
+  discountValue: number
   conditions: string
   dateEnd: string | null
   active: boolean
+  public: boolean            // true = показывать на сайте в /akczii
 }
 
 export const promotions: Promotion[] = [
@@ -49,6 +50,7 @@ export const promotions: Promotion[] = [
     icon: 'lucide:gift',
     color: '#f5c800',
     active: true,
+    featured: true,
   },
   {
     id: 2,
@@ -68,6 +70,7 @@ export const promotions: Promotion[] = [
     icon: 'lucide:percent',
     color: '#f5c800',
     active: true,
+    featured: true,
   },
   {
     id: 3,
@@ -87,6 +90,7 @@ export const promotions: Promotion[] = [
     icon: 'lucide:ruler',
     color: '#4a9eff',
     active: true,
+    featured: true,
   },
   {
     id: 4,
@@ -105,6 +109,7 @@ export const promotions: Promotion[] = [
     icon: 'lucide:heart-handshake',
     color: '#a78bfa',
     active: true,
+    featured: false,
   },
   {
     id: 5,
@@ -124,6 +129,7 @@ export const promotions: Promotion[] = [
     icon: 'lucide:home',
     color: '#34d399',
     active: true,
+    featured: false,
   },
   {
     id: 6,
@@ -143,10 +149,12 @@ export const promotions: Promotion[] = [
     icon: 'lucide:trending-up',
     color: '#f97316',
     active: true,
+    featured: false,
   },
 ]
 
 export const promoCodes: PromoCode[] = [
+  // ── ПУБЛИЧНЫЕ (видны на сайте /akczii) ──────────────────────────
   {
     id: 1,
     code: 'НОВОСЕЛ10',
@@ -157,6 +165,7 @@ export const promoCodes: PromoCode[] = [
     conditions: 'Только для новых клиентов, первый заказ',
     dateEnd: null,
     active: true,
+    public: true,
   },
   {
     id: 2,
@@ -168,6 +177,7 @@ export const promoCodes: PromoCode[] = [
     conditions: 'Передайте другу — оба получат скидку 500 ₽',
     dateEnd: null,
     active: true,
+    public: true,
   },
   {
     id: 3,
@@ -179,7 +189,9 @@ export const promoCodes: PromoCode[] = [
     conditions: 'При оформлении заявки через сайт, любой заказ',
     dateEnd: null,
     active: true,
+    public: true,
   },
+  // ── НЕПУБЛИЧНЫЕ (только для валидации) ──────────────────────────
   {
     id: 4,
     code: 'ПЕНСИОНЕР5',
@@ -190,6 +202,7 @@ export const promoCodes: PromoCode[] = [
     conditions: 'По предъявлению пенсионного удостоверения',
     dateEnd: null,
     active: true,
+    public: false,
   },
   {
     id: 5,
@@ -201,5 +214,50 @@ export const promoCodes: PromoCode[] = [
     conditions: 'Действует при заказе в летний период',
     dateEnd: '2026-08-31',
     active: true,
+    public: false,
+  },
+  {
+    id: 6,
+    code: '2ГИСПРО',
+    description: 'Партнёрский промокод',
+    discount: '15%',
+    discountType: 'percent',
+    discountValue: 15,
+    conditions: 'Только для партнёров компании',
+    dateEnd: null,
+    active: true,
+    public: false,
+  },
+  {
+    id: 7,
+    code: 'ЦЕНТР25',
+    description: 'Скидка для сотрудников',
+    discount: '10%',
+    discountType: 'percent',
+    discountValue: 10,
+    conditions: 'Только для сотрудников ПроПотолок',
+    dateEnd: null,
+    active: true,
+    public: false,
+  },
+  {
+    id: 8,
+    code: 'НОВОЛЕНИНО2026',
+    description: 'Офлайн-промокод (выставки 2026)',
+    discount: '12%',
+    discountType: 'percent',
+    discountValue: 12,
+    conditions: 'Раздаётся офлайн на выставках и мероприятиях 2026',
+    dateEnd: '2026-12-31',
+    active: true,
+    public: false,
   },
 ]
+
+// ── Хелперы (обратная совместимость) ────────────────────────────
+
+/** Все активные промокоды — для валидации в калькуляторе */
+export const activePromoCodes = promoCodes.filter(p => p.active)
+
+/** Только публичные активные — для блока на странице акций */
+export const publicPromoCodes = promoCodes.filter(p => p.active && p.public)

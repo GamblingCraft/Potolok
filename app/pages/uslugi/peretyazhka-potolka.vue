@@ -49,7 +49,7 @@
             <ul class="ms-compare-list">
               <li v-for="i in compareB" :key="i"><Icon name="lucide:check" size="13" class="ms-check"/>{{ i }}</li>
             </ul>
-            <div class="ms-compare-card__price">от 159 ₽/м²</div>
+            <div class="ms-compare-card__price">{{ "от " + (_prices?.["base"] ?? 159) + " ₽/м²" }}</div>
           </div>
         </div>
         <p class="ms-compare-note">Не уверены, что выбрать? Замерщик осмотрит конструкцию и порекомендует оптимальный вариант — бесплатно</p>
@@ -176,13 +176,21 @@
         </div>
       </div>
     </section>
-    <ModalCallback v-model="callbackOpen"/>
+    <ModalCallback v-model="callbackOpen" :initial-name="formName" :initial-phone="formPhone" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { site } from '~/data/site'
 import { services } from '~/data/services'
+import { usePageContent } from '~/composables/usePageContent'
+import { useCatalogPrices } from '~/composables/useCatalogPrices'
+
+// Данные страницы из pagesInfo.ts + перезаписи из админки
+const _prices = await useCatalogPrices()
+const _content = await usePageContent('peretyazhka-potolka')
+const faqItems = ref(_content.faqItems ?? [])
+const seoLinks = ref(_content.seoLinks ?? [])
 const service = services.find(s => s.slug === 'peretyazhka-potolka')!
 
 useHead({
@@ -243,21 +251,6 @@ const whyCards = [
   { icon: 'lucide:search',       title: 'Проверяем профиль',       desc: 'При демонтаже проверяем состояние профиля и заменяем повреждённые участки.' },
   { icon: 'lucide:badge-check',  title: 'Фиксированная цена',     desc: 'Стоимость согласовывается до начала работ и не меняется в процессе.' },
 ]
-const faqItems = [
-  { q: 'Что такое перетяжка потолка и чем она отличается от замены полотна?', a: 'Перетяжка включает полный демонтаж старого потолка (снятие полотна, проверку/замену профиля) и монтаж нового. Замена полотна дешевле — снимается только полотно, профиль остаётся. Перетяжка нужна при капремонте или когда профиль тоже требует замены.' },
-  { q: 'Сколько стоит перетяжка натяжного потолка?', a: 'От 200 ₽/м² — включает демонтаж, вывоз, монтаж нового полотна и гарантию. Точная стоимость зависит от площади, конфигурации и нужно ли менять профиль. Рассчитываем бесплатно при осмотре.' },
-  { q: 'Можно ли при перетяжке выбрать другую конфигурацию потолка?', a: 'Да. При перетяжке профиль демонтируется, поэтому можно изменить конфигурацию — например, перейти от обычного одноуровневого к парящему или двухуровневому. Стоимость пересчитывается с учётом новой конструкции.' },
-  { q: 'Нужно ли нести дополнительные расходы при перетяжке?', a: 'Нет. Стоимость включает всё: демонтаж старого полотна, вывоз отходов, проверку профиля, монтаж нового полотна, прорезку отверстий для светильников и гарантию. Согласовываем итоговую цену до начала работ.' },
-  { q: 'Обязательно ли менять профиль при перетяжке?', a: 'Нет, только если он повреждён или вы хотите изменить конфигурацию. Мастер осмотрит профиль при демонтаже и скажет, нужна ли замена. Вы принимаете решение сами — дополнительных трат без вашего согласия не будет.' },
-]
-const seoLinks = [
-  { to: '/uslugi/zamena-polotna',                 label: 'Замена натяжного полотна' },
-  { to: '/uslugi/demontazh-natyazhnogo-potolka',  label: 'Демонтаж потолка' },
-  { to: '/uslugi/montazh-natyazhnyh-potolkov',    label: 'Монтаж натяжных потолков' },
-  { to: '/uslugi/remont-natyazhnogo-potolka',     label: 'Ремонт потолка' },
-  { to: '/uslugi/ustanovka-svetilnikov',          label: 'Установка светильников' },
-]
-
 function maskPhone(e: Event) {
   const input = e.target as HTMLInputElement
   let val = input.value.replace(/\D/g, '')

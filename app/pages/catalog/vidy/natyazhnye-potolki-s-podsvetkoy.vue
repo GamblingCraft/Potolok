@@ -16,8 +16,8 @@
           </p>
           <div class="cp-hero__price-badge" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
             <meta itemprop="priceCurrency" content="RUB"/>
-            <meta itemprop="price" :content="String(159 + item.extra)"/>
-            от <strong>{{ 159 + item.extra }} ₽/м²</strong> — монтаж включён
+            <meta itemprop="price" :content="String(price)"/>
+            от <strong>{{ price }} ₽/м²</strong> — монтаж включён
           </div>
           <form class="cp-hero__form" @submit.prevent="submitHero">
             <input v-model="formName" class="cp-inp" type="text" placeholder="Ваше имя"/>
@@ -56,8 +56,8 @@
             <div class="cp-aside-card">
               <div class="cp-aside-card__title">Вызвать замерщика</div>
               <p class="cp-aside-card__desc">Замерщик приедет бесплатно, покажет образцы, рассчитает стоимость и оформит договор</p>
-              <div class="cp-aside-price">от <strong>{{ 159 + item.extra }} ₽</strong><span>/м²</span></div>
-              <div class="cp-aside-extra">+{{ item.extra }} ₽/м² за технологию</div>
+              <div class="cp-aside-price">от <strong>{{ price }} ₽</strong><span>/м²</span></div>
+              <div class="cp-aside-extra">+{{ priceExtra }} ₽/м² за технологию</div>
               <ul class="cp-aside-list">
                 <li v-for="i in asideItems" :key="i"><Icon name="lucide:check-circle" size="14" class="cp-check"/>{{ i }}</li>
               </ul>
@@ -106,7 +106,7 @@
             </div>
           </div>
         </div>
-        <div class="cp-works-more" v-if="gallery.length > visibleWorksCount">
+        <div class="cp-works-more" v-if="worksWithPrice.length > visibleWorksCount">
           <button class="cp-more-btn" @click="visibleWorksCount += 4">
             <Icon name="lucide:chevron-down" size="16"/>Смотреть ещё
           </button>
@@ -149,15 +149,7 @@
           <div class="cp-pretitle cp-pretitle--dark">Выгодные условия</div>
           <h2 class="cp-h2 cp-h2--center">Акции и скидки на потолки с подсветкой</h2>
         </div>
-        <div class="cp-promo-grid">
-          <div class="cp-promo-card" v-for="p in promos" :key="p.title">
-            <div class="cp-promo-card__icon"><Icon :name="p.icon" size="24"/></div>
-            <div class="cp-promo-card__title">{{ p.title }}</div>
-            <div class="cp-promo-card__desc">{{ p.desc }}</div>
-            <div class="cp-promo-card__date">{{ p.date }}</div>
-            <button class="nav-btn cp-promo-card__btn" @click="callbackOpen = true">Оставить заявку</button>
-          </div>
-        </div>
+        <CpPromoCards @callback="callbackOpen = true" />
       </div>
     </section>
 
@@ -249,17 +241,31 @@
       </Transition>
     </Teleport>
 
-    <ModalCallback v-model="callbackOpen"/>
+    <ModalCallback v-model="callbackOpen" :initial-name="formName" :initial-phone="formPhone" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { vidy } from '~/data/catalog'
-import { catalogGallery } from '~/data/gallery'
+import type { GalleryItem } from '~/data/gallery'
+import { usePageContent, usePageGallery, usePagePortfolio } from '~/composables/usePageContent'
+import { useCatalogPrices } from '~/composables/useCatalogPrices'
+
+// Данные страницы из pagesInfo.ts + перезаписи из админки
+const _content = await usePageContent('natyazhnye-potolki-s-podsvetkoy')
+const faqItems = ref(_content.faqItems ?? [])
+const advantages = ref(_content.advantages ?? [])
+const seoLinks = ref(_content.seoLinks ?? [])
+
+// Галерея из админки (дополнительные фото)
+const gallery = ref(await usePageGallery('natyazhnye-potolki-s-podsvetkoy'))
+const portfolio = ref(await usePagePortfolio('natyazhnye-potolki-s-podsvetkoy'))
+const _prices = await useCatalogPrices()
+const price = computed(() => _prices.value?.['podsvetka'] ?? 320)
+const priceExtra = computed(() => price.value - (_prices.value?.['base'] ?? 159))
 
 const item = vidy.find(v => v.id === 'light')!
-const gallery = catalogGallery['natyazhnye-potolki-s-podsvetkoy'] ?? []
-const worksWithPrice = gallery.filter(g => g.price)
+const worksWithPrice = portfolio.value.filter(g => g.price)
 const otherVidy = vidy.filter(v => v.id !== 'base').map(v => ({ id: v.id, slug: v.slug, title: v.title }))
 
 useHead({
@@ -278,7 +284,7 @@ useHead({
       name: 'Натяжные потолки с подсветкой',
       description: 'Натяжные потолки с подсветкой — споты, LED-лента, трековые системы. Монтаж в Иркутске.',
       brand: { '@type': 'Brand', name: 'ПроПотолок' },
-      offers: { '@type': 'Offer', price: 379, priceCurrency: 'RUB', availability: 'https://schema.org/InStock', seller: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' } } },
+      offers: { '@type': 'Offer', price: price.value, priceCurrency: 'RUB', availability: 'https://schema.org/InStock', seller: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' } } },
     }),
   }],
 })
@@ -294,21 +300,6 @@ function openLightbox(img: string, title: string) { lightbox.img = img; lightbox
 
 const asideItems = ['Бесплатный замер на дому', 'Монтаж включён в цену', 'Гарантия 12 лет по договору', 'Оплата после монтажа', 'Работаем в выходные']
 
-const advantages = [
-  { title: 'Точечные споты',      desc: 'Встраиваются в полотно любого типа — матовое, сатиновое, тканевое.' },
-  { title: 'Трековые системы',    desc: 'Гибкое расположение светильников — меняйте как угодно.' },
-  { title: 'LED-лента в нише',    desc: 'Скрытая подсветка по периметру — создаёт глубину и объём.' },
-  { title: 'Полупрозрачное полотно', desc: 'Рассеянный свет из-за полотна — мягкое равномерное освещение.' },
-  { title: 'RGB управление',      desc: 'Меняйте цвет и яркость через пульт или приложение на телефоне.' },
-  { title: 'Диммер и умный дом',  desc: 'Интегрируется с Яндекс Алисой, Apple HomeKit, Google Home.' },
-]
-
-const promos = [
-  { icon: 'lucide:gift',        title: '3-й потолок в подарок',        desc: 'При заказе от 3 помещений — одно монтируем бесплатно. Акция действует при одновременном заказе.',    date: 'Акция действует' },
-  { icon: 'lucide:percent',     title: '-10% пенсионерам и новосёлам', desc: 'Скидка 10% при предъявлении пенсионного удостоверения или договора купли-продажи квартиры.',      date: 'Постоянная скидка' },
-  { icon: 'lucide:credit-card', title: 'Рассрочка 0% до 3 мес.',      desc: 'Оформим рассрочку без переплаты. Первый взнос 0%. Монтаж — в тот же день. Документы — на месте.', date: 'Без переплаты' },
-]
-
 const whyCards = [
   { icon: 'lucide:leaf',         title: '100% без запаха',       desc: 'Полотна гипоаллергенны, проверены Роспотребнадзором. Установлены в детских садах и школах Иркутска.' },
   { icon: 'lucide:badge-check',  title: 'Сертификаты',           desc: 'На все фактуры, светильники и расходники предоставим сертификаты соответствия по запросу.' },
@@ -316,20 +307,6 @@ const whyCards = [
   { icon: 'lucide:globe',        title: 'Европейские материалы', desc: 'MSD, Bauf (Германия), Descor, Clipso — премиальные полотна всегда в наличии на складе.' },
   { icon: 'lucide:banknote',     title: 'Без предоплаты',        desc: 'Оплата после монтажа и вашей приёмки. Наличными, картой или безналом.' },
   { icon: 'lucide:hammer',       title: 'Безопасный монтаж',     desc: 'Метод холодного натяжения — без нагрева, без пыли, без необходимости выносить мебель.' },
-]
-
-const faqItems = [
-  { q: 'Какие светильники можно использовать с натяжным потолком?',    a: 'Точечные споты, трековые системы, люстры на закладной, LED-ленты в нише. Наши мастера установят любой тип освещения при монтаже потолка.' },
-  { q: 'Можно ли добавить подсветку к уже установленному потолку?',    a: 'Да — если при монтаже была предусмотрена закладная или ниша. Без разбора потолка добавить споты в натяжной потолок не получится — учитывайте освещение при заказе.' },
-  { q: 'Что такое полупрозрачный натяжной потолок?',                   a: 'Полотно пропускает свет — за ним размещается LED-лента или светодиодный светильник. Эффект мягкого равномерного свечения по всей площади потолка.' },
-  { q: 'Как управлять RGB-подсветкой?',                                a: 'Через пульт дистанционного управления, мобильное приложение или систему умного дома (Алиса, Google Home, Apple HomeKit). Устанавливаем контроллер при монтаже.' },
-  { q: 'Сколько стоит натяжной потолок с подсветкой?',                 a: 'От 379 ₽/м² — включает полотно и монтаж. Стоимость светильников и LED-ленты — отдельно. Точный расчёт после бесплатного замера.' },
-]
-
-const seoLinks = [
-  { to: '/catalog/vidy',     label: 'Все технологии' },
-  { to: '/catalog/faktury',  label: 'Фактуры потолков' },
-  { to: '/kalkulyator',      label: 'Калькулятор стоимости' },
 ]
 
 function fmt(n: number) { return n.toLocaleString('ru-RU') }

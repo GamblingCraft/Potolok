@@ -192,13 +192,19 @@
       </div>
     </section>
 
-    <ModalCallback v-model="callbackOpen"/>
+    <ModalCallback v-model="callbackOpen" :initial-name="formName" :initial-phone="formPhone" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { site } from '~/data/site'
 import { services } from '~/data/services'
+import { usePageContent } from '~/composables/usePageContent'
+
+// Данные страницы из pagesInfo.ts + перезаписи из админки
+const _content = await usePageContent('sliv-vody-s-natyazhnogo-potolka')
+const faqItems = ref(_content.faqItems ?? [])
+const seoLinks = ref(_content.seoLinks ?? [])
 const service = services.find(s => s.slug === 'sliv-vody-s-natyazhnogo-potolka')!
 
 useHead({
@@ -262,21 +268,6 @@ const whyCards = [
   { icon: 'lucide:banknote',     title: 'Честная цена',            desc: 'Стоимость от 1 500 ₽ зависит от объёма воды. Цена озвучивается по телефону до выезда.' },
   { icon: 'lucide:map-pin',      title: 'Весь Иркутск',            desc: 'Выезжаем во все районы города и ближайший пригород.' },
 ]
-const faqItems = [
-  { q: 'Что делать, если залили соседи сверху?', a: 'Главное — не паниковать и не пытаться самостоятельно проколоть потолок. Немедленно звоните нам. Пока едет мастер: перекройте воду (сообщите соседям или управляющей компании), отключите электричество в комнате с затоплением, сфотографируйте ущерб.' },
-  { q: 'Можно ли самому проколоть потолок?', a: 'Нельзя. Прокол или разрез полотна приведут к его разрыву. ПВХ-плёнка рвётся дальше от точки прокола, и потолок придётся менять полностью. Только специалист знает, где находится технологический клапан и как слить воду безопасно.' },
-  { q: 'Восстановится ли потолок после слива?', a: 'Да. ПВХ-полотно обладает памятью формы и после правильного слива полностью принимает первоначальный вид. Никаких следов затопления не остаётся. Тканевые полотна после сильного затопления могут требовать замены — мастер оценит на месте.' },
-  { q: 'Сколько стоит слив воды?', a: 'Стоимость от 1 500 ₽ и зависит от объёма воды и сложности работы. Точную цену называем по телефону после описания ситуации. Предоплата не требуется — оплата после завершения работ.' },
-  { q: 'Дадите ли документы для страховой?', a: 'Да. После работы выдаём акт выполненных работ, который подтверждает факт затопления и проведённые работы. Документы принимаются страховыми компаниями.' },
-]
-const seoLinks = [
-  { to: '/uslugi/montazh-natyazhnyh-potolkov',   label: 'Монтаж натяжных потолков' },
-  { to: '/uslugi/remont-natyazhnogo-potolka',    label: 'Ремонт натяжного потолка' },
-  { to: '/uslugi/zamena-polotna',                label: 'Замена полотна' },
-  { to: '/uslugi/demontazh-natyazhnogo-potolka', label: 'Демонтаж потолка' },
-  { to: '/uslugi/srochnyj-montazh-24-chasa',     label: 'Срочный монтаж 24ч' },
-]
-
 function maskPhone(e: Event) {
   const input = e.target as HTMLInputElement
   let val = input.value.replace(/\D/g, '')

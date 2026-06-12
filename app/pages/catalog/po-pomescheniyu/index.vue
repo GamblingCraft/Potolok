@@ -71,7 +71,15 @@
 </template>
 
 <script setup lang="ts">
-import { pomeshcheniya } from '~/data/catalog'
+import { pomeshcheniya as _pomeshcheniya } from '~/data/catalog'
+import { useCatalogPrices } from '~/composables/useCatalogPrices'
+
+const _prices = await useCatalogPrices()
+
+const pomeshcheniya = computed(() => _pomeshcheniya.map(p => ({
+  ...p,
+  price: _prices.value?.['base'] ?? p.price,
+})))
 
 useHead({
   title: 'Натяжные потолки по помещению — гостиная, спальня, кухня, ванная | ПроПотолок Иркутск',

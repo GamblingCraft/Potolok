@@ -184,8 +184,7 @@
 </template>
 
 <script setup lang="ts">
-import { promotions } from '~/data/promotions'
-import { publicPromoCodes } from '~/data/promo'
+import { promotions as defaultPromotions, promoCodes as defaultCodes, type Promotion, type PromoCode } from '~/data/promotions'
 
 useHead({
   title: 'Акции и скидки на натяжные потолки в Иркутске | ПроПотолок',
@@ -194,12 +193,23 @@ useHead({
   ],
 })
 
+const { data: promotionsData } = await useAsyncData<Promotion[]>(
+  'akczii-promotions',
+  () => $fetch<Promotion[]>('/api/cms/promotions'),
+  { default: () => defaultPromotions },
+)
+const { data: promoCodesData } = await useAsyncData<PromoCode[]>(
+  'akczii-promo-codes',
+  () => $fetch<PromoCode[]>('/api/cms/promo-codes'),
+  { default: () => defaultCodes },
+)
+
 const callbackOpen = ref(false)
 const openFaq = ref<number | null>(null)
 const copiedCode = ref<string | null>(null)
 
-const activePromos     = computed(() => promotions.filter(p => p.active))
-const activePromoCodes = publicPromoCodes
+const activePromos     = computed(() => (promotionsData.value ?? defaultPromotions).filter(p => p.active))
+const activePromoCodes = computed(() => (promoCodesData.value ?? defaultCodes).filter(c => c.active && c.public))
 
 const stats = [
   { val: 'до 20%',      label: 'максимальная скидка' },

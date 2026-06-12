@@ -71,7 +71,18 @@
 </template>
 
 <script setup lang="ts">
-import { vidy } from '~/data/catalog'
+import { vidy as _vidy } from '~/data/catalog'
+import { useCatalogPrices } from '~/composables/useCatalogPrices'
+
+const _prices = await useCatalogPrices()
+
+const vidy = computed(() => _vidy.map(v => {
+  const base = _prices.value?.['base'] ?? 159
+  return {
+    ...v,
+    extra: ((v.catalogKey ? _prices.value?.[v.catalogKey] : undefined) ?? (base + v.extra)) - base,
+  }
+}))
 
 useHead({
   title: 'Виды натяжных потолков — парящие, с подсветкой, двухуровневые | ПроПотолок Иркутск',

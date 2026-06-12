@@ -79,7 +79,15 @@
 </template>
 
 <script setup lang="ts">
-import { brendy } from '~/data/catalog'
+import { brendy as _brendy } from '~/data/catalog'
+import { useCatalogPrices } from '~/composables/useCatalogPrices'
+
+const _prices = await useCatalogPrices()
+
+const brendy = computed(() => _brendy.map(b => ({
+  ...b,
+  price: _prices.value?.['base'] ?? b.price,
+})))
 
 useHead({
   title: 'Натяжные потолки по производителю — MSD, Bauf, Pongs, Clipso, Cerutti | ПроПотолок Иркутск',

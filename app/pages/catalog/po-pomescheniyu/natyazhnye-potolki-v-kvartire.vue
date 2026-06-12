@@ -9,8 +9,8 @@
           <h1 class="cp-hero__title" itemprop="name">Натяжные потолки в квартиру в&nbsp;Иркутске</h1>
           <p class="cp-hero__price">Акция: <span>3-й потолок в подарок!</span> Гарантия 12 лет.<br>Потолки без запаха. Монтаж за 1 день. Без предоплаты.</p>
           <div class="cp-hero__price-badge" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-            <meta itemprop="priceCurrency" content="RUB"/><meta itemprop="price" :content="String(item.price)"/>
-            от <strong>{{ item.price }} ₽/м²</strong> — монтаж включён
+            <meta itemprop="priceCurrency" content="RUB"/><meta itemprop="price" :content="String(price)"/>
+            от <strong>{{ price }} ₽/м²</strong> — монтаж включён
           </div>
           <form class="cp-hero__form" @submit.prevent="submitHero">
             <input v-model="formName" class="cp-inp" type="text" placeholder="Ваше имя"/>
@@ -42,7 +42,7 @@
             <div class="cp-aside-card">
               <div class="cp-aside-card__title">Вызвать замерщика</div>
               <p class="cp-aside-card__desc">Замерщик приедет бесплатно, покажет образцы, рассчитает стоимость и оформит договор</p>
-              <div class="cp-aside-price">от <strong>{{ item.price }} ₽</strong><span>/м²</span></div>
+              <div class="cp-aside-price">от <strong>{{ price }} ₽</strong><span>/м²</span></div>
               <ul class="cp-aside-list">
                 <li v-for="i in asideItems" :key="i"><Icon name="lucide:check-circle" size="14" class="cp-check"/>{{ i }}</li>
               </ul>
@@ -87,7 +87,7 @@
             </div>
           </div>
         </div>
-        <div class="cp-works-more" v-if="gallery.length > visibleWorksCount">
+        <div class="cp-works-more" v-if="worksWithPrice.length > visibleWorksCount">
           <button class="cp-more-btn" @click="visibleWorksCount += 4"><Icon name="lucide:chevron-down" size="16"/>Смотреть ещё</button>
         </div>
       </div>
@@ -126,15 +126,7 @@
           <div class="cp-pretitle cp-pretitle--dark">Выгодные условия</div>
           <h2 class="cp-h2 cp-h2--center">Акции и скидки на потолки в квартиру</h2>
         </div>
-        <div class="cp-promo-grid">
-          <div class="cp-promo-card" v-for="p in promos" :key="p.title">
-            <div class="cp-promo-card__icon"><Icon :name="p.icon" size="24"/></div>
-            <div class="cp-promo-card__title">{{ p.title }}</div>
-            <div class="cp-promo-card__desc">{{ p.desc }}</div>
-            <div class="cp-promo-card__date">{{ p.date }}</div>
-            <button class="nav-btn cp-promo-card__btn" @click="callbackOpen = true">Оставить заявку</button>
-          </div>
-        </div>
+        <CpPromoCards @callback="callbackOpen = true" />
       </div>
     </section>
 
@@ -214,17 +206,30 @@
         </div>
       </Transition>
     </Teleport>
-    <ModalCallback v-model="callbackOpen"/>
+    <ModalCallback v-model="callbackOpen" :initial-name="formName" :initial-phone="formPhone" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { pomeshcheniya, BASE_PRICE } from '~/data/catalog'
-import { catalogGallery } from '~/data/gallery'
+import type { GalleryItem } from '~/data/gallery'
+import { usePageContent, usePageGallery, usePagePortfolio } from '~/composables/usePageContent'
+import { useCatalogPrices } from '~/composables/useCatalogPrices'
+
+// Данные страницы из pagesInfo.ts + перезаписи из админки
+const _content = await usePageContent('natyazhnye-potolki-v-kvartire')
+const faqItems = ref(_content.faqItems ?? [])
+const advantages = ref(_content.advantages ?? [])
+const seoLinks = ref(_content.seoLinks ?? [])
+
+// Галерея из админки (дополнительные фото)
+const gallery = ref(await usePageGallery('natyazhnye-potolki-v-kvartire'))
+const portfolio = ref(await usePagePortfolio('natyazhnye-potolki-v-kvartire'))
+const _prices = await useCatalogPrices()
+const price = computed(() => _prices.value?.['base'] ?? item.price)
 
 const item = pomeshcheniya.find(p => p.id === 'flat')!
-const gallery = catalogGallery['natyazhnye-potolki-v-kvartire'] ?? []
-const worksWithPrice = gallery.filter(g => g.price)
+const worksWithPrice = portfolio.value.filter(g => g.price)
 const otherPomeshcheniya = pomeshcheniya.map(p => ({ id: p.id, slug: p.slug, title: p.title }))
 
 useHead({
@@ -236,7 +241,7 @@ useHead({
     { property: 'og:image', content: item.img },
     { property: 'og:type', content: 'product' },
   ],
-  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'Product', name: 'Натяжные потолки в квартиру', description: 'Натяжные потолки в квартиру в Иркутске. Вся квартира за 1 день, 3-й потолок в подарок.', brand: { '@type': 'Brand', name: 'ПроПотолок' }, offers: { '@type': 'Offer', price: item.price, priceCurrency: 'RUB', availability: 'https://schema.org/InStock', seller: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' } } } }) }],
+  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'Product', name: 'Натяжные потолки в квартиру', description: 'Натяжные потолки в квартиру в Иркутске. Вся квартира за 1 день, 3-й потолок в подарок.', brand: { '@type': 'Brand', name: 'ПроПотолок' }, offers: { '@type': 'Offer', price: price.value, priceCurrency: 'RUB', availability: 'https://schema.org/InStock', seller: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' } } } }) }],
 })
 
 const callbackOpen = ref(false)
@@ -250,21 +255,6 @@ function openLightbox(img: string, title: string) { lightbox.img = img; lightbox
 
 const asideItems = ['Бесплатный замер на дому', 'Монтаж включён в цену', 'Гарантия 12 лет по договору', 'Оплата после монтажа', 'Работаем в выходные']
 
-const advantages = [
-  { title: 'Вся квартира за 1 день', desc: '2–3-комнатная квартира — за 1 рабочий день без остановки жизни.' },
-  { title: '3-й потолок в подарок', desc: 'При заказе от 3 помещений одно монтируем бесплатно.' },
-  { title: 'Разные фактуры в каждой комнате', desc: 'Матовый в спальне, парящий в зале, глянец в ванной.' },
-  { title: 'Единый договор', desc: 'Одна бригада, один договор, единая гарантия на всё.' },
-  { title: 'Без пыли и запаха', desc: 'Монтаж без строительного мусора — сразу въезжаете.' },
-  { title: 'Гарантия 12 лет', desc: 'На все помещения по единому договору.' },
-]
-
-const promos = [
-  { icon: 'lucide:gift', title: '3-й потолок в подарок', desc: 'При заказе от 3 помещений — одно монтируем бесплатно. Акция действует при одновременном заказе.', date: 'Акция действует' },
-  { icon: 'lucide:percent', title: '-10% пенсионерам и новосёлам', desc: 'Скидка 10% при предъявлении пенсионного удостоверения или договора купли-продажи квартиры.', date: 'Постоянная скидка' },
-  { icon: 'lucide:credit-card', title: 'Рассрочка 0% до 3 мес.', desc: 'Оформим рассрочку без переплаты. Первый взнос 0%. Монтаж — в тот же день. Документы — на месте.', date: 'Без переплаты' },
-]
-
 const whyCards = [
   { icon: 'lucide:leaf', title: '100% без запаха', desc: 'Полотна гипоаллергенны, проверены Роспотребнадзором. Установлены в детских садах и школах Иркутска.' },
   { icon: 'lucide:badge-check', title: 'Сертификаты', desc: 'На все фактуры, светильники и расходники предоставим сертификаты соответствия по запросу.' },
@@ -272,22 +262,6 @@ const whyCards = [
   { icon: 'lucide:globe', title: 'Европейские материалы', desc: 'MSD, Bauf (Германия), Descor, Clipso — премиальные полотна всегда в наличии на складе.' },
   { icon: 'lucide:banknote', title: 'Без предоплаты', desc: 'Оплата после монтажа и вашей приёмки. Наличными, картой или безналом.' },
   { icon: 'lucide:hammer', title: 'Безопасный монтаж', desc: 'Метод холодного натяжения — без нагрева, без пыли, без необходимости выносить мебель.' },
-]
-
-const faqItems = [
-  { q: 'За сколько дней сделают всю квартиру?', a: '2-комнатная (40–50 м²) — за 1 день. 3-комнатная (60–80 м²) — за 1–2 дня.' },
-  { q: 'Акция 3-й потолок в подарок действует?', a: 'Да — при одновременном заказе от 3 помещений монтируем наименьшее бесплатно.' },
-  { q: 'Нужно ли выселяться на время монтажа?', a: 'Нет. Мастера работают по одной комнате, остальные свободны.' },
-  { q: 'Можно ли разные фактуры в разных комнатах?', a: 'Да — это нормальная практика. Матовый в спальне, парящий в зале, влагостойкий в ванной.' },
-  { q: 'Сколько стоит вся квартира 60 м²?', a: 'От 159 × 60 = 9 540 ₽ за базовый вариант. С парящим в зале и споттами везде — 25 000–40 000 ₽.' },
-]
-
-const seoLinks = [
-  { to: '/catalog/vidy/paryashchie-natyazhnye-potolki', label: 'Парящие' },
-  { to: '/catalog/faktury', label: 'Фактуры' },
-  { to: '/akczii', label: 'Акции и скидки' },
-  { to: '/kalkulyator', label: 'Калькулятор' },
-  { to: '/catalog/po-pomescheniyu', label: 'Все помещения' },
 ]
 
 function fmt(n: number) { return n.toLocaleString('ru-RU') }

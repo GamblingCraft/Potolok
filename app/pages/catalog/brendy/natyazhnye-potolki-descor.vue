@@ -9,8 +9,8 @@
           <h1 class="cp-hero__title" itemprop="name">Натяжные потолки Descor в&nbsp;Иркутске</h1>
           <p class="cp-hero__price">Акция: <span>3-й потолок в подарок!</span> Гарантия 12 лет.<br>Монтаж за 1 день. Без предоплаты.</p>
           <div class="cp-hero__price-badge" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-            <meta itemprop="priceCurrency" content="RUB"/><meta itemprop="price" :content="String(item.price)"/>
-            от <strong>{{ item.price }} ₽/м²</strong> — монтаж включён
+            <meta itemprop="priceCurrency" content="RUB"/><meta itemprop="price" :content="String(price)"/>
+            от <strong>{{ price }} ₽/м²</strong> — монтаж включён
           </div>
           <form class="cp-hero__form" @submit.prevent="callbackOpen = true">
             <input v-model="formName" class="cp-inp" type="text" placeholder="Ваше имя"/>
@@ -47,7 +47,7 @@
             <div class="cp-aside-card">
               <div class="cp-aside-card__title">Вызвать замерщика</div>
               <p class="cp-aside-card__desc">Бесплатно привезём образцы Descor, рассчитаем стоимость и оформим договор</p>
-              <div class="cp-aside-price">от <strong>{{ item.price }} ₽</strong><span>/м²</span></div>
+              <div class="cp-aside-price">от <strong>{{ price }} ₽</strong><span>/м²</span></div>
               <ul class="cp-aside-list">
                 <li v-for="i in asideItems" :key="i"><Icon name="lucide:check-circle" size="14" class="cp-check"/>{{ i }}</li>
               </ul>
@@ -192,17 +192,31 @@
       </Transition>
     </Teleport>
 
-    <ModalCallback v-model="callbackOpen"/>
+    <ModalCallback v-model="callbackOpen" :initial-name="formName" :initial-phone="formPhone" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { brendy } from '~/data/catalog'
-import { catalogGallery } from '~/data/gallery'
+import type { GalleryItem } from '~/data/gallery'
+import { usePageContent, usePageGallery, usePagePortfolio } from '~/composables/usePageContent'
+import { useCatalogPrices } from '~/composables/useCatalogPrices'
+
+// Данные страницы из pagesInfo.ts + перезаписи из админки
+const _content = await usePageContent('natyazhnye-potolki-descor')
+const faqItems = ref(_content.faqItems ?? [])
+const advantages = ref(_content.advantages ?? [])
+const seoLinks = ref(_content.seoLinks ?? [])
+
+// Галерея из админки (дополнительные фото)
+const gallery = ref(await usePageGallery('natyazhnye-potolki-descor'))
+const portfolio = ref(await usePagePortfolio('natyazhnye-potolki-descor'))
 const item = brendy.find(b => b.id === 'descor')!
+
+const _prices = await useCatalogPrices()
+const price = computed(() => _prices.value?.['base'] ?? item.price)
 const otherBrendy = brendy.map(b => ({ id: b.id, slug: b.slug, title: b.title }))
-const gallery = catalogGallery['natyazhnye-potolki-descor'] ?? []
-const worksWithPrice = gallery.filter(g => g.price)
+const worksWithPrice = portfolio.value.filter(g => g.price)
 const visibleWorksCount = ref(4)
 const visibleWorks = computed(() => worksWithPrice.slice(0, visibleWorksCount.value))
 function fmt(n: number) { return n.toLocaleString('ru-RU') }
@@ -224,14 +238,6 @@ const faqOpen = ref(-1)
 const formName = ref('')
 const formPhone = ref('')
 const asideItems = ['Бесплатный замер на дому', 'Монтаж включён в цену', 'Гарантия 12 лет по договору', 'Оплата после монтажа', 'Работаем в выходные']
-const advantages = [
-  { title: 'Тканевое полотно без ПВХ', desc: 'Экологически чистый материал без токсичных пластификаторов и хлорсодержащих компонентов.' },
-  { title: 'Огнеупорность Trevira CS', desc: 'Запатентованное волокно с огнезащитными свойствами — безопасность заложена в структуру, не смывается.' },
-  { title: 'Легко моётся', desc: 'Поверхность допускает влажную уборку с моющими средствами без потери внешнего вида.' },
-  { title: 'Прочность и защита от разрыва', desc: 'Высокий запас прочности тканевого полотна обеспечивает долгий срок службы без деформаций.' },
-  { title: 'Немецкие технологии и ГОСТ', desc: 'Производство по стандартам Германии с соответствием требованиям российской сертификации.' },
-  { title: 'Гипоаллергенность', desc: 'Не содержит аллергенов, безопасен для детей и людей с повышенной чувствительностью.' },
-]
 const whyCards = [
   { icon: 'lucide:flame', title: 'Trevira CS — огнеупорность', desc: 'Волокно с заложенной огнезащитой — не горит, не плавится, соответствует требованиям пожарной безопасности.' },
   { icon: 'lucide:leaf', title: 'Без ПВХ', desc: 'Экологически чистое тканевое полотно без хлора, токсичных пластификаторов и вредных выбросов.' },
@@ -239,18 +245,6 @@ const whyCards = [
   { icon: 'lucide:droplets', title: 'Легко моётся', desc: 'Влажная уборка с моющими средствами — поверхность сохраняет вид на протяжении всего срока службы.' },
   { icon: 'lucide:banknote', title: 'Без предоплаты', desc: 'Оплата после монтажа и вашей приёмки. Наличными, картой или безналом.' },
   { icon: 'lucide:flag', title: 'Германия', desc: 'Немецкие технологии производства — стабильное качество и соответствие европейским стандартам.' },
-]
-const faqItems = [
-  { q: 'Чем тканевые потолки Descor отличаются от ПВХ?', a: 'Тканевые потолки Descor изготовлены из волокна Trevira CS без ПВХ и токсичных пластификаторов. Они дышат, не накапливают статическое электричество и имеют более натуральный вид. ПВХ-полотна более влагостойкие, но содержат пластификаторы. Descor — выбор для тех, кто ценит экологичность.' },
-  { q: 'Насколько огнеупорны потолки Descor?', a: 'Descor производится из волокна Trevira CS с встроенными огнезащитными свойствами — они не смываются и не исчезают со временем, так как заложены в молекулярную структуру волокна. Потолки соответствуют европейским и российским противопожарным нормам.' },
-  { q: 'Как ухаживать за тканевым потолком Descor?', a: 'Тканевые потолки Descor легко моются влажной тряпкой или губкой с нейтральным моющим средством. Не рекомендуется использовать абразивы и агрессивную химию. Пылесос с мягкой щёткой также подходит для регулярного ухода.' },
-  { q: 'Подходит ли Descor для ванной комнаты?', a: 'Descor является тканевым полотном и обладает умеренной влагостойкостью. Для ванных комнат с высокой влажностью рекомендуем ПВХ-потолки (например, Bauf или Pongs). Для санузлов с нормальной вентиляцией Descor допустим — уточняйте у замерщика.' },
-  { q: 'Сколько стоит установка потолка Descor в Иркутске?', a: 'Цена начинается от 319 ₽/м² с монтажом. Итоговая стоимость зависит от площади помещения, конфигурации и дополнительных работ (светильники, парящая ниша). Точную сумму рассчитает замерщик при бесплатном выезде на дом.' },
-]
-const seoLinks = [
-  { to: '/catalog/brendy/natyazhnye-potolki-clipso', label: 'Потолки Clipso (Франция)' },
-  { to: '/catalog/faktury/tkanevye-natyazhnye-potolki', label: 'Тканевые натяжные потолки' },
-  { to: '/catalog/brendy', label: 'Все бренды' },
 ]
 function maskPhone(e: Event) {
   const input = e.target as HTMLInputElement

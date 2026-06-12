@@ -16,8 +16,8 @@
           </p>
           <div class="cp-hero__price-badge" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
             <meta itemprop="priceCurrency" content="RUB"/>
-            <meta itemprop="price" :content="String(item.price)"/>
-            от <strong>{{ item.price }} ₽/м²</strong> — монтаж включён
+            <meta itemprop="price" :content="String(price)"/>
+            от <strong>{{ price }} ₽/м²</strong> — монтаж включён
           </div>
           <form class="cp-hero__form" @submit.prevent="submitHero">
             <input v-model="formName" class="cp-inp" type="text" placeholder="Ваше имя"/>
@@ -59,7 +59,7 @@
             <div class="cp-aside-card">
               <div class="cp-aside-card__title">Вызвать замерщика</div>
               <p class="cp-aside-card__desc">Замерщик приедет бесплатно, покажет образцы, рассчитает стоимость и оформит договор</p>
-              <div class="cp-aside-price">от <strong>{{ item.price }} ₽</strong><span>/м²</span></div>
+              <div class="cp-aside-price">от <strong>{{ price }} ₽</strong><span>/м²</span></div>
               <ul class="cp-aside-list">
                 <li v-for="i in asideItems" :key="i"><Icon name="lucide:check-circle" size="14" class="cp-check"/>{{ i }}</li>
               </ul>
@@ -108,7 +108,7 @@
             </div>
           </div>
         </div>
-        <div class="cp-works-more" v-if="gallery.length > visibleWorksCount">
+        <div class="cp-works-more" v-if="worksWithPrice.length > visibleWorksCount">
           <button class="cp-more-btn" @click="visibleWorksCount += 4">
             <Icon name="lucide:chevron-down" size="16"/>Смотреть ещё
           </button>
@@ -151,15 +151,7 @@
           <div class="cp-pretitle cp-pretitle--dark">Выгодные условия</div>
           <h2 class="cp-h2 cp-h2--center">Акции и скидки на гипоаллергенные потолки</h2>
         </div>
-        <div class="cp-promo-grid">
-          <div class="cp-promo-card" v-for="p in promos" :key="p.title">
-            <div class="cp-promo-card__icon"><Icon :name="p.icon" size="24"/></div>
-            <div class="cp-promo-card__title">{{ p.title }}</div>
-            <div class="cp-promo-card__desc">{{ p.desc }}</div>
-            <div class="cp-promo-card__date">{{ p.date }}</div>
-            <button class="nav-btn cp-promo-card__btn" @click="callbackOpen = true">Оставить заявку</button>
-          </div>
-        </div>
+        <CpPromoCards @callback="callbackOpen = true" />
       </div>
     </section>
 
@@ -253,17 +245,30 @@
       </Transition>
     </Teleport>
 
-    <ModalCallback v-model="callbackOpen"/>
+    <ModalCallback v-model="callbackOpen" :initial-name="formName" :initial-phone="formPhone" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { faktury } from '~/data/catalog'
-import { catalogGallery } from '~/data/gallery'
+import type { GalleryItem } from '~/data/gallery'
+import { usePageContent, usePageGallery, usePagePortfolio } from '~/composables/usePageContent'
+import { useCatalogPrices } from '~/composables/useCatalogPrices'
+
+// Данные страницы из pagesInfo.ts + перезаписи из админки
+const _content = await usePageContent('gipoallergennye-natyazhnye-potolki')
+const faqItems = ref(_content.faqItems ?? [])
+const advantages = ref(_content.advantages ?? [])
+const seoLinks = ref(_content.seoLinks ?? [])
+
+// Галерея из админки (дополнительные фото)
+const gallery = ref(await usePageGallery('gipoallergennye-natyazhnye-potolki'))
+const portfolio = ref(await usePagePortfolio('gipoallergennye-natyazhnye-potolki'))
+const _prices = await useCatalogPrices()
+const price = computed(() => _prices.value?.['gipoallergennye'] ?? item.price)
 
 const item = faktury.find(f => f.id === 'hypo')!
-const gallery = catalogGallery['gipoallergennye-natyazhnye-potolki'] ?? []
-const worksWithPrice = gallery.filter(g => g.price)
+const worksWithPrice = portfolio.value.filter(g => g.price)
 
 useHead({
   title: 'Гипоаллергенные натяжные потолки в Иркутске — от 279 ₽/м² | ПроПотолок',
@@ -285,7 +290,7 @@ useHead({
         brand: { '@type': 'Brand', name: 'ПроПотолок' },
         offers: {
           '@type': 'Offer',
-          price: item.price,
+          price: price.value,
           priceCurrency: 'RUB',
           availability: 'https://schema.org/InStock',
           seller: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' } },
@@ -318,21 +323,6 @@ const asideItems = [
   'Работаем в выходные',
 ]
 
-const advantages = [
-  { title: 'Без токсичных веществ',         desc: 'Нет толуола, хлора, фенола. Материал не выделяет летучих органических соединений.' },
-  { title: 'Антистатическая поверхность',    desc: 'Не притягивает пыль — важный фактор для аллергиков и людей с астмой.' },
-  { title: 'Сертифицированы для детских',    desc: 'Допущены в детские сады, школы, детские комнаты и медицинские учреждения.' },
-  { title: 'Монтаж без нагрева',             desc: 'Тканевые полотна не нагреваются — нет испарений при установке. Въезжать можно сразу.' },
-  { title: 'Дышащий материал',               desc: 'Пропускает воздух — нет конденсата и плесени за полотном.' },
-  { title: 'Долговечность',                  desc: 'Не выцветают, не деформируются, служат 30+ лет без замены.' },
-]
-
-const promos = [
-  { icon: 'lucide:gift',       title: '3-й потолок в подарок',       desc: 'При заказе от 3 помещений — одно монтируем бесплатно. Акция действует при одновременном заказе.',    date: 'Акция действует' },
-  { icon: 'lucide:percent',    title: '-10% пенсионерам и новосёлам', desc: 'Скидка 10% при предъявлении пенсионного удостоверения или договора купли-продажи квартиры.',      date: 'Постоянная скидка' },
-  { icon: 'lucide:credit-card', title: 'Рассрочка 0% до 3 мес.',     desc: 'Оформим рассрочку без переплаты. Первый взнос 0%. Монтаж — в тот же день. Документы — на месте.', date: 'Без переплаты' },
-]
-
 const whyCards = [
   { icon: 'lucide:leaf',         title: '100% без запаха',          desc: 'Полотна гипоаллергенны, проверены Роспотребнадзором. Установлены в детских садах и школах Иркутска.' },
   { icon: 'lucide:badge-check',  title: 'Сертификаты',              desc: 'На все фактуры, светильники и расходники предоставим сертификаты соответствия по запросу.' },
@@ -340,22 +330,6 @@ const whyCards = [
   { icon: 'lucide:globe',        title: 'Европейские материалы',    desc: 'MSD, Bauf (Германия), Descor, Clipso — премиальные полотна всегда в наличии на складе.' },
   { icon: 'lucide:banknote',     title: 'Без предоплаты',           desc: 'Оплата после монтажа и вашей приёмки. Наличными, картой или безналом.' },
   { icon: 'lucide:hammer',       title: 'Безопасный монтаж',        desc: 'Метод холодного натяжения — без нагрева, без пыли, без необходимости выносить мебель.' },
-]
-
-const faqItems = [
-  { q: 'Какие натяжные потолки считаются гипоаллергенными?', a: 'Тканевые полотна из полиэстера без ПВХ: Clipso, Descor, Teqtum. Они не содержат толуола, хлора и фенола, не выделяют летучих органических соединений и имеют санитарно-эпидемиологические заключения.' },
-  { q: 'Можно ли ставить обычный ПВХ-потолок аллергику?',    a: 'Качественные ПВХ-потолки от проверенных брендов (MSD, Bauf) с маркировкой A+ безопасны после монтажа. Но для максимальной уверенности — выбирайте тканевые гипоаллергенные варианты.' },
-  { q: 'Как ухаживать за гипоаллергенным потолком?',         a: 'Антистатическое покрытие не притягивает пыль, поэтому уход минимален. При необходимости — мягкая влажная тряпка без химических средств.' },
-  { q: 'Подходят ли гипоаллергенные потолки для детской?',   a: 'Идеально. Clipso и Descor сертифицированы для детских учреждений. Тканевое полотно без ПВХ — безопасно для детей любого возраста, включая новорождённых.' },
-  { q: 'Сколько стоят гипоаллергенные потолки в Иркутске?',  a: 'От 279 ₽/м² с монтажом. Зависит от бренда и площади. Точный расчёт после бесплатного замера.' },
-]
-
-const seoLinks = [
-  { to: '/catalog/faktury/tkanevye-natyazhnye-potolki',             label: 'Тканевые натяжные потолки' },
-  { to: '/catalog/brendy/natyazhnye-potolki-clipso',                label: 'Потолки Clipso' },
-  { to: '/catalog/brendy/natyazhnye-potolki-descor',                label: 'Потолки Descor' },
-  { to: '/catalog/po-pomescheniyu/natyazhnye-potolki-v-detskoy',    label: 'Потолки в детской' },
-  { to: '/catalog/faktury',                                         label: 'Все фактуры' },
 ]
 
 function fmt(n: number) { return n.toLocaleString('ru-RU') }

@@ -9,8 +9,8 @@
           <h1 class="cp-hero__title" itemprop="name">Натяжные потолки LumFer в&nbsp;Иркутске</h1>
           <p class="cp-hero__price">Акция: <span>3-й потолок в подарок!</span> Гарантия 12 лет.<br>Монтаж за 1 день. Без предоплаты.</p>
           <div class="cp-hero__price-badge" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-            <meta itemprop="priceCurrency" content="RUB"/><meta itemprop="price" :content="String(item.price)"/>
-            от <strong>{{ item.price }} ₽/м²</strong> — монтаж включён
+            <meta itemprop="priceCurrency" content="RUB"/><meta itemprop="price" :content="String(price)"/>
+            от <strong>{{ price }} ₽/м²</strong> — монтаж включён
           </div>
           <form class="cp-hero__form" @submit.prevent="callbackOpen = true">
             <input v-model="formName" class="cp-inp" type="text" placeholder="Ваше имя"/>
@@ -47,7 +47,7 @@
             <div class="cp-aside-card">
               <div class="cp-aside-card__title">Вызвать замерщика</div>
               <p class="cp-aside-card__desc">Бесплатно привезём образцы LumFer, рассчитаем стоимость и оформим договор</p>
-              <div class="cp-aside-price">от <strong>{{ item.price }} ₽</strong><span>/м²</span></div>
+              <div class="cp-aside-price">от <strong>{{ price }} ₽</strong><span>/м²</span></div>
               <ul class="cp-aside-list">
                 <li v-for="i in asideItems" :key="i"><Icon name="lucide:check-circle" size="14" class="cp-check"/>{{ i }}</li>
               </ul>
@@ -192,17 +192,31 @@
       </Transition>
     </Teleport>
 
-    <ModalCallback v-model="callbackOpen"/>
+    <ModalCallback v-model="callbackOpen" :initial-name="formName" :initial-phone="formPhone" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { brendy } from '~/data/catalog'
-import { catalogGallery } from '~/data/gallery'
+import type { GalleryItem } from '~/data/gallery'
+import { usePageContent, usePageGallery, usePagePortfolio } from '~/composables/usePageContent'
+import { useCatalogPrices } from '~/composables/useCatalogPrices'
+
+// Данные страницы из pagesInfo.ts + перезаписи из админки
+const _content = await usePageContent('natyazhnye-potolki-lumfer')
+const faqItems = ref(_content.faqItems ?? [])
+const advantages = ref(_content.advantages ?? [])
+const seoLinks = ref(_content.seoLinks ?? [])
+
+// Галерея из админки (дополнительные фото)
+const gallery = ref(await usePageGallery('natyazhnye-potolki-lumfer'))
+const portfolio = ref(await usePagePortfolio('natyazhnye-potolki-lumfer'))
 const item = brendy.find(b => b.id === 'lumfer')!
+
+const _prices = await useCatalogPrices()
+const price = computed(() => _prices.value?.['base'] ?? item.price)
 const otherBrendy = brendy.map(b => ({ id: b.id, slug: b.slug, title: b.title }))
-const gallery = catalogGallery['natyazhnye-potolki-lumfer'] ?? []
-const worksWithPrice = gallery.filter(g => g.price)
+const worksWithPrice = portfolio.value.filter(g => g.price)
 const visibleWorksCount = ref(4)
 const visibleWorks = computed(() => worksWithPrice.slice(0, visibleWorksCount.value))
 function fmt(n: number) { return n.toLocaleString('ru-RU') }
@@ -224,14 +238,6 @@ const faqOpen = ref(-1)
 const formName = ref('')
 const formPhone = ref('')
 const asideItems = ['Бесплатный замер на дому', 'Монтаж включён в цену', 'Гарантия 12 лет по договору', 'Оплата после монтажа', 'Работаем в выходные']
-const advantages = [
-  { title: 'Двухслойная конструкция', desc: 'Намного прочнее однослойных аналогов. Не рвётся, не деформируется, служит десятилетиями.' },
-  { title: 'Непрозрачный', desc: 'Чёрный внутренний слой полностью скрывает коммуникации, крепления и темные пятна базового потолка.' },
-  { title: 'Не вибрирует', desc: 'Толщина 32 мм обеспечивает жёсткость полотна — нет шелеста и колебаний при сквозняках.' },
-  { title: 'Не воспламеняется', desc: 'Полотно не горит и не выделяет токсичных веществ при нагреве. Безопасно для жилых помещений.' },
-  { title: 'Идеально для подсветки', desc: 'Монтируйте любые светильники — люстры, треки, LED — внутренняя часть не будет видна сквозь полотно.' },
-  { title: 'Немецкое производство', desc: 'Ferico GBR — немецкая компания с многолетней репутацией в производстве высококачественных полотен.' },
-]
 const whyCards = [
   { icon: 'lucide:layers', title: 'Двухслойное полотно', desc: 'Уникальная конструкция из двух слоёв — значительно прочнее любых однослойных аналогов на рынке.' },
   { icon: 'lucide:eye-off', title: 'Полная непрозрачность', desc: 'Чёрный внутренний слой исключает просвечивание крепежа, проводки и коммуникаций.' },
@@ -239,19 +245,6 @@ const whyCards = [
   { icon: 'lucide:flame', title: 'Не горит', desc: 'LumFer не воспламеняется и не выделяет токсинов при нагреве — важно для пожарной безопасности.' },
   { icon: 'lucide:banknote', title: 'Без предоплаты', desc: 'Оплата только после монтажа и приёмки. Наличными, картой или безналом.' },
   { icon: 'lucide:flag', title: 'Германия, Ferico GBR', desc: 'Производитель с немецкой репутацией. Стабильное качество, подтверждённое сертификатами.' },
-]
-const faqItems = [
-  { q: 'В чём главное отличие LumFer от обычных полотен?', a: 'LumFer — двухслойное полотно толщиной 32 мм с чёрным внутренним слоем. Оно не просвечивает, не вибрирует на сквозняках и значительно прочнее стандартных однослойных ПВХ-плёнок. Идеально для помещений с точечными светильниками.' },
-  { q: 'Почему LumFer лучше для комнат с подсветкой?', a: 'Чёрный внутренний слой полностью непрозрачен — со стороны помещения не видно ни держателей светильников, ни проводки, ни тёмных пятен базового потолка. Это особенно важно при установке трековых систем и точечных светильников.' },
-  { q: 'LumFer не шумит при сквозняках?', a: 'Именно. Толщина 32 мм обеспечивает достаточную жёсткость полотна. В отличие от тонких и дешёвых аналогов, LumFer не вибрирует и не шелестит даже при открытых окнах.' },
-  { q: 'Можно ли использовать галогенные лампы с LumFer?', a: 'Да. Чёрный внутренний слой исключает любое просвечивание — галогенные лампы, LED, любые светильники монтируются без ограничений. Внутренняя часть крепления не будет видна сквозь полотно.' },
-  { q: 'Сколько стоит LumFer по сравнению с обычными полотнами?', a: 'LumFer дороже стандартных полотен на 50–100 ₽/м², но эта разница оправдана: прочность, непрозрачность и отсутствие вибраций — это то, за что платят один раз, а получают на десятилетия.' },
-]
-const seoLinks = [
-  { to: '/catalog/brendy/natyazhnye-potolki-bauf', label: 'Потолки Bauf (Германия)' },
-  { to: '/catalog/brendy/natyazhnye-potolki-pongs', label: 'Потолки Pongs (Германия)' },
-  { to: '/catalog/vidy/natyazhnye-potolki-s-podsvetkoy', label: 'Потолки с подсветкой' },
-  { to: '/catalog/brendy', label: 'Все бренды' },
 ]
 function maskPhone(e: Event) {
   const input = e.target as HTMLInputElement

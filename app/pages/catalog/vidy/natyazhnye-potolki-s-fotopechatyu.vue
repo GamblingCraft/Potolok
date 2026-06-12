@@ -9,8 +9,8 @@
           <h1 class="cp-hero__title" itemprop="name">Натяжные потолки с фотопечатью в&nbsp;Иркутске</h1>
           <p class="cp-hero__price">Акция: <span>3-й потолок в подарок!</span> Гарантия 12 лет.<br>Потолки без запаха. Монтаж за 1 день. Без предоплаты.</p>
           <div class="cp-hero__price-badge" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-            <meta itemprop="priceCurrency" content="RUB"/><meta itemprop="price" :content="String(159 + item.extra)"/>
-            от <strong>{{ 159 + item.extra }} ₽/м²</strong> — монтаж включён
+            <meta itemprop="priceCurrency" content="RUB"/><meta itemprop="price" :content="String(price)"/>
+            от <strong>{{ price }} ₽/м²</strong> — монтаж включён
           </div>
           <form class="cp-hero__form" @submit.prevent="submitHero">
             <input v-model="formName" class="cp-inp" type="text" placeholder="Ваше имя"/>
@@ -42,8 +42,8 @@
             <div class="cp-aside-card">
               <div class="cp-aside-card__title">Вызвать замерщика</div>
               <p class="cp-aside-card__desc">Замерщик приедет бесплатно, покажет образцы, рассчитает стоимость и оформит договор</p>
-              <div class="cp-aside-price">от <strong>{{ 159 + item.extra }} ₽</strong><span>/м²</span></div>
-              <div class="cp-aside-extra">+{{ item.extra }} ₽/м² за технологию</div>
+              <div class="cp-aside-price">от <strong>{{ price }} ₽</strong><span>/м²</span></div>
+              <div class="cp-aside-extra">+{{ priceExtra }} ₽/м² за технологию</div>
               <ul class="cp-aside-list">
                 <li v-for="i in asideItems" :key="i"><Icon name="lucide:check-circle" size="14" class="cp-check"/>{{ i }}</li>
               </ul>
@@ -88,7 +88,7 @@
             </div>
           </div>
         </div>
-        <div class="cp-works-more" v-if="gallery.length > visibleWorksCount">
+        <div class="cp-works-more" v-if="worksWithPrice.length > visibleWorksCount">
           <button class="cp-more-btn" @click="visibleWorksCount += 4"><Icon name="lucide:chevron-down" size="16"/>Смотреть ещё</button>
         </div>
       </div>
@@ -127,15 +127,7 @@
           <div class="cp-pretitle cp-pretitle--dark">Выгодные условия</div>
           <h2 class="cp-h2 cp-h2--center">Акции и скидки на потолки с фотопечатью</h2>
         </div>
-        <div class="cp-promo-grid">
-          <div class="cp-promo-card" v-for="p in promos" :key="p.title">
-            <div class="cp-promo-card__icon"><Icon :name="p.icon" size="24"/></div>
-            <div class="cp-promo-card__title">{{ p.title }}</div>
-            <div class="cp-promo-card__desc">{{ p.desc }}</div>
-            <div class="cp-promo-card__date">{{ p.date }}</div>
-            <button class="nav-btn cp-promo-card__btn" @click="callbackOpen = true">Оставить заявку</button>
-          </div>
-        </div>
+        <CpPromoCards @callback="callbackOpen = true" />
       </div>
     </section>
 
@@ -215,17 +207,31 @@
         </div>
       </Transition>
     </Teleport>
-    <ModalCallback v-model="callbackOpen"/>
+    <ModalCallback v-model="callbackOpen" :initial-name="formName" :initial-phone="formPhone" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { vidy } from '~/data/catalog'
-import { catalogGallery } from '~/data/gallery'
+import type { GalleryItem } from '~/data/gallery'
+import { usePageContent, usePageGallery, usePagePortfolio } from '~/composables/usePageContent'
+import { useCatalogPrices } from '~/composables/useCatalogPrices'
+
+// Данные страницы из pagesInfo.ts + перезаписи из админки
+const _content = await usePageContent('natyazhnye-potolki-s-fotopechatyu')
+const faqItems = ref(_content.faqItems ?? [])
+const advantages = ref(_content.advantages ?? [])
+const seoLinks = ref(_content.seoLinks ?? [])
+
+// Галерея из админки (дополнительные фото)
+const gallery = ref(await usePageGallery('natyazhnye-potolki-s-fotopechatyu'))
+const portfolio = ref(await usePagePortfolio('natyazhnye-potolki-s-fotopechatyu'))
+const _prices = await useCatalogPrices()
+const price = computed(() => _prices.value?.['fotopechat'] ?? 550)
+const priceExtra = computed(() => price.value - (_prices.value?.['base'] ?? 159))
 
 const item = vidy.find(v => v.id === 'photo')!
-const gallery = catalogGallery['natyazhnye-potolki-s-fotopechatyu'] ?? []
-const worksWithPrice = gallery.filter(g => g.price)
+const worksWithPrice = portfolio.value.filter(g => g.price)
 const otherVidy = vidy.filter(v => v.id !== 'base').map(v => ({ id: v.id, slug: v.slug, title: v.title }))
 
 useHead({
@@ -237,7 +243,7 @@ useHead({
     { property: 'og:image', content: item.img },
     { property: 'og:type', content: 'product' },
   ],
-  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'Product', name: 'Натяжные потолки с фотопечатью', description: 'Натяжные потолки с фотопечатью — любой рисунок, УФ-печать, 500+ принтов. Монтаж в Иркутске.', brand: { '@type': 'Brand', name: 'ПроПотолок' }, offers: { '@type': 'Offer', price: 559, priceCurrency: 'RUB', availability: 'https://schema.org/InStock', seller: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' } } } }) }],
+  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'Product', name: 'Натяжные потолки с фотопечатью', description: 'Натяжные потолки с фотопечатью — любой рисунок, УФ-печать, 500+ принтов. Монтаж в Иркутске.', brand: { '@type': 'Brand', name: 'ПроПотолок' }, offers: { '@type': 'Offer', price: price.value, priceCurrency: 'RUB', availability: 'https://schema.org/InStock', seller: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' } } } }) }],
 })
 
 const callbackOpen = ref(false)
@@ -249,19 +255,6 @@ const lightbox = reactive({ open: false, img: '', title: '' })
 const visibleWorks = computed(() => worksWithPrice.slice(0, visibleWorksCount.value))
 function openLightbox(img: string, title: string) { lightbox.img = img; lightbox.title = title; lightbox.open = true }
 const asideItems = ['Бесплатный замер на дому', 'Монтаж включён в цену', 'Гарантия 12 лет по договору', 'Оплата после монтажа', 'Работаем в выходные']
-const advantages = [
-  { title: 'Любой рисунок',              desc: 'Сотни готовых принтов или ваше изображение — без ограничений по тематике.' },
-  { title: 'УФ-печать высокого разрешения', desc: 'Чёткое изображение на любой площади без размытости и пикселизации.' },
-  { title: 'Не выцветает',               desc: 'Чернила стойкие к UV-излучению — рисунок сохраняется на весь срок службы потолка.' },
-  { title: 'Гипоаллергенные чернила',    desc: 'Без запаха после монтажа — безопасно для детей и аллергиков.' },
-  { title: 'Совместимо со споттами',     desc: 'Отверстия под светильники вырезаются с учётом рисунка.' },
-  { title: 'Матовый и тканевый',         desc: 'Фотопечать применяется на матовых ПВХ и тканевых полотнах.' },
-]
-const promos = [
-  { icon: 'lucide:gift',        title: '3-й потолок в подарок',        desc: 'При заказе от 3 помещений — одно монтируем бесплатно. Акция действует при одновременном заказе.',    date: 'Акция действует' },
-  { icon: 'lucide:percent',     title: '-10% пенсионерам и новосёлам', desc: 'Скидка 10% при предъявлении пенсионного удостоверения или договора купли-продажи квартиры.',      date: 'Постоянная скидка' },
-  { icon: 'lucide:credit-card', title: 'Рассрочка 0% до 3 мес.',      desc: 'Оформим рассрочку без переплаты. Первый взнос 0%. Монтаж — в тот же день. Документы — на месте.', date: 'Без переплаты' },
-]
 const whyCards = [
   { icon: 'lucide:leaf',         title: '100% без запаха',       desc: 'Полотна гипоаллергенны, проверены Роспотребнадзором. Установлены в детских садах и школах Иркутска.' },
   { icon: 'lucide:badge-check',  title: 'Сертификаты',           desc: 'На все фактуры, светильники и расходники предоставим сертификаты соответствия по запросу.' },
@@ -269,18 +262,6 @@ const whyCards = [
   { icon: 'lucide:globe',        title: 'Европейские материалы', desc: 'MSD, Bauf (Германия), Descor, Clipso — премиальные полотна всегда в наличии на складе.' },
   { icon: 'lucide:banknote',     title: 'Без предоплаты',        desc: 'Оплата после монтажа и вашей приёмки. Наличными, картой или безналом.' },
   { icon: 'lucide:hammer',       title: 'Безопасный монтаж',     desc: 'Метод холодного натяжения — без нагрева, без пыли, без необходимости выносить мебель.' },
-]
-const faqItems = [
-  { q: 'Какое разрешение нужно для фотопечати?',          a: 'Минимум 3000×3000 пикселей для качественной печати. Если у вас нет изображения нужного разрешения — выберите принт из нашего каталога из 500+ вариантов.' },
-  { q: 'На каком полотне делается фотопечать?',           a: 'На матовом ПВХ и тканевом полотне. На глянцевом фотопечать не применяется — изображение теряет чёткость из-за отражений.' },
-  { q: 'Можно ли напечатать любое изображение?',          a: 'Да — любое изображение, которое вы пришлёте с достаточным разрешением. Исключение: изображения с нарушением авторских прав.' },
-  { q: 'Сохранятся ли цвета фотопечати со временем?',     a: 'Да. Чернила для УФ-печати стойкие к выгоранию. Рисунок сохраняет насыщенность цвета на весь срок службы потолка — 25–30 лет.' },
-  { q: 'Сколько стоит потолок с фотопечатью?',            a: 'От 559 ₽/м² с монтажом. Стоимость зависит от сложности изображения и площади. Точный расчёт после замера.' },
-]
-const seoLinks = [
-  { to: '/catalog/vidy',    label: 'Все технологии' },
-  { to: '/catalog/faktury', label: 'Фактуры потолков' },
-  { to: '/kalkulyator',     label: 'Калькулятор стоимости' },
 ]
 function fmt(n: number) { return n.toLocaleString('ru-RU') }
 function maskPhone(e: Event) {

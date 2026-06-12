@@ -192,7 +192,7 @@
                 </div>
                 <div class="calc-result__row calc-result__row--sub">
                   <span>Полотно + монтаж</span>
-                  <span>{{ fmt(Math.round(roomArea(room) * ((currentTexture?.price ?? 159) + (currentTexture?.mountPrice ?? 0)))) }} ₽</span>
+                  <span>{{ fmt(Math.round(roomArea(room) * ((currentTexture?.price ?? (_prices.value?.["base"] ?? 159)) + (currentTexture?.mountPrice ?? 0)))) }} ₽</span>
                 </div>
                 <div v-if="(currentView?.extra ?? 0) > 0" class="calc-result__row calc-result__row--sub">
                   <span>{{ currentView?.name }}</span>
@@ -280,13 +280,32 @@
 
 <script setup lang="ts">
 import { faktury, vidy as vidyData, tsveta as tsvetaData, extraWorks } from '~/data/catalog'
-import { activePromoCodes } from '~/data/promo'
+import { promoCodes as defaultCodes, type PromoCode } from '~/data/promotions'
+import { useCatalogPrices } from '~/composables/useCatalogPrices'
+
+const _prices = await useCatalogPrices()
+const { data: codesData } = await useAsyncData<PromoCode[]>(
+  'calc-promo-codes',
+  () => $fetch<PromoCode[]>('/api/cms/promo-codes'),
+  { default: () => defaultCodes },
+)
+const activePromoCodes = computed(() => (codesData.value ?? defaultCodes).filter(c => c.active))
 
 let _id = 0
 
-/* ── Справочники (из catalog.ts) ── */
-const textures = faktury.map(f => ({ id: f.id, name: f.title, price: f.price, mountPrice: f.mountPrice, img: f.img }))
-const views    = vidyData.map(v => ({ id: v.id, name: v.title, extra: v.extra ?? 0, img: v.img }))
+/* ── Справочники (из catalog.ts) с ценами из админки ── */
+const textures = computed(() => faktury.map(f => ({
+  id: f.id,
+  name: f.title,
+  price: _prices.value?.[f.catalogKey] ?? f.price,
+  mountPrice: f.mountPrice,
+  img: f.img,
+})))
+const views = computed(() => vidyData.map(v => {
+  const base = _prices.value?.['base'] ?? 159
+  const total = _prices.value?.[v.catalogKey ?? ''] ?? (base + (v.extra ?? 0))
+  return { id: v.id, name: v.title, extra: total - base, img: v.img }
+}))
 const colors   = tsvetaData.map(c => ({ id: c.id, name: c.title, hex: c.hex, extra: c.extra ?? 0 }))
 const extras   = extraWorks
 const roomTypes = [
@@ -333,7 +352,7 @@ const sent = ref(false)
 const foundPromo = computed(() => {
   const code = promoCode.value.trim().toUpperCase()
   if (!code) return null
-  return activePromoCodes.find(p => p.code.toUpperCase() === code) ?? undefined
+  return activePromoCodes.value.find(p => p.code.toUpperCase() === code) ?? undefined
 })
 
 const promoStatus = computed<'empty' | 'valid' | 'invalid'>(() => {
@@ -343,8 +362,8 @@ const promoStatus = computed<'empty' | 'valid' | 'invalid'>(() => {
 })
 
 /* ── Helpers ── */
-const currentTexture = computed(() => textures.find(t => t.id === sel.texture))
-const currentView    = computed(() => views.find(v => v.id === sel.view))
+const currentTexture = computed(() => textures.value.find(t => t.id === sel.texture))
+const currentView    = computed(() => views.value.find(v => v.id === sel.view))
 
 function roomArea(r: any) { return +(r.l * r.w).toFixed(1) }
 function getRoomIcon(type: string) { return roomTypes.find(r => r.id === type)?.icon ?? 'lucide:home' }
@@ -356,7 +375,7 @@ function roomExtrasTotal(r: any) {
 }
 
 function roomCost(r: any) {
-  const priceM2 = (currentTexture.value?.price ?? 159)
+  const priceM2 = (currentTexture.value?.price ?? (_prices.value?.["base"] ?? 159))
     + (currentTexture.value?.mountPrice ?? 0)
     + (currentView.value?.extra ?? 0)
     + getRoomColorExtra(r)
@@ -364,7 +383,7 @@ function roomCost(r: any) {
 }
 
 const totalArea = computed(() => +rooms.reduce((s, r) => s + roomArea(r), 0).toFixed(1))
-const costBase  = computed(() => Math.round(totalArea.value * ((currentTexture.value?.price ?? 159) + (currentTexture.value?.mountPrice ?? 0))))
+const costBase  = computed(() => Math.round(totalArea.value * ((currentTexture.value?.price ?? (_prices.value?.["base"] ?? 159)) + (currentTexture.value?.mountPrice ?? 0))))
 const costView  = computed(() => Math.round(totalArea.value * (currentView.value?.extra ?? 0)))
 const total     = computed(() => rooms.reduce((s, r) => s + roomCost(r), 0))
 
@@ -390,8 +409,25 @@ function maskPhone(e: Event) {
   input.value = r; return r
 }
 
-function submitCalc() {
+async function submitCalc() {
   sent.value = true
+  const details = [
+    `Фактура: ${currentTexture.value?.name ?? sel.texture}`,
+    `Вид: ${currentView.value?.name ?? sel.view}`,
+    `Площадь: ${totalArea.value} м²`,
+    `Ориентировочная стоимость: ${(costBase.value + costView.value).toLocaleString('ru')} ₽`,
+  ].join('\n')
+  try {
+    await $fetch('/api/requests', {
+      method: 'POST',
+      body: {
+        name: formName.value,
+        phone: formPhone.value,
+        message: details,
+        source: 'Калькулятор',
+      },
+    })
+  } catch {}
   setTimeout(() => { sent.value = false; formName.value = ''; formPhone.value = '' }, 3000)
 }
 </script>

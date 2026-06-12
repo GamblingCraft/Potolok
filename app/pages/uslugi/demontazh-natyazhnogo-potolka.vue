@@ -155,13 +155,19 @@
       </div>
     </section>
 
-    <ModalCallback v-model="callbackOpen"/>
+    <ModalCallback v-model="callbackOpen" :initial-name="formName" :initial-phone="formPhone" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { site } from '~/data/site'
 import { services } from '~/data/services'
+import { usePageContent } from '~/composables/usePageContent'
+
+// Данные страницы из pagesInfo.ts + перезаписи из админки
+const _content = await usePageContent('demontazh-natyazhnogo-potolka')
+const faqItems = ref(_content.faqItems ?? [])
+const seoLinks = ref(_content.seoLinks ?? [])
 const service = services.find(s => s.slug === 'demontazh-natyazhnogo-potolka')!
 
 useHead({
@@ -219,21 +225,6 @@ const whyCards = [
   { icon: 'lucide:banknote',     title: 'Честная цена',              desc: 'От 80 ₽/м², минимальный заказ 1 500 ₽. Итоговая стоимость фиксируется до начала работ.' },
   { icon: 'lucide:refresh-cw',   title: 'Сразу монтируем новый',     desc: 'Сделаем демонтаж и сразу установим новый потолок. При заказе монтажа — демонтаж со скидкой.' },
 ]
-const faqItems = [
-  { q: 'Сколько стоит демонтаж натяжного потолка?', a: 'Стоимость от 80 ₽/м², минимальный заказ 1 500 ₽. Цена зависит от площади, конфигурации и производителя. Окончательная стоимость фиксируется в договоре перед началом работ.' },
-  { q: 'Можно ли сохранить профиль при демонтаже?', a: 'Да, если профиль (багет) в хорошем состоянии — снимаем только полотно, профиль сохраняем. Это дешевле, а при последующей установке нового полотна не нужно повторно монтировать багет.' },
-  { q: 'Повредите ли вы стены при демонтаже?', a: 'Нет. Наши мастера используют специальный инструмент и технологии безопасного снятия. Стены, откосы и скрытые коммуникации остаются нетронутыми.' },
-  { q: 'Входит ли вывоз мусора в стоимость?', a: 'Да, вывоз строительных отходов уже включён в стоимость. Мы забираем снятое полотно, багет и упаковочный материал — помещение остаётся чистым.' },
-  { q: 'Можно ли заказать демонтаж с последующим монтажом нового потолка?', a: 'Да, и это выгоднее! При заказе демонтажа и монтажа вместе — стоимость демонтажа снижается. Работаем в один день: сначала снимаем старый, затем устанавливаем новый потолок.' },
-]
-const seoLinks = [
-  { to: '/uslugi/montazh-natyazhnyh-potolkov',    label: 'Монтаж натяжных потолков' },
-  { to: '/uslugi/zamena-polotna',                 label: 'Замена полотна' },
-  { to: '/uslugi/peretyazhka-potolka',            label: 'Перетяжка потолка' },
-  { to: '/uslugi/remont-natyazhnogo-potolka',     label: 'Ремонт потолка' },
-  { to: '/uslugi/sliv-vody-s-natyazhnogo-potolka', label: 'Слив воды' },
-]
-
 function maskPhone(e: Event) {
   const input = e.target as HTMLInputElement
   let val = input.value.replace(/\D/g, '')

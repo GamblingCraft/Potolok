@@ -8,7 +8,7 @@
           <div class="ms-pretitle">Профиль остаётся</div>
           <h1 class="ms-hero__title" itemprop="name">Замена натяжного полотна в&nbsp;Иркутске</h1>
           <p class="ms-hero__price" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-            <meta itemprop="price" content="159"/><meta itemprop="priceCurrency" content="RUB"/><meta itemprop="availability" content="https://schema.org/InStock"/>
+            <meta itemprop="price" :content="String(_prices?.['base'] ?? 159)"/><meta itemprop="priceCurrency" content="RUB"/><meta itemprop="availability" content="https://schema.org/InStock"/>
             <strong>{{ service.price }}</strong> — профиль и конструкция сохраняются
           </p>
           <p class="ms-hero__desc" itemprop="description">{{ service.description }}</p>
@@ -168,13 +168,21 @@
         </div>
       </div>
     </section>
-    <ModalCallback v-model="callbackOpen"/>
+    <ModalCallback v-model="callbackOpen" :initial-name="formName" :initial-phone="formPhone" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { site } from '~/data/site'
 import { services } from '~/data/services'
+import { usePageContent } from '~/composables/usePageContent'
+import { useCatalogPrices } from '~/composables/useCatalogPrices'
+
+// Данные страницы из pagesInfo.ts + перезаписи из админки
+const _prices = await useCatalogPrices()
+const _content = await usePageContent('zamena-polotna')
+const faqItems = ref(_content.faqItems ?? [])
+const seoLinks = ref(_content.seoLinks ?? [])
 const service = services.find(s => s.slug === 'zamena-polotna')!
 
 useHead({
@@ -184,7 +192,7 @@ useHead({
     { property: 'og:title', content: 'Замена натяжного полотна в Иркутске | ПроПотолок' },
     { property: 'og:type', content: 'website' },
   ],
-  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'Service', name: 'Замена натяжного полотна', provider: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' }, telephone: '+73952000000' }, areaServed: { '@type': 'City', name: 'Иркутск' }, offers: { '@type': 'Offer', price: '159', priceCurrency: 'RUB', availability: 'https://schema.org/InStock' } }) }],
+  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'Service', name: 'Замена натяжного полотна', provider: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' }, telephone: '+73952000000' }, areaServed: { '@type': 'City', name: 'Иркутск' }, offers: { '@type': 'Offer', price: String(_prices.value?.["base"] ?? 159), priceCurrency: 'RUB', availability: 'https://schema.org/InStock' } }) }],
 })
 
 const callbackOpen = ref(false)
@@ -197,10 +205,10 @@ const heroFacts = [
   { icon: 'lucide:palette',      text: '80+ цветов и фактур' },
   { icon: 'lucide:clock',        text: '2–5 часов работы' },
   { icon: 'lucide:shield-check', text: 'Гарантия 12 лет' },
-  { icon: 'lucide:banknote',     text: 'От 159 ₽/м²' },
+  { icon: 'lucide:banknote',     text: 'От ' + (_prices.value?.['base'] ?? 159) + ' ₽/м²' },
 ]
 const heroNums = [
-  { val: '159 ₽',  label: 'от, за м²' },
+  { val: (_prices.value?.['base'] ?? 159) + ' ₽',  label: 'от, за м²' },
   { val: '2–5 ч',  label: 'время замены' },
   { val: '80+',    label: 'вариантов полотна' },
   { val: '12 лет', label: 'гарантия' },
@@ -240,21 +248,6 @@ const whyCards = [
   { icon: 'lucide:badge-check',  title: 'Любой профиль',           desc: 'Устанавливаем новое полотно в профиль любого производителя без замены конструкции.' },
   { icon: 'lucide:trash-2',      title: 'Вывозим старое полотно',  desc: 'Забираем снятое полотно и упаковку — помещение остаётся чистым.' },
 ]
-const faqItems = [
-  { q: 'Что дешевле — замена полотна или новый монтаж?', a: 'Замена полотна значительно дешевле, так как конструкция и профиль уже есть. Вы платите только за новое полотно и работу по его установке. Экономия составляет до 40% по сравнению с полным монтажом с нуля.' },
-  { q: 'Можно ли поставить новое полотно в старый профиль другого производителя?', a: 'Да, в большинстве случаев наше полотно совместимо со стандартным профилем любого производителя. Мастер проверит совместимость при осмотре. В редких случаях потребуется замена участка профиля.' },
-  { q: 'Сколько времени занимает замена полотна?', a: 'Замена полотна в стандартной комнате занимает 2–3 часа. Квартира из 3 комнат — за 1 день. На время короче, чем новый монтаж, так как подготовительные работы уже не нужны.' },
-  { q: 'Можно ли при замене выбрать другую фактуру или цвет?', a: 'Да, при замене вы можете выбрать любую фактуру и цвет из нашего каталога. Замерщик привезёт полную коллекцию образцов.' },
-  { q: 'Нужно ли убирать мебель для замены полотна?', a: 'Нет. Работаем методом холодного натяжения без тепловой пушки. Мебель двигать не нужно — накроем защитной плёнкой.' },
-]
-const seoLinks = [
-  { to: '/uslugi/peretyazhka-potolka',           label: 'Перетяжка потолка' },
-  { to: '/uslugi/remont-natyazhnogo-potolka',    label: 'Ремонт потолка' },
-  { to: '/uslugi/demontazh-natyazhnogo-potolka', label: 'Демонтаж потолка' },
-  { to: '/uslugi/montazh-natyazhnyh-potolkov',   label: 'Монтаж натяжных потолков' },
-  { to: '/uslugi/sliv-vody-s-natyazhnogo-potolka', label: 'Слив воды с потолка' },
-]
-
 function maskPhone(e: Event) {
   const input = e.target as HTMLInputElement
   let val = input.value.replace(/\D/g, '')

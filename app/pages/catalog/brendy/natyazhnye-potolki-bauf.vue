@@ -9,8 +9,8 @@
           <h1 class="cp-hero__title" itemprop="name">Натяжные потолки Bauf в&nbsp;Иркутске</h1>
           <p class="cp-hero__price">Акция: <span>3-й потолок в подарок!</span> Гарантия 12 лет.<br>Монтаж за 1 день. Без предоплаты.</p>
           <div class="cp-hero__price-badge" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-            <meta itemprop="priceCurrency" content="RUB"/><meta itemprop="price" :content="String(item.price)"/>
-            от <strong>{{ item.price }} ₽/м²</strong> — монтаж включён
+            <meta itemprop="priceCurrency" content="RUB"/><meta itemprop="price" :content="String(price)"/>
+            от <strong>{{ price }} ₽/м²</strong> — монтаж включён
           </div>
           <form class="cp-hero__form" @submit.prevent="callbackOpen = true">
             <input v-model="formName" class="cp-inp" type="text" placeholder="Ваше имя"/>
@@ -47,7 +47,7 @@
             <div class="cp-aside-card">
               <div class="cp-aside-card__title">Вызвать замерщика</div>
               <p class="cp-aside-card__desc">Бесплатно привезём образцы Bauf, рассчитаем стоимость и оформим договор</p>
-              <div class="cp-aside-price">от <strong>{{ item.price }} ₽</strong><span>/м²</span></div>
+              <div class="cp-aside-price">от <strong>{{ price }} ₽</strong><span>/м²</span></div>
               <ul class="cp-aside-list">
                 <li v-for="i in asideItems" :key="i"><Icon name="lucide:check-circle" size="14" class="cp-check"/>{{ i }}</li>
               </ul>
@@ -192,17 +192,31 @@
       </Transition>
     </Teleport>
 
-    <ModalCallback v-model="callbackOpen"/>
+    <ModalCallback v-model="callbackOpen" :initial-name="formName" :initial-phone="formPhone" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { brendy } from '~/data/catalog'
-import { catalogGallery } from '~/data/gallery'
+import type { GalleryItem } from '~/data/gallery'
+import { usePageContent, usePageGallery, usePagePortfolio } from '~/composables/usePageContent'
+import { useCatalogPrices } from '~/composables/useCatalogPrices'
+
+// Данные страницы из pagesInfo.ts + перезаписи из админки
+const _content = await usePageContent('natyazhnye-potolki-bauf')
+const faqItems = ref(_content.faqItems ?? [])
+const advantages = ref(_content.advantages ?? [])
+const seoLinks = ref(_content.seoLinks ?? [])
+
+// Галерея из админки (дополнительные фото)
+const gallery = ref(await usePageGallery('natyazhnye-potolki-bauf'))
+const portfolio = ref(await usePagePortfolio('natyazhnye-potolki-bauf'))
 const item = brendy.find(b => b.id === 'bauf')!
+
+const _prices = await useCatalogPrices()
+const price = computed(() => _prices.value?.['base'] ?? item.price)
 const otherBrendy = brendy.map(b => ({ id: b.id, slug: b.slug, title: b.title }))
-const gallery = catalogGallery['natyazhnye-potolki-bauf'] ?? []
-const worksWithPrice = gallery.filter(g => g.price)
+const worksWithPrice = portfolio.value.filter(g => g.price)
 const visibleWorksCount = ref(4)
 const visibleWorks = computed(() => worksWithPrice.slice(0, visibleWorksCount.value))
 function fmt(n: number) { return n.toLocaleString('ru-RU') }
@@ -224,14 +238,6 @@ const faqOpen = ref(-1)
 const formName = ref('')
 const formPhone = ref('')
 const asideItems = ['Бесплатный замер на дому', 'Монтаж включён в цену', 'Гарантия 12 лет по договору', 'Оплата после монтажа', 'Работаем в выходные']
-const advantages = [
-  { title: 'Экологический класс A+', desc: 'Наивысший класс экологичности. Воздух в помещении с потолком Bauf абсолютно чист.' },
-  { title: '4 сертификата безопасности', desc: 'Независимые международные сертификаты подтверждают отсутствие токсичных веществ.' },
-  { title: 'Влагостойкость', desc: 'Специальная пропитка обеспечивает высокую влагостойкость — подходит для ванных и бассейнов.' },
-  { title: 'Для детских комнат', desc: 'Одобрен к применению в помещениях для детей — проверено на 178 вредных веществ.' },
-  { title: 'Немецкие технологии', desc: 'Производство по стандартам Германии гарантирует стабильное качество каждого рулона.' },
-  { title: 'Доступная цена', desc: 'Немецкое качество по цене доступного сегмента. Монтаж включён без скрытых доплат.' },
-]
 const whyCards = [
   { icon: 'lucide:leaf', title: 'Класс A+ — без токсинов', desc: 'Полотно проверено на 178 вредных веществ. Безопасно для детей, аллергиков и пожилых.' },
   { icon: 'lucide:badge-check', title: '4 сертификата качества', desc: 'Международные сертификаты экологичности, безопасности и термоустойчивости.' },
@@ -239,20 +245,6 @@ const whyCards = [
   { icon: 'lucide:droplets', title: 'Влагостойкое', desc: 'Специальная пропитка — подходит для ванных, кухонь, бассейнов. Удерживает 100 л/м².' },
   { icon: 'lucide:banknote', title: 'Без предоплаты', desc: 'Оплата после монтажа и вашей приёмки. Наличными, картой или безналом.' },
   { icon: 'lucide:flag', title: 'Немецкие технологии', desc: 'Производство по стандартам Германии — стабильное качество в каждом рулоне.' },
-]
-const faqItems = [
-  { q: 'Чем отличается Bauf от более дешёвых аналогов?', a: 'Bauf производится по немецким технологиям с использованием безопасного сырья. Маркировка A+ означает нулевые выбросы летучих органических соединений. Дешёвые аналоги часто имеют токсичный пластификатор DOP и неприятный запах после монтажа.' },
-  { q: 'Можно ли устанавливать Bauf в ванной комнате?', a: 'Да. Полотно Bauf имеет специальную влагозащитную пропитку. Водонепроницаемо, удерживает до 100 л/м² при затоплении. Рекомендуется для ванных комнат, санузлов и даже бассейнов.' },
-  { q: 'Безопасен ли Bauf для детей?', a: 'Абсолютно. Bauf имеет маркировку A+ и проверен на 178 вредных веществ — ни одного не обнаружено. Полотна разрешены для применения в детских садах, школах и медицинских учреждениях.' },
-  { q: 'Сколько стоит монтаж потолка Bauf в Иркутске?', a: 'Монтаж включён в стоимость полотна. Итоговая цена зависит от площади помещения и дополнительных работ (светильники, парящая ниша). Точную стоимость рассчитает замерщик при бесплатном выезде.' },
-  { q: 'Где производят Bauf?', a: 'Завод находится в Китае, но производство ведётся строго по немецким технологиям. Это позволяет поставлять полотна в Россию в обход санкций без потери качества. Все партии проходят входной контроль на нашем складе.' },
-]
-const seoLinks = [
-  { to: '/catalog/brendy/natyazhnye-potolki-msd', label: 'Потолки MSD' },
-  { to: '/catalog/brendy/natyazhnye-potolki-pongs', label: 'Потолки Pongs (Германия)' },
-  { to: '/catalog/brendy/natyazhnye-potolki-lumfer', label: 'Потолки LumFer (Германия)' },
-  { to: '/catalog/faktury/matovye-natyazhnye-potolki', label: 'Матовые потолки' },
-  { to: '/catalog/brendy', label: 'Все бренды' },
 ]
 function maskPhone(e: Event) {
   const input = e.target as HTMLInputElement

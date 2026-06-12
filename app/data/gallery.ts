@@ -486,4 +486,82 @@ export const catalogGallery: Record<string, GalleryItem[]> = {
     { id: 6, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', title: 'Cerutti в загородном доме', area: 45, room: 'Дом', price: 44100 },
   ],
 
+  // ─────────────────────────────────────────
+  // ЦВЕТА
+  // ─────────────────────────────────────────
+
+  'belye-natyazhnye-potolki': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', title: 'Белый матовый в гостиной', area: 22, room: 'Гостиная', price: 8360, details: ['Матовое белое', 'Споты: 8 шт', 'Углы: 4 шт', 'MSD'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&q=80', title: 'Белый глянец в спальне', area: 16, room: 'Спальня', price: 6720, details: ['Глянцевое белое', 'Споты: 6 шт', 'Без шва', 'Bauf'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80', title: 'Белый сатиновый на кухне', area: 12, room: 'Кухня', price: 5040, details: ['Сатиновое белое', 'Споты: 9 шт', 'IP44', 'Углы: 4 шт'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80', title: 'Белый парящий в зале', area: 30, room: 'Зал', price: 16200, details: ['Парящая ниша: 12 м', 'LED тёплая', 'Матовое белое', 'Без шва'] },
+    { id: 5, img: 'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=800&q=80', title: 'Белый тканевый в детской', area: 13, room: 'Детская', price: 9750, details: ['Clipso без ПВХ', 'Гипоаллергенный', 'Споты: 5 шт', 'Белый'] },
+    { id: 6, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', title: 'Белый матовый в прихожей', area: 8, room: 'Прихожая', price: 2880, details: ['Матовое белое', 'Споты: 5 шт', 'Углы: 6 шт', 'Профиль: 11 м'] },
+    { id: 7, img: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=800&q=80', title: 'Белый глянец в ванной', area: 7, room: 'Ванная', price: 3570, details: ['Глянцевое белое', 'IP44 споты: 5 шт', 'Влагостойкий', 'Углы: 4 шт'] },
+    { id: 8, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80', title: 'Белый двухуровневый', area: 26, room: 'Гостиная', price: 14040, details: ['2 уровня', 'LED-ниша', 'Матовое белое', 'Споты: 12 шт'] },
+  ],
+
+  'chernye-natyazhnye-potolki': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', title: 'Чёрный матовый в гостиной', area: 24, room: 'Гостиная', price: 9600, details: ['Матовое чёрное', 'Споты: 10 шт', 'LED тёплая', 'MSD'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80', title: 'Чёрный глянец в спальне', area: 18, room: 'Спальня', price: 7920, details: ['Глянцевое чёрное', 'Споты: 7 шт', 'Без шва', 'Эффект неба'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=800&q=80', title: 'Чёрно-белый двухуровневый', area: 22, room: 'Гостиная', price: 18700, details: ['2 уровня', 'Чёрный + белый', 'LED-ниша', 'Споты: 10 шт'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&q=80', title: 'Чёрный с подсветкой в зале', area: 30, room: 'Зал', price: 15300, details: ['Матовое чёрное', 'LED RGB ниша', 'Споты: 12 шт', 'Без шва'] },
+    { id: 5, img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80', title: 'Чёрный матовый в кабинете', area: 20, room: 'Кабинет', price: 7800, details: ['Матовое чёрное', 'Трековые: 2 шт', 'LED 4000К', 'Без шва'] },
+    { id: 6, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', title: 'Чёрный звёздное небо', area: 18, room: 'Спальня', price: 27000, details: ['300 оптоволокон', 'Мерцание', 'Чёрное тканевое', 'Диммер'] },
+  ],
+
+  'serye-natyazhnye-potolki': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&q=80', title: 'Серый матовый в гостиной', area: 24, room: 'Гостиная', price: 9120, details: ['Матовое серое', 'Споты: 10 шт', 'Углы: 4 шт', 'MSD'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=800&q=80', title: 'Серый сатиновый в спальне', area: 18, room: 'Спальня', price: 7020, details: ['Сатиновое серое', 'Споты: 6 шт', 'Диммер', 'Углы: 4 шт'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', title: 'Серый теневой', area: 26, room: 'Гостиная', price: 14560, details: ['Теневой профиль', 'Серое матовое', 'LED ниша', 'Споты: 10 шт'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', title: 'Серый в офисе open-space', area: 50, room: 'Офис', price: 18000, details: ['Матовое серое', 'Трековые: 5 шт', 'LED 4000К', 'Без шва'] },
+    { id: 5, img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&q=80', title: 'Серый двухуровневый', area: 22, room: 'Гостиная', price: 17600, details: ['2 уровня', 'Серый + белый', 'LED-ниша', 'Матовое'] },
+    { id: 6, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80', title: 'Серый с точечным освещением', area: 14, room: 'Кухня', price: 5460, details: ['Матовое серое', 'Споты: 10 шт', 'IP44', 'Лофт-стиль'] },
+  ],
+
+  'bezhevye-natyazhnye-potolki': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80', title: 'Бежевый сатиновый в гостиной', area: 24, room: 'Гостиная', price: 9360, details: ['Сатиновое бежевое', 'Споты: 9 шт', 'Углы: 4 шт', 'Тёплый свет'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&q=80', title: 'Бежевый матовый в спальне', area: 18, room: 'Спальня', price: 6660, details: ['Матовое бежевое', 'Споты: 6 шт', 'Диммер', 'Классика'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', title: 'Бежевый с LED в зале', area: 28, room: 'Зал', price: 15120, details: ['Матовое бежевое', 'LED-ниша: 10 м', 'Споты: 12 шт', 'Тёплая'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&q=80', title: 'Бежевый тканевый в спальне', area: 16, room: 'Спальня', price: 12000, details: ['Tканевое бежевое', 'Clipso', 'Без шва', 'Диммер'] },
+    { id: 5, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', title: 'Бежевый в классическом интерьере', area: 22, room: 'Гостиная', price: 8580, details: ['Сатиновое бежевое', 'Споты: 8 шт', 'Без шва', 'MSD'] },
+    { id: 6, img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80', title: 'Бежевый на кухне', area: 12, room: 'Кухня', price: 4680, details: ['Матовое бежевое', 'Споты: 9 шт', 'IP44', 'Углы: 4 шт'] },
+  ],
+
+  'cvetnye-natyazhnye-potolki': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80', title: 'Голубой в детской', area: 13, room: 'Детская', price: 9100, details: ['Clipso голубой', 'Без ПВХ', 'Без шва', 'Споты: 5 шт'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80', title: 'RGB подсветка в детской', area: 14, room: 'Детская', price: 7420, details: ['LED RGB', 'Споты: 6 шт', 'Тканевое', 'Пульт'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80', title: 'Зелёный в детской', area: 12, room: 'Детская', price: 8400, details: ['Матовое зелёное', 'Споты: 5 шт', 'Без ПВХ', 'Тканевое'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&q=80', title: 'Синий цветной зал', area: 25, room: 'Гостиная', price: 11250, details: ['Матовое синее', 'Споты: 10 шт', 'Акцентный', 'MSD'] },
+    { id: 5, img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80', title: 'Фиолетовый в баре', area: 30, room: 'Бар', price: 16200, details: ['Матовое фиолетовое', 'LED RGB', 'Без шва', 'Атмосферный'] },
+    { id: 6, img: 'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=800&q=80', title: 'Цветные панели', area: 20, room: 'Студия', price: 11000, details: ['Многоцветный', 'Криволинейный', 'LED', 'Дизайн-проект'] },
+  ],
+
+  'zolotye-natyazhnye-potolki': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1600573472559-240e53e0e27a?w=800&q=80', title: 'Золотой глянец в гостиной', area: 28, room: 'Гостиная', price: 15120, details: ['Глянцевое золото', 'Споты: 12 шт', 'Хрустальная люстра', 'Классика'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80', title: 'Золотой в ресторане', area: 60, room: 'Ресторан', price: 34200, details: ['Глянцевое золото', 'Без шва', 'LED 3000К', 'Премиум'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80', title: 'Золотой двухуровневый', area: 26, room: 'Гостиная', price: 22100, details: ['2 уровня', 'Золото + белый', 'LED-ниша', 'Классический'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&q=80', title: 'Золотой в холле', area: 20, room: 'Холл', price: 10800, details: ['Глянцевое золото', 'Споты: 8 шт', 'Люстра', 'Представительский'] },
+    { id: 5, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', title: 'Золотой сатиновый в спальне', area: 18, room: 'Спальня', price: 9720, details: ['Сатиновое золото', 'Споты: 7 шт', 'Диммер', 'Люкс'] },
+    { id: 6, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', title: 'Золотой металлик', area: 22, room: 'Гостиная', price: 12540, details: ['Металлик золото', 'Споты: 9 шт', 'LED 3000К', 'Pongs Premium'] },
+  ],
+
+  'golubye-natyazhnye-potolki': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80', title: 'Голубой в детской', area: 14, room: 'Детская', price: 9100, details: ['Матовое голубое', 'Споты: 6 шт', 'Без ПВХ', 'Безопасный'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=800&q=80', title: 'Голубой тканевый', area: 12, room: 'Детская', price: 9000, details: ['Clipso голубой', 'Без ПВХ', 'Без шва', 'Споты: 5 шт'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=800&q=80', title: 'Голубой в ванной', area: 7, room: 'Ванная', price: 3570, details: ['Матовое голубое', 'IP44 споты: 4 шт', 'Влагостойкий', 'Морской'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&q=80', title: 'Голубой с подсветкой', area: 18, room: 'Спальня', price: 8640, details: ['LED тёплая', 'Матовое голубое', 'Диммер', 'Споты: 7 шт'] },
+    { id: 5, img: 'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=800&q=80', title: 'Небесно-голубой в студии', area: 28, room: 'Студия', price: 13440, details: ['Матовое голубое', 'Световые линии', 'LED', 'Без шва'] },
+    { id: 6, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=800&q=80', title: 'Голубой двухцветный', area: 16, room: 'Детская', price: 9600, details: ['Голубой + белый', 'LED-ниша', 'Тканевое', 'Диммер'] },
+  ],
+
+  'korichnevye-natyazhnye-potolki': [
+    { id: 1, img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80', title: 'Коричневый матовый в гостиной', area: 24, room: 'Гостиная', price: 9120, details: ['Матовое коричневое', 'Споты: 9 шт', 'Углы: 4 шт', 'Тёплый интерьер'] },
+    { id: 2, img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80', title: 'Коричневый под дерево', area: 18, room: 'Гостиная', price: 8280, details: ['Фактурное под дерево', 'Споты: 7 шт', 'Тёплый свет', 'Эко-стиль'] },
+    { id: 3, img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=800&q=80', title: 'Коричневый в кабинете', area: 20, room: 'Кабинет', price: 7800, details: ['Матовое коричневое', 'Трековые: 2 шт', 'LED 3000К', 'Строгий стиль'] },
+    { id: 4, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=800&q=80', title: 'Коричневый в ресторане', area: 55, room: 'Ресторан', price: 24750, details: ['Матовое тёмное', 'Без шва', 'LED тёплая', 'Атмосферный'] },
+    { id: 5, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80', title: 'Коричневый в частном доме', area: 30, room: 'Дом', price: 13500, details: ['Матовое коричневое', 'Споты: 10 шт', 'Тёплая LED', 'Без шва'] },
+    { id: 6, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=800&q=80', title: 'Двухцветный коричневый + белый', area: 26, room: 'Гостиная', price: 15600, details: ['2 уровня', 'Коричневый + белый', 'LED-ниша', 'Тёплый свет'] },
+  ],
+
 }

@@ -72,9 +72,20 @@
 </template>
 
 <script setup lang="ts">
-import { activePromoCodes } from '~/data/promo'
+import { promoCodes as defaultCodes, type PromoCode } from '~/data/promotions'
 
-const props = defineProps<{ modelValue: boolean }>()
+const { data: codesData } = await useAsyncData<PromoCode[]>(
+  'modal-promo-codes',
+  () => $fetch<PromoCode[]>('/api/cms/promo-codes'),
+  { default: () => defaultCodes },
+)
+const activePromoCodes = computed(() => (codesData.value ?? defaultCodes).filter(c => c.active))
+
+const props = defineProps<{
+  modelValue: boolean
+  initialName?: string
+  initialPhone?: string
+}>()
 defineEmits(['update:modelValue'])
 
 const name = ref('')
@@ -85,7 +96,7 @@ const sent = ref(false)
 const foundPromo = computed(() => {
   const code = promoCode.value.trim().toUpperCase()
   if (!code) return null
-  return activePromoCodes.find(p => p.code === code) ?? null
+  return activePromoCodes.value.find(p => p.code === code) ?? null
 })
 
 const promoStatus = computed<'empty' | 'valid' | 'invalid'>(() => {
@@ -108,8 +119,19 @@ function maskPhone(e: Event) {
   return result
 }
 
-function submit() {
+async function submit() {
   sent.value = true
+  try {
+    await $fetch('/api/requests', {
+      method: 'POST',
+      body: {
+        name: name.value,
+        phone: phone.value,
+        message: promoCode.value ? `Промокод: ${promoCode.value}` : '',
+        source: 'Обратный звонок',
+      },
+    })
+  } catch {}
   setTimeout(() => {
     sent.value = false
     name.value = ''
@@ -120,6 +142,10 @@ function submit() {
 
 watch(() => props.modelValue, (val) => {
   document.body.style.overflow = val ? 'hidden' : ''
+  if (val) {
+    if (props.initialName) name.value = props.initialName
+    if (props.initialPhone) phone.value = props.initialPhone
+  }
 })
 </script>
 

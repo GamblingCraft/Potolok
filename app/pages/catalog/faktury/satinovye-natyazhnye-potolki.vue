@@ -19,8 +19,8 @@
           </p>
           <div class="cp-hero__price-badge" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
             <meta itemprop="priceCurrency" content="RUB"/>
-            <meta itemprop="price" :content="String(item.price)"/>
-            от <strong>{{ item.price }} ₽/м²</strong> — монтаж включён
+            <meta itemprop="price" :content="String(price)"/>
+            от <strong>{{ price }} ₽/м²</strong> — монтаж включён
           </div>
           <form class="cp-hero__form" @submit.prevent="submitHero">
             <input v-model="formName" class="cp-inp" type="text" placeholder="Ваше имя"/>
@@ -67,7 +67,7 @@
             <div class="cp-aside-card">
               <div class="cp-aside-card__title">Вызвать замерщика</div>
               <p class="cp-aside-card__desc">Замерщик приедет бесплатно, покажет образцы, рассчитает стоимость и оформит договор</p>
-              <div class="cp-aside-price">от <strong>{{ item.price }} ₽</strong><span>/м²</span></div>
+              <div class="cp-aside-price">от <strong>{{ price }} ₽</strong><span>/м²</span></div>
               <ul class="cp-aside-list">
                 <li v-for="i in asideItems" :key="i"><Icon name="lucide:check-circle" size="14" class="cp-check"/>{{ i }}</li>
               </ul>
@@ -122,7 +122,7 @@
             </div>
           </div>
         </div>
-        <div class="cp-works-more" v-if="gallery.length > visibleWorksCount">
+        <div class="cp-works-more" v-if="worksWithPrice.length > visibleWorksCount">
           <button class="cp-more-btn" @click="visibleWorksCount += 4">
             <Icon name="lucide:chevron-down" size="16"/>Смотреть ещё
           </button>
@@ -180,15 +180,7 @@
           <div class="cp-pretitle cp-pretitle--dark">Выгодные условия</div>
           <h2 class="cp-h2 cp-h2--center">Акции и скидки на сатиновые потолки</h2>
         </div>
-        <div class="cp-promo-grid">
-          <div class="cp-promo-card" v-for="p in promos" :key="p.title">
-            <div class="cp-promo-card__icon"><Icon :name="p.icon" size="24"/></div>
-            <div class="cp-promo-card__title">{{ p.title }}</div>
-            <div class="cp-promo-card__desc">{{ p.desc }}</div>
-            <div class="cp-promo-card__date">{{ p.date }}</div>
-            <button class="nav-btn cp-promo-card__btn" @click="callbackOpen = true">Оставить заявку</button>
-          </div>
-        </div>
+        <CpPromoCards @callback="callbackOpen = true" />
       </div>
     </section>
 
@@ -299,18 +291,31 @@
       </Transition>
     </Teleport>
 
-    <ModalCallback v-model="callbackOpen"/>
+    <ModalCallback v-model="callbackOpen" :initial-name="formName" :initial-phone="formPhone" />
 
   </div>
 </template>
 
 <script setup lang="ts">
 import { faktury } from '~/data/catalog'
-import { catalogGallery } from '~/data/gallery'
+import type { GalleryItem } from '~/data/gallery'
+import { usePageContent, usePageGallery, usePagePortfolio } from '~/composables/usePageContent'
+import { useCatalogPrices } from '~/composables/useCatalogPrices'
+
+// Данные страницы из pagesInfo.ts + перезаписи из админки
+const _content = await usePageContent('satinovye-natyazhnye-potolki')
+const faqItems = ref(_content.faqItems ?? [])
+const advantages = ref(_content.advantages ?? [])
+const seoLinks = ref(_content.seoLinks ?? [])
+
+// Галерея из админки (дополнительные фото)
+const gallery = ref(await usePageGallery('satinovye-natyazhnye-potolki'))
+const portfolio = ref(await usePagePortfolio('satinovye-natyazhnye-potolki'))
+const _prices = await useCatalogPrices()
+const price = computed(() => _prices.value?.['satinovye'] ?? item.price)
 
 const item = faktury.find(f => f.id === 'sat')!
-const gallery = catalogGallery['satinovye-natyazhnye-potolki'] ?? []
-const worksWithPrice = gallery.filter(g => g.price)
+const worksWithPrice = portfolio.value.filter(g => g.price)
 
 useHead({
   title: 'Сатиновые натяжные потолки в Иркутске — от 189 ₽/м² | ПроПотолок',
@@ -332,7 +337,7 @@ useHead({
         brand: { '@type': 'Brand', name: 'ПроПотолок' },
         offers: {
           '@type': 'Offer',
-          price: item.price,
+          price: price.value,
           priceCurrency: 'RUB',
           availability: 'https://schema.org/InStock',
           seller: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' } },
@@ -367,21 +372,6 @@ const asideItems = [
   'Работаем в выходные',
 ]
 
-const advantages = [
-  { title: 'Мягкий шёлковый блеск',             desc: 'Поверхность красиво переливается в свете — без резкого зеркального отражения, свойственного глянцу.' },
-  { title: 'Универсальность',                    desc: 'Подходит для любых помещений и стилей — от классики до современного минимализма.' },
-  { title: 'Визуально увеличивает пространство', desc: 'Лёгкий блеск добавляет глубины и воздушности, визуально поднимая высоту потолка.' },
-  { title: '100+ оттенков',                      desc: 'Широкая палитра, включая белые, бежевые, серые и цветные оттенки.' },
-  { title: 'Водонепроницаемость',                desc: 'ПВХ-полотно не пропускает воду. Подходит для кухонь и ванных.' },
-  { title: 'Совместим с любым освещением',       desc: 'Отлично смотрится с точечными светильниками, трековыми системами и LED-подсветкой.' },
-]
-
-const promos = [
-  { icon: 'lucide:gift',       title: '3-й потолок в подарок',       desc: 'При заказе от 3 помещений — одно монтируем бесплатно. Акция действует при одновременном заказе.',    date: 'Акция действует' },
-  { icon: 'lucide:percent',    title: '-10% пенсионерам и новосёлам', desc: 'Скидка 10% при предъявлении пенсионного удостоверения или договора купли-продажи квартиры.',      date: 'Постоянная скидка' },
-  { icon: 'lucide:credit-card', title: 'Рассрочка 0% до 3 мес.',     desc: 'Оформим рассрочку без переплаты. Первый взнос 0%. Монтаж — в тот же день. Документы — на месте.', date: 'Без переплаты' },
-]
-
 const whyCards = [
   { icon: 'lucide:leaf',         title: '100% без запаха',          desc: 'Полотна гипоаллергенны, проверены Роспотребнадзором. Установлены в детских садах и школах Иркутска.' },
   { icon: 'lucide:badge-check',  title: 'Сертификаты',              desc: 'На все фактуры, светильники и расходники предоставим сертификаты соответствия по запросу.' },
@@ -389,22 +379,6 @@ const whyCards = [
   { icon: 'lucide:globe',        title: 'Европейские материалы',    desc: 'MSD, Bauf (Германия), Descor, Clipso — премиальные полотна всегда в наличии на складе.' },
   { icon: 'lucide:banknote',     title: 'Без предоплаты',           desc: 'Оплата после монтажа и вашей приёмки. Наличными, картой или безналом.' },
   { icon: 'lucide:hammer',       title: 'Безопасный монтаж',        desc: 'Метод холодного натяжения — без нагрева, без пыли, без необходимости выносить мебель.' },
-]
-
-const faqItems = [
-  { q: 'В чём отличие сатина от матового и глянцевого?', a: 'Матовый — полное отсутствие блеска. Глянцевый — зеркальное отражение. Сатин — между ними: мягкий шёлковый блеск без резких отражений. Универсальный вариант для большинства интерьеров.' },
-  { q: 'Подходит ли сатин для спальни?',                 a: 'Идеально. Мягкий переливающийся блеск создаёт атмосферу уюта. В сочетании с точечными светильниками или LED-лентой за карнизом — очень эффектно.' },
-  { q: 'Легко ли ухаживать за сатиновым потолком?',      a: 'Да. Протирайте мягкой влажной тряпкой без абразивных средств. Поверхность не притягивает пыль и долго остаётся чистой.' },
-  { q: 'Сколько цветов доступно в сатиновой фактуре?',   a: 'Более 100 оттенков. Замерщик привезёт полную коллекцию образцов — вы сможете оценить блеск при вашем освещении.' },
-  { q: 'Можно ли использовать сатин в ванной?',          a: 'Да, ПВХ-полотно водонепроницаемо. Сатиновый потолок отлично смотрится в ванной, добавляя пространству элегантности.' },
-]
-
-const seoLinks = [
-  { to: '/catalog/faktury/matovye-natyazhnye-potolki',    label: 'Матовые натяжные потолки' },
-  { to: '/catalog/faktury/glyancevye-natyazhnye-potolki', label: 'Глянцевые натяжные потолки' },
-  { to: '/catalog/faktury/tkanevye-natyazhnye-potolki',   label: 'Тканевые натяжные потолки' },
-  { to: '/catalog/vidy/paryashchie-natyazhnye-potolki',   label: 'Парящие потолки' },
-  { to: '/uslugi/montazh-natyazhnyh-potolkov',            label: 'Монтаж натяжных потолков' },
 ]
 
 function fmt(n: number) { return n.toLocaleString('ru-RU') }

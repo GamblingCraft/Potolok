@@ -280,6 +280,10 @@
 
 <script setup lang="ts">
 import { priceFaktury, priceVidy, extraWorks, packages, volumeDiscounts } from '~/data/prices'
+import { useCatalogPrices } from '~/composables/useCatalogPrices'
+
+const _prices = await useCatalogPrices()
+const basePrice = computed(() => _prices.value?.['base'] ?? 159)
 
 useHead({
   title: 'Цены на натяжные потолки в Иркутске — прайс-лист 2024 | ПроПотолок',
@@ -308,12 +312,12 @@ const heroBadges = [
   { icon: 'lucide:banknote',      text: 'Оплата после монтажа' },
 ]
 
-const heroStats = [
-  { val: 'от 159 ₽', label: 'минимальная цена за м²' },
+const heroStats = computed(() => [
+  { val: `от ${basePrice.value} ₽`, label: 'минимальная цена за м²' },
   { val: 'до 20%',   label: 'скидка за большой заказ' },
   { val: '0 ₽',      label: 'замер и монтаж' },
   { val: '12 лет',   label: 'гарантия по договору' },
-]
+])
 
 const examples = [
   {
@@ -396,8 +400,8 @@ const schemaOrg = computed(() => JSON.stringify({
   '@context': 'https://schema.org',
   '@type': 'PriceSpecification',
   name: 'Цены на натяжные потолки ПроПотолок',
-  description: 'Натяжные потолки в Иркутске от 159 ₽/м²',
-  price: '159',
+  description: `Натяжные потолки в Иркутске от ${basePrice.value} ₽/м²`,
+  price: String(basePrice.value),
   priceCurrency: 'RUB',
   eligibleRegion: { '@type': 'Place', name: 'Иркутск' },
 }))

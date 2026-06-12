@@ -71,7 +71,15 @@
 </template>
 
 <script setup lang="ts">
-import { tsveta } from '~/data/catalog'
+import { tsveta as _tsveta } from '~/data/catalog'
+import { useCatalogPrices } from '~/composables/useCatalogPrices'
+
+const _prices = await useCatalogPrices()
+
+const tsveta = computed(() => _tsveta.map(t => ({
+  ...t,
+  price: (_prices.value?.['base'] ?? 159) + t.extra,
+})))
 
 useHead({
   title: 'Натяжные потолки по цвету — белые, чёрные, цветные | ПроПотолок Иркутск',

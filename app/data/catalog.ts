@@ -73,6 +73,7 @@ export const BASE_PRICE = PRICES.matovye
 export const faktury = [
   {
     id: 'mat',
+    catalogKey: 'matovye',
     slug: '/catalog/faktury/matovye-natyazhnye-potolki',
     title: 'Матовые',
     price: BASE_PRICE,
@@ -82,6 +83,7 @@ export const faktury = [
   },
   {
     id: 'gly',
+    catalogKey: 'glyancevye',
     slug: '/catalog/faktury/glyancevye-natyazhnye-potolki',
     title: 'Глянцевые',
     price: PRICES.glyancevye,
@@ -91,6 +93,7 @@ export const faktury = [
   },
   {
     id: 'sat',
+    catalogKey: 'satinovye',
     slug: '/catalog/faktury/satinovye-natyazhnye-potolki',
     title: 'Сатиновые',
     price: PRICES.satinovye,
@@ -100,6 +103,7 @@ export const faktury = [
   },
   {
     id: 'tkan',
+    catalogKey: 'tkanevye',
     slug: '/catalog/faktury/tkanevye-natyazhnye-potolki',
     title: 'Тканевые',
     price: PRICES.tkanevye,
@@ -109,6 +113,7 @@ export const faktury = [
   },
   {
     id: 'fakt',
+    catalogKey: 'fakturnye',
     slug: '/catalog/faktury/fakturnye-natyazhnye-potolki',
     title: 'Фактурные',
     price: PRICES.fakturnye,
@@ -118,6 +123,7 @@ export const faktury = [
   },
   {
     id: 'bess',
+    catalogKey: 'besshovnye',
     slug: '/catalog/faktury/besshovnye-natyazhnye-potolki',
     title: 'Бесшовные',
     price: PRICES.besshovnye,
@@ -127,6 +133,7 @@ export const faktury = [
   },
   {
     id: 'hypo',
+    catalogKey: 'gipoallergennye',
     slug: '/catalog/faktury/gipoallergennye-natyazhnye-potolki',
     title: 'Гипоаллергенные',
     price: PRICES.gipoallergennye,
@@ -136,6 +143,7 @@ export const faktury = [
   },
   {
     id: 'fire',
+    catalogKey: 'negoryuchie',
     slug: '/catalog/faktury/negoryuchie-natyazhnye-potolki',
     title: 'Негорючие',
     price: PRICES.negoryuchie,
@@ -151,6 +159,7 @@ export const faktury = [
 export const vidy = [
   {
     id: 'base',
+    catalogKey: 'base',
     slug: '/catalog/faktury/matovye-natyazhnye-potolki',
     title: 'Обычный',
     extra: 0,
@@ -159,6 +168,7 @@ export const vidy = [
   },
   {
     id: 'pary',
+    catalogKey: 'paryashchie',
     slug: '/catalog/vidy/paryashchie-natyazhnye-potolki',
     title: 'Парящий',
     extra: PRICES.extra_paryashchie,
@@ -167,6 +177,7 @@ export const vidy = [
   },
   {
     id: 'light',
+    catalogKey: 'podsvetka',
     slug: '/catalog/vidy/natyazhnye-potolki-s-podsvetkoy',
     title: 'С подсветкой',
     extra: PRICES.extra_podsvetka,
@@ -175,6 +186,7 @@ export const vidy = [
   },
   {
     id: 'two',
+    catalogKey: 'dvuhuroven',
     slug: '/catalog/vidy/dvuhurovnevye-natyazhnye-potolki',
     title: 'Двухуровневый',
     extra: PRICES.extra_dvuhuroven,
@@ -183,6 +195,7 @@ export const vidy = [
   },
   {
     id: 'photo',
+    catalogKey: 'fotopechat',
     slug: '/catalog/vidy/natyazhnye-potolki-s-fotopechatyu',
     title: 'Фотопечать',
     extra: PRICES.extra_fotopechat,
@@ -191,6 +204,7 @@ export const vidy = [
   },
   {
     id: 'star',
+    catalogKey: 'zvezdnoe',
     slug: '/catalog/vidy/natyazhnye-potolki-zvezdnoe-nebo',
     title: 'Звёздное небо',
     extra: PRICES.extra_zvezdnoe,
@@ -199,6 +213,7 @@ export const vidy = [
   },
   {
     id: 'lines',
+    catalogKey: 'linii',
     slug: '/catalog/vidy/natyazhnye-potolki-so-svetovymi-liniyami',
     title: 'Световые линии',
     extra: PRICES.extra_linii,
@@ -207,6 +222,7 @@ export const vidy = [
   },
   {
     id: 'shadow',
+    catalogKey: 'tenevye',
     slug: '/catalog/vidy/tenevye-natyazhnye-potolki',
     title: 'Теневой',
     extra: PRICES.extra_tenevye,
@@ -215,6 +231,7 @@ export const vidy = [
   },
   {
     id: 'contour',
+    catalogKey: 'konturnye',
     slug: '/catalog/vidy/konturnye-natyazhnye-potolki',
     title: 'Контурный',
     extra: PRICES.extra_konturnye,
@@ -223,6 +240,7 @@ export const vidy = [
   },
   {
     id: 'many',
+    catalogKey: 'mnogourovenye',
     slug: '/catalog/vidy/mnogourovenye-natyazhnye-potolki',
     title: 'Многоуровневый',
     extra: PRICES.extra_mnogo,
@@ -231,6 +249,7 @@ export const vidy = [
   },
   {
     id: 'curve',
+    catalogKey: 'krivolinejnye',
     slug: '/catalog/vidy/krivolinejnye-natyazhnye-potolki',
     title: 'Криволинейный',
     extra: PRICES.extra_krivo,

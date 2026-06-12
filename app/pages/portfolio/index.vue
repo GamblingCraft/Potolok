@@ -16,7 +16,7 @@
             @click="activeTag = tag.id"
           >
             {{ tag.label }}
-            <span v-if="tag.id === 'all'" class="pf-filter__count">{{ portfolio.length }}</span>
+            <span v-if="tag.id === 'all'" class="pf-filter__count">{{ portfolio.value?.length }}</span>
             <span v-else-if="countByTag(tag.id) > 0" class="pf-filter__count">{{ countByTag(tag.id) }}</span>
           </button>
         </div>
@@ -158,7 +158,7 @@
 </template>
 
 <script setup lang="ts">
-import { portfolio, portfolioTags } from '~/data/portfolio'
+import { portfolio as defaultPortfolio, portfolioTags, type PortfolioItem } from '~/data/portfolio'
 
 useHead({
   title: 'Наши работы — примеры натяжных потолков в Иркутске | ПроПотолок',
@@ -167,24 +167,31 @@ useHead({
   ],
 })
 
+const { data: portfolioData } = await useAsyncData<PortfolioItem[]>(
+  'portfolio',
+  () => $fetch<PortfolioItem[]>('/api/cms/portfolio'),
+  { default: () => defaultPortfolio },
+)
+const portfolio = computed(() => portfolioData.value ?? defaultPortfolio)
+
 const activeTag = ref('all')
 const activePhoto = reactive<Record<number, number>>({})
 
 const filteredItems = computed(() =>
   activeTag.value === 'all'
-    ? portfolio
-    : portfolio.filter(item => item.tags.includes(activeTag.value))
+    ? portfolio.value
+    : portfolio.value.filter(item => item.tags.includes(activeTag.value))
 )
 
 function countByTag(tag: string) {
-  return portfolio.filter(i => i.tags.includes(tag)).length
+  return portfolio.value.filter(i => i.tags.includes(tag)).length
 }
 
-function prevPhoto(item: typeof portfolio[0]) {
+function prevPhoto(item: PortfolioItem) {
   const cur = activePhoto[item.id] ?? 0
   activePhoto[item.id] = cur === 0 ? item.photos.length - 1 : cur - 1
 }
-function nextPhoto(item: typeof portfolio[0]) {
+function nextPhoto(item: PortfolioItem) {
   const cur = activePhoto[item.id] ?? 0
   activePhoto[item.id] = cur === item.photos.length - 1 ? 0 : cur + 1
 }

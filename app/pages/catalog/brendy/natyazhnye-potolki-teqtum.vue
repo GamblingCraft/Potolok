@@ -9,8 +9,8 @@
           <h1 class="cp-hero__title" itemprop="name">Натяжные потолки Teqtum в&nbsp;Иркутске</h1>
           <p class="cp-hero__price">Акция: <span>3-й потолок в подарок!</span> Гарантия 12 лет.<br>Монтаж за 1 день. Без предоплаты.</p>
           <div class="cp-hero__price-badge" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-            <meta itemprop="priceCurrency" content="RUB"/><meta itemprop="price" :content="String(item.price)"/>
-            от <strong>{{ item.price }} ₽/м²</strong> — монтаж включён
+            <meta itemprop="priceCurrency" content="RUB"/><meta itemprop="price" :content="String(price)"/>
+            от <strong>{{ price }} ₽/м²</strong> — монтаж включён
           </div>
           <form class="cp-hero__form" @submit.prevent="callbackOpen = true">
             <input v-model="formName" class="cp-inp" type="text" placeholder="Ваше имя"/>
@@ -47,7 +47,7 @@
             <div class="cp-aside-card">
               <div class="cp-aside-card__title">Вызвать замерщика</div>
               <p class="cp-aside-card__desc">Бесплатно привезём образцы Teqtum, рассчитаем стоимость и оформим договор</p>
-              <div class="cp-aside-price">от <strong>{{ item.price }} ₽</strong><span>/м²</span></div>
+              <div class="cp-aside-price">от <strong>{{ price }} ₽</strong><span>/м²</span></div>
               <ul class="cp-aside-list">
                 <li v-for="i in asideItems" :key="i"><Icon name="lucide:check-circle" size="14" class="cp-check"/>{{ i }}</li>
               </ul>
@@ -192,17 +192,31 @@
       </Transition>
     </Teleport>
 
-    <ModalCallback v-model="callbackOpen"/>
+    <ModalCallback v-model="callbackOpen" :initial-name="formName" :initial-phone="formPhone" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { brendy } from '~/data/catalog'
-import { catalogGallery } from '~/data/gallery'
+import type { GalleryItem } from '~/data/gallery'
+import { usePageContent, usePageGallery, usePagePortfolio } from '~/composables/usePageContent'
+import { useCatalogPrices } from '~/composables/useCatalogPrices'
+
+// Данные страницы из pagesInfo.ts + перезаписи из админки
+const _content = await usePageContent('natyazhnye-potolki-teqtum')
+const faqItems = ref(_content.faqItems ?? [])
+const advantages = ref(_content.advantages ?? [])
+const seoLinks = ref(_content.seoLinks ?? [])
+
+// Галерея из админки (дополнительные фото)
+const gallery = ref(await usePageGallery('natyazhnye-potolki-teqtum'))
+const portfolio = ref(await usePagePortfolio('natyazhnye-potolki-teqtum'))
 const item = brendy.find(b => b.id === 'teqtum')!
+
+const _prices = await useCatalogPrices()
+const price = computed(() => _prices.value?.['base'] ?? item.price)
 const otherBrendy = brendy.map(b => ({ id: b.id, slug: b.slug, title: b.title }))
-const gallery = catalogGallery['natyazhnye-potolki-teqtum'] ?? []
-const worksWithPrice = gallery.filter(g => g.price)
+const worksWithPrice = portfolio.value.filter(g => g.price)
 const visibleWorksCount = ref(4)
 const visibleWorks = computed(() => worksWithPrice.slice(0, visibleWorksCount.value))
 function fmt(n: number) { return n.toLocaleString('ru-RU') }
@@ -224,14 +238,6 @@ const faqOpen = ref(-1)
 const formName = ref('')
 const formPhone = ref('')
 const asideItems = ['Бесплатный замер на дому', 'Монтаж включён в цену', 'Гарантия 12 лет по договору', 'Оплата после монтажа', 'Работаем в выходные']
-const advantages = [
-  { title: 'Сертификат МЧС России', desc: 'Единственная плёнка на российском рынке, прошедшая полные противопожарные испытания МЧС.' },
-  { title: 'Без формальдегидов', desc: 'Полное отсутствие токсичных летучих веществ — подходит для людей с аллергиями и детей.' },
-  { title: 'Для медучреждений', desc: 'Разрешён в операционных, санаториях, детских садах — высочайшие стандарты безопасности.' },
-  { title: 'Европейские сертификаты', desc: 'Соответствие европейским нормам: экологичность, термоустойчивость, механическая прочность.' },
-  { title: 'Широкий температурный диапазон', desc: 'Сохраняет все характеристики от -10°C до +70°C — подходит для любых условий.' },
-  { title: 'Долговечность', desc: 'Расчётный срок службы — более 25 лет. Не желтеет, не теряет форму со временем.' },
-]
 const whyCards = [
   { icon: 'lucide:shield-check', title: 'Сертификат МЧС', desc: 'Наивысшие противопожарные характеристики. Единственное полотно с испытаниями МЧС России.' },
   { icon: 'lucide:leaf', title: 'Без токсинов', desc: 'Нет формальдегидов, нет летучих органических соединений. Абсолютно чистый воздух.' },
@@ -239,20 +245,6 @@ const whyCards = [
   { icon: 'lucide:hospital', title: 'Для соцобъектов', desc: 'Разрешён в больницах, операционных, детских садах и школах — официально.' },
   { icon: 'lucide:banknote', title: 'Без предоплаты', desc: 'Оплата после монтажа и вашей приёмки. Наличными, картой или безналом.' },
   { icon: 'lucide:thermometer', title: 'Термоустойчивость', desc: 'Рабочий диапазон от -10°C до +70°C. Подходит для кухонь, бань и неотапливаемых помещений.' },
-]
-const faqItems = [
-  { q: 'Почему Teqtum считается самым безопасным натяжным потолком?', a: 'Teqtum — единственная плёнка, прошедшая официальные испытания МЧС России. Это значит, что при пожаре материал не воспламеняется, не распространяет огонь и не выделяет токсичных газов. Дополнительно — отсутствие формальдегидов и других летучих токсинов при обычных условиях эксплуатации.' },
-  { q: 'Можно ли устанавливать Teqtum в детской комнате?', a: 'Да, и именно для детских комнат Teqtum рекомендуется в первую очередь. Официально разрешён к применению в детских садах и школах. Полное отсутствие токсичных выбросов делает его безопасным для детей даже при длительном пребывании в помещении.' },
-  { q: 'Чем Teqtum отличается от других брендов ПВХ?', a: 'Главное отличие — сертификат МЧС России, которого нет ни у одного другого производителя натяжных потолков. Плюс полное отсутствие формальдегидов, что подтверждено европейскими лабораториями. Teqtum соответствует требованиям для государственных учреждений с особыми нормами безопасности.' },
-  { q: 'Подходит ли Teqtum для ванной и кухни?', a: 'Да. Teqtum водонепроницаем и устойчив к перепадам температур и влажности. Широкий рабочий диапазон температур от -10 до +70°C делает его пригодным для кухонь, ванных и даже отапливаемых балконов.' },
-  { q: 'Сколько стоит монтаж Teqtum в Иркутске?', a: 'Монтаж включён в стоимость полотна. Стоимость от 279 ₽/м². Точная цена зависит от площади и дополнительных работ. Позвоните нам или вызовите замерщика — всё рассчитаем бесплатно.' },
-]
-const seoLinks = [
-  { to: '/catalog/brendy/natyazhnye-potolki-clipso', label: 'Потолки Clipso (Франция)' },
-  { to: '/catalog/brendy/natyazhnye-potolki-descor', label: 'Потолки Descor (тканевые)' },
-  { to: '/catalog/faktury/gipoallergennye-natyazhnye-potolki', label: 'Гипоаллергенные потолки' },
-  { to: '/catalog/po-pomescheniyu/natyazhnye-potolki-v-detskoy', label: 'Потолки в детскую' },
-  { to: '/catalog/brendy', label: 'Все бренды' },
 ]
 function maskPhone(e: Event) {
   const input = e.target as HTMLInputElement

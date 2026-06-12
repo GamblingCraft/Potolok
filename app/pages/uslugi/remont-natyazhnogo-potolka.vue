@@ -170,13 +170,19 @@
       </div>
     </section>
 
-    <ModalCallback v-model="callbackOpen"/>
+    <ModalCallback v-model="callbackOpen" :initial-name="formName" :initial-phone="formPhone" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { site } from '~/data/site'
 import { services } from '~/data/services'
+import { usePageContent } from '~/composables/usePageContent'
+
+// Данные страницы из pagesInfo.ts + перезаписи из админки
+const _content = await usePageContent('remont-natyazhnogo-potolka')
+const faqItems = ref(_content.faqItems ?? [])
+const seoLinks = ref(_content.seoLinks ?? [])
 const service = services.find(s => s.slug === 'remont-natyazhnogo-potolka')!
 
 useHead({
@@ -242,21 +248,6 @@ const whyCards = [
   { icon: 'lucide:banknote',     title: 'Честная цена',           desc: 'Стоимость озвучивается после диагностики и до начала работ. Скрытых доплат нет.' },
   { icon: 'lucide:refresh-cw',   title: 'Если нельзя починить',   desc: 'Если ремонт нецелесообразен — предложим замену полотна по выгодной цене.' },
 ]
-const faqItems = [
-  { q: 'Можно ли отремонтировать провисший натяжной потолок?', a: 'В большинстве случаев — да. Если полотно отошло от профиля, мастер повторно заправит его. Если причина в деформации профиля — заменит участок. Стоимость такого ремонта значительно ниже полной замены.' },
-  { q: 'Можно ли починить порванный натяжной потолок?', a: 'Небольшой прокол или порез можно устранить с помощью специальной заплатки — место повреждения становится практически незаметным. При крупном разрыве производится замена полотна: конструкция сохраняется, меняется только плёнка.' },
-  { q: 'Ремонтируете ли вы потолки других компаний?', a: 'Да. Ремонтируем потолки любых производителей и любых компаний-установщиков. Для диагностики достаточно осмотра на месте.' },
-  { q: 'Сколько стоит ремонт натяжного потолка?', a: 'От 500 ₽ в зависимости от вида и сложности дефекта. Точную стоимость называем после бесплатной диагностики. Согласовываем цену до начала работ.' },
-  { q: 'Если потолок установлен у вас — ремонт бесплатный?', a: 'Если дефект возник в гарантийный период (12 лет) и по нашей вине — ремонт бесплатный. Отправьте фото дефекта, и мы организуем гарантийный выезд.' },
-]
-const seoLinks = [
-  { to: '/uslugi/zamena-polotna',                 label: 'Замена натяжного полотна' },
-  { to: '/uslugi/demontazh-natyazhnogo-potolka',  label: 'Демонтаж потолка' },
-  { to: '/uslugi/sliv-vody-s-natyazhnogo-potolka', label: 'Слив воды с потолка' },
-  { to: '/uslugi/montazh-natyazhnyh-potolkov',    label: 'Монтаж натяжных потолков' },
-  { to: '/uslugi/ustanovka-svetilnikov',          label: 'Установка светильников' },
-]
-
 function maskPhone(e: Event) {
   const input = e.target as HTMLInputElement
   let val = input.value.replace(/\D/g, '')

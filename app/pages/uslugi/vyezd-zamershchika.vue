@@ -220,7 +220,7 @@
       </div>
     </section>
 
-    <ModalCallback v-model="callbackOpen"/>
+    <ModalCallback v-model="callbackOpen" :initial-name="formName" :initial-phone="formPhone" />
 
   </div>
 </template>
@@ -228,6 +228,12 @@
 <script setup lang="ts">
 import { site } from '~/data/site'
 import { services } from '~/data/services'
+import { usePageContent } from '~/composables/usePageContent'
+
+// Данные страницы из pagesInfo.ts + перезаписи из админки
+const _content = await usePageContent('vyezd-zamershchika')
+const faqItems = ref(_content.faqItems ?? [])
+const seoLinks = ref(_content.seoLinks ?? [])
 
 const service = services.find(s => s.slug === 'vyezd-zamershchika')!
 
@@ -313,25 +319,6 @@ const whyCards = [
   { icon: 'lucide:badge-check',   title: 'Точность до миллиметра',          desc: 'Используем профессиональные лазерные дальномеры. Полотно изготавливается строго по вашим размерам.' },
   { icon: 'lucide:map-pin',       title: 'Весь Иркутск и область',          desc: 'Выезжаем во все районы города, в Шелехов, Ангарск и пригород без доплаты.' },
   { icon: 'lucide:users',         title: 'Опытные специалисты',             desc: 'Замерщики с опытом от 3 лет. Знают нюансы сложных помещений: низкие потолки, балки, ниши.' },
-]
-
-const faqItems = [
-  { q: 'Замер действительно бесплатный?', a: 'Да, выезд замерщика полностью бесплатен. Никаких скрытых платежей нет. Если вы решите не заказывать потолок — тоже ничего не платите.' },
-  { q: 'Как быстро приедет замерщик?', a: 'В большинстве случаев замерщик приезжает в день обращения. Принимаем заявки ежедневно с 8:00 до 20:00, включая выходные и праздники.' },
-  { q: 'Нужно ли что-то подготовить к приезду замерщика?', a: 'Ничего специально готовить не нужно. Убирать мебель тоже не требуется — наш специалист измеряет помещение в любом состоянии.' },
-  { q: 'Привезут ли образцы на замер?', a: 'Да. Замерщик привозит полную коллекцию образцов — более 80 цветов и все основные фактуры: матовые, глянцевые, сатиновые и тканевые полотна.' },
-  { q: 'Будет ли известна точная цена после замера?', a: 'Да. После замера специалист рассчитает точную стоимость прямо у вас дома с учётом площади, выбранной фактуры, цвета и дополнительных работ. Цена фиксируется в договоре.' },
-  { q: 'Работаете ли вы в пригороде Иркутска?', a: 'Выезжаем в Шелехов, Ангарск, Усолье-Сибирское и Иркутский район. Стоимость выезда за пределы Иркутска обсуждается индивидуально.' },
-]
-
-const seoLinks = [
-  { to: '/uslugi/montazh-natyazhnyh-potolkov',      label: 'Монтаж натяжных потолков' },
-  { to: '/uslugi/srochnyj-montazh-24-chasa',         label: 'Срочный монтаж за 24 часа' },
-  { to: '/uslugi/demontazh-natyazhnogo-potolka',     label: 'Демонтаж натяжного потолка' },
-  { to: '/uslugi/remont-natyazhnogo-potolka',        label: 'Ремонт натяжного потолка' },
-  { to: '/uslugi/sliv-vody-s-natyazhnogo-potolka',   label: 'Слив воды с потолка' },
-  { to: '/uslugi/zamena-polotna',                    label: 'Замена полотна' },
-  { to: '/uslugi/ustanovka-svetilnikov',             label: 'Установка светильников' },
 ]
 
 function maskPhone(e: Event) {

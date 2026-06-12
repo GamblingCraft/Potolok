@@ -9,8 +9,8 @@
           <h1 class="cp-hero__title" itemprop="name">Натяжные потолки Clipso в&nbsp;Иркутске</h1>
           <p class="cp-hero__price">Акция: <span>3-й потолок в подарок!</span> Гарантия 12 лет.<br>Монтаж за 1 день. Без предоплаты.</p>
           <div class="cp-hero__price-badge" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-            <meta itemprop="priceCurrency" content="RUB"/><meta itemprop="price" :content="String(item.price)"/>
-            от <strong>{{ item.price }} ₽/м²</strong> — монтаж включён
+            <meta itemprop="priceCurrency" content="RUB"/><meta itemprop="price" :content="String(price)"/>
+            от <strong>{{ price }} ₽/м²</strong> — монтаж включён
           </div>
           <form class="cp-hero__form" @submit.prevent="callbackOpen = true">
             <input v-model="formName" class="cp-inp" type="text" placeholder="Ваше имя"/>
@@ -47,7 +47,7 @@
             <div class="cp-aside-card">
               <div class="cp-aside-card__title">Вызвать замерщика</div>
               <p class="cp-aside-card__desc">Бесплатно привезём образцы Clipso, рассчитаем стоимость и оформим договор</p>
-              <div class="cp-aside-price">от <strong>{{ item.price }} ₽</strong><span>/м²</span></div>
+              <div class="cp-aside-price">от <strong>{{ price }} ₽</strong><span>/м²</span></div>
               <ul class="cp-aside-list">
                 <li v-for="i in asideItems" :key="i"><Icon name="lucide:check-circle" size="14" class="cp-check"/>{{ i }}</li>
               </ul>
@@ -192,17 +192,31 @@
       </Transition>
     </Teleport>
 
-    <ModalCallback v-model="callbackOpen"/>
+    <ModalCallback v-model="callbackOpen" :initial-name="formName" :initial-phone="formPhone" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { brendy } from '~/data/catalog'
-import { catalogGallery } from '~/data/gallery'
+import type { GalleryItem } from '~/data/gallery'
+import { usePageContent, usePageGallery, usePagePortfolio } from '~/composables/usePageContent'
+import { useCatalogPrices } from '~/composables/useCatalogPrices'
+
+// Данные страницы из pagesInfo.ts + перезаписи из админки
+const _content = await usePageContent('natyazhnye-potolki-clipso')
+const faqItems = ref(_content.faqItems ?? [])
+const advantages = ref(_content.advantages ?? [])
+const seoLinks = ref(_content.seoLinks ?? [])
+
+// Галерея из админки (дополнительные фото)
+const gallery = ref(await usePageGallery('natyazhnye-potolki-clipso'))
+const portfolio = ref(await usePagePortfolio('natyazhnye-potolki-clipso'))
 const item = brendy.find(b => b.id === 'clipso')!
+
+const _prices = await useCatalogPrices()
+const price = computed(() => _prices.value?.['base'] ?? item.price)
 const otherBrendy = brendy.map(b => ({ id: b.id, slug: b.slug, title: b.title }))
-const gallery = catalogGallery['natyazhnye-potolki-clipso'] ?? []
-const worksWithPrice = gallery.filter(g => g.price)
+const worksWithPrice = portfolio.value.filter(g => g.price)
 const visibleWorksCount = ref(4)
 const visibleWorks = computed(() => worksWithPrice.slice(0, visibleWorksCount.value))
 function fmt(n: number) { return n.toLocaleString('ru-RU') }
@@ -224,14 +238,6 @@ const faqOpen = ref(-1)
 const formName = ref('')
 const formPhone = ref('')
 const asideItems = ['Бесплатный замер на дому', 'Монтаж включён в цену', 'Гарантия 12 лет по договору', 'Оплата после монтажа', 'Работаем в выходные']
-const advantages = [
-  { title: 'Монтаж без нагрева', desc: 'Холодная технология установки — не нужна тепловая пушка, безопасно для мебели и отделки.' },
-  { title: 'Дышащее полотно (нет конденсата)', desc: 'Ткань пропускает воздух — исключает образование конденсата и сырости под потолком.' },
-  { title: 'Акустические варианты', desc: 'Специальные полотна с шумопоглощением для офисов, переговорных, домашних кинотеатров.' },
-  { title: 'Цветные с натуральными красителями', desc: 'Цветная гамма на основе натуральных красителей — без токсичных синтетических пигментов.' },
-  { title: 'Противопожарные стандарты', desc: 'Соответствует европейским и российским нормам пожарной безопасности.' },
-  { title: 'Франция — европейское качество', desc: 'Французское производство с многолетней историей и строгим контролем каждой партии.' },
-]
 const whyCards = [
   { icon: 'lucide:thermometer', title: 'Холодный монтаж', desc: 'Установка без тепловой пушки — не нагревает помещение, безопасно для всех типов отделки.' },
   { icon: 'lucide:wind', title: 'Дышащее полотно', desc: 'Пропускает воздух — нет конденсата, нет сырости, нет плесени под потолком.' },
@@ -239,19 +245,6 @@ const whyCards = [
   { icon: 'lucide:volume-2', title: 'Акустика', desc: 'Шумопоглощающие варианты для офисов, кинотеатров и переговорных комнат.' },
   { icon: 'lucide:banknote', title: 'Без предоплаты', desc: 'Оплата после монтажа и вашей приёмки. Наличными, картой или безналом.' },
   { icon: 'lucide:flag', title: 'Франция', desc: 'Французские технологии и производство — европейское качество в каждом изделии.' },
-]
-const faqItems = [
-  { q: 'Что такое холодный монтаж Clipso?', a: 'Холодный монтаж — это технология установки тканевого полотна без разогрева тепловой пушкой. Стандартные ПВХ-потолки требуют нагрева помещения до 60–70°C. Clipso натягивается механически при комнатной температуре — это быстрее, безопаснее и не создаёт неприятного запаха.' },
-  { q: 'Почему под потолком Clipso нет конденсата?', a: 'Тканевое полотно Clipso дышит — оно пропускает воздух. Разница температур между полотном и перекрытием не создаёт "парникового эффекта". Конденсат не образуется даже в помещениях с повышенной влажностью при наличии нормальной вентиляции.' },
-  { q: 'Как работают акустические потолки Clipso?', a: 'Акустические варианты Clipso имеют специальную структуру ткани с повышенным коэффициентом звукопоглощения. Они снижают уровень реверберации в помещении — эхо и шум становятся тише. Используются в офисах, переговорных, домашних кинотеатрах и ресторанах.' },
-  { q: 'Можно ли заказать цветной потолок Clipso?', a: 'Да, Clipso предлагает широкую цветовую палитру. Полотна окрашены натуральными красителями без токсичных синтетических пигментов. Возможна печать изображений и орнаментов. Точный выбор цвета уточняйте у замерщика — он привезёт актуальные образцы.' },
-  { q: 'Сколько стоит установка Clipso в Иркутске?', a: 'Цена начинается от 389 ₽/м² с монтажом. Итоговая стоимость зависит от площади, варианта полотна (стандарт, акустика, цветное) и дополнительных работ. Точный расчёт делает замерщик при бесплатном выезде на дом.' },
-]
-const seoLinks = [
-  { to: '/catalog/brendy/natyazhnye-potolki-cerutti', label: 'Потолки Cerutti (Швейцария)' },
-  { to: '/catalog/brendy/natyazhnye-potolki-descor', label: 'Потолки Descor (Германия)' },
-  { to: '/catalog/faktury/tkanevye-natyazhnye-potolki', label: 'Тканевые натяжные потолки' },
-  { to: '/catalog/brendy', label: 'Все бренды' },
 ]
 function maskPhone(e: Event) {
   const input = e.target as HTMLInputElement

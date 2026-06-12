@@ -14,8 +14,8 @@
           </p>
           <div class="cp-hero__price-badge" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
             <meta itemprop="priceCurrency" content="RUB"/>
-            <meta itemprop="price" :content="String(item.price)"/>
-            от <strong>{{ item.price }} ₽/м²</strong> — монтаж включён
+            <meta itemprop="price" :content="String(price)"/>
+            от <strong>{{ price }} ₽/м²</strong> — монтаж включён
           </div>
           <form class="cp-hero__form" @submit.prevent="callbackOpen = true">
             <input v-model="formName" class="cp-inp" type="text" placeholder="Ваше имя"/>
@@ -53,7 +53,7 @@
             <div class="cp-aside-card">
               <div class="cp-aside-card__title">Вызвать замерщика</div>
               <p class="cp-aside-card__desc">Замерщик приедет бесплатно, привезёт образцы MSD всех серий, рассчитает стоимость</p>
-              <div class="cp-aside-price">от <strong>{{ item.price }} ₽</strong><span>/м²</span></div>
+              <div class="cp-aside-price">от <strong>{{ price }} ₽</strong><span>/м²</span></div>
               <ul class="cp-aside-list">
                 <li v-for="i in asideItems" :key="i"><Icon name="lucide:check-circle" size="14" class="cp-check"/>{{ i }}</li>
               </ul>
@@ -96,15 +96,7 @@
           <div class="cp-pretitle cp-pretitle--dark">Выгодные условия</div>
           <h2 class="cp-h2 cp-h2--center">Акции на потолки MSD</h2>
         </div>
-        <div class="cp-promo-grid">
-          <div class="cp-promo-card" v-for="p in promos" :key="p.title">
-            <div class="cp-promo-card__icon"><Icon :name="p.icon" size="24"/></div>
-            <div class="cp-promo-card__title">{{ p.title }}</div>
-            <div class="cp-promo-card__desc">{{ p.desc }}</div>
-            <div class="cp-promo-card__date">{{ p.date }}</div>
-            <button class="nav-btn cp-promo-card__btn" @click="callbackOpen = true">Оставить заявку</button>
-          </div>
-        </div>
+        <CpPromoCards @callback="callbackOpen = true" />
       </div>
     </section>
 
@@ -226,18 +218,32 @@
       </Transition>
     </Teleport>
 
-    <ModalCallback v-model="callbackOpen"/>
+    <ModalCallback v-model="callbackOpen" :initial-name="formName" :initial-phone="formPhone" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { brendy } from '~/data/catalog'
-import { catalogGallery } from '~/data/gallery'
+import type { GalleryItem } from '~/data/gallery'
+import { usePageContent, usePageGallery, usePagePortfolio } from '~/composables/usePageContent'
+import { useCatalogPrices } from '~/composables/useCatalogPrices'
+
+// Данные страницы из pagesInfo.ts + перезаписи из админки
+const _content = await usePageContent('natyazhnye-potolki-msd')
+const faqItems = ref(_content.faqItems ?? [])
+const advantages = ref(_content.advantages ?? [])
+const seoLinks = ref(_content.seoLinks ?? [])
+
+// Галерея из админки (дополнительные фото)
+const gallery = ref(await usePageGallery('natyazhnye-potolki-msd'))
+const portfolio = ref(await usePagePortfolio('natyazhnye-potolki-msd'))
 
 const item = brendy.find(b => b.id === 'msd')!
+
+const _prices = await useCatalogPrices()
+const price = computed(() => _prices.value?.['base'] ?? item.price)
 const otherBrendy = brendy.map(b => ({ id: b.id, slug: b.slug, title: b.title }))
-const gallery = catalogGallery['natyazhnye-potolki-msd'] ?? []
-const worksWithPrice = gallery.filter(g => g.price)
+const worksWithPrice = portfolio.value.filter(g => g.price)
 const visibleWorksCount = ref(4)
 const visibleWorks = computed(() => worksWithPrice.slice(0, visibleWorksCount.value))
 function fmt(n: number) { return n.toLocaleString('ru-RU') }
@@ -266,21 +272,6 @@ const formPhone = ref('')
 
 const asideItems = ['Бесплатный замер на дому', 'Монтаж включён в цену', 'Гарантия 12 лет по договору', 'Оплата после монтажа', 'Работаем в выходные']
 
-const advantages = [
-  { title: 'Три серии на выбор', desc: 'Classic — эконом, Evolution — оптимальный выбор, Premium — максимум долговечности. Подберём серию под ваш бюджет.' },
-  { title: 'Европейские стандарты', desc: 'Все полотна MSD сертифицированы и имеют санитарно-эпидемиологическое заключение. Разрешены в детских и медицинских учреждениях.' },
-  { title: 'Широкий цветовой ряд', desc: 'Более 200 цветов и фактур: матовые, глянцевые, сатиновые. Подберём оттенок под любой интерьер.' },
-  { title: 'Водонепроницаемость', desc: 'ПВХ-полотно удерживает до 100 л/м² при затоплении. Незаменимо для кухонь и ванных комнат.' },
-  { title: 'Быстрый монтаж', desc: 'Стандартная комната монтируется за 2–4 часа. Не нужно выносить мебель — достаточно отодвинуть от стен на 30 см.' },
-  { title: 'Доступная цена', desc: 'Серия Classic — самое выгодное предложение рынка. Монтаж включён в стоимость без доплат.' },
-]
-
-const promos = [
-  { icon: 'lucide:gift', title: '3-й потолок в подарок', desc: 'При заказе от 3 помещений одно монтируем бесплатно. Акция при одновременном заказе.', date: 'Акция действует' },
-  { icon: 'lucide:percent', title: '-10% пенсионерам', desc: 'Скидка 10% при предъявлении пенсионного удостоверения. Без ограничений по площади.', date: 'Постоянная скидка' },
-  { icon: 'lucide:credit-card', title: 'Рассрочка 0%', desc: 'Оформим рассрочку без переплаты на срок до 3 месяцев. Монтаж — в день оформления.', date: 'Без переплаты' },
-]
-
 const whyCards = [
   { icon: 'lucide:leaf', title: 'Без запаха', desc: 'Монтаж методом холодного натяжения. Никакого нагрева — никакого запаха. Въезжайте сразу.' },
   { icon: 'lucide:badge-check', title: 'Сертификаты MSD', desc: 'На все серии полотен есть санитарно-эпидемиологические заключения и сертификаты качества.' },
@@ -288,22 +279,6 @@ const whyCards = [
   { icon: 'lucide:globe', title: 'Большой выбор', desc: 'Classic, Evolution, Premium — три серии под разные задачи и бюджеты. Всё в наличии на складе.' },
   { icon: 'lucide:banknote', title: 'Без предоплаты', desc: 'Оплата только после монтажа и вашей приёмки. Наличными, картой или безналом.' },
   { icon: 'lucide:hammer', title: 'Монтаж за 1 день', desc: 'Всю квартиру монтируем за один день. Мастера убирают за собой после работы.' },
-]
-
-const faqItems = [
-  { q: 'Какая серия MSD лучше всего подходит для квартиры?', a: 'Для большинства жилых помещений рекомендуем серию Evolution — оптимальное соотношение цены и качества. Premium выбирайте для гостиных с нестандартной геометрией. Classic подходит для технических помещений или при ограниченном бюджете.' },
-  { q: 'Сколько цветов доступно в линейке MSD?', a: 'Линейка MSD включает более 200 цветов и фактур: матовые, глянцевые, сатиновые. Замерщик привезёт полную коллекцию образцов на дом — вы сможете оценить цвет в вашем освещении.' },
-  { q: 'Выдержат ли потолки MSD затопление от соседей?', a: 'Да. ПВХ-полотно водонепроницаемо и удерживает до 100 литров воды на 1 м². Если вас затопили — позвоните нам, мастер приедет и аккуратно сольёт воду без повреждения полотна.' },
-  { q: 'Можно ли устанавливать MSD в детской?', a: 'Да. Полотна MSD имеют санитарно-эпидемиологическое заключение и разрешены для применения в детских учреждениях. Для детских комнат рекомендуем матовую серию Evolution — нет бликов при игре.' },
-  { q: 'Сколько времени занимает монтаж?', a: 'Стандартная комната площадью до 20 м² монтируется за 2–4 часа. Двухкомнатная квартира — за 1 рабочий день. Мебель выносить не нужно — достаточно отодвинуть от стен на 30 см.' },
-]
-
-const seoLinks = [
-  { to: '/catalog/brendy/natyazhnye-potolki-bauf', label: 'Потолки Bauf (Германия)' },
-  { to: '/catalog/brendy/natyazhnye-potolki-pongs', label: 'Потолки Pongs (Германия)' },
-  { to: '/catalog/faktury/matovye-natyazhnye-potolki', label: 'Матовые потолки' },
-  { to: '/catalog/faktury/glyancevye-natyazhnye-potolki', label: 'Глянцевые потолки' },
-  { to: '/catalog/brendy', label: 'Все бренды' },
 ]
 
 function maskPhone(e: Event) {

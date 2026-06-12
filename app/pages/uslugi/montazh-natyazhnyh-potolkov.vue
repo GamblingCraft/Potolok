@@ -254,7 +254,7 @@
       </div>
     </section>
 
-    <ModalCallback v-model="callbackOpen"/>
+    <ModalCallback v-model="callbackOpen" :initial-name="formName" :initial-phone="formPhone" />
 
   </div>
 </template>
@@ -262,6 +262,14 @@
 <script setup lang="ts">
 import { site } from '~/data/site'
 import { services } from '~/data/services'
+import { usePageContent } from '~/composables/usePageContent'
+import { useCatalogPrices } from '~/composables/useCatalogPrices'
+
+// Данные страницы из pagesInfo.ts + перезаписи из админки
+const _prices = await useCatalogPrices()
+const _content = await usePageContent('montazh-natyazhnyh-potolkov')
+const faqItems = ref(_content.faqItems ?? [])
+const seoLinks = ref(_content.seoLinks ?? [])
 
 const service = services.find(s => s.slug === 'montazh-natyazhnyh-potolkov')!
 
@@ -290,7 +298,7 @@ useHead({
           priceRange: '₽₽',
         },
         areaServed: { '@type': 'City', name: 'Иркутск' },
-        offers: { '@type': 'Offer', price: '159', priceCurrency: 'RUB', availability: 'https://schema.org/InStock' },
+        offers: { '@type': 'Offer', price: String(_prices.value?.["base"] ?? 159), priceCurrency: 'RUB', availability: 'https://schema.org/InStock' },
         hasOfferCatalog: { '@type': 'OfferCatalog', name: 'Виды монтажа натяжных потолков' },
       }),
     },
@@ -320,21 +328,21 @@ const heroNums = [
 const priceList = [
   {
     title: 'Матовый / Глянцевый',
-    price: 159,
+    price: _prices.value?.["base"] ?? 159,
     icon: 'lucide:square',
     hit: 'Хит',
     features: ['Одноуровневый', 'ПВХ-полотно', 'Монтаж включён', 'Маскировочная лента'],
   },
   {
     title: 'Сатиновый',
-    price: 189,
+    price: _prices.value?.["satinovye"] ?? 189,
     icon: 'lucide:sparkles',
     hit: null,
     features: ['Шелковистая фактура', 'Без бликов', 'Монтаж включён', 'Маскировочная лента'],
   },
   {
     title: 'Тканевый',
-    price: 319,
+    price: _prices.value?.["tkanevye"] ?? 319,
     icon: 'lucide:layers',
     hit: null,
     features: ['Без нагрева', 'Дышащий материал', 'Монтаж включён', 'Маскировочная лента'],
@@ -395,26 +403,6 @@ const whyCards = [
   { icon: 'lucide:shield',        title: 'Гарантия 12 лет',              desc: 'Письменная гарантия на полотно и монтажные работы. Все обязательства зафиксированы в договоре.' },
   { icon: 'lucide:leaf',          title: 'Чистая работа',                desc: 'Монтаж без запаха — метод холодного натяжения. Не нужно выносить мебель. Убираем за собой.' },
   { icon: 'lucide:credit-card',   title: 'Оплата после',                 desc: 'Никакой предоплаты. Платите только после приёмки готовой работы: наличными, картой или переводом.' },
-]
-
-const faqItems = [
-  { q: 'Сколько стоит монтаж натяжного потолка в Иркутске?', a: 'Стоимость монтажа натяжного потолка в Иркутске начинается от 159 ₽/м² — цена включает полотно, монтаж, расходники и уборку. Точная стоимость рассчитывается после бесплатного замера с учётом площади, сложности конструкции, фактуры и цвета полотна.' },
-  { q: 'Сколько времени занимает монтаж?', a: 'Монтаж стандартной комнаты 15–20 м² занимает 2–3 часа. Квартира из 3 комнат — 4–6 часов. Многоуровневые конструкции и парящие потолки монтируются за 1–2 дня в зависимости от сложности.' },
-  { q: 'Нужно ли выносить мебель перед монтажем?', a: 'Нет. Мы работаем методом холодного натяжения без тепловой пушки, поэтому мебель двигать не нужно. Мастера накроют её защитной плёнкой и снимут после завершения работ.' },
-  { q: 'Какая гарантия на натяжной потолок?', a: 'Мы выдаём письменную гарантию на полотно и монтажные работы сроком 12 лет. Европейские полотна рассчитаны на срок службы 25+ лет. При обнаружении дефекта — устраним бесплатно в течение 3 рабочих дней.' },
-  { q: 'Можно ли монтировать натяжной потолок в ванной и на кухне?', a: 'Да. Натяжные потолки — влагостойкие и подходят для кухни, ванной и санузла. При затоплении полотно удерживает воду (до 100 л/м²) и после её слива принимает первоначальную форму без следов.' },
-  { q: 'Работаете ли вы в пригороде Иркутска?', a: 'Да. Выезжаем в Шелехов, Ангарск, Усолье-Сибирское, Иркутский район. Стоимость выезда за пределы города обсуждается при оформлении заявки.' },
-  { q: 'Как проходит оплата?', a: 'Предоплата не требуется. Оплата производится после завершения всех работ и вашей приёмки. Принимаем наличные, банковские карты и безналичный перевод для юридических лиц.' },
-]
-
-const seoLinks = [
-  { to: '/uslugi/vyezd-zamershchika',             label: 'Бесплатный замер' },
-  { to: '/uslugi/demontazh-natyazhnogo-potolka',  label: 'Демонтаж натяжного потолка' },
-  { to: '/uslugi/remont-natyazhnogo-potolka',     label: 'Ремонт натяжного потолка' },
-  { to: '/uslugi/sliv-vody-s-natyazhnogo-potolka', label: 'Слив воды с потолка' },
-  { to: '/uslugi/zamena-polotna',                 label: 'Замена полотна' },
-  { to: '/uslugi/ustanovka-svetilnikov',          label: 'Установка светильников' },
-  { to: '/uslugi/srochnyj-montazh-24-chasa',      label: 'Срочный монтаж 24 часа' },
 ]
 
 function maskPhone(e: Event) {

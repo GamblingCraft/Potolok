@@ -9,8 +9,8 @@
           <h1 class="cp-hero__title" itemprop="name">Натяжные потолки Pongs в&nbsp;Иркутске</h1>
           <p class="cp-hero__price">Акция: <span>3-й потолок в подарок!</span> Гарантия 12 лет.<br>Монтаж за 1 день. Без предоплаты.</p>
           <div class="cp-hero__price-badge" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
-            <meta itemprop="priceCurrency" content="RUB"/><meta itemprop="price" :content="String(item.price)"/>
-            от <strong>{{ item.price }} ₽/м²</strong> — монтаж включён
+            <meta itemprop="priceCurrency" content="RUB"/><meta itemprop="price" :content="String(price)"/>
+            от <strong>{{ price }} ₽/м²</strong> — монтаж включён
           </div>
           <form class="cp-hero__form" @submit.prevent="callbackOpen = true">
             <input v-model="formName" class="cp-inp" type="text" placeholder="Ваше имя"/>
@@ -47,7 +47,7 @@
             <div class="cp-aside-card">
               <div class="cp-aside-card__title">Вызвать замерщика</div>
               <p class="cp-aside-card__desc">Бесплатно привезём образцы Pongs, рассчитаем стоимость и оформим договор</p>
-              <div class="cp-aside-price">от <strong>{{ item.price }} ₽</strong><span>/м²</span></div>
+              <div class="cp-aside-price">от <strong>{{ price }} ₽</strong><span>/м²</span></div>
               <ul class="cp-aside-list">
                 <li v-for="i in asideItems" :key="i"><Icon name="lucide:check-circle" size="14" class="cp-check"/>{{ i }}</li>
               </ul>
@@ -192,17 +192,31 @@
       </Transition>
     </Teleport>
 
-    <ModalCallback v-model="callbackOpen"/>
+    <ModalCallback v-model="callbackOpen" :initial-name="formName" :initial-phone="formPhone" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { brendy } from '~/data/catalog'
-import { catalogGallery } from '~/data/gallery'
+import type { GalleryItem } from '~/data/gallery'
+import { usePageContent, usePageGallery, usePagePortfolio } from '~/composables/usePageContent'
+import { useCatalogPrices } from '~/composables/useCatalogPrices'
+
+// Данные страницы из pagesInfo.ts + перезаписи из админки
+const _content = await usePageContent('natyazhnye-potolki-pongs')
+const faqItems = ref(_content.faqItems ?? [])
+const advantages = ref(_content.advantages ?? [])
+const seoLinks = ref(_content.seoLinks ?? [])
+
+// Галерея из админки (дополнительные фото)
+const gallery = ref(await usePageGallery('natyazhnye-potolki-pongs'))
+const portfolio = ref(await usePagePortfolio('natyazhnye-potolki-pongs'))
 const item = brendy.find(b => b.id === 'pongs')!
+
+const _prices = await useCatalogPrices()
+const price = computed(() => _prices.value?.['base'] ?? item.price)
 const otherBrendy = brendy.map(b => ({ id: b.id, slug: b.slug, title: b.title }))
-const gallery = catalogGallery['natyazhnye-potolki-pongs'] ?? []
-const worksWithPrice = gallery.filter(g => g.price)
+const worksWithPrice = portfolio.value.filter(g => g.price)
 const visibleWorksCount = ref(4)
 const visibleWorks = computed(() => worksWithPrice.slice(0, visibleWorksCount.value))
 function fmt(n: number) { return n.toLocaleString('ru-RU') }
@@ -224,14 +238,6 @@ const faqOpen = ref(-1)
 const formName = ref('')
 const formPhone = ref('')
 const asideItems = ['Бесплатный замер на дому', 'Монтаж включён в цену', 'Гарантия 12 лет по договору', 'Оплата после монтажа', 'Работаем в выходные']
-const advantages = [
-  { title: 'Пластификатор DOTP (нетоксичный)', desc: 'Безопасная замена DOP — без запаха, без вредных выбросов, соответствует европейским нормам.' },
-  { title: 'Ширина до 325 см (бесшовность)', desc: 'Бесшовный монтаж в большинстве жилых комнат — никаких видимых швов на потолке.' },
-  { title: 'Температурный диапазон +3..+50°C', desc: 'Не деформируется при перепадах температур — подходит для отапливаемых и неотапливаемых помещений.' },
-  { title: 'Водонепроницаемость 100 л/м²', desc: 'При затоплении сверху удерживает до 100 литров воды на квадратный метр без риска прорыва.' },
-  { title: 'Чистый безопасный состав', desc: 'Отсутствие токсичных компонентов подтверждено независимыми европейскими лабораториями.' },
-  { title: 'Премиальный уровень', desc: 'Высший сегмент немецкого качества для требовательных клиентов с дорогим ремонтом.' },
-]
 const whyCards = [
   { icon: 'lucide:leaf', title: 'DOTP — безопасный пластификатор', desc: 'Нетоксичный состав без запаха — одобрен для жилых помещений, детских комнат и спален.' },
   { icon: 'lucide:ruler', title: 'Ширина до 325 см', desc: 'Бесшовный монтаж в большинстве комнат — не нужны дополнительные швы и стыки.' },
@@ -239,19 +245,6 @@ const whyCards = [
   { icon: 'lucide:droplets', title: 'Водозащита 100 л/м²', desc: 'Надёжная защита при затоплении сверху — удерживает воду без риска прорыва.' },
   { icon: 'lucide:banknote', title: 'Без предоплаты', desc: 'Оплата после монтажа и вашей приёмки. Наличными, картой или безналом.' },
   { icon: 'lucide:flag', title: 'Германия', desc: 'Немецкое производство и контроль качества — стабильный результат в каждом рулоне.' },
-]
-const faqItems = [
-  { q: 'Чем Pongs отличается от других премиум-брендов?', a: 'Pongs выделяется использованием пластификатора DOTP вместо токсичного DOP, шириной полотна до 325 см и немецким производством с жёстким контролем качества. Это потолок для клиентов, которым важен безопасный состав и возможность монтажа без швов в больших комнатах.' },
-  { q: 'Чем DOTP лучше DOP?', a: 'DOP (диоктилфталат) — токсичный пластификатор, запрещённый в ряде стран. DOTP (диоктилтерефталат) — его нетоксичная замена, одобренная европейскими регуляторами. Полотна с DOTP не выделяют вредных веществ, не имеют запаха и безопасны для людей с аллергией.' },
-  { q: 'Можно ли сделать бесшовный потолок Pongs в большой комнате?', a: 'Да. Ширина полотна Pongs до 325 см позволяет перекрыть большинство жилых комнат без швов. Для помещений шире 325 см шов неизбежен, но мастер установит его в наименее заметном месте и сделает практически невидимым.' },
-  { q: 'Насколько Pongs защищает от затопления?', a: 'Полотно Pongs выдерживает до 100 л/м² воды без прорыва. При затоплении сверху вода скапливается в провисшем потолке. Нужно вызвать мастера для слива воды — после этого потолок возвращает форму без повреждений.' },
-  { q: 'Сколько стоит монтаж Pongs в Иркутске?', a: 'Цена начинается от 349 ₽/м² с монтажом. Итоговая стоимость зависит от площади и конфигурации. Для премиум-фактур (лак, сатин) цена выше. Точный расчёт делает замерщик при бесплатном выезде.' },
-]
-const seoLinks = [
-  { to: '/catalog/brendy/natyazhnye-potolki-cerutti', label: 'Потолки Cerutti (Швейцария)' },
-  { to: '/catalog/brendy/natyazhnye-potolki-lumfer', label: 'Потолки LumFer (Германия)' },
-  { to: '/catalog/faktury/glyancevye-natyazhnye-potolki', label: 'Глянцевые натяжные потолки' },
-  { to: '/catalog/brendy', label: 'Все бренды' },
 ]
 function maskPhone(e: Event) {
   const input = e.target as HTMLInputElement

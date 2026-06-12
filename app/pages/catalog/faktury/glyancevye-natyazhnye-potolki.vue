@@ -19,8 +19,8 @@
           </p>
           <div class="cp-hero__price-badge" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
             <meta itemprop="priceCurrency" content="RUB"/>
-            <meta itemprop="price" :content="String(item.price)"/>
-            от <strong>{{ item.price }} ₽/м²</strong> — монтаж включён
+            <meta itemprop="price" :content="String(price)"/>
+            от <strong>{{ price }} ₽/м²</strong> — монтаж включён
           </div>
           <form class="cp-hero__form" @submit.prevent="submitHero">
             <input v-model="formName" class="cp-inp" type="text" placeholder="Ваше имя"/>
@@ -67,7 +67,7 @@
             <div class="cp-aside-card">
               <div class="cp-aside-card__title">Вызвать замерщика</div>
               <p class="cp-aside-card__desc">Замерщик приедет бесплатно, покажет образцы, рассчитает стоимость и оформит договор</p>
-              <div class="cp-aside-price">от <strong>{{ item.price }} ₽</strong><span>/м²</span></div>
+              <div class="cp-aside-price">от <strong>{{ price }} ₽</strong><span>/м²</span></div>
               <ul class="cp-aside-list">
                 <li v-for="i in asideItems" :key="i"><Icon name="lucide:check-circle" size="14" class="cp-check"/>{{ i }}</li>
               </ul>
@@ -122,7 +122,7 @@
             </div>
           </div>
         </div>
-        <div class="cp-works-more" v-if="gallery.length > visibleWorksCount">
+        <div class="cp-works-more" v-if="worksWithPrice.length > visibleWorksCount">
           <button class="cp-more-btn" @click="visibleWorksCount += 4">
             <Icon name="lucide:chevron-down" size="16"/>Смотреть ещё
           </button>
@@ -180,15 +180,7 @@
           <div class="cp-pretitle cp-pretitle--dark">Выгодные условия</div>
           <h2 class="cp-h2 cp-h2--center">Акции и скидки на глянцевые потолки</h2>
         </div>
-        <div class="cp-promo-grid">
-          <div class="cp-promo-card" v-for="p in promos" :key="p.title">
-            <div class="cp-promo-card__icon"><Icon :name="p.icon" size="24"/></div>
-            <div class="cp-promo-card__title">{{ p.title }}</div>
-            <div class="cp-promo-card__desc">{{ p.desc }}</div>
-            <div class="cp-promo-card__date">{{ p.date }}</div>
-            <button class="nav-btn cp-promo-card__btn" @click="callbackOpen = true">Оставить заявку</button>
-          </div>
-        </div>
+        <CpPromoCards @callback="callbackOpen = true" />
       </div>
     </section>
 
@@ -301,19 +293,32 @@
       </Transition>
     </Teleport>
 
-    <ModalCallback v-model="callbackOpen"/>
+    <ModalCallback v-model="callbackOpen" :initial-name="formName" :initial-phone="formPhone" />
 
   </div>
 </template>
 
 <script setup lang="ts">
 import { faktury } from '~/data/catalog'
-import { catalogGallery } from '~/data/gallery'
+import type { GalleryItem } from '~/data/gallery'
+import { usePageContent, usePageGallery, usePagePortfolio } from '~/composables/usePageContent'
+import { useCatalogPrices } from '~/composables/useCatalogPrices'
+
+// Данные страницы из pagesInfo.ts + перезаписи из админки
+const _content = await usePageContent('glyancevye-natyazhnye-potolki')
+const faqItems = ref(_content.faqItems ?? [])
+const advantages = ref(_content.advantages ?? [])
+const seoLinks = ref(_content.seoLinks ?? [])
+
+// Галерея из админки (дополнительные фото)
+const gallery = ref(await usePageGallery('glyancevye-natyazhnye-potolki'))
+const portfolio = ref(await usePagePortfolio('glyancevye-natyazhnye-potolki'))
+const _prices = await useCatalogPrices()
+const price = computed(() => _prices.value?.['glyancevye'] ?? item.price)
 
 // ── Данные страницы из catalog.ts ──────────────────────────────
 const item = faktury.find(f => f.id === 'gly')!
-const gallery = catalogGallery['glyancevye-natyazhnye-potolki'] ?? []
-const worksWithPrice = gallery.filter(g => g.price)
+const worksWithPrice = portfolio.value.filter(g => g.price)
 
 // ── SEO ────────────────────────────────────────────────────────
 useHead({
@@ -336,7 +341,7 @@ useHead({
         brand: { '@type': 'Brand', name: 'ПроПотолок' },
         offers: {
           '@type': 'Offer',
-          price: item.price,
+          price: price.value,
           priceCurrency: 'RUB',
           availability: 'https://schema.org/InStock',
           seller: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' } },
@@ -373,21 +378,6 @@ const asideItems = [
   'Работаем в выходные',
 ]
 
-const advantages = [
-  { title: 'Простота в уходе',        desc: 'ПВХ-плёнка не притягивает пыль; при загрязнении достаточно протереть мягкой влажной тряпкой без химии.' },
-  { title: 'Быстрый монтаж',          desc: 'Одна комната — 2–3 часа, двухкомнатная квартира — за 1 день. Без шума и пыли.' },
-  { title: 'Водонепроницаемость',     desc: 'Плёнка не пропускает воду — при затоплении сверху потолок удержит до 100 л/м².' },
-  { title: 'Экологическая безопасность', desc: 'Нетоксичны, без запаха после монтажа. Установлены в детских садах и медучреждениях Иркутска.' },
-  { title: 'Зеркальный эффект',       desc: 'Весь свет от светильников отражается от потолка — комната становится визуально просторнее и ярче.' },
-  { title: 'Широкие возможности',     desc: '100+ цветов и оттенков. Совместимы с фотопечатью, можно напечатать любой рисунок.' },
-]
-
-const promos = [
-  { icon: 'lucide:gift',       title: '3-й потолок в подарок',       desc: 'При заказе от 3 помещений — одно монтируем бесплатно. Акция действует при одновременном заказе.',    date: 'Акция действует' },
-  { icon: 'lucide:percent',    title: '-10% пенсионерам и новосёлам', desc: 'Скидка 10% при предъявлении пенсионного удостоверения или договора купли-продажи квартиры.',      date: 'Постоянная скидка' },
-  { icon: 'lucide:credit-card', title: 'Рассрочка 0% до 3 мес.',     desc: 'Оформим рассрочку без переплаты. Первый взнос 0%. Монтаж — в тот же день. Документы — на месте.', date: 'Без переплаты' },
-]
-
 const whyCards = [
   { icon: 'lucide:leaf',         title: '100% без запаха',          desc: 'Полотна гипоаллергенны, проверены Роспотребнадзором. Установлены в детских садах и школах Иркутска.' },
   { icon: 'lucide:badge-check',  title: 'Сертификаты',              desc: 'На все фактуры, светильники и расходники предоставим сертификаты соответствия по запросу.' },
@@ -395,24 +385,6 @@ const whyCards = [
   { icon: 'lucide:globe',        title: 'Европейские материалы',    desc: 'MSD, Bauf (Германия), Descor, Clipso — премиальные полотна всегда в наличии на складе.' },
   { icon: 'lucide:banknote',     title: 'Без предоплаты',           desc: 'Оплата после монтажа и вашей приёмки. Наличными, картой или безналом.' },
   { icon: 'lucide:hammer',       title: 'Безопасный монтаж',        desc: 'Метод холодного натяжения — без нагрева, без пыли, без необходимости выносить мебель.' },
-]
-
-const faqItems = [
-  { q: 'Надо ли выровнять потолок перед монтажом?',    a: 'Нет. Если нет больших трещин глубиной более 1 см — специальной подготовки не требуется. Мастер самостоятельно очистит основание от осыпающейся штукатурки.' },
-  { q: 'Будет ли запах от глянцевого потолка?',         a: 'Метод холодного натяжения не предполагает нагрева, поэтому запаха нет. Полотна изготовлены из нетоксичного ПВХ, прошли санитарно-эпидемиологическую проверку.' },
-  { q: 'На сколько визуально уменьшает высоту потолок?', a: 'Натяжной потолок забирает 3–5 см от высоты помещения. При стандартной высоте 2,7 м останется 2,65–2,67 м — практически незаметно.' },
-  { q: 'Можно ли мыть глянцевый потолок?',              a: 'Да. Протирайте мягкой слегка влажной тряпкой без абразивных и химически активных средств. Избегайте острых предметов и прямых солнечных лучей длительное время.' },
-  { q: 'Сколько цветов доступно в глянцевой фактуре?',  a: 'Более 100 цветов и оттенков: белые, бежевые, серебристые, золотые, цветные. Замерщик привезёт полную коллекцию образцов, чтобы вы могли оценить цвет в вашем интерьере.' },
-  { q: 'Выдержит ли потолок затопление?',               a: 'Да. ПВХ-полотно водонепроницаемо и удерживает до 100 литров воды на 1 м². Если вас затопили — звоните нам, мастер приедет и аккуратно сольёт воду без повреждения потолка.' },
-]
-
-const seoLinks = [
-  { to: '/catalog/faktury/matovye-natyazhnye-potolki',   label: 'Матовые натяжные потолки' },
-  { to: '/catalog/faktury/satinovye-natyazhnye-potolki', label: 'Сатиновые натяжные потолки' },
-  { to: '/catalog/faktury/tkanevye-natyazhnye-potolki',  label: 'Тканевые натяжные потолки' },
-  { to: '/catalog/vidy/paryashchie-natyazhnye-potolki',  label: 'Парящие потолки' },
-  { to: '/catalog/vidy/natyazhnye-potolki-s-podsvetkoy', label: 'С подсветкой' },
-  { to: '/uslugi/montazh-natyazhnyh-potolkov',           label: 'Монтаж натяжных потолков' },
 ]
 
 // ── Хелперы ────────────────────────────────────────────────────

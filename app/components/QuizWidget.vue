@@ -161,7 +161,24 @@ function choose(value: string) {
   answers.value[step.value] = value
 }
 
-function submit() {
+async function submit() {
+  const answersText = questions
+    .map((q, i) => {
+      const opt = q.options.find(o => o.value === answers.value[i])
+      return `${q.text}: ${opt?.label ?? answers.value[i] ?? '—'}`
+    })
+    .join('\n')
+  try {
+    await $fetch('/api/requests', {
+      method: 'POST',
+      body: {
+        name: contactName.value,
+        phone: contactPhone.value,
+        message: answersText,
+        source: 'Квиз',
+      },
+    })
+  } catch {}
   step.value = questions.length + 1
 }
 

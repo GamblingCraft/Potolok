@@ -5,6 +5,7 @@
 
 export interface PriceItem {
   id: number
+  catalogKey?: string      // ключ для связи с каталожными страницами
   name: string
   description: string
   priceFrom: number       // цена от, ₽/м²
@@ -37,26 +38,29 @@ export interface Package {
 
 // ─── Фактуры ───
 export const priceFaktury: PriceItem[] = [
-  { id: 1,  name: 'Матовый',        description: 'Классический белый ПВХ. Равномерное рассеивание света, скрывает неровности.',    priceFrom: 159, priceTo: 220,  unit: 'м²', badge: 'Хит',    popular: true  },
-  { id: 2,  name: 'Глянцевый',      description: 'Зеркальный эффект, визуально увеличивает пространство. Популярен в гостиных.',   priceFrom: 209, priceTo: 290,  unit: 'м²', badge: null,     popular: false },
-  { id: 3,  name: 'Сатиновый',      description: 'Мягкий шёлковый блеск. Универсален для любых помещений.',                       priceFrom: 189, priceTo: 260,  unit: 'м²', badge: null,     popular: true  },
-  { id: 4,  name: 'Тканевый',       description: 'Немецкое полотно без ПВХ. Гипоаллергенен, для детских и спален.',               priceFrom: 319, priceTo: 420,  unit: 'м²', badge: 'Эко',    popular: false },
-  { id: 5,  name: 'Фактурный',      description: 'Структурированная поверхность. Скрывает мелкие дефекты.',                       priceFrom: 259, priceTo: 350,  unit: 'м²', badge: null,     popular: false },
-  { id: 6,  name: 'Бесшовный',      description: 'Без видимых швов на больших площадях. До 5 м шириной.',                         priceFrom: 229, priceTo: 310,  unit: 'м²', badge: null,     popular: false },
-  { id: 7,  name: 'Гипоаллергенный',description: 'Сертифицированный материал без вредных веществ. Для чувствительных.',           priceFrom: 279, priceTo: 370,  unit: 'м²', badge: null,     popular: false },
-  { id: 8,  name: 'Негорючий',      description: 'Класс пожарной безопасности Г1. Для коридоров и коммерческих помещений.',       priceFrom: 299, priceTo: 400,  unit: 'м²', badge: null,     popular: false },
+  { id: 1,  catalogKey: 'matovye',         name: 'Матовый',        description: 'Классический белый ПВХ. Равномерное рассеивание света, скрывает неровности.',    priceFrom: 159, priceTo: 220,  unit: 'м²', badge: 'Хит',    popular: true  },
+  { id: 2,  catalogKey: 'glyancevye',      name: 'Глянцевый',      description: 'Зеркальный эффект, визуально увеличивает пространство. Популярен в гостиных.',   priceFrom: 209, priceTo: 290,  unit: 'м²', badge: null,     popular: false },
+  { id: 3,  catalogKey: 'satinovye',       name: 'Сатиновый',      description: 'Мягкий шёлковый блеск. Универсален для любых помещений.',                       priceFrom: 189, priceTo: 260,  unit: 'м²', badge: null,     popular: true  },
+  { id: 4,  catalogKey: 'tkanevye',        name: 'Тканевый',       description: 'Немецкое полотно без ПВХ. Гипоаллергенен, для детских и спален.',               priceFrom: 319, priceTo: 420,  unit: 'м²', badge: 'Эко',    popular: false },
+  { id: 5,  catalogKey: 'fakturnye',       name: 'Фактурный',      description: 'Структурированная поверхность. Скрывает мелкие дефекты.',                       priceFrom: 259, priceTo: 350,  unit: 'м²', badge: null,     popular: false },
+  { id: 6,  catalogKey: 'besshovnye',      name: 'Бесшовный',      description: 'Без видимых швов на больших площадях. До 5 м шириной.',                         priceFrom: 229, priceTo: 310,  unit: 'м²', badge: null,     popular: false },
+  { id: 7,  catalogKey: 'gipoallergennye', name: 'Гипоаллергенный',description: 'Сертифицированный материал без вредных веществ. Для чувствительных.',           priceFrom: 279, priceTo: 370,  unit: 'м²', badge: null,     popular: false },
+  { id: 8,  catalogKey: 'negoryuchie',     name: 'Негорючий',      description: 'Класс пожарной безопасности Г1. Для коридоров и коммерческих помещений.',       priceFrom: 299, priceTo: 400,  unit: 'м²', badge: null,     popular: false },
 ]
 
 // ─── Виды/Технологии ───
 export const priceVidy: PriceItem[] = [
-  { id: 1, name: 'Обычный одноуровневый', description: 'Стандартный натяжной потолок на одном уровне.',                           priceFrom: 159, priceTo: null, unit: 'м²', badge: null,     popular: false },
-  { id: 2, name: 'Парящий потолок',       description: 'Световая ниша по периметру с LED-подсветкой. Эффект левитации.',          priceFrom: 350, priceTo: 550,  unit: 'м²', badge: 'Тренд',  popular: true  },
-  { id: 3, name: 'С подсветкой',          description: 'Встроенная LED-лента, точечные или линейные светильники.',                 priceFrom: 320, priceTo: 480,  unit: 'м²', badge: null,     popular: true  },
-  { id: 4, name: 'Двухуровневый',         description: 'Два полотна на разных уровнях. Зонирование пространства.',                priceFrom: 450, priceTo: 700,  unit: 'м²', badge: null,     popular: false },
-  { id: 5, name: 'Световые линии',        description: 'LED-профили встроены в полотно. Архитектурный эффект.',                   priceFrom: 380, priceTo: 580,  unit: 'м²', badge: null,     popular: false },
-  { id: 6, name: 'Фотопечать',            description: 'Печать любого изображения на полотне. Уникальный дизайн.',                priceFrom: 550, priceTo: 900,  unit: 'м²', badge: null,     popular: false },
-  { id: 7, name: 'Звёздное небо',         description: 'Оптоволоконная подсветка имитирует ночное небо.',                         priceFrom: 650, priceTo: null, unit: 'м²', badge: null,     popular: false },
-  { id: 8, name: 'Теневой профиль',       description: 'Щель между потолком и стеной. Минималистичный дизайн.',                   priceFrom: 300, priceTo: 450,  unit: 'м²', badge: null,     popular: false },
+  { id: 1,  catalogKey: 'base',            name: 'Обычный одноуровневый', description: 'Стандартный натяжной потолок на одном уровне.',                           priceFrom: 159, priceTo: null, unit: 'м²', badge: null,     popular: false },
+  { id: 2,  catalogKey: 'paryashchie',     name: 'Парящий потолок',       description: 'Световая ниша по периметру с LED-подсветкой. Эффект левитации.',          priceFrom: 350, priceTo: 550,  unit: 'м²', badge: 'Тренд',  popular: true  },
+  { id: 3,  catalogKey: 'podsvetka',       name: 'С подсветкой',          description: 'Встроенная LED-лента, точечные или линейные светильники.',                 priceFrom: 320, priceTo: 480,  unit: 'м²', badge: null,     popular: true  },
+  { id: 4,  catalogKey: 'dvuhuroven',      name: 'Двухуровневый',         description: 'Два полотна на разных уровнях. Зонирование пространства.',                priceFrom: 450, priceTo: 700,  unit: 'м²', badge: null,     popular: false },
+  { id: 5,  catalogKey: 'linii',           name: 'Световые линии',        description: 'LED-профили встроены в полотно. Архитектурный эффект.',                   priceFrom: 380, priceTo: 580,  unit: 'м²', badge: null,     popular: false },
+  { id: 6,  catalogKey: 'fotopechat',      name: 'Фотопечать',            description: 'Печать любого изображения на полотне. Уникальный дизайн.',                priceFrom: 550, priceTo: 900,  unit: 'м²', badge: null,     popular: false },
+  { id: 7,  catalogKey: 'zvezdnoe',        name: 'Звёздное небо',         description: 'Оптоволоконная подсветка имитирует ночное небо.',                         priceFrom: 650, priceTo: null, unit: 'м²', badge: null,     popular: false },
+  { id: 8,  catalogKey: 'tenevye',         name: 'Теневой профиль',       description: 'Щель между потолком и стеной. Минималистичный дизайн.',                   priceFrom: 300, priceTo: 450,  unit: 'м²', badge: null,     popular: false },
+  { id: 9,  catalogKey: 'konturnye',       name: 'Контурный потолок',     description: 'Световые контуры и геометрические формы из LED-профиля.',                 priceFrom: 420, priceTo: 600,  unit: 'м²', badge: null,     popular: false },
+  { id: 10, catalogKey: 'krivolinejnye',   name: 'Криволинейный',         description: 'Волнообразные и изогнутые формы. Сложные архитектурные решения.',         priceFrom: 540, priceTo: 800,  unit: 'м²', badge: null,     popular: false },
+  { id: 11, catalogKey: 'mnogourovenye',   name: 'Многоуровневый',        description: 'Три и более уровней. Максимально сложная конструкция.',                   priceFrom: 600, priceTo: 950,  unit: 'м²', badge: null,     popular: false },
 ]
 
 // ─── Доп. работы ───

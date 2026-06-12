@@ -70,7 +70,15 @@
 </template>
 
 <script setup lang="ts">
-import { faktury } from '~/data/catalog'
+import { faktury as _faktury } from '~/data/catalog'
+import { useCatalogPrices } from '~/composables/useCatalogPrices'
+
+const _prices = await useCatalogPrices()
+
+const faktury = computed(() => _faktury.map(f => ({
+  ...f,
+  price: _prices.value?.[f.catalogKey] ?? f.price,
+})))
 
 useHead({
   title: 'Натяжные потолки по фактуре — матовые, глянцевые, сатиновые | ПроПотолок Иркутск',

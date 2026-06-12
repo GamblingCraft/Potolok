@@ -6,7 +6,7 @@
 
         <div class="hero__content">
           <div class="hero__pretitle">Натяжные потолки в Иркутске</div>
-          <h1 class="hero__title">Европейские натяжные&nbsp;потолки — от&nbsp;<span class="hero__title-price">159&nbsp;руб./м²</span></h1>
+          <h1 class="hero__title">Европейские натяжные&nbsp;потолки — от&nbsp;<span class="hero__title-price">{{ _prices?.['base'] ?? 159 }}&nbsp;руб./м²</span></h1>
           <p class="hero__text">
             Акция: <span class="hero__text-accent">3-й потолок в подарок!</span><br>
             Гарантия по договору 12 лет. Монтаж за 1 день.<br>
@@ -398,13 +398,22 @@
     </Transition>
   </Teleport>
 
-  <ModalCallback v-model="callbackOpenIdx"/>
+  <ModalCallback v-model="callbackOpenIdx" :initial-name="formName" :initial-phone="formPhone" />
 </template>
 
 <script setup lang="ts">
-import { promotions } from '~/data/promotions'
+import { promotions as defaultPromotions } from '~/data/promotions'
 import { reviews, platformStats } from '~/data/reviews'
 import { portfolio } from '~/data/portfolio'
+import { useCatalogPrices } from '~/composables/useCatalogPrices'
+import type { Promotion } from '~/data/promotions'
+
+const _prices = await useCatalogPrices()
+const { data: promotionsData } = await useAsyncData<Promotion[]>(
+  'index-promotions',
+  () => $fetch<Promotion[]>('/api/cms/promotions'),
+  { default: () => defaultPromotions },
+)
 
 const formName = ref('')
 const formPhone = ref('')
@@ -414,7 +423,9 @@ const callbackOpenIdx = ref(false)
 const faqOpen = ref(-1)
 const lightbox = reactive({ open: false, img: '', title: '' })
 
-const promoCards = promotions.filter(p => p.active).slice(0, 3)
+const promoCards = computed(() =>
+  (promotionsData.value ?? defaultPromotions).filter(p => p.active && p.featured).slice(0, 3)
+)
 const portfolioCards = portfolio.slice(0, 6)
 const reviewsSlice = reviews.slice(0, 6)
 
@@ -467,7 +478,7 @@ const creditCards = [
 ]
 
 const faqs = [
-  { q: 'Сколько стоит натяжной потолок в Иркутске?',      a: 'Стоимость зависит от фактуры, площади и дополнительных работ. Минимальная цена — от 159 ₽/м² за матовое белое полотно. Монтаж включён. Точная цена — после бесплатного замера.' },
+  { q: 'Сколько стоит натяжной потолок в Иркутске?',      a: `Стоимость зависит от фактуры, площади и дополнительных работ. Минимальная цена — от ${_prices.value?.['base'] ?? 159} ₽/м² за матовое белое полотно. Монтаж включён. Точная цена — после бесплатного замера.` },
   { q: 'Сколько времени занимает монтаж?',                 a: 'Стандартная комната до 20 м² монтируется за 2–4 часа. Всю квартиру из 3–4 комнат выполняем за 1 рабочий день. Мебель выносить не нужно — достаточно отодвинуть от стен на 30 см.' },
   { q: 'Нужно ли выравнивать потолок перед монтажом?',    a: 'Нет. Натяжной потолок скрывает все неровности базового потолка — трещины, перепады, коммуникации. Специальной подготовки не требуется.' },
   { q: 'Чем отличаются матовые и глянцевые потолки?',     a: 'Матовые равномерно рассеивают свет, скрывают неровности, подходят для любых помещений. Глянцевые создают зеркальный эффект и визуально увеличивают пространство. Глянец сложнее в уходе, но эффектнее смотрится в гостиных.' },
@@ -477,16 +488,16 @@ const faqs = [
   { q: 'Можно ли оплатить в рассрочку?',                  a: 'Да. Оформляем рассрочку 0% на срок до 12 месяцев прямо на замере. Первый взнос — 0 рублей. Монтаж сразу после подписания договора.' },
 ]
 
-const catalog = [
-  { slug: '/catalog/faktury/matovye-natyazhnye-potolki',           title: 'Матовые',         price: 159, badge: 'Хит',   img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=75' },
-  { slug: '/catalog/faktury/glyancevye-natyazhnye-potolki',        title: 'Глянцевые',       price: 189, badge: null,    img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=600&q=75' },
-  { slug: '/catalog/faktury/satinovye-natyazhnye-potolki',         title: 'Сатиновые',       price: 179, badge: null,    img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&q=75' },
-  { slug: '/catalog/faktury/tkanevye-natyazhnye-potolki',          title: 'Тканевые',        price: 299, badge: null,    img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=75' },
-  { slug: '/catalog/vidy/paryashchie-natyazhnye-potolki',          title: 'Парящий потолок', price: 350, badge: 'Тренд', img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=75' },
-  { slug: '/catalog/vidy/natyazhnye-potolki-s-podsvetkoy',         title: 'С подсветкой',    price: 320, badge: null,    img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=600&q=75' },
-  { slug: '/catalog/vidy/dvuhurovnevye-natyazhnye-potolki',        title: 'Двухуровневые',   price: 450, badge: null,    img: 'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=600&q=75' },
-  { slug: '/catalog/vidy/natyazhnye-potolki-s-fotopechatyu',       title: 'Фотопечать',      price: 550, badge: null,    img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=600&q=75' },
-]
+const catalog = computed(() => [
+  { slug: '/catalog/faktury/matovye-natyazhnye-potolki',           title: 'Матовые',         price: _prices.value?.['matovye']     ?? 159, badge: 'Хит',   img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=75' },
+  { slug: '/catalog/faktury/glyancevye-natyazhnye-potolki',        title: 'Глянцевые',       price: _prices.value?.['glyancevye']  ?? 209, badge: null,    img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=600&q=75' },
+  { slug: '/catalog/faktury/satinovye-natyazhnye-potolki',         title: 'Сатиновые',       price: _prices.value?.['satinovye']   ?? 189, badge: null,    img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&q=75' },
+  { slug: '/catalog/faktury/tkanevye-natyazhnye-potolki',          title: 'Тканевые',        price: _prices.value?.['tkanevye']    ?? 319, badge: null,    img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=75' },
+  { slug: '/catalog/vidy/paryashchie-natyazhnye-potolki',          title: 'Парящий потолок', price: _prices.value?.['paryashchie'] ?? 350, badge: 'Тренд', img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=75' },
+  { slug: '/catalog/vidy/natyazhnye-potolki-s-podsvetkoy',         title: 'С подсветкой',    price: _prices.value?.['podsvetka']   ?? 320, badge: null,    img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=600&q=75' },
+  { slug: '/catalog/vidy/dvuhurovnevye-natyazhnye-potolki',        title: 'Двухуровневые',   price: _prices.value?.['dvuhuroven']  ?? 450, badge: null,    img: 'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=600&q=75' },
+  { slug: '/catalog/vidy/natyazhnye-potolki-s-fotopechatyu',       title: 'Фотопечать',      price: _prices.value?.['fotopechat']  ?? 550, badge: null,    img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=600&q=75' },
+])
 
 const roomCards = [
   { to: '/catalog/po-pomescheniyu/natyazhnye-potolki-v-gostinoy',      title: 'Гостиная',    img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=70' },
@@ -510,16 +521,16 @@ const colorCards = [
   { to: '/catalog/tsveta/korichnevye-natyazhnye-potolki', title: 'Коричневые', img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=70' },
 ]
 
-const typeCards = [
-  { to: '/catalog/vidy/dvuhurovnevye-natyazhnye-potolki',          title: 'Двухуровневые',  price: 450, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&q=70' },
-  { to: '/catalog/vidy/paryashchie-natyazhnye-potolki',            title: 'Парящие',        price: 350, img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&q=70' },
-  { to: '/catalog/vidy/natyazhnye-potolki-s-podsvetkoy',           title: 'С подсветкой',   price: 320, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=400&q=70' },
-  { to: '/catalog/vidy/natyazhnye-potolki-s-fotopechatyu',         title: 'Фотопечать',     price: 550, img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=400&q=70' },
-  { to: '/catalog/vidy/natyazhnye-potolki-zvezdnoe-nebo',          title: 'Звёздное небо',  price: 650, img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=70' },
-  { to: '/catalog/vidy/natyazhnye-potolki-so-svetovymi-liniyami',  title: 'Световые линии', price: 380, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=400&q=70' },
-  { to: '/catalog/vidy/tenevye-natyazhnye-potolki',                title: 'Теневые',        price: 300, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=400&q=70' },
+const typeCards = computed(() => [
+  { to: '/catalog/vidy/dvuhurovnevye-natyazhnye-potolki',          title: 'Двухуровневые',  price: _prices.value?.['dvuhuroven']  ?? 450, img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400&q=70' },
+  { to: '/catalog/vidy/paryashchie-natyazhnye-potolki',            title: 'Парящие',        price: _prices.value?.['paryashchie'] ?? 350, img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&q=70' },
+  { to: '/catalog/vidy/natyazhnye-potolki-s-podsvetkoy',           title: 'С подсветкой',   price: _prices.value?.['podsvetka']   ?? 320, img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=400&q=70' },
+  { to: '/catalog/vidy/natyazhnye-potolki-s-fotopechatyu',         title: 'Фотопечать',     price: _prices.value?.['fotopechat']  ?? 550, img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=400&q=70' },
+  { to: '/catalog/vidy/natyazhnye-potolki-zvezdnoe-nebo',          title: 'Звёздное небо',  price: _prices.value?.['zvezdnoe']    ?? 650, img: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=70' },
+  { to: '/catalog/vidy/natyazhnye-potolki-so-svetovymi-liniyami',  title: 'Световые линии', price: _prices.value?.['linii']       ?? 380, img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=400&q=70' },
+  { to: '/catalog/vidy/tenevye-natyazhnye-potolki',                title: 'Теневые',        price: _prices.value?.['tenevye']     ?? 300, img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=400&q=70' },
   { to: '/catalog/vidy/natyazhnye-potolki-3d',                     title: '3D потолки',     price: 700, img: 'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=400&q=70' },
-]
+])
 
 function maskPhone(e: Event) {
   const input = e.target as HTMLInputElement
@@ -537,7 +548,7 @@ function maskPhone(e: Event) {
 }
 
 function submitForm() {
-  // TODO: отправка заявки
+  callbackOpenIdx.value = true
 }
 </script>
 
