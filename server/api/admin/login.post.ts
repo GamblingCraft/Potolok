@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
     throw createError({ statusCode: 401, message: 'Неверный логин или пароль' })
   }
 
-  const token = `${Date.now()}_${Math.random().toString(36).slice(2)}_${config.adminSecret.slice(0, 8)}`
+  const token = createAdminToken(config.adminSecret)
 
   setCookie(event, 'admin_token', token, {
     httpOnly: true,
@@ -16,9 +16,6 @@ export default defineEventHandler(async (event) => {
     path: '/',
     sameSite: 'lax',
   })
-
-  const storage = useStorage('data')
-  await storage.setItem('admin:token', token)
 
   return { ok: true }
 })

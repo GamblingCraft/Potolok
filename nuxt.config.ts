@@ -8,10 +8,9 @@ export default defineNuxtConfig({
 
   nitro: {
     storage: {
-      data: {
-        driver: 'fs',
-        base: './data/storage',
-      },
+      data: process.env.KV_REST_API_URL
+        ? { driver: 'upstash', url: process.env.KV_REST_API_URL, token: process.env.KV_REST_API_TOKEN }
+        : { driver: 'fs', base: './data/storage' },
     },
   },
 
