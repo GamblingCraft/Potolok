@@ -1,7 +1,7 @@
 <script setup lang="ts">
 definePageMeta({ layout: 'admin', middleware: 'admin-auth' })
 
-import { site } from '~/data/site'
+const site = useSite()
 
 const siteData = ref(JSON.parse(JSON.stringify(site)))
 const saved = ref(false)

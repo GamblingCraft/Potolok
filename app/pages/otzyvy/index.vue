@@ -8,13 +8,15 @@
         <div class="rv-hero__left">
           <div class="rv-pretitle">Что говорят клиенты</div>
           <h1 class="rv-hero__title">Отзывы о натяжных потолках ПроПотолок</h1>
-          <p class="rv-hero__desc">Более 190 реальных отзывов на Яндекс Картах, 2ГИС и Авито. Читайте — и убедитесь сами.</p>
+          <p class="rv-hero__desc">{{ totalReviews }} реальных отзывов с Яндекс Карт и 2ГИС. Читайте — и убедитесь сами.</p>
 
           <!-- Платформы -->
           <div class="rv-platforms">
             <a
               v-for="(stat, key) in platformStats" :key="key"
-              href="#" class="rv-platform"
+              :href="key === 'yandex' ? 'https://yandex.ru/profile/57118507733' : 'https://2gis.ru/irkutsk/branches/70000001060616514/firm/70000001095752055/tab/reviews'"
+              target="_blank" rel="noopener"
+              class="rv-platform"
               :style="{ '--platform-color': stat.color }"
             >
               <div class="rv-platform__rating">{{ stat.rating }}</div>
@@ -35,7 +37,7 @@
         <!-- Общий рейтинг -->
         <div class="rv-hero__rating">
           <div class="rv-rating-big">
-            <div class="rv-rating-big__num">4.9</div>
+            <div class="rv-rating-big__num">{{ avgRating }}</div>
             <div class="rv-rating-big__stars">
               <span v-for="i in 5" :key="i" class="rv-sym-star rv-sym-star--lg filled">★</span>
             </div>
@@ -67,10 +69,10 @@
             v-for="tab in tabs" :key="tab.id"
             class="rv-filter"
             :class="{ active: activeTab === tab.id }"
-            @click="activeTab = tab.id"
+            @click="activeTab = (tab.id as 'all' | 'yandex' | '2gis')"
           >
             {{ tab.label }}
-            <span class="rv-filter__count">{{ tab.id === 'all' ? reviews.length : reviews.filter(r => r.platform === tab.id).length }}</span>
+            <span class="rv-filter__count">{{ tab.count }}</span>
           </button>
         </div>
 
@@ -80,7 +82,13 @@
 
             <div class="rv-card__head">
               <!-- Аватар -->
-              <div class="rv-card__avatar" :style="{ background: avatarColor(review.author) }">
+              <img
+                v-if="review.avatar"
+                :src="review.avatar"
+                :alt="review.author"
+                class="rv-card__avatar rv-card__avatar--photo"
+              />
+              <div v-else class="rv-card__avatar" :style="{ background: avatarColor(review.author) }">
                 {{ review.author[0] }}
               </div>
               <div class="rv-card__author-info">
@@ -130,21 +138,22 @@
           </article>
         </TransitionGroup>
 
+        <!-- Показать ещё -->
+        <div v-if="hasMore" style="text-align:center;margin-bottom:28px">
+          <button class="rv-show-more" @click="showMore">Показать ещё</button>
+        </div>
+
         <!-- Ссылки на платформы -->
         <div class="rv-external">
           <div class="rv-external__title">Читать все отзывы на платформах:</div>
           <div class="rv-external__links">
-            <a href="#" class="rv-external__link rv-external__link--yandex">
+            <a href="https://yandex.ru/profile/57118507733" target="_blank" rel="noopener" class="rv-external__link rv-external__link--yandex">
               <Icon name="simple-icons:yandex" size="16"/>
-              Яндекс Карты · 87 отзывов
+              Яндекс Карты · {{ platformStats.yandex.count }} отзывов
             </a>
-            <a href="#" class="rv-external__link rv-external__link--2gis">
+            <a href="https://2gis.ru/irkutsk/branches/70000001060616514/firm/70000001095752055/tab/reviews" target="_blank" rel="noopener" class="rv-external__link rv-external__link--2gis">
               <Icon name="lucide:map-pin" size="16"/>
-              2ГИС · 64 отзыва
-            </a>
-            <a href="#" class="rv-external__link rv-external__link--avito">
-              <Icon name="lucide:tag" size="16"/>
-              Авито · 43 отзыва
+              2ГИС · {{ platformStats['2gis'].count }} отзывов
             </a>
           </div>
         </div>
@@ -199,17 +208,13 @@
           <p class="rv-leave__desc">Поделитесь впечатлением — это помогает другим клиентам сделать выбор и мотивирует нашу команду работать лучше</p>
         </div>
         <div class="rv-leave__btns">
-          <a href="#" class="rv-leave__btn rv-leave__btn--yandex">
+          <a href="https://yandex.ru/profile/57118507733" target="_blank" rel="noopener" class="rv-leave__btn rv-leave__btn--yandex">
             <Icon name="simple-icons:yandex" size="16"/>
             Отзыв на Яндексе
           </a>
-          <a href="#" class="rv-leave__btn rv-leave__btn--2gis">
+          <a href="https://2gis.ru/irkutsk/branches/70000001060616514/firm/70000001095752055/tab/reviews" target="_blank" rel="noopener" class="rv-leave__btn rv-leave__btn--2gis">
             <Icon name="lucide:map-pin" size="16"/>
             Отзыв на 2ГИС
-          </a>
-          <a href="#" class="rv-leave__btn rv-leave__btn--avito">
-            <Icon name="lucide:tag" size="16"/>
-            Отзыв на Авито
           </a>
         </div>
       </div>
@@ -280,42 +285,84 @@
 </template>
 
 <script setup lang="ts">
-import { reviews, videoReviews, platformStats } from '~/data/reviews'
+import { reviews as fallbackReviews, videoReviews, type Review } from '~/data/reviews'
 
 useHead({
   title: 'Отзывы клиентов о натяжных потолках в Иркутске | ПроПотолок',
   meta: [
-    { name: 'description', content: 'Реальные отзывы клиентов ПроПотолок: рейтинг 4.9 из 5. Более 190 отзывов на Яндекс Картах, 2ГИС и Авито. Фото и видео работ.' },
+    { name: 'description', content: 'Реальные отзывы клиентов ПроПотолок: рейтинг 4.9 из 5. Более 190 отзывов на Яндекс Картах и 2ГИС. Фото и видео работ.' },
   ],
 })
 
-const activeTab = ref<'all' | 'yandex' | '2gis' | 'avito'>('all')
+const { data: reviewsData } = await useAsyncData<Review[]>(
+  'page-reviews',
+  () => $fetch<Review[]>('/api/reviews'),
+  { default: () => fallbackReviews },
+)
+const reviews = computed(() => reviewsData.value ?? fallbackReviews)
+
+const activeTab = ref<'all' | 'yandex' | '2gis'>('all')
 const expandedCards = ref(new Set<number>())
 const activeVideo = ref<typeof videoReviews[0] | null>(null)
+const visibleCount = ref(10)
+const PAGE_SIZE = 10
 
-const tabs = [
-  { id: 'all',    label: 'Все отзывы' },
-  { id: 'yandex', label: 'Яндекс Карты' },
-  { id: '2gis',   label: '2ГИС' },
-  { id: 'avito',  label: 'Авито' },
-]
+const tabs = computed(() => [
+  { id: 'all',    label: 'Все отзывы',    count: reviews.value.length },
+  { id: 'yandex', label: 'Яндекс Карты', count: reviews.value.filter(r => r.platform === 'yandex').length },
+  { id: '2gis',   label: '2ГИС',          count: reviews.value.filter(r => r.platform === '2gis').length },
+])
 
-const filteredReviews = computed(() =>
-  activeTab.value === 'all' ? reviews : reviews.filter(r => r.platform === activeTab.value)
+const allFiltered = computed(() =>
+  activeTab.value === 'all' ? reviews.value : reviews.value.filter(r => r.platform === activeTab.value)
 )
+const filteredReviews = computed(() => allFiltered.value.slice(0, visibleCount.value))
+const hasMore = computed(() => visibleCount.value < allFiltered.value.length)
 
-const totalReviews = computed(() =>
-  Object.values(platformStats).reduce((s, p) => s + p.count, 0)
-)
+// сбрасываем счётчик при смене вкладки
+watch(activeTab, () => { visibleCount.value = PAGE_SIZE })
 
-const barWidths: Record<number, number> = { 5: 88, 4: 9, 3: 2, 2: 1, 1: 0 }
+function showMore() { visibleCount.value += PAGE_SIZE }
+
+// Реальный средний рейтинг из данных
+const avgRating = computed(() => {
+  if (!reviews.value.length) return 4.9
+  const sum = reviews.value.reduce((s, r) => s + r.rating, 0)
+  return Math.round((sum / reviews.value.length) * 10) / 10
+})
+
+const totalReviews = computed(() => reviews.value.length)
+
+// Процент каждой оценки
+const barWidths = computed(() => {
+  const total = reviews.value.length || 1
+  const result: Record<number, number> = {}
+  for (let n = 1; n <= 5; n++) {
+    const cnt = reviews.value.filter(r => r.rating === n).length
+    result[n] = Math.round((cnt / total) * 100)
+  }
+  return result
+})
+
+// Статистика по платформам
+const platformStats = computed(() => {
+  const yandex = reviews.value.filter(r => r.platform === 'yandex')
+  const gis    = reviews.value.filter(r => r.platform === '2gis')
+  const yRating = yandex.length ? Math.round((yandex.reduce((s, r) => s + r.rating, 0) / yandex.length) * 10) / 10 : 4.9
+  const gRating = gis.length    ? Math.round((gis.reduce((s, r) => s + r.rating, 0)    / gis.length)    * 10) / 10 : 4.9
+  return {
+    yandex: { name: 'Яндекс Карты', rating: yRating, count: yandex.length, color: '#fc3f1d', icon: 'simple-icons:yandex' },
+    '2gis': { name: '2ГИС',         rating: gRating, count: gis.length,    color: '#00844b', icon: 'lucide:map-pin' },
+  }
+})
 
 function platformName(p: string) {
-  const map: Record<string, string> = { yandex: 'Яндекс', '2gis': '2ГИС', avito: 'Авито' }
+  const map: Record<string, string> = { yandex: 'Яндекс', '2gis': '2ГИС' }
   return map[p] ?? p
 }
 
 function formatDate(d: string) {
+  if (!d) return ''
   return new Date(d).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })
 }
 
@@ -340,12 +387,12 @@ const schemaOrg = computed(() => JSON.stringify({
   name: 'ПроПотолок',
   aggregateRating: {
     '@type': 'AggregateRating',
-    ratingValue: '4.9',
+    ratingValue: String(avgRating.value),
     reviewCount: totalReviews.value,
     bestRating: '5',
     worstRating: '1',
   },
-  review: reviews.map(r => ({
+  review: reviews.value.slice(0, 10).map(r => ({
     '@type': 'Review',
     author: { '@type': 'Person', name: r.author },
     reviewRating: { '@type': 'Rating', ratingValue: String(r.rating), bestRating: '5' },
@@ -450,6 +497,7 @@ const schemaOrg = computed(() => JSON.stringify({
   display: flex; align-items: center; justify-content: center;
   font-size: 17px; font-weight: 800; color: var(--dark);
 }
+.rv-card__avatar--photo { object-fit: cover; }
 .rv-card__author {
   font-size: 15px; font-weight: 700; color: var(--dark);
   display: flex; align-items: center; gap: 5px;
@@ -504,6 +552,17 @@ const schemaOrg = computed(() => JSON.stringify({
   margin-bottom: 5px; text-transform: uppercase; letter-spacing: .3px;
 }
 .rv-card__reply-text { font-size: 13px; color: #555; line-height: 1.6; }
+
+/* Показать ещё */
+.rv-show-more {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 13px 32px; background: #fff;
+  border: 2px solid #e0e0e0; border-radius: 50px;
+  font-size: 15px; font-weight: 700; color: var(--dark);
+  font-family: 'Gilroy', sans-serif; cursor: pointer;
+  transition: border-color .15s, box-shadow .15s;
+}
+.rv-show-more:hover { border-color: var(--accent); box-shadow: 0 4px 16px rgba(245,200,0,.2); }
 
 /* Ссылки на платформы */
 .rv-external {

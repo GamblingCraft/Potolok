@@ -1,9 +1,19 @@
 <script setup lang="ts">
 definePageMeta({ layout: 'admin', middleware: 'admin-auth' })
 
-import { reviews as initialReviews, type Review } from '~/data/reviews'
+import type { Review } from '~/data/reviews'
 
-const reviews = ref<Review[]>(JSON.parse(JSON.stringify(initialReviews)))
+const { data: reviewsData, refresh: refreshReviews } = await useAsyncData<Review[]>(
+  'admin-reviews',
+  () => $fetch<Review[]>('/api/reviews'),
+  { default: () => [] },
+)
+
+const reviews = computed(() => reviewsData.value ?? [])
+
+const yandexData = computed(() => reviews.value.filter(r => r.platform === 'yandex'))
+const gisData    = computed(() => reviews.value.filter(r => r.platform === '2gis'))
+
 const search = ref('')
 const filterPlatform = ref('')
 const editingId = ref<number | null>(null)
@@ -24,24 +34,35 @@ watch(editingId, id => {
   editForm.value = id !== null ? { ...(reviews.value.find(r => r.id === id) ?? ({} as Review)) } : null
 })
 
-function saveReview(review: Review) {
-  const idx = reviews.value.findIndex(r => r.id === review.id)
-  if (idx !== -1) reviews.value[idx] = { ...review }
-  editingId.value = null
-}
-function deleteReview(id: number) {
-  reviews.value = reviews.value.filter(r => r.id !== id)
-  showDeleteConfirm.value = null
+function saveReview(review: Review) { editingId.value = null }
+function deleteReview(_id: number) { showDeleteConfirm.value = null }
+
+const refreshing = ref(false)
+const refreshMsg = ref('')
+
+async function refreshFromPlatforms() {
+  refreshing.value = true
+  refreshMsg.value = ''
+  try {
+    await $fetch('/api/admin/reviews-refresh', { method: 'POST' })
+    await refreshReviews()
+    refreshMsg.value = `Загружено ${reviews.value.length} отзывов с платформ`
+    setTimeout(() => refreshMsg.value = '', 4000)
+  } catch (e: any) {
+    refreshMsg.value = 'Ошибка: ' + (e?.data?.message ?? e?.message ?? 'неизвестная')
+  } finally {
+    refreshing.value = false
+  }
 }
 
 function platLabel(p: string) {
-  return ({ yandex: 'Яндекс', '2gis': '2ГИС', avito: 'Авито', own: 'Собственный' } as Record<string,string>)[p] ?? p
+  return ({ yandex: 'Яндекс', '2gis': '2ГИС', own: 'Собственный' } as Record<string,string>)[p] ?? p
 }
 function platBg(p: string) {
-  return ({ yandex: '#fef2f2', '2gis': '#f0fdf4', avito: '#eff6ff', own: '#f3f4f6' } as Record<string,string>)[p] ?? '#f3f4f6'
+  return ({ yandex: '#fef2f2', '2gis': '#f0fdf4', own: '#f3f4f6' } as Record<string,string>)[p] ?? '#f3f4f6'
 }
 function platColor(p: string) {
-  return ({ yandex: '#dc2626', '2gis': '#16a34a', avito: '#2563eb', own: '#6b7280' } as Record<string,string>)[p] ?? '#6b7280'
+  return ({ yandex: '#dc2626', '2gis': '#16a34a', own: '#6b7280' } as Record<string,string>)[p] ?? '#6b7280'
 }
 </script>
 
@@ -50,11 +71,25 @@ function platColor(p: string) {
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
       <div>
         <h1 class="adm-page-title">Отзывы</h1>
-        <p class="adm-page-sub">{{ reviews.length }} отзывов в базе</p>
+        <p class="adm-page-sub">
+          {{ reviews.length }} отзывов ·
+          Яндекс {{ (yandexData ?? []).length }} · 2ГИС {{ (gisData ?? []).length }}
+        </p>
       </div>
-      <button class="adm-btn adm-btn--primary">
-        <Icon name="lucide:plus" style="width:15px;height:15px" />Добавить отзыв
-      </button>
+      <div style="display:flex;gap:8px">
+        <button class="adm-btn adm-btn--ghost" :disabled="refreshing" @click="refreshFromPlatforms">
+          <Icon :name="refreshing ? 'lucide:loader-2' : 'lucide:refresh-cw'" style="width:15px;height:15px" />
+          {{ refreshing ? 'Обновляем…' : 'Обновить с Яндекс и 2ГИС' }}
+        </button>
+        <button class="adm-btn adm-btn--primary">
+          <Icon name="lucide:plus" style="width:15px;height:15px" />Добавить отзыв
+        </button>
+      </div>
+    </div>
+
+    <!-- Refresh message -->
+    <div v-if="refreshMsg" style="padding:10px 16px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:10px;font-size:13px;color:#166534;display:flex;align-items:center;gap:8px">
+      <Icon name="lucide:check-circle" style="width:15px;height:15px" />{{ refreshMsg }}
     </div>
 
     <!-- Filters -->
@@ -66,10 +101,8 @@ function platColor(p: string) {
       </div>
       <select v-model="filterPlatform" class="adm-input" style="width:auto;min-width:160px">
         <option value="">Все платформы</option>
-        <option value="yandex">Яндекс</option>
-        <option value="2gis">2ГИС</option>
-        <option value="avito">Авито</option>
-        <option value="own">Собственные</option>
+        <option value="yandex">Яндекс ({{ (yandexData ?? []).length }})</option>
+        <option value="2gis">2ГИС ({{ (gisData ?? []).length }})</option>
       </select>
     </div>
 
@@ -92,7 +125,9 @@ function platColor(p: string) {
               onmouseover="this.style.background='#f8f9fb'" onmouseout="this.style.background=''">
               <td style="padding:12px 16px">
                 <div style="display:flex;align-items:center;gap:8px">
-                  <div style="width:30px;height:30px;border-radius:50%;background:#e8eaed;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#374151;flex-shrink:0">
+                  <img v-if="r.avatar" :src="r.avatar" :alt="r.author"
+                    style="width:30px;height:30px;border-radius:50%;object-fit:cover;flex-shrink:0" />
+                  <div v-else style="width:30px;height:30px;border-radius:50%;background:#e8eaed;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#374151;flex-shrink:0">
                     {{ r.author[0] }}
                   </div>
                   <span style="font-size:14px;font-weight:600;color:#111827">{{ r.author }}</span>

@@ -283,7 +283,7 @@
         <div class="idx-rating-badges">
           <div v-for="(stat, key) in platformStats" :key="key" class="rating-badge">
             <div class="rating-badge__stars">
-              <Icon v-for="n in 5" :key="n" name="lucide:star" size="12" :class="n <= Math.round(stat.rating) ? 'star-filled' : 'star-empty'"/>
+              <span v-for="n in 5" :key="n" :class="n <= Math.round(stat.rating) ? 'star-filled' : 'star-empty'">★</span>
             </div>
             <div class="rating-badge__val">{{ stat.rating }}</div>
             <div class="rating-badge__name">{{ stat.name }}</div>
@@ -291,10 +291,34 @@
           </div>
         </div>
       </div>
+
+      <!-- Табы -->
+      <div class="reviews-tabs">
+        <button
+          class="reviews-tab"
+          :class="{ 'reviews-tab--active': reviewsTab === 'yandex' }"
+          @click="reviewsTab = 'yandex'"
+        >
+          <Icon name="simple-icons:yandex" size="14"/>
+          Яндекс Карты
+          <span class="reviews-tab__count">{{ platformStats.yandex.count }}</span>
+        </button>
+        <button
+          class="reviews-tab"
+          :class="{ 'reviews-tab--active': reviewsTab === '2gis' }"
+          @click="reviewsTab = '2gis'"
+        >
+          <Icon name="lucide:map-pin" size="14"/>
+          2ГИС
+          <span class="reviews-tab__count">{{ platformStats['2gis'].count }}</span>
+        </button>
+      </div>
+
       <div class="reviews-grid">
         <div v-for="r in reviewsSlice" :key="r.id" class="review-card">
           <div class="review-card__head">
-            <div class="review-card__avatar">{{ r.author[0] }}</div>
+            <img v-if="r.avatar" :src="r.avatar" :alt="r.author" class="review-card__avatar review-card__avatar--photo" />
+            <div v-else class="review-card__avatar">{{ r.author[0] }}</div>
             <div>
               <div class="review-card__author">{{ r.author }}</div>
               <div class="review-card__meta">
@@ -303,7 +327,7 @@
               </div>
             </div>
             <div class="review-card__stars">
-              <Icon v-for="n in r.rating" :key="n" name="lucide:star" size="13" class="star-filled"/>
+              <span v-for="n in 5" :key="n" :class="n <= r.rating ? 'star-filled' : 'star-empty'">★</span>
             </div>
           </div>
           <div class="review-card__text">{{ r.text }}</div>
@@ -312,6 +336,7 @@
           </div>
         </div>
       </div>
+
       <div class="idx-more">
         <NuxtLink to="/otzyvy" class="idx-more-link">
           Все отзывы <Icon name="lucide:arrow-right" size="15"/>
@@ -403,7 +428,7 @@
 
 <script setup lang="ts">
 import { promotions as defaultPromotions } from '~/data/promotions'
-import { reviews, platformStats } from '~/data/reviews'
+import type { Review } from '~/data/reviews'
 import { portfolio } from '~/data/portfolio'
 import { useCatalogPrices } from '~/composables/useCatalogPrices'
 import type { Promotion } from '~/data/promotions'
@@ -427,7 +452,28 @@ const promoCards = computed(() =>
   (promotionsData.value ?? defaultPromotions).filter(p => p.active && p.featured).slice(0, 3)
 )
 const portfolioCards = portfolio.slice(0, 6)
-const reviewsSlice = reviews.slice(0, 6)
+
+// Отзывы из API
+const { data: reviewsData } = await useAsyncData<Review[]>(
+  'index-reviews',
+  () => $fetch<Review[]>('/api/reviews'),
+  { default: () => [] },
+)
+const reviewsTab = ref<'yandex' | '2gis'>('yandex')
+const reviewsSlice = computed(() => {
+  const list = (reviewsData.value ?? []).filter(r => r.platform === reviewsTab.value)
+  return list.slice(0, 6)
+})
+const platformStats = computed(() => {
+  const all = reviewsData.value ?? []
+  const y = all.filter(r => r.platform === 'yandex')
+  const g = all.filter(r => r.platform === '2gis')
+  const avg = (arr: Review[]) => arr.length ? Math.round(arr.reduce((s, r) => s + r.rating, 0) / arr.length * 10) / 10 : 4.9
+  return {
+    yandex: { name: 'Яндекс Карты', rating: avg(y), count: y.length },
+    '2gis':  { name: '2ГИС',         rating: avg(g), count: g.length },
+  }
+})
 
 function openLightbox(img: string, title: string) {
   lightbox.img = img; lightbox.title = title; lightbox.open = true
@@ -1057,7 +1103,26 @@ function submitForm() {
 .rating-badge__name  { font-size: 12px; font-weight: 600; color: var(--dark); margin: 2px 0; }
 .rating-badge__count { font-size: 11px; color: var(--gray); }
 .star-filled { color: #f5c800; }
-.star-empty  { color: #ddd; }
+.star-empty  { color: #e0e0e0; }
+.reviews-tabs {
+  display: flex; gap: 6px; margin-bottom: 20px;
+}
+.reviews-tab {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 9px 18px; background: #fff;
+  border: 1.5px solid #e0e0e0; border-radius: 24px;
+  font-size: 14px; font-weight: 600; color: var(--gray);
+  font-family: 'Gilroy', sans-serif; cursor: pointer;
+  transition: all .15s;
+}
+.reviews-tab:hover { border-color: #bbb; color: var(--dark); }
+.reviews-tab--active { border-color: var(--accent); color: var(--dark); background: #fffbe6; }
+.reviews-tab__count {
+  background: #f0f0f0; border-radius: 20px;
+  font-size: 11px; font-weight: 700; padding: 1px 7px;
+}
+.reviews-tab--active .reviews-tab__count { background: rgba(245,200,0,.3); }
+
 .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .review-card {
   background: #fff; border-radius: 16px; padding: 22px;
@@ -1071,6 +1136,7 @@ function submitForm() {
   color: var(--dark); font-size: 18px; font-weight: 800;
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
 }
+.review-card__avatar--photo { object-fit: cover; }
 .review-card__author { font-size: 14px; font-weight: 700; color: var(--dark); }
 .review-card__meta   { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 3px; }
 .review-card__room   { font-size: 11px; color: var(--accent); background: rgba(245,200,0,.1); padding: 1px 7px; border-radius: 10px; font-weight: 600; }

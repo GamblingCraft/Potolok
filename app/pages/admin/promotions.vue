@@ -4,7 +4,7 @@ definePageMeta({ layout: 'admin', middleware: 'admin-auth' })
 import { promotions as defaultPromos, promoCodes as defaultCodes, type Promotion, type PromoCode } from '~/data/promotions'
 
 // ── State ──────────────────────────────────────────────────────────
-const activeTab = ref<'promos' | 'codes'>('promos')
+const activeTab = ref<'promos' | 'codes' | 'banner'>('promos')
 const promos = ref<Promotion[]>(JSON.parse(JSON.stringify(defaultPromos)))
 const codes = ref<PromoCode[]>(JSON.parse(JSON.stringify(defaultCodes)))
 const editingPromo = ref<Promotion | null>(null)
@@ -83,6 +83,31 @@ function addCode() {
 function deleteCode(id: number) {
   codes.value = codes.value.filter(c => c.id !== id)
 }
+
+// ── Banner ─────────────────────────────────────────────────────────
+import type { BannerConfig } from '~/server/api/cms/banner.get'
+
+const banner = ref<BannerConfig>({ enabled: true, text: '', label: 'Акция', durationHours: 12 })
+const bannerSaving = ref(false)
+const bannerSaved  = ref(false)
+
+const { data: bannerData } = await useAsyncData<BannerConfig>(
+  'admin-banner',
+  () => $fetch<BannerConfig>('/api/cms/banner'),
+  { default: () => ({ enabled: true, text: 'Бесплатный замер + скидка 10% на монтаж — только сегодня!', label: 'Акция', durationHours: 12 }) },
+)
+if (bannerData.value) banner.value = { ...bannerData.value }
+
+async function saveBanner() {
+  bannerSaving.value = true
+  try {
+    await $fetch('/api/admin/banner', { method: 'POST', body: banner.value })
+    bannerSaved.value = true
+    setTimeout(() => bannerSaved.value = false, 2500)
+  } finally {
+    bannerSaving.value = false
+  }
+}
 </script>
 
 <template>
@@ -96,7 +121,7 @@ function deleteCode(id: number) {
           {{ promos.filter(p => p.active).length }} активных акций · {{ codes.filter(c => c.active).length }} активных промокодов
         </p>
       </div>
-      <button
+      <button v-if="activeTab !== 'banner'"
         class="adm-btn"
         :class="saved ? 'adm-btn--ghost' : 'adm-btn--primary'"
         :disabled="saving"
@@ -112,16 +137,17 @@ function deleteCode(id: number) {
     <div style="display:flex;gap:4px;background:#f4f5f7;padding:4px;border-radius:11px;width:fit-content">
       <button
         v-for="tab in [
-          { key: 'promos', label: 'Акции',      icon: 'lucide:percent', count: promos.length },
-          { key: 'codes',  label: 'Промокоды',  icon: 'lucide:ticket',  count: codes.length },
+          { key: 'promos',  label: 'Акции',      icon: 'lucide:percent',    count: promos.length },
+          { key: 'codes',   label: 'Промокоды',  icon: 'lucide:ticket',     count: codes.length },
+          { key: 'banner',  label: 'Баннер',     icon: 'lucide:megaphone',  count: null },
         ]"
         :key="tab.key"
         :class="['adm-tab-btn', activeTab === tab.key && 'adm-tab-btn--on']"
-        @click="activeTab = tab.key as 'promos' | 'codes'"
+        @click="activeTab = tab.key as 'promos' | 'codes' | 'banner'"
       >
         <Icon :name="tab.icon" style="width:14px;height:14px" />
         {{ tab.label }}
-        <span style="font-size:11px;background:rgba(0,0,0,.07);padding:1px 6px;border-radius:5px;margin-left:2px">{{ tab.count }}</span>
+        <span v-if="tab.count !== null" style="font-size:11px;background:rgba(0,0,0,.07);padding:1px 6px;border-radius:5px;margin-left:2px">{{ tab.count }}</span>
       </button>
     </div>
 
@@ -265,6 +291,63 @@ function deleteCode(id: number) {
             </tr>
           </tbody>
         </table>
+      </div>
+    </div>
+
+    <!-- ═══ БАННЕР ══════════════════════════════════════════════════════ -->
+    <div v-if="activeTab === 'banner'" style="max-width:640px">
+      <div class="adm-card adm-card--pad" style="display:flex;flex-direction:column;gap:18px">
+
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div>
+            <div style="font-size:15px;font-weight:700;color:#111827">Верхний баннер (TopBanner)</div>
+            <div style="font-size:13px;color:#6b7280;margin-top:2px">Показывается вверху сайта с таймером обратного отсчёта</div>
+          </div>
+          <label style="display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none">
+            <span style="font-size:13.5px;font-weight:600;color:#374151">{{ banner.enabled ? 'Включён' : 'Выключен' }}</span>
+            <div
+              @click="banner.enabled = !banner.enabled"
+              :style="`width:42px;height:24px;border-radius:12px;transition:background .2s;cursor:pointer;position:relative;background:${banner.enabled ? '#22c55e' : '#d1d5db'}`"
+            >
+              <div :style="`position:absolute;top:3px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:left .2s;left:${banner.enabled ? '21px' : '3px'}`" />
+            </div>
+          </label>
+        </div>
+
+        <div>
+          <label class="adm-label">Метка (лейбл)</label>
+          <input v-model="banner.label" class="adm-input" placeholder="Акция" />
+          <div style="font-size:12px;color:#9ca3af;margin-top:4px">Короткий текст на цветной таблетке слева</div>
+        </div>
+
+        <div>
+          <label class="adm-label">Текст баннера</label>
+          <input v-model="banner.text" class="adm-input" placeholder="Бесплатный замер + скидка 10% на монтаж — только сегодня!" />
+        </div>
+
+        <div>
+          <label class="adm-label">Длительность таймера (часов)</label>
+          <input v-model.number="banner.durationHours" type="number" min="1" max="72" class="adm-input" style="max-width:160px" />
+          <div style="font-size:12px;color:#9ca3af;margin-top:4px">С момента первого открытия страницы посетителем</div>
+        </div>
+
+        <!-- Preview -->
+        <div v-if="banner.enabled" style="background:#1a1a2e;border-radius:10px;padding:10px 16px;display:flex;align-items:center;gap:14px">
+          <span style="background:#f5c800;color:#1a1a2e;font-weight:700;font-size:11px;padding:3px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0">{{ banner.label || 'Акция' }}</span>
+          <span style="color:#fff;font-size:13px;font-weight:500;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ banner.text || '…' }}</span>
+          <span style="color:#aaa;font-size:12px;white-space:nowrap;flex-shrink:0">{{ banner.durationHours }}ч ⏱</span>
+        </div>
+        <div v-else style="background:#f3f4f6;border-radius:10px;padding:10px 16px;text-align:center;font-size:13px;color:#9ca3af">
+          Баннер скрыт на сайте
+        </div>
+
+        <div style="display:flex;justify-content:flex-end">
+          <button class="adm-btn" :class="bannerSaved ? 'adm-btn--ghost' : 'adm-btn--primary'" :disabled="bannerSaving" @click="saveBanner">
+            <Icon :name="bannerSaved ? 'lucide:check' : bannerSaving ? 'lucide:loader-2' : 'lucide:save'" style="width:15px;height:15px" />
+            {{ bannerSaved ? 'Сохранено!' : bannerSaving ? 'Сохраняем…' : 'Сохранить баннер' }}
+          </button>
+        </div>
+
       </div>
     </div>
 

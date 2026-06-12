@@ -224,7 +224,7 @@
 </template>
 
 <script setup lang="ts">
-import { site } from '~/data/site'
+const site = useSite()
 import { company, districts } from '~/data/contacts'
 
 useHead({

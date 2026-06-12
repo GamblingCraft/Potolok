@@ -223,7 +223,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import { site } from '~/data/site'
+const site = useSite()
 
 useHead({
   title: 'Натяжные потолки в Правобережном округе Иркутска — от 159 ₽/м² | ПроПотолок',

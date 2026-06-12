@@ -110,7 +110,7 @@
 </template>
 
 <script setup lang="ts">
-import { site } from '~/data/site'
+const site = useSite()
 useHead({
   title: 'Обмен и возврат — ПроПотолок Иркутск',
   meta: [{ name: 'description', content: 'Условия обмена и возврата в компании ПроПотолок. Работаем по Закону о защите прав потребителей. Возврат средств в течение 10 дней.' }],

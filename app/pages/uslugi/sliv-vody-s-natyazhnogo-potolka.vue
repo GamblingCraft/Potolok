@@ -197,7 +197,7 @@
 </template>
 
 <script setup lang="ts">
-import { site } from '~/data/site'
+const site = useSite()
 import { services } from '~/data/services'
 import { usePageContent } from '~/composables/usePageContent'
 

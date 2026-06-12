@@ -101,7 +101,7 @@
 </template>
 
 <script setup lang="ts">
-import { site } from '~/data/site'
+const site = useSite()
 useHead({
   title: 'Сертификаты и лицензии ПроПотолок — Иркутск',
   meta: [{ name: 'description', content: 'Сертификаты соответствия, гигиенические заключения и лицензии компании ПроПотолок. Все материалы проверены и сертифицированы.' }],

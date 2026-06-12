@@ -130,6 +130,6 @@
 </template>
 
 <script setup lang="ts">
-import { site } from '~/data/site'
 defineEmits(['openCallback'])
+const site = useSite()
 </script>

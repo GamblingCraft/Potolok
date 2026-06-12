@@ -144,7 +144,7 @@
 </template>
 
 <script setup lang="ts">
-import { site } from '~/data/site'
+const site = useSite()
 useHead({
   title: 'Реквизиты ООО «ПроПотолок» — ИНН, ОГРН, банковские данные | Иркутск',
   meta: [{ name: 'description', content: 'Официальные реквизиты компании ПроПотолок: ИНН, ОГРН, КПП, расчётный счёт, банк. Скачать PDF или скопировать.' }],
@@ -154,7 +154,7 @@ const copied    = ref<string | null>(null)
 const copiedAll = ref(false)
 const toastMsg  = ref('')
 
-const mainData = [
+const mainData = computed(() => [
   { label: 'Полное наименование',  val: `Общество с ограниченной ответственностью «${site.name}»` },
   { label: 'Краткое наименование', val: site.nameFull },
   { label: 'ИНН',   val: site.inn },
@@ -162,15 +162,15 @@ const mainData = [
   { label: 'ОГРН',  val: site.ogrn },
   { label: 'ОКПО',  val: site.okpo },
   { label: 'ОКВЭД', val: site.okved },
-]
+])
 
-const bankData = [
+const bankData = computed(() => [
   { label: 'Банк',             val: site.bank },
   { label: 'БИК',              val: site.bankBik },
   { label: 'Расчётный счёт',   val: site.bankAccount },
   { label: 'Корр. счёт',       val: site.bankKorr },
   { label: 'Отделение банка',  val: site.bankBranch },
-]
+])
 
 const contactData = computed(() => [
   { label: 'Телефон',       val: site.phone },
@@ -179,12 +179,12 @@ const contactData = computed(() => [
   { label: 'Режим работы',  val: site.schedule },
 ])
 
-const addressData = [
+const addressData = computed(() => [
   { label: 'Юридический адрес',    val: site.addressLegal },
   { label: 'Фактический адрес',    val: site.addressFull },
   { label: 'Почтовый адрес',       val: site.addressFull },
   { label: 'Генеральный директор', val: site.director },
-]
+])
 
 function copy(val: string, label: string) {
   navigator.clipboard.writeText(val)

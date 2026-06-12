@@ -93,7 +93,7 @@
 </template>
 
 <script setup lang="ts">
-import { site } from '~/data/site'
+const site = useSite()
 import { faqCategories } from '~/data/faq'
 
 useHead({

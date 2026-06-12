@@ -1,13 +1,13 @@
 <template>
-  <div v-if="visible" class="top-banner">
+  <div v-if="visible && config.enabled" class="top-banner">
     <div class="top-banner__inner container">
 
       <div class="top-banner__text">
         <span class="top-banner__label">
           <Icon name="lucide:zap" size="12" />
-          Акция
+          {{ config.label }}
         </span>
-        Бесплатный замер + скидка 10% на монтаж — только сегодня!
+        {{ config.text }}
       </div>
 
       <div class="top-banner__timer">
@@ -33,10 +33,17 @@
 </template>
 
 <script setup lang="ts">
-const DURATION = 12 * 60 * 60
+import type { BannerConfig } from '~/server/api/cms/banner.get'
+
+const { data: configData } = await useAsyncData<BannerConfig>(
+  'top-banner-config',
+  () => $fetch<BannerConfig>('/api/cms/banner'),
+  { default: () => ({ enabled: true, text: 'Бесплатный замер + скидка 10% на монтаж — только сегодня!', label: 'Акция', durationHours: 12 }) },
+)
+const config = computed(() => configData.value!)
 
 const visible = ref(false)
-const remaining = ref(DURATION)
+const remaining = ref(0)
 
 const pad = (n: number) => String(n).padStart(2, '0')
 const hh = computed(() => pad(Math.floor(remaining.value / 3600)).split(''))
@@ -48,8 +55,9 @@ let interval: ReturnType<typeof setInterval>
 onMounted(() => {
   if (localStorage.getItem('banner_closed')) return
 
+  const duration = (config.value.durationHours ?? 12) * 3600
   const saved = localStorage.getItem('banner_end')
-  const end = saved ? parseInt(saved) : Date.now() + DURATION * 1000
+  const end = saved ? parseInt(saved) : Date.now() + duration * 1000
   if (!saved) localStorage.setItem('banner_end', String(end))
 
   remaining.value = Math.max(0, Math.round((end - Date.now()) / 1000))
