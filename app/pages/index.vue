@@ -5,8 +5,8 @@
       <div class="container hero__container">
 
         <div class="hero__content">
-          <div class="hero__pretitle">Натяжные потолки в Иркутске</div>
-          <h1 class="hero__title">Европейские натяжные&nbsp;потолки — от&nbsp;<span class="hero__title-price">{{ _prices?.['base'] ?? 159 }}&nbsp;руб./м²</span></h1>
+          <h1 class="hero__pretitle">Натяжные потолки в Иркутске</h1>
+          <div class="hero__title">Европейские натяжные&nbsp;потолки — от&nbsp;<span class="hero__title-price">{{ _prices?.['base'] ?? 159 }}&nbsp;руб./м²</span></div>
           <p class="hero__text">
             Акция: <span class="hero__text-accent">3-й потолок в подарок!</span><br>
             Гарантия по договору 12 лет. Монтаж за 1 день.<br>

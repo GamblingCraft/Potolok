@@ -126,6 +126,11 @@
                 <NuxtLink to="/catalog/vidy/natyazhnye-potolki-zvezdnoe-nebo" @click="megaOpen = false">Звёздное небо</NuxtLink>
                 <NuxtLink to="/catalog/vidy/natyazhnye-potolki-so-svetovymi-liniyami" @click="megaOpen = false">Световые линии</NuxtLink>
                 <NuxtLink to="/catalog/vidy/besshchelevye-natyazhnye-potolki" @click="megaOpen = false">Бесщелевые</NuxtLink>
+                <NuxtLink to="/catalog/vidy/mnogourovenye-natyazhnye-potolki" @click="megaOpen = false">Многоуровневые</NuxtLink>
+                <NuxtLink to="/catalog/vidy/besshovnye-natyazhnye-potolki" @click="megaOpen = false">Бесшовные</NuxtLink>
+                <NuxtLink to="/catalog/vidy/natyazhnye-potolki-3d" @click="megaOpen = false">3D потолки</NuxtLink>
+                <NuxtLink to="/catalog/vidy/krivolinejnye-natyazhnye-potolki" @click="megaOpen = false">Криволинейные</NuxtLink>
+                <NuxtLink to="/catalog/vidy/konturnye-natyazhnye-potolki" @click="megaOpen = false">Контурные</NuxtLink>
               </div>
             </nav>
 
@@ -140,6 +145,10 @@
                 <NuxtLink to="/catalog/po-pomescheniyu/natyazhnye-potolki-v-prihozhey" @click="megaOpen = false">В прихожую</NuxtLink>
                 <NuxtLink to="/catalog/po-pomescheniyu/natyazhnye-potolki-v-kvartire" @click="megaOpen = false">В квартиру</NuxtLink>
                 <NuxtLink to="/catalog/po-pomescheniyu/natyazhnye-potolki-v-chastnom-dome" @click="megaOpen = false">В частный дом</NuxtLink>
+                <NuxtLink to="/catalog/po-pomescheniyu/natyazhnye-potolki-v-tualete" @click="megaOpen = false">В туалете</NuxtLink>
+                <NuxtLink to="/catalog/po-pomescheniyu/natyazhnye-potolki-v-ofise" @click="megaOpen = false">В офисе</NuxtLink>
+                <NuxtLink to="/catalog/po-pomescheniyu/natyazhnye-potolki-na-balkone" @click="megaOpen = false">На балконе</NuxtLink>
+                <NuxtLink to="/catalog/po-pomescheniyu/natyazhnye-potolki-na-dache" @click="megaOpen = false">На даче</NuxtLink>
               </div>
             </nav>
 
@@ -166,6 +175,8 @@
                 <NuxtLink to="/uslugi/remont-natyazhnogo-potolka" @click="megaOpen = false">Ремонт потолка</NuxtLink>
                 <NuxtLink to="/uslugi/sliv-vody-s-natyazhnogo-potolka" @click="megaOpen = false">Слив воды</NuxtLink>
                 <NuxtLink to="/uslugi/zamena-polotna" @click="megaOpen = false">Замена полотна</NuxtLink>
+                <NuxtLink to="/uslugi/peretyazhka-potolka" @click="megaOpen = false">Перетяжка потолка</NuxtLink>
+                <NuxtLink to="/uslugi/ustanovka-svetilnikov" @click="megaOpen = false">Установка светильников</NuxtLink>
               </div>
             </nav>
 
@@ -253,7 +264,6 @@
             <NuxtLink to="/catalog/vidy/natyazhnye-potolki-zvezdnoe-nebo" @click="mobileOpen = false">Звёздное небо</NuxtLink>
             <NuxtLink to="/catalog/vidy/natyazhnye-potolki-so-svetovymi-liniyami" @click="mobileOpen = false">Световые линии</NuxtLink>
             <NuxtLink to="/catalog/vidy/konturnye-natyazhnye-potolki" @click="mobileOpen = false">Контурные</NuxtLink>
-            <NuxtLink to="/catalog/osveshchenie" @click="mobileOpen = false">Системы освещения</NuxtLink>
           </div>
         </div>
 

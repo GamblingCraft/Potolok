@@ -139,7 +139,7 @@
             <meta itemprop="position" :content="String(i + 1)"/>
             <meta itemprop="name" :content="step.title"/>
             <meta itemprop="text" :content="step.desc"/>
-            <div class="ms-step__num">{{ String(i + 1).padStart(2, '0') }}</div>
+            <div class="ms-step__num">{{ i + 1 }}</div>
             <div class="ms-step__icon"><Icon :name="step.icon" size="24"/></div>
             <div class="ms-step__title" itemprop="name">{{ step.title }}</div>
             <div class="ms-step__desc">{{ step.desc }}</div>
@@ -398,6 +398,7 @@ function submitHero() {
 /* ═══ Переменные и утилиты ═══ */
 .ms-pretitle {
   display: inline-block;
+  background: var(--accent); color: var(--dark);
   font-size: 12px; font-weight: 700;
   padding: 3px 14px; border-radius: 20px;
   margin-bottom: 14px;
@@ -604,6 +605,7 @@ function submitHero() {
   gap: 16px;
 }
 .ms-step {
+  overflow: hidden;
   background: #1e1e1e; border: 1px solid #2a2a2a;
   border-radius: 18px; padding: 26px 22px;
   position: relative;
@@ -611,11 +613,15 @@ function submitHero() {
 }
 .ms-step:hover { border-color: var(--accent); }
 .ms-step__num {
-  position: absolute; top: 18px; right: 18px;
-  font-size: 36px; font-weight: 900;
-  color: rgba(245,200,0,.08);
-  font-family: 'Gilroy', sans-serif;
+  position: absolute; bottom: -60px; right: -6px;
+  font-size: 200px; font-weight: 900;
+  font-family: var(--font);
   line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--accent);
+  text-stroke: 2px var(--accent);
+  opacity: .2;
+  user-select: none;
 }
 .ms-step__icon {
   width: 50px; height: 50px;

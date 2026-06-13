@@ -28,7 +28,7 @@ const GROUPS = [
     label: 'Основные страницы',
     icon: 'lucide:layout-dashboard',
     hasTemplate: false,
-    slugs: ['index', 'catalog', 'ceny', 'akczii', 'otzyvy', 'portfolio', 'kontakty', 'kalkulyator', 'o-kompanii', 'garantiya', 'voprosy-otvety', 'rekvizity', 'sertifikaty', 'obmen-i-vozvrat'],
+    slugs: ['index', 'catalog', 'ceny', 'akczii', 'otzyvy', 'portfolio', 'kontakty', 'kalkulyator', 'o-kompanii', 'garantiya', 'voprosy-otvety', 'rekvizity', 'sertifikaty', 'obmen-i-vozvrat', 'rassrochka-i-oplata', 'politika-konfidentsialnosti'],
   },
   {
     key: 'faktury',
@@ -42,7 +42,7 @@ const GROUPS = [
     label: 'Каталог — Виды',
     icon: 'lucide:sparkles',
     hasTemplate: true,
-    slugs: ['vidy', 'paryashchie-natyazhnye-potolki', 'natyazhnye-potolki-s-podsvetkoy', 'dvuhurovnevye-natyazhnye-potolki', 'natyazhnye-potolki-s-fotopechatyu', 'natyazhnye-potolki-zvezdnoe-nebo', 'natyazhnye-potolki-so-svetovymi-liniyami', 'tenevye-natyazhnye-potolki', 'konturnye-natyazhnye-potolki', 'mnogourovenye-natyazhnye-potolki', 'krivolinejnye-natyazhnye-potolki'],
+    slugs: ['vidy', 'paryashchie-natyazhnye-potolki', 'natyazhnye-potolki-s-podsvetkoy', 'dvuhurovnevye-natyazhnye-potolki', 'natyazhnye-potolki-s-fotopechatyu', 'natyazhnye-potolki-zvezdnoe-nebo', 'natyazhnye-potolki-so-svetovymi-liniyami', 'tenevye-natyazhnye-potolki', 'konturnye-natyazhnye-potolki', 'mnogourovenye-natyazhnye-potolki', 'krivolinejnye-natyazhnye-potolki', 'besshchelevye-natyazhnye-potolki', 'natyazhnye-potolki-3d'],
   },
   {
     key: 'tsveta',

@@ -88,7 +88,7 @@
         <div class="ms-steps-grid ms-steps-grid--4">
           <div class="ms-step" v-for="(step, i) in steps" :key="step.title" itemprop="step" itemscope itemtype="https://schema.org/HowToStep">
             <meta itemprop="position" :content="String(i + 1)"/><meta itemprop="name" :content="step.title"/><meta itemprop="text" :content="step.desc"/>
-            <div class="ms-step__num">{{ String(i + 1).padStart(2, '0') }}</div>
+            <div class="ms-step__num">{{ i + 1 }}</div>
             <div class="ms-step__icon"><Icon :name="step.icon" size="24"/></div>
             <div class="ms-step__title">{{ step.title }}</div>
             <div class="ms-step__desc">{{ step.desc }}</div>

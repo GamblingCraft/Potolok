@@ -90,7 +90,6 @@
           <NuxtLink to="/catalog/vidy/natyazhnye-potolki-zvezdnoe-nebo">Звёздное небо</NuxtLink>
           <NuxtLink to="/catalog/vidy/natyazhnye-potolki-so-svetovymi-liniyami">Световые линии</NuxtLink>
           <NuxtLink to="/catalog/vidy/konturnye-natyazhnye-potolki">Контурные</NuxtLink>
-          <NuxtLink to="/catalog/osveshchenie">Системы освещения</NuxtLink>
         </div>
 
         <div class="footer__item">

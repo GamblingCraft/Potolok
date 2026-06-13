@@ -74,7 +74,7 @@
             <meta itemprop="position" :content="String(i + 1)"/>
             <meta itemprop="name" :content="step.title"/>
             <meta itemprop="text" :content="step.desc"/>
-            <div class="ms-step__num">{{ String(i + 1).padStart(2, '0') }}</div>
+            <div class="ms-step__num">{{ i + 1 }}</div>
             <div class="ms-step__icon"><Icon :name="step.icon" size="24"/></div>
             <div class="ms-step__title">{{ step.title }}</div>
             <div class="ms-step__desc">{{ step.desc }}</div>

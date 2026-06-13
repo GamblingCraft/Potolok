@@ -119,7 +119,7 @@
             <meta itemprop="position" :content="String(i + 1)"/>
             <meta itemprop="name" :content="step.title"/>
             <meta itemprop="text" :content="step.desc"/>
-            <div class="ms-step__num">{{ String(i + 1).padStart(2, '0') }}</div>
+            <div class="ms-step__num">{{ i + 1 }}</div>
             <div class="ms-step__icon"><Icon :name="step.icon" size="24"/></div>
             <div class="ms-step__title">{{ step.title }}</div>
             <div class="ms-step__desc">{{ step.desc }}</div>
@@ -398,62 +398,16 @@ function submitHero() { callbackOpen.value = true }
 .ms-steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .ms-step { background: #1e1e1e; border: 1px solid #2a2a2a; border-radius: 18px; padding: 26px 22px; position: relative; transition: border-color .2s; }
 .ms-step:hover { border-color: var(--accent); }
-.ms-step__num { position: absolute; top: 18px; right: 18px; font-size: 36px; font-weight: 900; color: rgba(245,200,0,.08); font-family: 'Gilroy', sans-serif; line-height: 1; }
-.ms-step__icon { width: 50px; height: 50px; background: rgba(245,200,0,.12); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: var(--accent); margin-bottom: 16px; transition: background .2s; }
-.ms-step:hover .ms-step__icon { background: var(--accent); color: var(--dark); }
-.ms-step__title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px; }
-.ms-step__desc  { font-size: 13px; color: rgba(255,255,255,.45); line-height: 1.6; margin-bottom: 12px; }
-.ms-step__time  { display: inline-flex; align-items: center; gap: 5px; font-size: 11px; font-weight: 700; color: var(--accent); background: rgba(245,200,0,.1); padding: 3px 10px; border-radius: 20px; }
-
-/* ПОЧЕМУ МЫ */
-.ms-why { background: #fff; }
-.ms-why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.ms-why-card { background: #f7f7f7; border-radius: 16px; padding: 26px 22px; border: 1.5px solid transparent; transition: border-color .15s, box-shadow .15s; }
-.ms-why-card:hover { border-color: var(--accent); box-shadow: 0 4px 20px rgba(245,200,0,.1); }
-.ms-why-card__icon { width: 50px; height: 50px; background: var(--accent); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: var(--dark); margin-bottom: 14px; }
-.ms-why-card__title { font-size: 15px; font-weight: 700; color: var(--dark); margin-bottom: 7px; }
-.ms-why-card__desc  { font-size: 13px; color: var(--gray); line-height: 1.6; }
-
-/* CTA */
-.ms-cta { background: #141414; padding: 64px 0; }
-.ms-cta__inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
-.ms-cta__title { font-size: 30px; font-weight: 900; color: #fff; margin-bottom: 8px; }
-.ms-cta__desc  { font-size: 15px; color: rgba(255,255,255,.4); max-width: 440px; }
-.ms-cta__btns  { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
-.ms-cta__btn   { display: inline-flex; align-items: center; gap: 8px; padding: 14px 28px; font-size: 15px; }
-.ms-cta__outline { display: inline-flex; align-items: center; gap: 8px; padding: 13px 26px; font-size: 15px; font-weight: 700; font-family: var(--font); background: none; border: 2px solid rgba(255,255,255,.2); border-radius: 10px; color: #fff; cursor: pointer; text-decoration: none; transition: border-color .15s, color .15s; }
-.ms-cta__outline:hover { border-color: var(--accent); color: var(--accent); }
-
-/* FAQ */
-.ms-faq { background: #f7f7f7; }
-.ms-faq-list { display: flex; flex-direction: column; gap: 10px; max-width: 860px; margin: 0 auto; }
-.ms-faq-item { background: #fff; border-radius: 14px; border: 1.5px solid #eee; overflow: hidden; cursor: pointer; transition: border-color .15s; }
-.ms-faq-item.open { border-color: var(--accent); }
-.ms-faq-item__q { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 22px; font-size: 15px; font-weight: 700; color: var(--dark); user-select: none; }
-.ms-faq-item__arrow { flex-shrink: 0; color: var(--gray); }
-.ms-faq-item.open .ms-faq-item__arrow { color: var(--accent); }
-.ms-faq-item__a { max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .3s; font-size: 14px; color: #555; line-height: 1.7; padding: 0 22px; }
-.ms-faq-item.open .ms-faq-item__a { max-height: 300px; padding: 0 22px 18px; }
-
-/* SEO */
-.ms-seo { background: #fff; }
-.ms-seo-inner { display: grid; grid-template-columns: 1fr 240px; gap: 56px; align-items: start; }
-.ms-seo-content h2 { font-size: 22px; font-weight: 800; color: var(--dark); margin: 0 0 14px; }
-.ms-seo-content h3 { font-size: 16px; font-weight: 700; color: var(--dark); margin: 20px 0 8px; }
-.ms-seo-content p  { font-size: 15px; color: #555; line-height: 1.75; margin-bottom: 10px; }
-.ms-seo-content strong { color: var(--dark); }
-.ms-seo-links { position: sticky; top: 100px; }
-.ms-seo-links__title { font-size: 14px; font-weight: 800; color: var(--dark); margin-bottom: 14px; text-transform: uppercase; letter-spacing: .4px; }
-.ms-seo-link { display: flex; align-items: center; gap: 7px; padding: 9px 0; font-size: 14px; font-weight: 500; color: var(--gray); text-decoration: none; border-bottom: 1px solid #f0f0f0; transition: color .15s, padding-left .15s; }
-.ms-seo-link:hover { color: var(--dark); padding-left: 4px; }
-
-/* Responsive */
-@media (max-width: 1100px) {
-  .ms-hero__inner { grid-template-columns: 1fr; }
-  .ms-hero__nums  { grid-template-columns: repeat(4, 1fr); }
-  .ms-cases-grid  { grid-template-columns: repeat(2, 1fr); }
-  .ms-steps-grid  { grid-template-columns: repeat(2, 1fr); }
-  .ms-why-grid    { grid-template-columns: repeat(2, 1fr); }
+.ms-step__num {
+  position: absolute; bottom: -60px; right: -6px;
+  font-size: 200px; font-weight: 900;
+  font-family: var(--font);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 2px var(--accent);
+  text-stroke: 2px var(--accent);
+  opacity: .2;
+  user-select: none;
 }
 @media (max-width: 860px) {
   .ms-two-col    { grid-template-columns: 1fr; }
