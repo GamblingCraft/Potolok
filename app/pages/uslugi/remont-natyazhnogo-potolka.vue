@@ -257,7 +257,7 @@ function submitHero() { callbackOpen.value = true }
 </script>
 
 <style scoped>
-.ms-pretitle { display: inline-block; font-size: 12px; font-weight: 700; padding: 3px 14px; border-radius: 20px; margin-bottom: 14px; text-transform: uppercase; letter-spacing: .5px; }
+.ms-pretitle { display: inline-block; background: var(--accent); color: var(--dark); font-size: 12px; font-weight: 700; padding: 3px 14px; border-radius: 20px; margin-bottom: 14px; text-transform: uppercase; letter-spacing: .5px; }
 .ms-pretitle--dark  { background: var(--accent); color: var(--dark); }
 .ms-pretitle--light { background: rgba(245,200,0,.15); color: var(--accent); }
 .ms-head { text-align: center; margin-bottom: 44px; }
@@ -317,9 +317,9 @@ function submitHero() { callbackOpen.value = true }
 .ms-steps { background: #141414; }
 .ms-steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .ms-steps-grid--4 { grid-template-columns: repeat(4, 1fr); }
-.ms-step { background: #1e1e1e; border: 1px solid #2a2a2a; border-radius: 18px; padding: 26px 22px; position: relative; transition: border-color .2s; }
+.ms-step { background: #1e1e1e; border: 1px solid #2a2a2a; border-radius: 18px; padding: 26px 22px; position: relative; overflow: hidden; overflow: hidden; transition: border-color .2s; }
 .ms-step:hover { border-color: var(--accent); }
-.ms-step__num { position: absolute; top: 18px; right: 18px; font-size: 36px; font-weight: 900; color: rgba(245,200,0,.08); font-family: 'Gilroy', sans-serif; line-height: 1; }
+.ms-step__num { position: absolute; bottom: -60px; right: -6px; font-size: 200px; font-weight: 900; font-family: var(--font); line-height: 1; color: transparent; -webkit-text-stroke: 2px var(--accent); text-stroke: 2px var(--accent); opacity: .2; user-select: none; }
 .ms-step__icon { width: 50px; height: 50px; background: rgba(245,200,0,.12); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: var(--accent); margin-bottom: 16px; transition: background .2s; }
 .ms-step:hover .ms-step__icon { background: var(--accent); color: var(--dark); }
 .ms-step__title { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 8px; }

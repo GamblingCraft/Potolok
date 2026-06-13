@@ -396,7 +396,7 @@ function submitHero() { callbackOpen.value = true }
 /* ЭТАПЫ */
 .ms-steps { background: #141414; }
 .ms-steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-.ms-step { background: #1e1e1e; border: 1px solid #2a2a2a; border-radius: 18px; padding: 26px 22px; position: relative; transition: border-color .2s; }
+.ms-step { background: #1e1e1e; border: 1px solid #2a2a2a; border-radius: 18px; padding: 26px 22px; position: relative; overflow: hidden; overflow: hidden; transition: border-color .2s; }
 .ms-step:hover { border-color: var(--accent); }
 .ms-step__num {
   position: absolute; bottom: -60px; right: -6px;
