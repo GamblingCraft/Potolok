@@ -44,7 +44,7 @@ export function usePageSeoMeta(slug: string) {
   )
 
   const { data: prices } = useAsyncData<Record<string, number>>(
-    'catalog-prices',
+    'catalog-prices-seo',
     () => $fetch<Record<string, number>>('/api/cms/catalog-prices'),
     { default: () => ({}) as Record<string, number> },
   )

@@ -109,7 +109,7 @@
         </div>
         <div class="ab-steps">
           <div v-for="(step, i) in steps" :key="step.title" class="ab-step">
-            <div class="ab-step__num">{{ String(i + 1).padStart(2, '0') }}</div>
+            <div class="ab-step__num">{{ i + 1 }}</div>
             <div class="ab-step__icon"><Icon :name="step.icon" size="26"/></div>
             <div class="ab-step__title">{{ step.title }}</div>
             <div class="ab-step__desc">{{ step.desc }}</div>
@@ -466,10 +466,10 @@ const schemaOrg = computed(() => JSON.stringify({
 .ab-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; }
 .ab-step {
   padding: 28px 24px; border-right: 1px solid #2a2a2a;
-  position: relative;
+  position: relative; overflow: hidden;
 }
 .ab-step:last-child { border-right: none; }
-.ab-step__num { font-size: 48px; font-weight: 900; color: rgba(255,255,255,.04); font-family: 'Gilroy', sans-serif; line-height: 1; margin-bottom: 14px; }
+.ab-step__num { position: absolute; bottom: -60px; right: -6px; font-size: 200px; font-weight: 900; font-family: var(--font); line-height: 1; color: transparent; -webkit-text-stroke: 2px var(--accent); text-stroke: 2px var(--accent); opacity: .2; user-select: none; }
 .ab-step__icon { color: var(--accent); margin-bottom: 12px; }
 .ab-step__title { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 8px; }
 .ab-step__desc  { font-size: 13px; color: rgba(255,255,255,.4); line-height: 1.6; }

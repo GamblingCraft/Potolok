@@ -63,7 +63,7 @@
         </div>
         <div class="gr-steps">
           <div class="gr-step" v-for="(s, i) in steps" :key="s.title">
-            <div class="gr-step__num">{{ String(i+1).padStart(2,'0') }}</div>
+            <div class="gr-step__num">{{ i + 1 }}</div>
             <div class="gr-step__icon"><Icon :name="s.icon" size="24"/></div>
             <div class="gr-step__title">{{ s.title }}</div>
             <div class="gr-step__desc">{{ s.desc }}</div>
@@ -211,7 +211,7 @@ const faq = [
 .gr-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-bottom: 36px; }
 .gr-step { padding: 24px; border-right: 1px solid #2a2a2a; }
 .gr-step:last-child { border-right: none; }
-.gr-step__num { font-size: 40px; font-weight: 900; color: rgba(255,255,255,.04); font-family: 'Gilroy', sans-serif; margin-bottom: 12px; line-height: 1; }
+.gr-step__num { position: absolute; bottom: -60px; right: -6px; font-size: 200px; font-weight: 900; font-family: var(--font); line-height: 1; color: transparent; -webkit-text-stroke: 2px var(--accent); text-stroke: 2px var(--accent); opacity: .2; user-select: none; }
 .gr-step__icon { color: var(--accent); margin-bottom: 10px; }
 .gr-step__title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 6px; }
 .gr-step__desc  { font-size: 13px; color: rgba(255,255,255,.4); line-height: 1.6; }

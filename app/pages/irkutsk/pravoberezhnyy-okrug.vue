@@ -106,7 +106,7 @@
         </div>
         <div class="gp-steps-grid">
           <div class="gp-step" v-for="(s, i) in steps" :key="s.title">
-            <div class="gp-step__num">{{ String(i + 1).padStart(2, '0') }}</div>
+            <div class="gp-step__num">{{ i + 1 }}</div>
             <div class="gp-step__icon"><Icon :name="s.icon" size="22"/></div>
             <div class="gp-step__title">{{ s.title }}</div>
             <div class="gp-step__desc">{{ s.desc }}</div>
@@ -370,9 +370,9 @@ const faqs = [
 .gp-price-card__btn:hover { opacity: .9; }
 .gp-steps { background: #141414; }
 .gp-steps-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
-.gp-step { background: #1e1e1e; border: 1px solid #2a2a2a; border-radius: 18px; padding: 24px 20px; position: relative; transition: border-color .2s; }
+.gp-step { background: #1e1e1e; border: 1px solid #2a2a2a; border-radius: 18px; padding: 24px 20px; position: relative; overflow: hidden; transition: border-color .2s; }
 .gp-step:hover { border-color: var(--accent); }
-.gp-step__num { position: absolute; top: 16px; right: 16px; font-size: 34px; font-weight: 900; color: rgba(245,200,0,.07); line-height: 1; }
+.gp-step__num { position: absolute; bottom: -60px; right: -6px; font-size: 200px; font-weight: 900; font-family: var(--font); line-height: 1; color: transparent; -webkit-text-stroke: 2px var(--accent); text-stroke: 2px var(--accent); opacity: .2; user-select: none; }
 .gp-step__icon { width: 48px; height: 48px; background: rgba(245,200,0,.12); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: var(--accent); margin-bottom: 14px; transition: background .2s; }
 .gp-step:hover .gp-step__icon { background: var(--accent); color: var(--dark); }
 .gp-step__title { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 8px; }
