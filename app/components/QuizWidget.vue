@@ -54,7 +54,7 @@
               <input v-model="contactName" class="quiz-input" type="text" placeholder="Ваше имя" />
               <input v-model="contactPhone" class="quiz-input" type="tel" placeholder="+7 (999) 999-99-99" />
               <button class="nav-btn quiz-submit" @click="submit">
-                Получить скидку
+                Получить подарок
               </button>
             </div>
           </template>

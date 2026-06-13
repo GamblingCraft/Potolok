@@ -145,10 +145,7 @@
 
 <script setup lang="ts">
 const site = useSite()
-useHead({
-  title: 'Реквизиты ООО «ПроПотолок» — ИНН, ОГРН, банковские данные | Иркутск',
-  meta: [{ name: 'description', content: 'Официальные реквизиты компании ПроПотолок: ИНН, ОГРН, КПП, расчётный счёт, банк. Скачать PDF или скопировать.' }],
-})
+usePageSeoMeta('rekvizity')
 
 const copied    = ref<string | null>(null)
 const copiedAll = ref(false)

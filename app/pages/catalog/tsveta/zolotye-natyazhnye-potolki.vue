@@ -284,21 +284,8 @@ const price = computed(() => _prices.value?.['base'] ?? item.price)
 const item = tsveta.find(c => c.id === 'gold')!
 const worksWithPrice = portfolio.value.filter(g => g.price)
 
-useHead({
-  title: 'Золотые натяжные потолки в Иркутске — от 199 ₽/м² с монтажом | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Золотые натяжные потолки в Иркутске от 199 ₽/м² с монтажом. Матовое, глянцевое, розовое золото — роскошный интерьер для гостиной и ресторана. Монтаж за 1 день, гарантия 12 лет.' },
-    { property: 'og:title', content: 'Золотые натяжные потолки в Иркутске | ПроПотолок' },
-    { property: 'og:description', content: 'Золотые потолки от 199 ₽/м². Монтаж за 1 день, гарантия 12 лет, бесплатный замер.' },
-    { property: 'og:image', content: item.img },
-  ],
-  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({
-    '@context': 'https://schema.org', '@type': 'Product',
-    name: 'Золотые натяжные потолки', description: 'Золотые натяжные потолки из ПВХ-плёнки. Матовое и глянцевое золото, монтаж в Иркутске.',
-    brand: { '@type': 'Brand', name: 'ПроПотолок' },
-    offers: { '@type': 'Offer', price: price.value, priceCurrency: 'RUB', availability: 'https://schema.org/InStock' },
-  }) }],
-})
+usePageSeoMeta('zolotye-natyazhnye-potolki')
+useHead({ meta: [{ property: 'og:image', content: item.img }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

@@ -321,35 +321,8 @@ const item = faktury.find(f => f.id === 'gly')!
 const worksWithPrice = portfolio.value.filter(g => g.price)
 
 // ── SEO ────────────────────────────────────────────────────────
-useHead({
-  title: 'Глянцевые натяжные потолки в Иркутске — цены от 209 ₽/м² с монтажом | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Глянцевые натяжные потолки в Иркутске от 209 ₽/м² с монтажом. 100+ цветов, европейские полотна MSD и Bauf. Монтаж за 1 день, гарантия 12 лет, без предоплаты.' },
-    { property: 'og:title', content: 'Глянцевые натяжные потолки в Иркутске | ПроПотолок' },
-    { property: 'og:description', content: 'Глянцевые потолки от 209 ₽/м². Монтаж за 1 день, гарантия 12 лет, бесплатный замер.' },
-    { property: 'og:image', content: item.img },
-    { property: 'og:type', content: 'product' },
-  ],
-  script: [
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'Product',
-        name: 'Глянцевые натяжные потолки',
-        description: 'Глянцевые натяжные потолки из ПВХ-плёнки с зеркальным эффектом. 100+ цветов, монтаж в Иркутске.',
-        brand: { '@type': 'Brand', name: 'ПроПотолок' },
-        offers: {
-          '@type': 'Offer',
-          price: price.value,
-          priceCurrency: 'RUB',
-          availability: 'https://schema.org/InStock',
-          seller: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' } },
-        },
-      }),
-    },
-  ],
-})
+usePageSeoMeta('glyancevye-natyazhnye-potolki')
+useHead({ meta: [{ property: 'og:image', content: item.img }, { property: 'og:type', content: 'product' }] })
 
 // ── State ──────────────────────────────────────────────────────
 const callbackOpen = ref(false)

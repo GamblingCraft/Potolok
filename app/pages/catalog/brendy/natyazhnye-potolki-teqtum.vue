@@ -229,10 +229,8 @@ onMounted(() => {
   document.addEventListener('keydown', onKey)
   onUnmounted(() => document.removeEventListener('keydown', onKey))
 })
-useHead({
-  title: 'Натяжные потолки Teqtum в Иркутске — от 279 ₽/м² с монтажом | ПроПотолок',
-  meta: [{ name: 'description', content: 'Натяжные потолки Teqtum в Иркутске от 279 ₽/м². Единственная плёнка с сертификатом МЧС России. Без формальдегидов. Монтаж за 1 день, гарантия 12 лет.' }, { property: 'og:image', content: item.img }],
-})
+usePageSeoMeta('natyazhnye-potolki-teqtum')
+useHead({ meta: [{ property: 'og:image', content: item.img }] })
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)
 const formName = ref('')

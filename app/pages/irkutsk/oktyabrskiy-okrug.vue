@@ -238,46 +238,8 @@
 import { ref } from 'vue'
 const site = useSite()
 
-useHead({
-  title: 'Натяжные потолки в Октябрьском округе Иркутска — от 159 ₽/м² | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Монтаж натяжных потолков в Октябрьском округе Иркутска. Бесплатный замер, монтаж за 1 день, гарантия 12 лет по договору. Без предоплаты. Цены от 159 ₽/м².' },
-    { name: 'keywords', content: 'натяжные потолки Октябрьский округ Иркутск, потолки центр Иркутска, натяжной потолок Иркутск центр' },
-    { property: 'og:title', content: 'Натяжные потолки в Октябрьском округе Иркутска — от 159 ₽/м²' },
-    { property: 'og:description', content: 'Монтаж натяжных потолков в историческом центре Иркутска. Бесплатный замер, 1 день работы, 12 лет гарантии.' },
-    { property: 'og:type', content: 'website' },
-    { name: 'robots', content: 'index, follow' },
-  ],
-  link: [{ rel: 'canonical', href: 'https://propot.ru/irkutsk/oktyabrskiy-okrug' }],
-  script: [
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify([
-        {
-          '@context': 'https://schema.org',
-          '@type': 'LocalBusiness',
-          name: 'ПроПотолок',
-          description: 'Монтаж натяжных потолков в Октябрьском округе Иркутска.',
-          url: 'https://propot.ru/irkutsk/oktyabrskiy-okrug',
-          telephone: site.phoneRaw,
-          priceRange: '₽₽',
-          address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressRegion: 'Иркутская область', addressCountry: 'RU' },
-          areaServed: { '@type': 'AdministrativeArea', name: 'Октябрьский округ, Иркутск' },
-          openingHours: 'Mo-Su 08:00-21:00',
-          aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '214' },
-        },
-        {
-          '@context': 'https://schema.org',
-          '@type': 'FAQPage',
-          mainEntity: [
-            { '@type': 'Question', name: 'Есть ли доплата за выезд в центр Иркутска?', acceptedAnswer: { '@type': 'Answer', text: 'Нет. Цены единые для всего Иркутска — никаких надбавок «за центр». Замер и выезд мастеров бесплатный.' } },
-            { '@type': 'Question', name: 'Работаете ли вы в старых домах в центре?', acceptedAnswer: { '@type': 'Answer', text: 'Да. У нас большой опыт монтажа в домах любого возраста: дореволюционные постройки, сталинки с высокими потолками, хрущёвки. Для каждого типа дома знаем правильный подход.' } },
-          ],
-        },
-      ]),
-    },
-  ],
-})
+usePageSeoMeta('oktyabrskiy-okrug')
+useHead({ meta: [{ property: 'og:type', content: 'website' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

@@ -219,12 +219,7 @@ const tsveta = computed(() => _tsveta.map(t => ({
   price: (_prices.value?.['base'] ?? 159) + t.extra,
 })))
 
-useHead({
-  title: 'Каталог натяжных потолков в Иркутске — все виды, фактуры и цены | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Каталог натяжных потолков от 159 ₽/м²: матовые, глянцевые, сатиновые, тканевые, парящие, с подсветкой. Более 430 фактур и цветов. Монтаж бесплатно. Иркутск.' },
-  ],
-})
+usePageSeoMeta('catalog')
 
 const activeTab = ref('all')
 const openFaq = ref<number | null>(null)

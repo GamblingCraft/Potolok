@@ -102,10 +102,7 @@
 
 <script setup lang="ts">
 const site = useSite()
-useHead({
-  title: 'Сертификаты и лицензии ПроПотолок — Иркутск',
-  meta: [{ name: 'description', content: 'Сертификаты соответствия, гигиенические заключения и лицензии компании ПроПотолок. Все материалы проверены и сертифицированы.' }],
-})
+usePageSeoMeta('sertifikaty')
 
 const lightbox = reactive({ open: false, img: '', title: '' })
 

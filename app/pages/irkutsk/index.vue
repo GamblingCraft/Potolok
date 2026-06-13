@@ -167,29 +167,8 @@
 import { ref, computed } from 'vue'
 const site = useSite()
 
-useHead({
-  title: 'Натяжные потолки в Иркутске по районам — все округа | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Натяжные потолки в Иркутске — работаем во всех округах: Октябрьский, Правобережный, Свердловский, Ленинский. Единые цены от 159 ₽/м², бесплатный выезд, гарантия 12 лет.' },
-    { property: 'og:title', content: 'Натяжные потолки в Иркутске — все районы города' },
-    { property: 'og:type', content: 'website' },
-    { name: 'robots', content: 'index, follow' },
-  ],
-  link: [{ rel: 'canonical', href: 'https://propot.ru/irkutsk' }],
-  script: [
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'BreadcrumbList',
-        itemListElement: [
-          { '@type': 'ListItem', position: 1, name: 'Главная', item: 'https://propot.ru/' },
-          { '@type': 'ListItem', position: 2, name: 'Иркутск', item: 'https://propot.ru/irkutsk' },
-        ],
-      }),
-    },
-  ],
-})
+usePageSeoMeta('irkutsk')
+useHead({ meta: [{ property: 'og:type', content: 'website' }] })
 
 const callbackOpen = ref(false)
 const activeFilter = ref('all')

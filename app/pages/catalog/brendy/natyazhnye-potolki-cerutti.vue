@@ -229,10 +229,8 @@ onMounted(() => {
   document.addEventListener('keydown', onKey)
   onUnmounted(() => document.removeEventListener('keydown', onKey))
 })
-useHead({
-  title: 'Натяжные потолки Cerutti в Иркутске — швейцарский люкс от 490 ₽/м² | ПроПотолок',
-  meta: [{ name: 'description', content: 'Натяжные потолки Cerutti в Иркутске от 490 ₽/м². Швейцарский люкс-сегмент, безупречно ровное покрытие, влагозащитный лак, экологичное производство. Гарантия 12 лет.' }, { property: 'og:image', content: item.img }],
-})
+usePageSeoMeta('natyazhnye-potolki-cerutti')
+useHead({ meta: [{ property: 'og:image', content: item.img }] })
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)
 const formName = ref('')

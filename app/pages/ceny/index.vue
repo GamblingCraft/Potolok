@@ -285,12 +285,7 @@ import { useCatalogPrices } from '~/composables/useCatalogPrices'
 const _prices = await useCatalogPrices()
 const basePrice = computed(() => _prices.value?.['base'] ?? 159)
 
-useHead({
-  title: 'Цены на натяжные потолки в Иркутске — прайс-лист 2024 | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Актуальные цены на натяжные потолки в Иркутске: матовые от 159 ₽/м², глянцевые от 209 ₽/м². Монтаж включён. Скидки до 20%. Бесплатный замер.' },
-  ],
-})
+usePageSeoMeta('ceny')
 
 const callbackOpen = ref(false)
 const activeTab = ref('faktury')

@@ -185,15 +185,8 @@ const faqItems = ref(_content.faqItems ?? [])
 const seoLinks = ref(_content.seoLinks ?? [])
 const service = services.find(s => s.slug === 'remont-natyazhnogo-potolka')!
 
-useHead({
-  title: 'Ремонт натяжного потолка в Иркутске — от 500 ₽, бесплатная диагностика | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Ремонт натяжного потолка в Иркутске от 500 ₽. Устраняем провисания, порывы, проблемы с багетом. Бесплатная диагностика. Любой производитель.' },
-    { property: 'og:title', content: 'Ремонт натяжного потолка в Иркутске | ПроПотолок' },
-    { property: 'og:type', content: 'website' },
-  ],
-  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'Service', name: 'Ремонт натяжного потолка', provider: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' }, telephone: '+73952000000' }, areaServed: { '@type': 'City', name: 'Иркутск' }, offers: { '@type': 'Offer', price: '500', priceCurrency: 'RUB', availability: 'https://schema.org/InStock' } }) }],
-})
+usePageSeoMeta('remont-natyazhnogo-potolka')
+useHead({ meta: [{ property: 'og:type', content: 'website' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

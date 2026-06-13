@@ -170,15 +170,8 @@ const faqItems = ref(_content.faqItems ?? [])
 const seoLinks = ref(_content.seoLinks ?? [])
 const service = services.find(s => s.slug === 'demontazh-natyazhnogo-potolka')!
 
-useHead({
-  title: 'Демонтаж натяжного потолка в Иркутске — от 80 ₽/м² | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Профессиональный демонтаж натяжного потолка в Иркутске от 80 ₽/м². Снимаем полотна любых производителей, демонтаж багета, вывоз мусора. Минимальный заказ 1 500 ₽.' },
-    { property: 'og:title', content: 'Демонтаж натяжного потолка в Иркутске | ПроПотолок' },
-    { property: 'og:type', content: 'website' },
-  ],
-  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'Service', name: 'Демонтаж натяжного потолка', provider: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' }, telephone: '+73952000000' }, areaServed: { '@type': 'City', name: 'Иркутск' }, offers: { '@type': 'Offer', price: '80', priceCurrency: 'RUB', availability: 'https://schema.org/InStock' } }) }],
-})
+usePageSeoMeta('demontazh-natyazhnogo-potolka')
+useHead({ meta: [{ property: 'og:type', content: 'website' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

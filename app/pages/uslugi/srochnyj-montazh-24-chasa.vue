@@ -239,34 +239,8 @@ const seoLinks = ref(_content.seoLinks ?? [])
 
 const service = services.find(s => s.slug === 'srochnyj-montazh-24-chasa')!
 
-useHead({
-  title: 'Срочный монтаж натяжного потолка за 24 часа в Иркутске | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Срочный монтаж натяжного потолка в Иркутске за 24 часа. Выезд мастера в течение 2–4 часов. Работаем в выходные и праздники. Гарантия 12 лет.' },
-    { property: 'og:title', content: 'Срочный монтаж натяжного потолка за 24 часа | ПроПотолок Иркутск' },
-    { property: 'og:description', content: 'Выезд мастера в течение 2–4 часов. Монтаж в день обращения, гарантия 12 лет.' },
-    { property: 'og:type', content: 'website' },
-  ],
-  script: [
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'Service',
-        name: 'Срочный монтаж натяжного потолка за 24 часа',
-        description: 'Срочный монтаж натяжного потолка в Иркутске с выездом мастера в течение 2–4 часов после заявки.',
-        provider: {
-          '@type': 'LocalBusiness',
-          name: 'ПроПотолок',
-          address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' },
-          telephone: '+73952000000',
-        },
-        areaServed: { '@type': 'City', name: 'Иркутск' },
-        offers: { '@type': 'Offer', priceCurrency: 'RUB', availability: 'https://schema.org/InStock' },
-      }),
-    },
-  ],
-})
+usePageSeoMeta('srochnyj-montazh-24-chasa')
+useHead({ meta: [{ property: 'og:type', content: 'website' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

@@ -317,35 +317,8 @@ const item = vidy.find(v => v.id === 'pary')!
 const worksWithPrice = portfolio.value.filter(g => g.price)
 const otherVidy = vidy.filter(v => v.id !== 'base').map(v => ({ id: v.id, slug: v.slug, title: v.title }))
 
-useHead({
-  title: 'Парящие натяжные потолки в Иркутске — от 339 ₽/м² | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Парящие натяжные потолки в Иркутске. Световая ниша по периметру создаёт эффект левитирующего потолка. Монтаж за 1 день, гарантия 12 лет.' },
-    { property: 'og:title', content: 'Парящие натяжные потолки в Иркутске | ПроПотолок' },
-    { property: 'og:description', content: 'Парящие потолки от 339 ₽/м². Монтаж за 1 день, гарантия 12 лет, бесплатный замер.' },
-    { property: 'og:image', content: item.img },
-    { property: 'og:type', content: 'product' },
-  ],
-  script: [
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'Product',
-        name: 'Парящие натяжные потолки',
-        description: 'Парящие натяжные потолки с световой нишей по периметру. Эффект левитации, монтаж в Иркутске.',
-        brand: { '@type': 'Brand', name: 'ПроПотолок' },
-        offers: {
-          '@type': 'Offer',
-          price: price.value,
-          priceCurrency: 'RUB',
-          availability: 'https://schema.org/InStock',
-          seller: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' } },
-        },
-      }),
-    },
-  ],
-})
+usePageSeoMeta('paryashchie-natyazhnye-potolki')
+useHead({ meta: [{ property: 'og:image', content: item.img }, { property: 'og:type', content: 'product' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

@@ -317,35 +317,8 @@ const price = computed(() => _prices.value?.['satinovye'] ?? item.price)
 const item = faktury.find(f => f.id === 'sat')!
 const worksWithPrice = portfolio.value.filter(g => g.price)
 
-useHead({
-  title: 'Сатиновые натяжные потолки в Иркутске — от 189 ₽/м² | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Сатиновые натяжные потолки в Иркутске от 189 ₽/м² с монтажом. Мягкий шёлковый блеск, 100+ оттенков, универсальный выбор. Монтаж за 1 день, гарантия 12 лет.' },
-    { property: 'og:title', content: 'Сатиновые натяжные потолки в Иркутске | ПроПотолок' },
-    { property: 'og:description', content: 'Сатиновые потолки от 189 ₽/м². Монтаж за 1 день, гарантия 12 лет, бесплатный замер.' },
-    { property: 'og:image', content: item.img },
-    { property: 'og:type', content: 'product' },
-  ],
-  script: [
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'Product',
-        name: 'Сатиновые натяжные потолки',
-        description: 'Сатиновые натяжные потолки с мягким шёлковым блеском. 100+ оттенков, монтаж в Иркутске.',
-        brand: { '@type': 'Brand', name: 'ПроПотолок' },
-        offers: {
-          '@type': 'Offer',
-          price: price.value,
-          priceCurrency: 'RUB',
-          availability: 'https://schema.org/InStock',
-          seller: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' } },
-        },
-      }),
-    },
-  ],
-})
+usePageSeoMeta('satinovye-natyazhnye-potolki')
+useHead({ meta: [{ property: 'og:image', content: item.img }, { property: 'og:type', content: 'product' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

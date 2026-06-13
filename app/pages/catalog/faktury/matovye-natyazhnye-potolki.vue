@@ -317,35 +317,8 @@ const price = computed(() => _prices.value?.['matovye'] ?? item.price)
 const item = faktury.find(f => f.id === 'mat')!
 const worksWithPrice = portfolio.value.filter(g => g.price)
 
-useHead({
-  title: 'Матовые натяжные потолки в Иркутске — от 159 ₽/м² с монтажом | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Матовые натяжные потолки в Иркутске от 159 ₽/м² с монтажом. Самый популярный вид: рассеивают свет, 100+ цветов, без запаха. Монтаж за 1 день, гарантия 12 лет.' },
-    { property: 'og:title', content: 'Матовые натяжные потолки в Иркутске | ПроПотолок' },
-    { property: 'og:description', content: 'Матовые потолки от 159 ₽/м². Монтаж за 1 день, гарантия 12 лет, бесплатный замер.' },
-    { property: 'og:image', content: item.img },
-    { property: 'og:type', content: 'product' },
-  ],
-  script: [
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'Product',
-        name: 'Матовые натяжные потолки',
-        description: 'Матовые натяжные потолки из ПВХ-плёнки. 100+ цветов, монтаж в Иркутске.',
-        brand: { '@type': 'Brand', name: 'ПроПотолок' },
-        offers: {
-          '@type': 'Offer',
-          price: price.value,
-          priceCurrency: 'RUB',
-          availability: 'https://schema.org/InStock',
-          seller: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' } },
-        },
-      }),
-    },
-  ],
-})
+usePageSeoMeta('matovye-natyazhnye-potolki')
+useHead({ meta: [{ property: 'og:image', content: item.img }, { property: 'og:type', content: 'product' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

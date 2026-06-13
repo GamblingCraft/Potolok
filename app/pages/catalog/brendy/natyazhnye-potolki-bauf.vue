@@ -229,10 +229,8 @@ onMounted(() => {
   document.addEventListener('keydown', onKey)
   onUnmounted(() => document.removeEventListener('keydown', onKey))
 })
-useHead({
-  title: 'Натяжные потолки Bauf (Бауф) в Иркутске — цены от 189 ₽/м² с монтажом | ПроПотолок',
-  meta: [{ name: 'description', content: 'Натяжные потолки Bauf в Иркутске от 189 ₽/м². Немецкие технологии, экологический класс A+, 4 сертификата. Монтаж за 1 день, гарантия 12 лет.' }, { property: 'og:image', content: item.img }],
-})
+usePageSeoMeta('natyazhnye-potolki-bauf')
+useHead({ meta: [{ property: 'og:image', content: item.img }] })
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)
 const formName = ref('')

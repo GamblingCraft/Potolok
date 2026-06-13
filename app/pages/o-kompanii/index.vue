@@ -223,12 +223,7 @@
 </template>
 
 <script setup lang="ts">
-useHead({
-  title: 'О компании ПроПотолок — натяжные потолки в Иркутске с 2009 года',
-  meta: [
-    { name: 'description', content: 'ПроПотолок — профессиональная установка натяжных потолков в Иркутске с 2009 года. 4000+ выполненных проектов, команда с опытом 5–15 лет, гарантия 12 лет по договору.' },
-  ],
-})
+usePageSeoMeta('o-kompanii')
 
 const callbackOpen = ref(false)
 

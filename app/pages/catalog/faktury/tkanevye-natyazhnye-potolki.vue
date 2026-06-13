@@ -270,35 +270,8 @@ const price = computed(() => _prices.value?.['tkanevye'] ?? item.price)
 const item = faktury.find(f => f.id === 'tkan')!
 const worksWithPrice = portfolio.value.filter(g => g.price)
 
-useHead({
-  title: 'Тканевые натяжные потолки в Иркутске — от 319 ₽/м² без ПВХ | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Тканевые натяжные потолки в Иркутске от 319 ₽/м². Без ПВХ, монтаж без нагрева, ширина до 5.2м — бесшовные. Гипоаллергенны, подходят для детских. Гарантия 12 лет.' },
-    { property: 'og:title', content: 'Тканевые натяжные потолки в Иркутске | ПроПотолок' },
-    { property: 'og:description', content: 'Тканевые потолки от 319 ₽/м². Без ПВХ, монтаж без нагрева, гарантия 12 лет.' },
-    { property: 'og:image', content: item.img },
-    { property: 'og:type', content: 'product' },
-  ],
-  script: [
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'Product',
-        name: 'Тканевые натяжные потолки',
-        description: 'Тканевые натяжные потолки из полиэстера без ПВХ. Clipso, Descor, Cerutti. Монтаж в Иркутске.',
-        brand: { '@type': 'Brand', name: 'ПроПотолок' },
-        offers: {
-          '@type': 'Offer',
-          price: price.value,
-          priceCurrency: 'RUB',
-          availability: 'https://schema.org/InStock',
-          seller: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' } },
-        },
-      }),
-    },
-  ],
-})
+usePageSeoMeta('tkanevye-natyazhnye-potolki')
+useHead({ meta: [{ property: 'og:image', content: item.img }, { property: 'og:type', content: 'product' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

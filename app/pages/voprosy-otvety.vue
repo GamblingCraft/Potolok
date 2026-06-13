@@ -96,11 +96,7 @@
 const site = useSite()
 import { faqCategories } from '~/data/faq'
 
-useHead({
-  title: 'Вопросы и ответы о натяжных потолках — ПроПотолок Иркутск',
-  meta: [{ name: 'description', content: 'Ответы на частые вопросы о натяжных потолках: цены, монтаж, уход, гарантия, сравнение материалов. Иркутск.' }],
-  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage' }) }],
-})
+usePageSeoMeta('voprosy-otvety')
 
 const search    = ref('')
 const openItems = reactive(new Set<string>())

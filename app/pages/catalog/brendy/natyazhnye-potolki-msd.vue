@@ -257,13 +257,8 @@ onMounted(() => {
   onUnmounted(() => document.removeEventListener('keydown', onKey))
 })
 
-useHead({
-  title: 'Натяжные потолки MSD в Иркутске — цены от 159 ₽/м² с монтажом | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Натяжные потолки MSD (Classic, Evolution, Premium) в Иркутске от 159 ₽/м² с монтажом. Европейские стандарты качества. Монтаж за 1 день, гарантия 12 лет, без предоплаты.' },
-    { property: 'og:image', content: item.img },
-  ],
-})
+usePageSeoMeta('natyazhnye-potolki-msd')
+useHead({ meta: [{ property: 'og:image', content: item.img }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

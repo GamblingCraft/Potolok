@@ -179,12 +179,7 @@
 const site = useSite()
 import { services, serviceCategories } from '~/data/services'
 
-useHead({
-  title: 'Услуги по натяжным потолкам в Иркутске — монтаж, замер, ремонт | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Полный комплекс услуг по натяжным потолкам в Иркутске: монтаж, бесплатный замер, ремонт, замена полотна, слив воды, установка светильников. Гарантия 12 лет.' },
-  ],
-})
+usePageSeoMeta('uslugi')
 
 const callbackOpen = ref(false)
 const activeCategory = ref('all')

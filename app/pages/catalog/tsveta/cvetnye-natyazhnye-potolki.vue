@@ -284,21 +284,8 @@ const price = computed(() => _prices.value?.['base'] ?? item.price)
 const item = tsveta.find(c => c.id === 'color')!
 const worksWithPrice = portfolio.value.filter(g => g.price)
 
-useHead({
-  title: 'Цветные натяжные потолки в Иркутске — от 179 ₽/м² с монтажом | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Цветные натяжные потолки в Иркутске от 179 ₽/м² с монтажом. Более 1000 оттенков RAL — любой цвет под заказ. Матовые, глянцевые, сатиновые. Монтаж за 1 день, гарантия 12 лет.' },
-    { property: 'og:title', content: 'Цветные натяжные потолки в Иркутске | ПроПотолок' },
-    { property: 'og:description', content: 'Цветные потолки от 179 ₽/м². 1000+ оттенков RAL, монтаж за 1 день, гарантия 12 лет.' },
-    { property: 'og:image', content: item.img },
-  ],
-  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({
-    '@context': 'https://schema.org', '@type': 'Product',
-    name: 'Цветные натяжные потолки', description: 'Цветные натяжные потолки из ПВХ-плёнки. Более 1000 оттенков RAL, монтаж в Иркутске.',
-    brand: { '@type': 'Brand', name: 'ПроПотолок' },
-    offers: { '@type': 'Offer', price: price.value, priceCurrency: 'RUB', availability: 'https://schema.org/InStock' },
-  }) }],
-})
+usePageSeoMeta('cvetnye-natyazhnye-potolki')
+useHead({ meta: [{ property: 'og:image', content: item.img }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

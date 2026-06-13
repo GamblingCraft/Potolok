@@ -229,10 +229,8 @@ onMounted(() => {
   document.addEventListener('keydown', onKey)
   onUnmounted(() => document.removeEventListener('keydown', onKey))
 })
-useHead({
-  title: 'Натяжные потолки Pongs (Понгс) в Иркутске — от 349 ₽/м² | ПроПотолок',
-  meta: [{ name: 'description', content: 'Натяжные потолки Pongs в Иркутске от 349 ₽/м². Немецкий премиум, пластификатор DOTP (нетоксичный), ширина до 325 см, водозащита 100 л/м². Гарантия 12 лет.' }, { property: 'og:image', content: item.img }],
-})
+usePageSeoMeta('natyazhnye-potolki-pongs')
+useHead({ meta: [{ property: 'og:image', content: item.img }] })
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)
 const formName = ref('')

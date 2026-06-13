@@ -236,17 +236,8 @@ const item = vidy.find(v => v.id === 'two')!
 const worksWithPrice = portfolio.value.filter(g => g.price)
 const otherVidy = vidy.filter(v => v.id !== 'base').map(v => ({ id: v.id, slug: v.slug, title: v.title }))
 
-useHead({
-  title: 'Двухуровневые натяжные потолки в Иркутске — от 509 ₽/м² | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Двухуровневые натяжные потолки в Иркутске. Зонирование пространства, скрытие коммуникаций, LED-подсветка. Монтаж за 1 день, гарантия 12 лет.' },
-    { property: 'og:title', content: 'Двухуровневые натяжные потолки в Иркутске | ПроПотолок' },
-    { property: 'og:description', content: 'Двухуровневые потолки от 509 ₽/м². Монтаж за 1 день, гарантия 12 лет, бесплатный замер.' },
-    { property: 'og:image', content: item.img },
-    { property: 'og:type', content: 'product' },
-  ],
-  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'Product', name: 'Двухуровневые натяжные потолки', description: 'Двухуровневые натяжные потолки — зонирование, LED, скрытие коммуникаций. Монтаж в Иркутске.', brand: { '@type': 'Brand', name: 'ПроПотолок' }, offers: { '@type': 'Offer', price: price.value, priceCurrency: 'RUB', availability: 'https://schema.org/InStock', seller: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' } } } }) }],
-})
+usePageSeoMeta('dvuhurovnevye-natyazhnye-potolki')
+useHead({ meta: [{ property: 'og:image', content: item.img }, { property: 'og:type', content: 'product' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

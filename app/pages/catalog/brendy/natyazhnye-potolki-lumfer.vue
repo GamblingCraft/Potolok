@@ -229,10 +229,8 @@ onMounted(() => {
   document.addEventListener('keydown', onKey)
   onUnmounted(() => document.removeEventListener('keydown', onKey))
 })
-useHead({
-  title: 'Натяжные потолки LumFer (Люмфер) в Иркутске — от 249 ₽/м² с монтажом | ПроПотолок',
-  meta: [{ name: 'description', content: 'Натяжные потолки LumFer в Иркутске от 249 ₽/м². Двухслойное немецкое полотно Ferico GBR, толщина 32 мм, не просвечивает. Монтаж за 1 день, гарантия 12 лет.' }, { property: 'og:image', content: item.img }],
-})
+usePageSeoMeta('natyazhnye-potolki-lumfer')
+useHead({ meta: [{ property: 'og:image', content: item.img }] })
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)
 const formName = ref('')

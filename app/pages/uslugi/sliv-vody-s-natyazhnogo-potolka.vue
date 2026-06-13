@@ -207,15 +207,8 @@ const faqItems = ref(_content.faqItems ?? [])
 const seoLinks = ref(_content.seoLinks ?? [])
 const service = services.find(s => s.slug === 'sliv-vody-s-natyazhnogo-potolka')!
 
-useHead({
-  title: 'Слив воды с натяжного потолка в Иркутске — от 1 500 ₽, выезд в день обращения | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Аварийный слив воды с натяжного потолка в Иркутске. Выезд в день обращения, полотно сохраняется целым. Работаем при любом объёме затопления. Цена от 1 500 ₽.' },
-    { property: 'og:title', content: 'Слив воды с натяжного потолка в Иркутске | ПроПотолок' },
-    { property: 'og:type', content: 'website' },
-  ],
-  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'Service', name: 'Слив воды с натяжного потолка', provider: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' }, telephone: '+73952000000' }, areaServed: { '@type': 'City', name: 'Иркутск' }, offers: { '@type': 'Offer', price: '1500', priceCurrency: 'RUB', availability: 'https://schema.org/InStock' } }) }],
-})
+usePageSeoMeta('sliv-vody-s-natyazhnogo-potolka')
+useHead({ meta: [{ property: 'og:type', content: 'website' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

@@ -234,17 +234,8 @@ const item = vidy.find(v => v.id === 'star')!
 const worksWithPrice = portfolio.value.filter(g => g.price)
 const otherVidy = vidy.filter(v => v.id !== 'base').map(v => ({ id: v.id, slug: v.slug, title: v.title }))
 
-useHead({
-  title: 'Потолок Звёздное небо в Иркутске — от 659 ₽/м² | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Натяжной потолок Звёздное небо в Иркутске. Оптоволоконная подсветка с мерцанием. Для детских, спален, ресторанов. Монтаж за 1 день, гарантия 12 лет.' },
-    { property: 'og:title', content: 'Потолок Звёздное небо в Иркутске | ПроПотолок' },
-    { property: 'og:description', content: 'Звёздное небо от 659 ₽/м². Оптоволокно, мерцание. Монтаж за 1 день, гарантия 12 лет.' },
-    { property: 'og:image', content: item.img },
-    { property: 'og:type', content: 'product' },
-  ],
-  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'Product', name: 'Потолок Звёздное небо', description: 'Натяжной потолок с оптоволоконными нитями — эффект звёздного неба. Монтаж в Иркутске.', brand: { '@type': 'Brand', name: 'ПроПотолок' }, offers: { '@type': 'Offer', price: price.value, priceCurrency: 'RUB', availability: 'https://schema.org/InStock', seller: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' } } } }) }],
-})
+usePageSeoMeta('natyazhnye-potolki-zvezdnoe-nebo')
+useHead({ meta: [{ property: 'og:image', content: item.img }, { property: 'og:type', content: 'product' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

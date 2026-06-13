@@ -237,34 +237,8 @@ const seoLinks = ref(_content.seoLinks ?? [])
 
 const service = services.find(s => s.slug === 'vyezd-zamershchika')!
 
-useHead({
-  title: 'Бесплатный замер натяжного потолка в Иркутске — выезд в день обращения | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Бесплатный замер натяжного потолка в Иркутске. Выезд замерщика в день обращения, образцы полотен, расчёт стоимости на месте. Без обязательств.' },
-    { property: 'og:title', content: 'Бесплатный замер натяжного потолка в Иркутске | ПроПотолок' },
-    { property: 'og:description', content: 'Бесплатный выезд замерщика в любой район Иркутска. Образцы, замеры, расчёт на месте.' },
-    { property: 'og:type', content: 'website' },
-  ],
-  script: [
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'Service',
-        name: 'Бесплатный замер натяжного потолка',
-        description: 'Бесплатный выезд замерщика для обмера помещения, подбора полотна и расчёта стоимости натяжного потолка в Иркутске.',
-        provider: {
-          '@type': 'LocalBusiness',
-          name: 'ПроПотолок',
-          address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressRegion: 'Иркутская область', addressCountry: 'RU' },
-          telephone: '+73952000000',
-        },
-        areaServed: { '@type': 'City', name: 'Иркутск' },
-        offers: { '@type': 'Offer', price: '0', priceCurrency: 'RUB', availability: 'https://schema.org/InStock' },
-      }),
-    },
-  ],
-})
+usePageSeoMeta('vyezd-zamershchika')
+useHead({ meta: [{ property: 'og:type', content: 'website' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

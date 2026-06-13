@@ -225,46 +225,8 @@
 import { ref } from 'vue'
 const site = useSite()
 
-useHead({
-  title: 'Натяжные потолки в Ленинском округе Иркутска — от 159 ₽/м² | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Монтаж натяжных потолков в Ленинском округе Иркутска. Скрываем трещины и дефекты советских домов. Бесплатный замер, 1 день монтаж, гарантия 12 лет. Цены от 159 ₽/м².' },
-    { name: 'keywords', content: 'натяжные потолки Ленинский округ Иркутск, потолки хрущёвка Иркутск, натяжной потолок советский дом Иркутск' },
-    { property: 'og:title', content: 'Натяжные потолки в Ленинском округе Иркутска — от 159 ₽/м²' },
-    { property: 'og:description', content: 'Монтаж натяжных потолков в Ленинском округе. Скрываем трещины и дефекты. Бесплатный замер, 1 день работы, 12 лет гарантии.' },
-    { property: 'og:type', content: 'website' },
-    { name: 'robots', content: 'index, follow' },
-  ],
-  link: [{ rel: 'canonical', href: 'https://propot.ru/irkutsk/leninskiy-okrug' }],
-  script: [
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify([
-        {
-          '@context': 'https://schema.org',
-          '@type': 'LocalBusiness',
-          name: 'ПроПотолок',
-          description: 'Монтаж натяжных потолков в Ленинском округе Иркутска.',
-          url: 'https://propot.ru/irkutsk/leninskiy-okrug',
-          telephone: site.phoneRaw,
-          priceRange: '₽₽',
-          address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressRegion: 'Иркутская область', addressCountry: 'RU' },
-          areaServed: { '@type': 'AdministrativeArea', name: 'Ленинский округ, Иркутск' },
-          openingHours: 'Mo-Su 08:00-21:00',
-          aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '214' },
-        },
-        {
-          '@context': 'https://schema.org',
-          '@type': 'FAQPage',
-          mainEntity: [
-            { '@type': 'Question', name: 'Работаете ли вы в хрущёвках в Ленинском округе?', acceptedAnswer: { '@type': 'Answer', text: 'Да, у нас большой опыт монтажа в советских домах. Натяжной потолок скрывает трещины, пятна и перепады. Теряем всего 3–5 см высоты — для комнаты 2,5 м это незаметно.' } },
-            { '@type': 'Question', name: 'Есть ли доплата за выезд в Ленинский округ?', acceptedAnswer: { '@type': 'Answer', text: 'Никакой доплаты. Цены единые для всего Иркутска. Замер и выезд мастеров бесплатны.' } },
-          ],
-        },
-      ]),
-    },
-  ],
-})
+usePageSeoMeta('leninskiy-okrug')
+useHead({ meta: [{ property: 'og:type', content: 'website' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

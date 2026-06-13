@@ -284,21 +284,8 @@ const price = computed(() => _prices.value?.['base'] ?? item.price)
 const item = tsveta.find(c => c.id === 'white')!
 const worksWithPrice = portfolio.value.filter(g => g.price)
 
-useHead({
-  title: 'Белые натяжные потолки в Иркутске — от 159 ₽/м² с монтажом | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Белые натяжные потолки в Иркутске от 159 ₽/м² с монтажом. Матовые, глянцевые, сатиновые — более 30 оттенков белого. Без запаха, монтаж за 1 день, гарантия 12 лет.' },
-    { property: 'og:title', content: 'Белые натяжные потолки в Иркутске | ПроПотолок' },
-    { property: 'og:description', content: 'Белые потолки от 159 ₽/м². Монтаж за 1 день, гарантия 12 лет, бесплатный замер.' },
-    { property: 'og:image', content: item.img },
-  ],
-  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({
-    '@context': 'https://schema.org', '@type': 'Product',
-    name: 'Белые натяжные потолки', description: 'Белые натяжные потолки из ПВХ-плёнки. Более 30 оттенков, монтаж в Иркутске.',
-    brand: { '@type': 'Brand', name: 'ПроПотолок' },
-    offers: { '@type': 'Offer', price: price.value, priceCurrency: 'RUB', availability: 'https://schema.org/InStock' },
-  }) }],
-})
+usePageSeoMeta('belye-natyazhnye-potolki')
+useHead({ meta: [{ property: 'og:image', content: item.img }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

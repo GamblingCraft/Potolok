@@ -284,21 +284,8 @@ const price = computed(() => _prices.value?.['base'] ?? item.price)
 const item = tsveta.find(c => c.id === 'beige')!
 const worksWithPrice = portfolio.value.filter(g => g.price)
 
-useHead({
-  title: 'Бежевые натяжные потолки в Иркутске — от 169 ₽/м² с монтажом | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Бежевые натяжные потолки в Иркутске от 169 ₽/м² с монтажом. Кремовый, слоновая кость, капучино — тёплые оттенки для уютного интерьера. Монтаж за 1 день, гарантия 12 лет.' },
-    { property: 'og:title', content: 'Бежевые натяжные потолки в Иркутске | ПроПотолок' },
-    { property: 'og:description', content: 'Бежевые потолки от 169 ₽/м². Монтаж за 1 день, гарантия 12 лет, бесплатный замер.' },
-    { property: 'og:image', content: item.img },
-  ],
-  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({
-    '@context': 'https://schema.org', '@type': 'Product',
-    name: 'Бежевые натяжные потолки', description: 'Бежевые натяжные потолки из ПВХ-плёнки. Тёплые оттенки для уютного интерьера, монтаж в Иркутске.',
-    brand: { '@type': 'Brand', name: 'ПроПотолок' },
-    offers: { '@type': 'Offer', price: price.value, priceCurrency: 'RUB', availability: 'https://schema.org/InStock' },
-  }) }],
-})
+usePageSeoMeta('bezhevye-natyazhnye-potolki')
+useHead({ meta: [{ property: 'og:image', content: item.img }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

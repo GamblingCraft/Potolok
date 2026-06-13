@@ -287,12 +287,7 @@
 <script setup lang="ts">
 import { reviews as fallbackReviews, videoReviews, type Review } from '~/data/reviews'
 
-useHead({
-  title: 'Отзывы клиентов о натяжных потолках в Иркутске | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Реальные отзывы клиентов ПроПотолок: рейтинг 4.9 из 5. Более 190 отзывов на Яндекс Картах и 2ГИС. Фото и видео работ.' },
-  ],
-})
+usePageSeoMeta('otzyvy')
 
 const { data: reviewsData } = await useAsyncData<Review[]>(
   'page-reviews',

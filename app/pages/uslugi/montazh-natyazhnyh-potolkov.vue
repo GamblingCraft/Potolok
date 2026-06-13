@@ -273,37 +273,8 @@ const seoLinks = ref(_content.seoLinks ?? [])
 
 const service = services.find(s => s.slug === 'montazh-natyazhnyh-potolkov')!
 
-useHead({
-  title: 'Монтаж натяжных потолков в Иркутске — от 159 ₽/м² под ключ | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Профессиональный монтаж натяжных потолков в Иркутске от 159 ₽/м². Монтаж за 1 день, без предоплаты, гарантия 12 лет по договору. Бесплатный замер в день обращения.' },
-    { property: 'og:title', content: 'Монтаж натяжных потолков в Иркутске — от 159 ₽/м² | ПроПотолок' },
-    { property: 'og:description', content: 'Монтаж натяжных потолков за 1 день. Цена от 159 ₽/м², гарантия 12 лет, бесплатный замер.' },
-    { property: 'og:type', content: 'website' },
-  ],
-  script: [
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'Service',
-        name: 'Монтаж натяжных потолков',
-        description: 'Профессиональный монтаж натяжных потолков в Иркутске. Все виды: одноуровневые, многоуровневые, парящие, с подсветкой.',
-        provider: {
-          '@type': 'LocalBusiness',
-          name: 'ПроПотолок',
-          address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressRegion: 'Иркутская область', addressCountry: 'RU' },
-          telephone: '+73952000000',
-          url: 'https://прopotolok.ru',
-          priceRange: '₽₽',
-        },
-        areaServed: { '@type': 'City', name: 'Иркутск' },
-        offers: { '@type': 'Offer', price: String(_prices.value?.["base"] ?? 159), priceCurrency: 'RUB', availability: 'https://schema.org/InStock' },
-        hasOfferCatalog: { '@type': 'OfferCatalog', name: 'Виды монтажа натяжных потолков' },
-      }),
-    },
-  ],
-})
+usePageSeoMeta('montazh-natyazhnyh-potolkov')
+useHead({ meta: [{ property: 'og:type', content: 'website' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

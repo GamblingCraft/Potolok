@@ -160,12 +160,7 @@
 <script setup lang="ts">
 import { portfolio as defaultPortfolio, portfolioTags, type PortfolioItem } from '~/data/portfolio'
 
-useHead({
-  title: 'Наши работы — примеры натяжных потолков в Иркутске | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Фотогалерея выполненных работ по установке натяжных потолков в Иркутске. Реальные проекты с ценами, фактурами и описанием.' },
-  ],
-})
+usePageSeoMeta('portfolio')
 
 const { data: portfolioData } = await useAsyncData<PortfolioItem[]>(
   'portfolio',

@@ -234,19 +234,8 @@ const price = computed(() => _prices.value?.['base'] ?? item.price)
 const item = tsveta.find(c => c.id === 'black')!
 const worksWithPrice = portfolio.value.filter(g => g.price)
 
-useHead({
-  title: 'Чёрные натяжные потолки в Иркутске — от 169 ₽/м² с монтажом | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Чёрные натяжные потолки в Иркутске от 169 ₽/м². Матовые и глянцевые, с подсветкой и без. Лофт, хай-тек, кинотеатр. Монтаж за 1 день, гарантия 12 лет.' },
-    { property: 'og:title', content: 'Чёрные натяжные потолки в Иркутске | ПроПотолок' },
-    { property: 'og:image', content: item.img },
-  ],
-  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({
-    '@context': 'https://schema.org', '@type': 'Product',
-    name: 'Чёрные натяжные потолки',
-    offers: { '@type': 'Offer', price: price.value, priceCurrency: 'RUB', availability: 'https://schema.org/InStock' },
-  }) }],
-})
+usePageSeoMeta('chernye-natyazhnye-potolki')
+useHead({ meta: [{ property: 'og:image', content: item.img }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

@@ -234,17 +234,8 @@ const item = vidy.find(v => v.id === 'photo')!
 const worksWithPrice = portfolio.value.filter(g => g.price)
 const otherVidy = vidy.filter(v => v.id !== 'base').map(v => ({ id: v.id, slug: v.slug, title: v.title }))
 
-useHead({
-  title: 'Натяжные потолки с фотопечатью в Иркутске — от 559 ₽/м² | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Натяжные потолки с фотопечатью в Иркутске. Любой рисунок, фото или узор. УФ-печать высокого разрешения. Монтаж за 1 день, гарантия 12 лет.' },
-    { property: 'og:title', content: 'Натяжные потолки с фотопечатью в Иркутске | ПроПотолок' },
-    { property: 'og:description', content: 'Потолки с фотопечатью от 559 ₽/м². Монтаж за 1 день, гарантия 12 лет.' },
-    { property: 'og:image', content: item.img },
-    { property: 'og:type', content: 'product' },
-  ],
-  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'Product', name: 'Натяжные потолки с фотопечатью', description: 'Натяжные потолки с фотопечатью — любой рисунок, УФ-печать, 500+ принтов. Монтаж в Иркутске.', brand: { '@type': 'Brand', name: 'ПроПотолок' }, offers: { '@type': 'Offer', price: price.value, priceCurrency: 'RUB', availability: 'https://schema.org/InStock', seller: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' } } } }) }],
-})
+usePageSeoMeta('natyazhnye-potolki-s-fotopechatyu')
+useHead({ meta: [{ property: 'og:image', content: item.img }, { property: 'og:type', content: 'product' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

@@ -270,35 +270,8 @@ const price = computed(() => _prices.value?.['fakturnye'] ?? item.price)
 const item = faktury.find(f => f.id === 'fakt')!
 const worksWithPrice = portfolio.value.filter(g => g.price)
 
-useHead({
-  title: 'Фактурные натяжные потолки в Иркутске — от 259 ₽/м² | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Фактурные натяжные потолки в Иркутске от 259 ₽/м². Имитация кожи, мрамора, камня, металлика. Уникальный дизайн и стиль. Монтаж за 1 день, гарантия 12 лет.' },
-    { property: 'og:title', content: 'Фактурные натяжные потолки в Иркутске | ПроПотолок' },
-    { property: 'og:description', content: 'Фактурные потолки от 259 ₽/м². Кожа, мрамор, камень, металлик. Гарантия 12 лет.' },
-    { property: 'og:image', content: item.img },
-    { property: 'og:type', content: 'product' },
-  ],
-  script: [
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'Product',
-        name: 'Фактурные натяжные потолки',
-        description: 'Фактурные натяжные потолки с тиснением — имитация кожи, мрамора, камня, металлика. Монтаж в Иркутске.',
-        brand: { '@type': 'Brand', name: 'ПроПотолок' },
-        offers: {
-          '@type': 'Offer',
-          price: price.value,
-          priceCurrency: 'RUB',
-          availability: 'https://schema.org/InStock',
-          seller: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' } },
-        },
-      }),
-    },
-  ],
-})
+usePageSeoMeta('fakturnye-natyazhnye-potolki')
+useHead({ meta: [{ property: 'og:image', content: item.img }, { property: 'og:type', content: 'product' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

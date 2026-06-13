@@ -229,10 +229,8 @@ onMounted(() => {
   document.addEventListener('keydown', onKey)
   onUnmounted(() => document.removeEventListener('keydown', onKey))
 })
-useHead({
-  title: 'Натяжные потолки Clipso (Клипсо) в Иркутске — от 389 ₽/м² | ПроПотолок',
-  meta: [{ name: 'description', content: 'Натяжные потолки Clipso в Иркутске от 389 ₽/м². Французское тканевое полотно, холодный монтаж, дышащее, акустические варианты. Гарантия 12 лет.' }, { property: 'og:image', content: item.img }],
-})
+usePageSeoMeta('natyazhnye-potolki-clipso')
+useHead({ meta: [{ property: 'og:image', content: item.img }] })
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)
 const formName = ref('')

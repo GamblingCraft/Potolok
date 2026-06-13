@@ -185,15 +185,8 @@ const faqItems = ref(_content.faqItems ?? [])
 const seoLinks = ref(_content.seoLinks ?? [])
 const service = services.find(s => s.slug === 'ustanovka-svetilnikov')!
 
-useHead({
-  title: 'Установка светильников в натяжной потолок в Иркутске — от 300 ₽/шт | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Установка светильников в натяжной потолок в Иркутске от 300 ₽/шт. Точечные споты, люстры, LED-ленты, трековые системы. Термокольца в комплекте, подключение к электрике.' },
-    { property: 'og:title', content: 'Установка светильников в натяжной потолок в Иркутске | ПроПотолок' },
-    { property: 'og:type', content: 'website' },
-  ],
-  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'Service', name: 'Установка светильников в натяжной потолок', provider: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' }, telephone: '+73952000000' }, areaServed: { '@type': 'City', name: 'Иркутск' }, offers: { '@type': 'Offer', price: '300', priceCurrency: 'RUB', availability: 'https://schema.org/InStock' } }) }],
-})
+usePageSeoMeta('ustanovka-svetilnikov')
+useHead({ meta: [{ property: 'og:type', content: 'website' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

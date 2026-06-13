@@ -81,10 +81,7 @@ const pomeshcheniya = computed(() => _pomeshcheniya.map(p => ({
   price: _prices.value?.['base'] ?? p.price,
 })))
 
-useHead({
-  title: 'Натяжные потолки по помещению — гостиная, спальня, кухня, ванная | ПроПотолок Иркутск',
-  meta: [{ name: 'description', content: 'Натяжные потолки для каждого помещения: гостиная, спальня, кухня, ванная, детская, прихожая. Подбор с учётом влажности и освещения. Монтаж в Иркутске.' }],
-})
+usePageSeoMeta('po-pomescheniyu')
 
 const callbackOpen = ref(false)
 </script>

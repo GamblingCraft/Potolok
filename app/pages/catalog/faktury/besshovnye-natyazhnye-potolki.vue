@@ -270,35 +270,8 @@ const price = computed(() => _prices.value?.['besshovnye'] ?? item.price)
 const item = faktury.find(f => f.id === 'bess')!
 const worksWithPrice = portfolio.value.filter(g => g.price)
 
-useHead({
-  title: 'Бесшовные натяжные потолки в Иркутске — от 229 ₽/м² | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Бесшовные натяжные потолки в Иркутске от 229 ₽/м². Ширина полотна до 5 м — идеально ровная поверхность без стыков в любом помещении. Гарантия 12 лет.' },
-    { property: 'og:title', content: 'Бесшовные натяжные потолки в Иркутске | ПроПотолок' },
-    { property: 'og:description', content: 'Бесшовные потолки от 229 ₽/м². Ширина до 5 м, без стыков. Гарантия 12 лет.' },
-    { property: 'og:image', content: item.img },
-    { property: 'og:type', content: 'product' },
-  ],
-  script: [
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'Product',
-        name: 'Бесшовные натяжные потолки',
-        description: 'Бесшовные натяжные потолки шириной до 5 метров. Идеально ровная поверхность без стыков. Монтаж в Иркутске.',
-        brand: { '@type': 'Brand', name: 'ПроПотолок' },
-        offers: {
-          '@type': 'Offer',
-          price: price.value,
-          priceCurrency: 'RUB',
-          availability: 'https://schema.org/InStock',
-          seller: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' } },
-        },
-      }),
-    },
-  ],
-})
+usePageSeoMeta('besshovnye-natyazhnye-potolki')
+useHead({ meta: [{ property: 'og:image', content: item.img }, { property: 'og:type', content: 'product' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

@@ -192,7 +192,7 @@
               <Icon name="lucide:check" size="13" class="promo-card__check"/>{{ c }}
             </li>
           </ul>
-          <button class="nav-btn promo-card__btn" @click="callbackOpenIdx = true">Получить скидку</button>
+          <button class="nav-btn promo-card__btn" @click="callbackOpenIdx = true">Получить подарок</button>
         </div>
       </div>
       <div class="idx-more">
@@ -301,7 +301,7 @@
         >
           <Icon name="simple-icons:yandex" size="14"/>
           Яндекс Карты
-          <span class="reviews-tab__count">{{ platformStats.yandex.count }}</span>
+          <span class="reviews-tab__count">{{ platformStats?.yandex?.count }}</span>
         </button>
         <button
           class="reviews-tab"
@@ -310,7 +310,7 @@
         >
           <Icon name="lucide:map-pin" size="14"/>
           2ГИС
-          <span class="reviews-tab__count">{{ platformStats['2gis'].count }}</span>
+          <span class="reviews-tab__count">{{ platformStats?.['2gis']?.count }}</span>
         </button>
       </div>
 
@@ -427,6 +427,7 @@
 </template>
 
 <script setup lang="ts">
+usePageSeoMeta('index')
 import { promotions as defaultPromotions } from '~/data/promotions'
 import type { Review } from '~/data/reviews'
 import { portfolio } from '~/data/portfolio'

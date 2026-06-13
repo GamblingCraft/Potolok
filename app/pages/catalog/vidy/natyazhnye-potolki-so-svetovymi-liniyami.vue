@@ -234,17 +234,8 @@ const item = vidy.find(v => v.id === 'lines')!
 const worksWithPrice = portfolio.value.filter(g => g.price)
 const otherVidy = vidy.filter(v => v.id !== 'base').map(v => ({ id: v.id, slug: v.slug, title: v.title }))
 
-useHead({
-  title: 'Натяжные потолки со световыми линиями в Иркутске — от 439 ₽/м² | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Натяжные потолки со световыми линиями в Иркутске. Профили SLOTT и FLEXY — прямые и криволинейные линии. Монтаж за 1 день, гарантия 12 лет.' },
-    { property: 'og:title', content: 'Натяжные потолки со световыми линиями в Иркутске | ПроПотолок' },
-    { property: 'og:description', content: 'Световые линии от 439 ₽/м². Профили SLOTT и FLEXY. Монтаж за 1 день, гарантия 12 лет.' },
-    { property: 'og:image', content: item.img },
-    { property: 'og:type', content: 'product' },
-  ],
-  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'Product', name: 'Натяжные потолки со световыми линиями', description: 'Натяжные потолки со встроенными световыми линиями — профили SLOTT и FLEXY. Монтаж в Иркутске.', brand: { '@type': 'Brand', name: 'ПроПотолок' }, offers: { '@type': 'Offer', price: price.value, priceCurrency: 'RUB', availability: 'https://schema.org/InStock', seller: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' } } } }) }],
-})
+usePageSeoMeta('natyazhnye-potolki-so-svetovymi-liniyami')
+useHead({ meta: [{ property: 'og:image', content: item.img }, { property: 'og:type', content: 'product' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

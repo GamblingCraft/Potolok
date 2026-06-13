@@ -268,26 +268,8 @@ const item = vidy.find(v => v.id === 'light')!
 const worksWithPrice = portfolio.value.filter(g => g.price)
 const otherVidy = vidy.filter(v => v.id !== 'base').map(v => ({ id: v.id, slug: v.slug, title: v.title }))
 
-useHead({
-  title: 'Натяжные потолки с подсветкой в Иркутске — от 379 ₽/м² | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Натяжные потолки с подсветкой в Иркутске. Точечные споты, LED-ленты, трековые системы. Монтаж за 1 день, гарантия 12 лет.' },
-    { property: 'og:title', content: 'Натяжные потолки с подсветкой в Иркутске | ПроПотолок' },
-    { property: 'og:description', content: 'Потолки с подсветкой от 379 ₽/м². Монтаж за 1 день, гарантия 12 лет, бесплатный замер.' },
-    { property: 'og:image', content: item.img },
-    { property: 'og:type', content: 'product' },
-  ],
-  script: [{
-    type: 'application/ld+json',
-    innerHTML: JSON.stringify({
-      '@context': 'https://schema.org', '@type': 'Product',
-      name: 'Натяжные потолки с подсветкой',
-      description: 'Натяжные потолки с подсветкой — споты, LED-лента, трековые системы. Монтаж в Иркутске.',
-      brand: { '@type': 'Brand', name: 'ПроПотолок' },
-      offers: { '@type': 'Offer', price: price.value, priceCurrency: 'RUB', availability: 'https://schema.org/InStock', seller: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' } } },
-    }),
-  }],
-})
+usePageSeoMeta('natyazhnye-potolki-s-podsvetkoy')
+useHead({ meta: [{ property: 'og:image', content: item.img }, { property: 'og:type', content: 'product' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

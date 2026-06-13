@@ -284,21 +284,8 @@ const price = computed(() => _prices.value?.['base'] ?? item.price)
 const item = tsveta.find(c => c.id === 'grey')!
 const worksWithPrice = portfolio.value.filter(g => g.price)
 
-useHead({
-  title: 'Серые натяжные потолки в Иркутске — от 169 ₽/м² с монтажом | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Серые натяжные потолки в Иркутске от 169 ₽/м² с монтажом. Матовые, глянцевые, сатиновые — оттенки от светло-серого до антрацита. Без запаха, монтаж за 1 день, гарантия 12 лет.' },
-    { property: 'og:title', content: 'Серые натяжные потолки в Иркутске | ПроПотолок' },
-    { property: 'og:description', content: 'Серые потолки от 169 ₽/м². Монтаж за 1 день, гарантия 12 лет, бесплатный замер.' },
-    { property: 'og:image', content: item.img },
-  ],
-  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({
-    '@context': 'https://schema.org', '@type': 'Product',
-    name: 'Серые натяжные потолки', description: 'Серые натяжные потолки из ПВХ-плёнки. Оттенки от светло-серого до антрацита, монтаж в Иркутске.',
-    brand: { '@type': 'Brand', name: 'ПроПотолок' },
-    offers: { '@type': 'Offer', price: price.value, priceCurrency: 'RUB', availability: 'https://schema.org/InStock' },
-  }) }],
-})
+usePageSeoMeta('serye-natyazhnye-potolki')
+useHead({ meta: [{ property: 'og:image', content: item.img }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

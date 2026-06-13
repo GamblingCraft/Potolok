@@ -224,38 +224,8 @@
 import { ref } from 'vue'
 const site = useSite()
 
-useHead({
-  title: 'Натяжные потолки в Свердловском округе Иркутска — от 159 ₽/м² | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Монтаж натяжных потолков в Свердловском округе Иркутска. Квартиры и частные дома. Бесплатный замер, 1 день монтаж, гарантия 12 лет. Скидки при заказе нескольких комнат. Цены от 159 ₽/м².' },
-    { name: 'keywords', content: 'натяжные потолки Свердловский округ Иркутск, потолки частный дом Иркутск Свердловский' },
-    { property: 'og:title', content: 'Натяжные потолки в Свердловском округе Иркутска — от 159 ₽/м²' },
-    { property: 'og:description', content: 'Монтаж натяжных потолков в Свердловском округе. Квартиры и частные дома. Бесплатный замер, 1 день работы, 12 лет гарантии.' },
-    { property: 'og:type', content: 'website' },
-    { name: 'robots', content: 'index, follow' },
-  ],
-  link: [{ rel: 'canonical', href: 'https://propot.ru/irkutsk/sverdlovskiy-okrug' }],
-  script: [
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify([
-        {
-          '@context': 'https://schema.org',
-          '@type': 'LocalBusiness',
-          name: 'ПроПотолок',
-          description: 'Монтаж натяжных потолков в Свердловском округе Иркутска.',
-          url: 'https://propot.ru/irkutsk/sverdlovskiy-okrug',
-          telephone: site.phoneRaw,
-          priceRange: '₽₽',
-          address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressRegion: 'Иркутская область', addressCountry: 'RU' },
-          areaServed: { '@type': 'AdministrativeArea', name: 'Свердловский округ, Иркутск' },
-          openingHours: 'Mo-Su 08:00-21:00',
-          aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '214' },
-        },
-      ]),
-    },
-  ],
-})
+usePageSeoMeta('sverdlovskiy-okrug')
+useHead({ meta: [{ property: 'og:type', content: 'website' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

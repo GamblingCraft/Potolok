@@ -59,7 +59,7 @@
                 Бессрочно
               </div>
               <button class="nav-btn ak-card__btn" @click="callbackOpen = true">
-                Получить скидку
+                Получить подарок
               </button>
             </div>
           </article>
@@ -186,12 +186,7 @@
 <script setup lang="ts">
 import { promotions as defaultPromotions, promoCodes as defaultCodes, type Promotion, type PromoCode } from '~/data/promotions'
 
-useHead({
-  title: 'Акции и скидки на натяжные потолки в Иркутске | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Актуальные акции и скидки на натяжные потолки в Иркутске: 3-й потолок в подарок, скидка 10% новым клиентам, скидки пенсионерам и новосёлам. Промокоды.' },
-  ],
-})
+usePageSeoMeta('akczii')
 
 const { data: promotionsData } = await useAsyncData<Promotion[]>(
   'akczii-promotions',

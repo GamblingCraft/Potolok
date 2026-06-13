@@ -284,21 +284,8 @@ const price = computed(() => _prices.value?.['base'] ?? item.price)
 const item = tsveta.find(c => c.id === 'blue')!
 const worksWithPrice = portfolio.value.filter(g => g.price)
 
-useHead({
-  title: 'Голубые натяжные потолки в Иркутске — от 169 ₽/м² с монтажом | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Голубые натяжные потолки в Иркутске от 169 ₽/м² с монтажом. Небесный, пастельный, бирюзовый — свежие оттенки для спальни и детской. Монтаж за 1 день, гарантия 12 лет.' },
-    { property: 'og:title', content: 'Голубые натяжные потолки в Иркутске | ПроПотолок' },
-    { property: 'og:description', content: 'Голубые потолки от 169 ₽/м². Монтаж за 1 день, гарантия 12 лет, бесплатный замер.' },
-    { property: 'og:image', content: item.img },
-  ],
-  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({
-    '@context': 'https://schema.org', '@type': 'Product',
-    name: 'Голубые натяжные потолки', description: 'Голубые натяжные потолки из ПВХ-плёнки. Небесные оттенки для свежего интерьера, монтаж в Иркутске.',
-    brand: { '@type': 'Brand', name: 'ПроПотолок' },
-    offers: { '@type': 'Offer', price: price.value, priceCurrency: 'RUB', availability: 'https://schema.org/InStock' },
-  }) }],
-})
+usePageSeoMeta('golubye-natyazhnye-potolki')
+useHead({ meta: [{ property: 'og:image', content: item.img }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

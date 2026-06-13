@@ -227,12 +227,7 @@
 const site = useSite()
 import { company, districts } from '~/data/contacts'
 
-useHead({
-  title: 'Контакты — натяжные потолки в Иркутске | ПроПотолок',
-  meta: [
-    { name: 'description', content: `Контакты компании ПроПотолок в Иркутске. Телефон: ${company.phone}. Адрес: ${company.address}. Бесплатный замер на дому.` },
-  ],
-})
+usePageSeoMeta('kontakty')
 
 const mapSection = ref<HTMLElement | null>(null)
 const sent = ref(false)

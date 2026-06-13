@@ -185,15 +185,8 @@ const faqItems = ref(_content.faqItems ?? [])
 const seoLinks = ref(_content.seoLinks ?? [])
 const service = services.find(s => s.slug === 'zamena-polotna')!
 
-useHead({
-  title: 'Замена натяжного полотна в Иркутске — от 159 ₽/м², профиль остаётся | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Замена натяжного полотна в Иркутске от 159 ₽/м². Профиль и конструкция сохраняются. Все фактуры и цвета. Гарантия 12 лет на новое полотно.' },
-    { property: 'og:title', content: 'Замена натяжного полотна в Иркутске | ПроПотолок' },
-    { property: 'og:type', content: 'website' },
-  ],
-  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'Service', name: 'Замена натяжного полотна', provider: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' }, telephone: '+73952000000' }, areaServed: { '@type': 'City', name: 'Иркутск' }, offers: { '@type': 'Offer', price: String(_prices.value?.["base"] ?? 159), priceCurrency: 'RUB', availability: 'https://schema.org/InStock' } }) }],
-})
+usePageSeoMeta('zamena-polotna')
+useHead({ meta: [{ property: 'og:type', content: 'website' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

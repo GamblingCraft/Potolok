@@ -22,7 +22,7 @@ const promos = computed(() => (data.value ?? []).slice(0, 3))
           <Icon name="lucide:check" size="13" class="cp-feat-card__check" />{{ c }}
         </li>
       </ul>
-      <button class="nav-btn cp-feat-card__btn" @click="$emit('callback')">Получить скидку</button>
+      <button class="nav-btn cp-feat-card__btn" @click="$emit('callback')">Получить подарок</button>
     </div>
   </div>
 </template>

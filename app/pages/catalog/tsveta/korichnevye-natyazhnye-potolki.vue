@@ -284,21 +284,8 @@ const price = computed(() => _prices.value?.['base'] ?? item.price)
 const item = tsveta.find(c => c.id === 'brown')!
 const worksWithPrice = portfolio.value.filter(g => g.price)
 
-useHead({
-  title: 'Коричневые натяжные потолки в Иркутске — от 169 ₽/м² с монтажом | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Коричневые натяжные потолки в Иркутске от 169 ₽/м² с монтажом. Шоколад, орех, каштан — тёплые оттенки для эко-интерьера. Монтаж за 1 день, гарантия 12 лет.' },
-    { property: 'og:title', content: 'Коричневые натяжные потолки в Иркутске | ПроПотолок' },
-    { property: 'og:description', content: 'Коричневые потолки от 169 ₽/м². Монтаж за 1 день, гарантия 12 лет, бесплатный замер.' },
-    { property: 'og:image', content: item.img },
-  ],
-  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({
-    '@context': 'https://schema.org', '@type': 'Product',
-    name: 'Коричневые натяжные потолки', description: 'Коричневые натяжные потолки из ПВХ-плёнки. Тёплые природные оттенки для эко-интерьера, монтаж в Иркутске.',
-    brand: { '@type': 'Brand', name: 'ПроПотолок' },
-    offers: { '@type': 'Offer', price: price.value, priceCurrency: 'RUB', availability: 'https://schema.org/InStock' },
-  }) }],
-})
+usePageSeoMeta('korichnevye-natyazhnye-potolki')
+useHead({ meta: [{ property: 'og:image', content: item.img }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

@@ -80,10 +80,7 @@ const faktury = computed(() => _faktury.map(f => ({
   price: _prices.value?.[f.catalogKey] ?? f.price,
 })))
 
-useHead({
-  title: 'Натяжные потолки по фактуре — матовые, глянцевые, сатиновые | ПроПотолок Иркутск',
-  meta: [{ name: 'description', content: 'Каталог натяжных потолков по фактуре: матовые от 159 ₽/м², глянцевые, сатиновые, тканевые и фактурные. Монтаж включён. Бесплатный замер в Иркутске.' }],
-})
+usePageSeoMeta('faktury')
 
 const callbackOpen = ref(false)
 </script>

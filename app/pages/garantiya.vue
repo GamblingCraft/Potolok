@@ -115,10 +115,7 @@
 
 <script setup lang="ts">
 const site = useSite()
-useHead({
-  title: 'Гарантия на натяжные потолки 12 лет — ПроПотолок Иркутск',
-  meta: [{ name: 'description', content: 'Гарантия на натяжные потолки 12 лет по договору. Устраняем любой дефект по нашей вине бесплатно. Выезд в течение 24 часов.' }],
-})
+usePageSeoMeta('garantiya')
 
 const faqOpen = ref(-1)
 

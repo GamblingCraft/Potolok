@@ -232,17 +232,8 @@ const item = pomeshcheniya.find(p => p.id === 'bath')!
 const worksWithPrice = portfolio.value.filter(g => g.price)
 const otherPomeshcheniya = pomeshcheniya.map(p => ({ id: p.id, slug: p.slug, title: p.title }))
 
-useHead({
-  title: 'Натяжные потолки в ванную в Иркутске — от 159 ₽/м² | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Натяжные потолки в ванную в Иркутске от 159 ₽/м². 100% водонепроницаемые. Удерживают 100 л/м². IP44 светильники. Гарантия 12 лет.' },
-    { property: 'og:title', content: 'Натяжные потолки в ванную в Иркутске | ПроПотолок' },
-    { property: 'og:description', content: 'Натяжные потолки в ванную от 159 ₽/м². 100% водонепроницаемые, гарантия 12 лет.' },
-    { property: 'og:image', content: item.img },
-    { property: 'og:type', content: 'product' },
-  ],
-  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'Product', name: 'Натяжные потолки в ванную', description: '100% водонепроницаемые натяжные потолки в ванную в Иркутске.', brand: { '@type': 'Brand', name: 'ПроПотолок' }, offers: { '@type': 'Offer', price: price.value, priceCurrency: 'RUB', availability: 'https://schema.org/InStock', seller: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' } } } }) }],
-})
+usePageSeoMeta('natyazhnye-potolki-v-vannoy')
+useHead({ meta: [{ property: 'og:image', content: item.img }, { property: 'og:type', content: 'product' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

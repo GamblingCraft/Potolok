@@ -232,17 +232,8 @@ const item = vidy.find(v => v.id === 'many')!
 const worksWithPrice = portfolio.value.filter(g => g.price)
 const otherVidy = vidy.filter(v => v.id !== 'base').map(v => ({ id: v.id, slug: v.slug, title: v.title }))
 
-useHead({
-  title: 'Многоуровневые натяжные потолки в Иркутске — от 609 ₽/м² | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Многоуровневые натяжные потолки в Иркутске. Три и более уровней, сложная геометрия, LED-подсветка. Индивидуальный проект. Гарантия 12 лет.' },
-    { property: 'og:title', content: 'Многоуровневые натяжные потолки в Иркутске | ПроПотолок' },
-    { property: 'og:description', content: 'Многоуровневые потолки от 609 ₽/м². Индивидуальный проект, гарантия 12 лет.' },
-    { property: 'og:image', content: item.img },
-    { property: 'og:type', content: 'product' },
-  ],
-  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'Product', name: 'Многоуровневые натяжные потолки', description: 'Многоуровневые натяжные потолки — три и более уровней, сложная геометрия. Монтаж в Иркутске.', brand: { '@type': 'Brand', name: 'ПроПотолок' }, offers: { '@type': 'Offer', price: price.value, priceCurrency: 'RUB', availability: 'https://schema.org/InStock', seller: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' } } } }) }],
-})
+usePageSeoMeta('mnogourovenye-natyazhnye-potolki')
+useHead({ meta: [{ property: 'og:image', content: item.img }, { property: 'og:type', content: 'product' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

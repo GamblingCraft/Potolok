@@ -232,17 +232,8 @@ const item = vidy.find(v => v.id === 'curve')!
 const worksWithPrice = portfolio.value.filter(g => g.price)
 const otherVidy = vidy.filter(v => v.id !== 'base').map(v => ({ id: v.id, slug: v.slug, title: v.title }))
 
-useHead({
-  title: 'Криволинейные натяжные потолки в Иркутске — от 539 ₽/м² | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Криволинейные натяжные потолки в Иркутске. Волны, эллипсы, круги — любые формы на профиле FLEXY. Монтаж за 1 день, гарантия 12 лет.' },
-    { property: 'og:title', content: 'Криволинейные натяжные потолки в Иркутске | ПроПотолок' },
-    { property: 'og:description', content: 'Криволинейные потолки от 539 ₽/м². Профиль FLEXY. Монтаж за 1 день, гарантия 12 лет.' },
-    { property: 'og:image', content: item.img },
-    { property: 'og:type', content: 'product' },
-  ],
-  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'Product', name: 'Криволинейные натяжные потолки', description: 'Криволинейные натяжные потолки на профиле FLEXY — любые формы. Монтаж в Иркутске.', brand: { '@type': 'Brand', name: 'ПроПотолок' }, offers: { '@type': 'Offer', price: price.value, priceCurrency: 'RUB', availability: 'https://schema.org/InStock', seller: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' } } } }) }],
-})
+usePageSeoMeta('krivolinejnye-natyazhnye-potolki')
+useHead({ meta: [{ property: 'og:image', content: item.img }, { property: 'og:type', content: 'product' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

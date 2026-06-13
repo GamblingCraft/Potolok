@@ -25,6 +25,8 @@
     "vue-router": "^5.0.7"
   },
   "devDependencies": {
+    "@iconify-json/lucide": "^1.2.111",
+    "@iconify-json/simple-icons": "^1.2.86",
     "@tailwindcss/vite": "^4.3.0",
     "shadcn-nuxt": "^2.7.4",
     "tailwindcss": "^4.3.0"

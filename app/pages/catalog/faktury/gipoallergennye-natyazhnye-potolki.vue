@@ -270,35 +270,8 @@ const price = computed(() => _prices.value?.['gipoallergennye'] ?? item.price)
 const item = faktury.find(f => f.id === 'hypo')!
 const worksWithPrice = portfolio.value.filter(g => g.price)
 
-useHead({
-  title: 'Гипоаллергенные натяжные потолки в Иркутске — от 279 ₽/м² | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Гипоаллергенные натяжные потолки в Иркутске от 279 ₽/м². Без толуола, хлора и фенола. Тканевые полотна Clipso, Descor — сертифицированы для детских и медучреждений.' },
-    { property: 'og:title', content: 'Гипоаллергенные натяжные потолки в Иркутске | ПроПотолок' },
-    { property: 'og:description', content: 'Гипоаллергенные потолки от 279 ₽/м². Без токсинов, для детей и аллергиков. Гарантия 12 лет.' },
-    { property: 'og:image', content: item.img },
-    { property: 'og:type', content: 'product' },
-  ],
-  script: [
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify({
-        '@context': 'https://schema.org',
-        '@type': 'Product',
-        name: 'Гипоаллергенные натяжные потолки',
-        description: 'Гипоаллергенные натяжные потолки без ПВХ. Clipso, Descor, Teqtum. Монтаж в Иркутске.',
-        brand: { '@type': 'Brand', name: 'ПроПотолок' },
-        offers: {
-          '@type': 'Offer',
-          price: price.value,
-          priceCurrency: 'RUB',
-          availability: 'https://schema.org/InStock',
-          seller: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' } },
-        },
-      }),
-    },
-  ],
-})
+usePageSeoMeta('gipoallergennye-natyazhnye-potolki')
+useHead({ meta: [{ property: 'og:image', content: item.img }, { property: 'og:type', content: 'product' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

@@ -89,10 +89,7 @@ const brendy = computed(() => _brendy.map(b => ({
   price: _prices.value?.['base'] ?? b.price,
 })))
 
-useHead({
-  title: 'Натяжные потолки по производителю — MSD, Bauf, Pongs, Clipso, Cerutti | ПроПотолок Иркутск',
-  meta: [{ name: 'description', content: 'Каталог натяжных потолков по брендам: MSD от 159 ₽/м², Bauf, LumFer, Teqtum, Pongs, Clipso, Cerutti. Европейские производители с сертификатами. Монтаж в Иркутске.' }],
-})
+usePageSeoMeta('brendy')
 
 const callbackOpen = ref(false)
 </script>

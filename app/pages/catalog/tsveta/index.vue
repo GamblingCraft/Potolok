@@ -81,10 +81,7 @@ const tsveta = computed(() => _tsveta.map(t => ({
   price: (_prices.value?.['base'] ?? 159) + t.extra,
 })))
 
-useHead({
-  title: 'Натяжные потолки по цвету — белые, чёрные, цветные | ПроПотолок Иркутск',
-  meta: [{ name: 'description', content: 'Каталог натяжных потолков по цвету: белые, чёрные, серые, бежевые, цветные, золотые. Более 1000 оттенков. Монтаж включён. Бесплатный замер в Иркутске.' }],
-})
+usePageSeoMeta('tsveta')
 
 const callbackOpen = ref(false)
 </script>

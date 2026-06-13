@@ -225,46 +225,8 @@
 import { ref } from 'vue'
 const site = useSite()
 
-useHead({
-  title: 'Натяжные потолки в Правобережном округе Иркутска — от 159 ₽/м² | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Монтаж натяжных потолков в Правобережном округе Иркутска. Работаем в новостройках и домах старого фонда. Бесплатный замер, 1 день монтаж, гарантия 12 лет. Цены от 159 ₽/м².' },
-    { name: 'keywords', content: 'натяжные потолки Правобережный округ Иркутск, потолки правый берег Иркутска' },
-    { property: 'og:title', content: 'Натяжные потолки в Правобережном округе Иркутска — от 159 ₽/м²' },
-    { property: 'og:description', content: 'Монтаж натяжных потолков в Правобережном округе. Бесплатный замер, 1 день работы, 12 лет гарантии.' },
-    { property: 'og:type', content: 'website' },
-    { name: 'robots', content: 'index, follow' },
-  ],
-  link: [{ rel: 'canonical', href: 'https://propot.ru/irkutsk/pravoberezhnyy-okrug' }],
-  script: [
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify([
-        {
-          '@context': 'https://schema.org',
-          '@type': 'LocalBusiness',
-          name: 'ПроПотолок',
-          description: 'Монтаж натяжных потолков в Правобережном округе Иркутска.',
-          url: 'https://propot.ru/irkutsk/pravoberezhnyy-okrug',
-          telephone: site.phoneRaw,
-          priceRange: '₽₽',
-          address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressRegion: 'Иркутская область', addressCountry: 'RU' },
-          areaServed: { '@type': 'AdministrativeArea', name: 'Правобережный округ, Иркутск' },
-          openingHours: 'Mo-Su 08:00-21:00',
-          aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.9', reviewCount: '214' },
-        },
-        {
-          '@context': 'https://schema.org',
-          '@type': 'FAQPage',
-          mainEntity: [
-            { '@type': 'Question', name: 'Работаете ли вы в новостройках Правобережного округа?', acceptedAnswer: { '@type': 'Answer', text: 'Да, активно работаем в новых жилых кварталах Правобережного округа. Делаем потолки как в квартирах с черновой отделкой, так и в готовых. Согласуем порядок работ с другими строителями.' } },
-            { '@type': 'Question', name: 'Есть ли доплата за выезд в Правобережный округ?', acceptedAnswer: { '@type': 'Answer', text: 'Нет никакой доплаты. Цены единые для всего Иркутска, замер и выезд мастеров бесплатный.' } },
-          ],
-        },
-      ]),
-    },
-  ],
-})
+usePageSeoMeta('pravoberezhnyy-okrug')
+useHead({ meta: [{ property: 'og:type', content: 'website' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

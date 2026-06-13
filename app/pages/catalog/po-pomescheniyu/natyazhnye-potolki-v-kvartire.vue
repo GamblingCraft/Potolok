@@ -232,17 +232,8 @@ const item = pomeshcheniya.find(p => p.id === 'flat')!
 const worksWithPrice = portfolio.value.filter(g => g.price)
 const otherPomeshcheniya = pomeshcheniya.map(p => ({ id: p.id, slug: p.slug, title: p.title }))
 
-useHead({
-  title: 'Натяжные потолки в квартиру в Иркутске — от 159 ₽/м² | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Натяжные потолки в квартиру в Иркутске от 159 ₽/м². Вся квартира за 1 рабочий день. При заказе от 3 помещений — 3-й потолок в подарок. Гарантия 12 лет.' },
-    { property: 'og:title', content: 'Натяжные потолки в квартиру в Иркутске | ПроПотолок' },
-    { property: 'og:description', content: 'Натяжные потолки в квартиру от 159 ₽/м². Вся квартира за 1 день, 3-й потолок в подарок.' },
-    { property: 'og:image', content: item.img },
-    { property: 'og:type', content: 'product' },
-  ],
-  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'Product', name: 'Натяжные потолки в квартиру', description: 'Натяжные потолки в квартиру в Иркутске. Вся квартира за 1 день, 3-й потолок в подарок.', brand: { '@type': 'Brand', name: 'ПроПотолок' }, offers: { '@type': 'Offer', price: price.value, priceCurrency: 'RUB', availability: 'https://schema.org/InStock', seller: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' } } } }) }],
-})
+usePageSeoMeta('natyazhnye-potolki-v-kvartire')
+useHead({ meta: [{ property: 'og:image', content: item.img }, { property: 'og:type', content: 'product' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

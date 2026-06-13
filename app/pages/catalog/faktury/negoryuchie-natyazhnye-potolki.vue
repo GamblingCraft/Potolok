@@ -270,17 +270,8 @@ const item = faktury.find(f => f.id === 'fire')!
 const worksWithPrice = portfolio.value.filter(g => g.price)
 const otherFaktury = faktury.map(f => ({ id: f.id, slug: f.slug, title: f.title }))
 
-useHead({
-  title: 'Негорючие натяжные потолки в Иркутске — от 299 ₽/м² | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Негорючие натяжные потолки в Иркутске от 299 ₽/м². Teqtum — сертификат МЧС. Для жилых и коммерческих помещений. Монтаж за 1 день, гарантия 12 лет.' },
-    { property: 'og:title', content: 'Негорючие натяжные потолки в Иркутске | ПроПотолок' },
-    { property: 'og:description', content: 'Негорючие потолки от 299 ₽/м². Teqtum — сертификат МЧС. Монтаж за 1 день, гарантия 12 лет.' },
-    { property: 'og:image', content: item.img },
-    { property: 'og:type', content: 'product' },
-  ],
-  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'Product', name: 'Негорючие натяжные потолки', brand: { '@type': 'Brand', name: 'ПроПотолок' }, offers: { '@type': 'Offer', price: price.value, priceCurrency: 'RUB', availability: 'https://schema.org/InStock' } }) }],
-})
+usePageSeoMeta('negoryuchie-natyazhnye-potolki')
+useHead({ meta: [{ property: 'og:image', content: item.img }, { property: 'og:type', content: 'product' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

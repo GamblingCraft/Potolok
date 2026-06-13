@@ -229,10 +229,8 @@ onMounted(() => {
   document.addEventListener('keydown', onKey)
   onUnmounted(() => document.removeEventListener('keydown', onKey))
 })
-useHead({
-  title: 'Натяжные потолки Descor в Иркутске — тканевые от 319 ₽/м² | ПроПотолок',
-  meta: [{ name: 'description', content: 'Натяжные потолки Descor в Иркутске от 319 ₽/м². Тканевое полотно Trevira CS — огнеупорное, без ПВХ, гипоаллергенное. Монтаж за 1 день, гарантия 12 лет.' }, { property: 'og:image', content: item.img }],
-})
+usePageSeoMeta('natyazhnye-potolki-descor')
+useHead({ meta: [{ property: 'og:image', content: item.img }] })
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)
 const formName = ref('')

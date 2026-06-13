@@ -84,10 +84,7 @@ const vidy = computed(() => _vidy.map(v => {
   }
 }))
 
-useHead({
-  title: 'Виды натяжных потолков — парящие, с подсветкой, двухуровневые | ПроПотолок Иркутск',
-  meta: [{ name: 'description', content: 'Каталог натяжных потолков по виду: парящие, с подсветкой, двухуровневые, световые линии, фотопечать, звёздное небо. Монтаж в Иркутске.' }],
-})
+usePageSeoMeta('vidy')
 
 const callbackOpen = ref(false)
 </script>

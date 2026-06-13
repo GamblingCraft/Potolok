@@ -193,15 +193,8 @@ const faqItems = ref(_content.faqItems ?? [])
 const seoLinks = ref(_content.seoLinks ?? [])
 const service = services.find(s => s.slug === 'peretyazhka-potolka')!
 
-useHead({
-  title: 'Перетяжка натяжного потолка в Иркутске — от 200 ₽/м² под ключ | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Перетяжка натяжного потолка в Иркутске от 200 ₽/м². Демонтаж старого полотна, замена профиля при необходимости, монтаж нового. Гарантия 12 лет.' },
-    { property: 'og:title', content: 'Перетяжка натяжного потолка в Иркутске | ПроПотолок' },
-    { property: 'og:type', content: 'website' },
-  ],
-  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'Service', name: 'Перетяжка натяжного потолка', provider: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' }, telephone: '+73952000000' }, areaServed: { '@type': 'City', name: 'Иркутск' }, offers: { '@type': 'Offer', price: '200', priceCurrency: 'RUB', availability: 'https://schema.org/InStock' } }) }],
-})
+usePageSeoMeta('peretyazhka-potolka')
+useHead({ meta: [{ property: 'og:type', content: 'website' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)

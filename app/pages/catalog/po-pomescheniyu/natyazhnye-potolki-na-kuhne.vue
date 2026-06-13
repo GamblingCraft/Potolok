@@ -232,17 +232,8 @@ const item = pomeshcheniya.find(p => p.id === 'kitchen')!
 const worksWithPrice = portfolio.value.filter(g => g.price)
 const otherPomeshcheniya = pomeshcheniya.map(p => ({ id: p.id, slug: p.slug, title: p.title }))
 
-useHead({
-  title: 'Натяжные потолки на кухню в Иркутске — от 159 ₽/м² | ПроПотолок',
-  meta: [
-    { name: 'description', content: 'Натяжные потолки на кухню в Иркутске от 159 ₽/м². Влагостойкий ПВХ, удерживает до 100 л/м² при затоплении. Монтаж за 1 день, гарантия 12 лет.' },
-    { property: 'og:title', content: 'Натяжные потолки на кухню в Иркутске | ПроПотолок' },
-    { property: 'og:description', content: 'Натяжные потолки на кухню от 159 ₽/м². Влагостойкие, монтаж за 1 день, гарантия 12 лет.' },
-    { property: 'og:image', content: item.img },
-    { property: 'og:type', content: 'product' },
-  ],
-  script: [{ type: 'application/ld+json', innerHTML: JSON.stringify({ '@context': 'https://schema.org', '@type': 'Product', name: 'Натяжные потолки на кухню', description: 'Влагостойкие натяжные потолки на кухню в Иркутске.', brand: { '@type': 'Brand', name: 'ПроПотолок' }, offers: { '@type': 'Offer', price: price.value, priceCurrency: 'RUB', availability: 'https://schema.org/InStock', seller: { '@type': 'LocalBusiness', name: 'ПроПотолок', address: { '@type': 'PostalAddress', addressLocality: 'Иркутск', addressCountry: 'RU' } } } }) }],
-})
+usePageSeoMeta('natyazhnye-potolki-na-kuhne')
+useHead({ meta: [{ property: 'og:image', content: item.img }, { property: 'og:type', content: 'product' }] })
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)
