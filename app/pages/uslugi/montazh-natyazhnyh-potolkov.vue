@@ -5,7 +5,7 @@
          HERO
     ══════════════════════════════════════ -->
     <section class="ms-hero">
-      <div class="ms-hero__bg" :style="{ backgroundImage: `url('${service.img}')` }"></div>
+      <div class="ms-hero__bg" :style="{ backgroundImage: `url('${heroImg}')` }"></div>
       <div class="ms-hero__overlay"></div>
       <div class="container ms-hero__inner">
         <div class="ms-hero__content">
@@ -272,6 +272,7 @@ const faqItems = ref(_content.faqItems ?? [])
 const seoLinks = ref(_content.seoLinks ?? [])
 
 const service = services.find(s => s.slug === 'montazh-natyazhnyh-potolkov')!
+const heroImg = usePageHero('montazh-natyazhnyh-potolkov', service.img)
 
 usePageSeoMeta('montazh-natyazhnyh-potolkov')
 useHead({ meta: [{ property: 'og:type', content: 'website' }] })
@@ -424,12 +425,7 @@ function submitHero() {
   min-height: 520px;
   display: flex; align-items: center;
 }
-.ms-hero__bg {
-  position: absolute; inset: 0;
-  background-image: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1600&q=80');
-  background-size: cover; background-position: center;
-  z-index: 0;
-}
+.ms-hero__bg { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 0; }
 .ms-hero__overlay {
   position: absolute; inset: 0;
   background: linear-gradient(90deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.6) 60%, rgba(0,0,0,.3) 100%);

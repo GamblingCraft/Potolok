@@ -90,7 +90,7 @@
           :to="item.slug"
           class="cat-card"
         >
-          <div class="cat-card__img" :style="{ backgroundImage: `url('${item.img}')` }"></div>
+          <div class="cat-card__img" :style="{ backgroundImage: `url('${heroImg(item)}')` }"></div>
           <div class="cat-card__overlay"></div>
           <div class="cat-card__body">
             <div class="cat-card__badge" v-if="item.badge">{{ item.badge }}</div>
@@ -111,7 +111,7 @@
         </div>
         <div class="catalog-grid catalog-grid--sm">
           <NuxtLink v-for="item in roomCards" :key="item.to" :to="item.to" class="cat-card cat-card--sm">
-            <div class="cat-card__img" :style="{ backgroundImage: `url('${item.img}')` }"></div>
+            <div class="cat-card__img" :style="{ backgroundImage: `url('${heroImg(item)}')` }"></div>
             <div class="cat-card__overlay"></div>
             <div class="cat-card__body">
               <div class="cat-card__title">{{ item.title }}</div>
@@ -129,7 +129,7 @@
         </div>
         <div class="catalog-grid catalog-grid--sm">
           <NuxtLink v-for="item in colorCards" :key="item.to" :to="item.to" class="cat-card cat-card--sm">
-            <div class="cat-card__img" :style="{ backgroundImage: `url('${item.img}')` }"></div>
+            <div class="cat-card__img" :style="{ backgroundImage: `url('${heroImg(item)}')` }"></div>
             <div class="cat-card__overlay"></div>
             <div class="cat-card__body">
               <div class="cat-card__title">{{ item.title }}</div>
@@ -147,7 +147,7 @@
         </div>
         <div class="catalog-grid">
           <NuxtLink v-for="item in typeCards" :key="item.to" :to="item.to" class="cat-card">
-            <div class="cat-card__img" :style="{ backgroundImage: `url('${item.img}')` }"></div>
+            <div class="cat-card__img" :style="{ backgroundImage: `url('${heroImg(item)}')` }"></div>
             <div class="cat-card__overlay"></div>
             <div class="cat-card__body">
               <div class="cat-card__title">{{ item.title }}</div>
@@ -427,6 +427,7 @@
 </template>
 
 <script setup lang="ts">
+const { heroImg } = useCatalogHeroes()
 usePageSeoMeta('index')
 import { promotions as defaultPromotions } from '~/data/promotions'
 import type { Review } from '~/data/reviews'

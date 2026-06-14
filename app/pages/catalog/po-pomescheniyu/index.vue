@@ -29,7 +29,7 @@
       <div class="container">
         <div class="cl-grid">
           <NuxtLink v-for="item in pomeshcheniya" :key="item.id" :to="item.slug" class="cl-card">
-            <div class="cl-card__img" :style="{ backgroundImage: `url('${item.img}')` }"></div>
+            <div class="cl-card__img" :style="{ backgroundImage: `url('${heroImg(item)}')` }"></div>
             <div class="cl-card__overlay"></div>
             <div class="cl-card__body">
               <div class="cl-card__icon"><Icon :name="item.icon" size="18"/></div>
@@ -71,6 +71,7 @@
 </template>
 
 <script setup lang="ts">
+const { heroImg } = useCatalogHeroes()
 import { pomeshcheniya as _pomeshcheniya } from '~/data/catalog'
 import { useCatalogPrices } from '~/composables/useCatalogPrices'
 

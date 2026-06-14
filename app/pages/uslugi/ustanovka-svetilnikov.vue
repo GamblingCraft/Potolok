@@ -1,7 +1,7 @@
 <template>
   <div itemscope itemtype="https://schema.org/Service">
     <section class="ms-hero">
-      <div class="ms-hero__bg" :style="{ backgroundImage: `url('${service.img}')` }"></div>
+      <div class="ms-hero__bg" :style="{ backgroundImage: `url('${heroImg}')` }"></div>
       <div class="ms-hero__overlay"></div>
       <div class="container ms-hero__inner">
         <div class="ms-hero__content">
@@ -184,6 +184,7 @@ const _content = await usePageContent('ustanovka-svetilnikov')
 const faqItems = ref(_content.faqItems ?? [])
 const seoLinks = ref(_content.seoLinks ?? [])
 const service = services.find(s => s.slug === 'ustanovka-svetilnikov')!
+const heroImg = usePageHero('ustanovka-svetilnikov', service.img)
 
 usePageSeoMeta('ustanovka-svetilnikov')
 useHead({ meta: [{ property: 'og:type', content: 'website' }] })

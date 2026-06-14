@@ -30,7 +30,7 @@
 
         <div class="br-grid">
           <NuxtLink v-for="item in brendy" :key="item.id" :to="item.slug" class="br-card">
-            <div class="br-card__img" :style="{ backgroundImage: `url('${item.img}')` }"></div>
+            <div class="br-card__img" :style="{ backgroundImage: `url('${heroImg(item)}')` }"></div>
             <div class="br-card__overlay"></div>
             <div v-if="item.badge" class="br-card__badge">{{ item.badge }}</div>
             <div class="br-card__body">
@@ -79,6 +79,7 @@
 </template>
 
 <script setup lang="ts">
+const { heroImg } = useCatalogHeroes()
 import { brendy as _brendy } from '~/data/catalog'
 import { useCatalogPrices } from '~/composables/useCatalogPrices'
 

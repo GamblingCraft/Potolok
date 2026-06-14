@@ -29,7 +29,7 @@
       <div class="container">
         <div class="cl-grid">
           <NuxtLink v-for="item in faktury" :key="item.id" :to="item.slug" class="cl-card">
-            <div class="cl-card__img" :style="{ backgroundImage: `url('${item.img}')` }"></div>
+            <div class="cl-card__img" :style="{ backgroundImage: `url('${heroImg(item)}')` }"></div>
             <div class="cl-card__overlay"></div>
             <div class="cl-card__body">
               <div v-if="item.badge" class="cl-card__badge">{{ item.badge }}</div>
@@ -70,6 +70,7 @@
 </template>
 
 <script setup lang="ts">
+const { heroImg } = useCatalogHeroes()
 import { faktury as _faktury } from '~/data/catalog'
 import { useCatalogPrices } from '~/composables/useCatalogPrices'
 

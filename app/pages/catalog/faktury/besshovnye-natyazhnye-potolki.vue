@@ -2,7 +2,7 @@
   <div itemscope itemtype="https://schema.org/Product">
 
     <section class="cp-hero">
-      <div class="cp-hero__bg" :style="{ backgroundImage: `url('${item.img}')` }"></div>
+      <div class="cp-hero__bg" :style="{ backgroundImage: `url('${heroImg}')` }"></div>
       <div class="cp-hero__overlay"></div>
       <div class="container cp-hero__inner">
         <div class="cp-hero__content">
@@ -268,6 +268,7 @@ const _prices = await useCatalogPrices()
 const price = computed(() => _prices.value?.['besshovnye'] ?? item.price)
 
 const item = faktury.find(f => f.id === 'bess')!
+const heroImg = usePageHero('besshovnye-natyazhnye-potolki', item.img)
 const worksWithPrice = portfolio.value.filter(g => g.price)
 
 usePageSeoMeta('besshovnye-natyazhnye-potolki')

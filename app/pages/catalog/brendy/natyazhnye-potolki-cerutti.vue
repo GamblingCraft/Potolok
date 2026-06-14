@@ -1,7 +1,7 @@
 ﻿<template>
   <div itemscope itemtype="https://schema.org/Product">
     <section class="cp-hero">
-      <div class="cp-hero__bg" :style="{ backgroundImage: `url('${item.img}')` }"></div>
+      <div class="cp-hero__bg" :style="{ backgroundImage: `url('${heroImg}')` }"></div>
       <div class="cp-hero__overlay"></div>
       <div class="container cp-hero__inner">
         <div class="cp-hero__content">
@@ -212,6 +212,7 @@ const seoLinks = ref(_content.seoLinks ?? [])
 const gallery = ref(await usePageGallery('natyazhnye-potolki-cerutti'))
 const portfolio = ref(await usePagePortfolio('natyazhnye-potolki-cerutti'))
 const item = brendy.find(b => b.id === 'cerutti')!
+const heroImg = usePageHero('natyazhnye-potolki-cerutti', item.img)
 
 const _prices = await useCatalogPrices()
 const price = computed(() => _prices.value?.['base'] ?? item.price)

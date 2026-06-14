@@ -2,7 +2,7 @@
   <div itemscope itemtype="https://schema.org/Product">
 
     <section class="cp-hero">
-      <div class="cp-hero__bg" :style="{ backgroundImage: `url('${item.img}')` }"></div>
+      <div class="cp-hero__bg" :style="{ backgroundImage: `url('${heroImg}')` }"></div>
       <div class="cp-hero__overlay"></div>
       <div class="container cp-hero__inner">
         <div class="cp-hero__content">
@@ -265,6 +265,7 @@ const price = computed(() => _prices.value?.['podsvetka'] ?? 320)
 const priceExtra = computed(() => price.value - (_prices.value?.['base'] ?? 159))
 
 const item = vidy.find(v => v.id === 'light')!
+const heroImg = usePageHero('natyazhnye-potolki-s-podsvetkoy', item.img)
 const worksWithPrice = portfolio.value.filter(g => g.price)
 const otherVidy = vidy.filter(v => v.id !== 'base').map(v => ({ id: v.id, slug: v.slug, title: v.title }))
 

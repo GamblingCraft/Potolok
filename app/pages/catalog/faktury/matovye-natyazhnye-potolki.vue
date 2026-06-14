@@ -5,7 +5,7 @@
          HERO / BANNER
     ══════════════════════════════════════ -->
     <section class="cp-hero">
-      <div class="cp-hero__bg" :style="{ backgroundImage: `url('${item.img}')` }"></div>
+      <div class="cp-hero__bg" :style="{ backgroundImage: `url('${heroImg}')` }"></div>
       <div class="cp-hero__overlay"></div>
       <div class="container cp-hero__inner">
         <div class="cp-hero__content">
@@ -315,6 +315,7 @@ const _prices = await useCatalogPrices()
 const price = computed(() => _prices.value?.['matovye'] ?? item.price)
 
 const item = faktury.find(f => f.id === 'mat')!
+const heroImg = usePageHero('matovye-natyazhnye-potolki', item.img)
 const worksWithPrice = portfolio.value.filter(g => g.price)
 
 usePageSeoMeta('matovye-natyazhnye-potolki')

@@ -23,7 +23,7 @@
         </div>
         <div class="ab-hero__img-wrap">
           <img
-            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&q=80"
+            :src="aboutHeroImg"
             alt="Натяжные потолки ПроПотолок Иркутск"
             class="ab-hero__img"
           />
@@ -293,36 +293,12 @@ const steps = [
   { icon: 'lucide:check-circle',  title: 'Сдача',         desc: 'Принимаете работу — оплачиваете. Получаете гарантийный талон на 12 лет.' },
 ]
 
-const team = [
-  {
-    name: 'Александр',
-    role: 'Старший замерщик',
-    exp: '12 лет',
-    photo: 'https://images.unsplash.com/photo-1566753323558-f4e0952af115?w=300&h=300&fit=crop&q=80',
-    skills: ['Сложные помещения', 'Дизайн-консультация', 'Коммерческие объекты'],
-  },
-  {
-    name: 'Дмитрий',
-    role: 'Ведущий монтажник',
-    exp: '10 лет',
-    photo: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?w=300&h=300&fit=crop&q=80',
-    skills: ['Многоуровневые потолки', 'Световые линии', 'Парящие ниши'],
-  },
-  {
-    name: 'Михаил',
-    role: 'Монтажник',
-    exp: '7 лет',
-    photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=300&h=300&fit=crop&q=80',
-    skills: ['Стандартный монтаж', 'Ванные и кухни', 'Срочные заказы'],
-  },
-  {
-    name: 'Ирина',
-    role: 'Менеджер по заказам',
-    exp: '6 лет',
-    photo: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=300&h=300&fit=crop&q=80',
-    skills: ['Консультации клиентов', 'Подбор материалов', 'Оформление договоров'],
-  },
-]
+const aboutHeroImg = usePageHero('o-kompanii', 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&q=80')
+
+const { data: team } = await useAsyncData('cms-team',
+  () => $fetch<any[]>('/api/cms/team'),
+  { default: () => [] as any[] },
+)
 
 const brands = [
   { name: 'MSD',    origin: 'Испания',  desc: 'Премиальные ПВХ-полотна. Широкая цветовая палитра, высокая прочность.' },

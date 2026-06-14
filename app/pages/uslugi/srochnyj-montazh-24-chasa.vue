@@ -3,7 +3,7 @@
 
     <!-- HERO -->
     <section class="ms-hero">
-      <div class="ms-hero__bg" :style="{ backgroundImage: `url('${service.img}')` }"></div>
+      <div class="ms-hero__bg" :style="{ backgroundImage: `url('${heroImg}')` }"></div>
       <div class="ms-hero__overlay"></div>
       <div class="container ms-hero__inner">
         <div class="ms-hero__content">
@@ -238,6 +238,7 @@ const faqItems = ref(_content.faqItems ?? [])
 const seoLinks = ref(_content.seoLinks ?? [])
 
 const service = services.find(s => s.slug === 'srochnyj-montazh-24-chasa')!
+const heroImg = usePageHero('srochnyj-montazh-24-chasa', service.img)
 
 usePageSeoMeta('srochnyj-montazh-24-chasa')
 useHead({ meta: [{ property: 'og:type', content: 'website' }] })

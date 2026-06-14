@@ -26,7 +26,7 @@
           </div>
           <div class="cat-grid cat-grid--4">
             <NuxtLink v-for="item in faktury" :key="item.slug" :to="item.slug" class="cat-card">
-              <div class="cat-card__img" :style="{ backgroundImage: `url('${item.img}')` }"></div>
+              <div class="cat-card__img" :style="{ backgroundImage: `url('${heroImg(item)}')` }"></div>
               <div class="cat-card__overlay"></div>
               <div class="cat-card__body">
                 <div v-if="item.badge" class="cat-card__badge">{{ item.badge }}</div>
@@ -46,7 +46,7 @@
           </div>
           <div class="cat-grid cat-grid--4">
             <NuxtLink v-for="item in vidy" :key="item.slug" :to="item.slug" class="cat-card">
-              <div class="cat-card__img" :style="{ backgroundImage: `url('${item.img}')` }"></div>
+              <div class="cat-card__img" :style="{ backgroundImage: `url('${heroImg(item)}')` }"></div>
               <div class="cat-card__overlay"></div>
               <div class="cat-card__body">
                 <div v-if="item.badge" class="cat-card__badge">{{ item.badge }}</div>
@@ -66,7 +66,7 @@
           </div>
           <div class="cat-grid cat-grid--4">
             <NuxtLink v-for="item in pomeshcheniya" :key="item.slug" :to="item.slug" class="cat-card">
-              <div class="cat-card__img" :style="{ backgroundImage: `url('${item.img}')` }"></div>
+              <div class="cat-card__img" :style="{ backgroundImage: `url('${heroImg(item)}')` }"></div>
               <div class="cat-card__overlay"></div>
               <div class="cat-card__body">
                 <div class="cat-card__title">{{ item.title }}</div>
@@ -85,7 +85,7 @@
           </div>
           <div class="cat-grid cat-grid--4">
             <NuxtLink v-for="item in tsveta" :key="item.slug" :to="item.slug" class="cat-card">
-              <div class="cat-card__img" :style="{ backgroundImage: `url('${item.img}')` }"></div>
+              <div class="cat-card__img" :style="{ backgroundImage: `url('${heroImg(item)}')` }"></div>
               <div class="cat-card__overlay"></div>
               <div class="cat-card__body">
                 <div class="cat-card__title">{{ item.title }}</div>
@@ -198,6 +198,7 @@
 </template>
 
 <script setup lang="ts">
+const { heroImg } = useCatalogHeroes()
 import { faktury as _faktury, vidy as _vidy, pomeshcheniya, tsveta as _tsveta } from '~/data/catalog'
 import { useCatalogPrices } from '~/composables/useCatalogPrices'
 

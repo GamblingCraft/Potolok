@@ -19,6 +19,14 @@ const hero = reactive({
   price: (page.value as any)?.price ?? 0,
 })
 
+const { data: storedHero } = await useAsyncData(
+  `page-hero:${slug.value}`,
+  () => $fetch<{ img: string; title: string } | null>(`/api/cms/page-hero/${slug.value}`).catch(() => null),
+  { default: () => null },
+)
+if (storedHero.value?.img)   hero.img   = storedHero.value.img
+if (storedHero.value?.title) hero.title = storedHero.value.title
+
 // ── Gallery (отдельные фото страницы) ─────────────────
 const { data: galleryApiData, refresh: refreshGallery } = await useAsyncData(
   `page-gallery:${slug.value}`,
@@ -142,6 +150,10 @@ async function save() {
       $fetch('/api/admin/gallery', {
         method: 'POST',
         body: { slug: slug.value, items: portfolio.value },
+      }),
+      $fetch('/api/admin/page-hero', {
+        method: 'POST',
+        body: { slug: slug.value, hero: { img: hero.img, title: hero.title } },
       }),
     ])
     await Promise.all([refreshGallery(), refreshPortfolio()])

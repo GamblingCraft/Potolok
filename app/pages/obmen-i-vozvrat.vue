@@ -172,8 +172,8 @@ const docs = [
 .ov-case__desc  { font-size: 14px; color: #555; line-height: 1.55; }
 
 .ov-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 32px; }
-.ov-step { background: #fff; border-radius: 16px; padding: 26px 22px; border: 1.5px solid #eee; position: relative; }
-.ov-step__num { position: absolute; top: 16px; right: 16px; font-size: 40px; font-weight: 900; color: rgba(0,0,0,.05); font-family: 'Gilroy', sans-serif; line-height: 1; }
+.ov-step { background: #fff; border-radius: 16px; padding: 26px 22px; border: 1.5px solid #eee; position: relative; overflow: hidden; }
+.ov-step__num { position: absolute; bottom: -60px; right: -6px; font-size: 200px; font-weight: 900; font-family: var(--font); line-height: 1; color: transparent; -webkit-text-stroke: 2px var(--accent); text-stroke: 2px var(--accent); opacity: .2; user-select: none; }
 .ov-step__icon { width: 46px; height: 46px; background: var(--accent); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--dark); margin-bottom: 14px; }
 .ov-step__title { font-size: 14px; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
 .ov-step__desc  { font-size: 13px; color: var(--gray); line-height: 1.55; }

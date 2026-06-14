@@ -3,7 +3,7 @@
 
     <!-- HERO -->
     <section class="cp-hero">
-      <div class="cp-hero__bg" :style="{ backgroundImage: `url('${item.img}')` }"></div>
+      <div class="cp-hero__bg" :style="{ backgroundImage: `url('${heroImg}')` }"></div>
       <div class="cp-hero__overlay"></div>
       <div class="container cp-hero__inner">
         <div class="cp-hero__content">
@@ -282,6 +282,7 @@ const _prices = await useCatalogPrices()
 const price = computed(() => _prices.value?.['base'] ?? item.price)
 
 const item = tsveta.find(c => c.id === 'grey')!
+const heroImg = usePageHero('serye-natyazhnye-potolki', item.img)
 const worksWithPrice = portfolio.value.filter(g => g.price)
 
 usePageSeoMeta('serye-natyazhnye-potolki')

@@ -166,6 +166,21 @@ const newRequestsCount = computed(() =>
           <span v-if="!collapsed" class="adm-link__label">Страницы</span>
         </NuxtLink>
 
+        <!-- О компании -->
+        <button class="adm-group-head" :class="active('/admin/about') && 'adm-group-head--on'" @click="toggle('about')" :title="collapsed ? 'О компании' : ''">
+          <Icon name="lucide:users" class="adm-link__ic" />
+          <span v-if="!collapsed" class="adm-link__label">О компании</span>
+          <Icon v-if="!collapsed" name="lucide:chevron-down" class="adm-chevron" :class="isOpen('about') && 'adm-chevron--open'" />
+        </button>
+        <div v-if="isOpen('about') && !collapsed" class="adm-sub">
+          <NuxtLink to="/admin/about/team" class="adm-sub__link" :class="active('/admin/about/team') && 'adm-sub__link--on'">
+            <Icon name="lucide:user-circle" class="adm-sub__ic" />Команда
+          </NuxtLink>
+          <NuxtLink to="/admin/about/certificates" class="adm-sub__link" :class="active('/admin/about/certificates') && 'adm-sub__link--on'">
+            <Icon name="lucide:award" class="adm-sub__ic" />Сертификаты
+          </NuxtLink>
+        </div>
+
         <div class="adm-sep" />
 
         <!-- ── SETTINGS ── -->

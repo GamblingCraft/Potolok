@@ -2,14 +2,11 @@
 definePageMeta({ layout: 'admin', middleware: 'admin-auth' })
 
 const pages = [
-  { title: 'Главная',        href: '/',               icon: 'lucide:home',        adminHref: null },
-  { title: 'О компании',     href: '/o-kompanii',     icon: 'lucide:building-2',  adminHref: null },
   { title: 'Отзывы',         href: '/otzyvy',         icon: 'lucide:star',        adminHref: '/admin/reviews' },
   { title: 'Акции',          href: '/akcii',          icon: 'lucide:percent',     adminHref: '/admin/promotions' },
   { title: 'FAQ',            href: '/voprosy-otvety', icon: 'lucide:help-circle', adminHref: '/admin/faq' },
   { title: 'Контакты',       href: '/kontakty',       icon: 'lucide:map-pin',     adminHref: '/admin/contacts' },
   { title: 'Наши работы',    href: '/portfolio',      icon: 'lucide:image',       adminHref: '/admin/portfolio' },
-  { title: 'Реквизиты',      href: '/rekvizity',      icon: 'lucide:file-text',   adminHref: null },
 ]
 
 const router = useRouter()

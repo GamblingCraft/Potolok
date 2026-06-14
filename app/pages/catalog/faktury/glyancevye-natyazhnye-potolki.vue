@@ -5,7 +5,7 @@
          HERO / BANNER
     ══════════════════════════════════════ -->
     <section class="cp-hero">
-      <div class="cp-hero__bg" :style="{ backgroundImage: `url('${item.img}')` }"></div>
+      <div class="cp-hero__bg" :style="{ backgroundImage: `url('${heroImg}')` }"></div>
       <div class="cp-hero__overlay"></div>
       <div class="container cp-hero__inner">
         <div class="cp-hero__content">
@@ -318,6 +318,7 @@ const price = computed(() => _prices.value?.['glyancevye'] ?? item.price)
 
 // ── Данные страницы из catalog.ts ──────────────────────────────
 const item = faktury.find(f => f.id === 'gly')!
+const heroImg = usePageHero('glyancevye-natyazhnye-potolki', item.img)
 const worksWithPrice = portfolio.value.filter(g => g.price)
 
 // ── SEO ────────────────────────────────────────────────────────

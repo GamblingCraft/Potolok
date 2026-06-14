@@ -16,6 +16,14 @@ const tab = ref<Tab>('faq')
 
 const form = reactive(JSON.parse(JSON.stringify(svc.value ?? {})) as Service)
 
+// Load stored hero override
+const { data: storedHero } = await useAsyncData(
+  `svc-hero:${slug.value}`,
+  () => $fetch<{ img: string; title: string } | null>(`/api/cms/page-hero/${slug.value}`).catch(() => null),
+  { default: () => null },
+)
+if (storedHero.value?.img) form.img = storedHero.value.img
+
 // Gallery
 interface GalleryItem { id: number; src: string; alt: string }
 const gallery = ref<GalleryItem[]>([
@@ -87,10 +95,16 @@ const saving = ref(false)
 async function save() {
   saving.value = true
   try {
-    await $fetch('/api/admin/page-content', {
-      method: 'POST',
-      body: { slug: slug.value, content: { faqItems: faqs.value } },
-    })
+    await Promise.all([
+      $fetch('/api/admin/page-content', {
+        method: 'POST',
+        body: { slug: slug.value, content: { faqItems: faqs.value } },
+      }),
+      $fetch('/api/admin/page-hero', {
+        method: 'POST',
+        body: { slug: slug.value, hero: { img: form.img, title: form.title } },
+      }),
+    ])
     await refreshContent()
     saved.value = true
     setTimeout(() => saved.value = false, 2500)
