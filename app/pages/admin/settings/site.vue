@@ -6,6 +6,18 @@ const { data: siteData, refresh } = await useAsyncData('admin-site', () => $fetc
 const form = ref(JSON.parse(JSON.stringify(siteData.value ?? {})))
 watch(siteData, v => { if (v) form.value = JSON.parse(JSON.stringify(v)) })
 
+// Авто-генерация phoneRaw из phone при изменении
+watch(() => (form.value as any).phone, (val: string) => {
+  if (!val) return
+  const digits = val.replace(/\D/g, '')
+  if (digits.length >= 10) {
+    const raw = digits.startsWith('7') || digits.startsWith('8')
+      ? '+7' + digits.slice(1)
+      : '+7' + digits
+    ;(form.value as any).phoneRaw = raw
+  }
+})
+
 const saved = ref(false)
 const saving = ref(false)
 async function save() {
@@ -30,16 +42,22 @@ const sections = [
     { k: 'founded',  l: 'Год основания',    type: 'text' },
   ]},
   { key: 'contacts', label: 'Контакты', icon: 'lucide:phone', fields: [
-    { k: 'phone',    l: 'Телефон (отображение)',  type: 'tel' },
-    { k: 'phoneRaw', l: 'Телефон (tel:)',          type: 'text' },
-    { k: 'email',    l: 'Email',                   type: 'email' },
-    { k: 'telegram', l: 'Telegram (ссылка)',        type: 'text' },
-    { k: 'vk',       l: 'ВКонтакте (ссылка)',      type: 'text' },
+    { k: 'phone',        l: 'Телефон (отображение)',    type: 'tel' },
+    { k: 'phoneRaw',     l: 'Телефон (tel: ссылка)',    type: 'text' },
+    { k: 'phoneAlt',     l: 'Доп. телефон (отображ.)', type: 'tel' },
+    { k: 'phoneAltRaw',  l: 'Доп. телефон (tel:)',      type: 'text' },
+    { k: 'email',        l: 'Email основной',           type: 'email' },
+    { k: 'emailSales',   l: 'Email для заказов',        type: 'email' },
+    { k: 'telegram',     l: 'Telegram (ссылка)',        type: 'text' },
+    { k: 'vk',           l: 'ВКонтакте (ссылка)',      type: 'text' },
+    { k: 'whatsapp',     l: 'WhatsApp (ссылка wa.me)',  type: 'text' },
   ]},
-  { key: 'address', label: 'Адрес', icon: 'lucide:map-pin', fields: [
-    { k: 'address',     l: 'Адрес',          type: 'text' },
-    { k: 'addressFull', l: 'Полный адрес',   type: 'text' },
-    { k: 'schedule',    l: 'Режим работы',   type: 'text' },
+  { key: 'address', label: 'Адрес и карта', icon: 'lucide:map-pin', fields: [
+    { k: 'address',      l: 'Адрес',              type: 'text' },
+    { k: 'addressShort', l: 'Адрес (кратко)',     type: 'text' },
+    { k: 'addressFull',  l: 'Полный адрес',       type: 'text' },
+    { k: 'schedule',     l: 'Режим работы',       type: 'text' },
+    { k: 'mapEmbed',     l: 'Яндекс.Карты embed', type: 'text' },
   ]},
   { key: 'seo', label: 'SEO', icon: 'lucide:globe', fields: [
     { k: 'siteUrl',    l: 'URL сайта',   type: 'text' },

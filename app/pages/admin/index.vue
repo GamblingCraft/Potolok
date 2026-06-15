@@ -37,8 +37,6 @@ const quickLinks = [
   { label: 'Отзывы',     desc: 'Просмотр реальных отзывов',              href: '/admin/reviews',              icon: 'lucide:star',        icolor: '#ca8a04' },
   { label: 'Заявки',     desc: 'Входящие обращения клиентов',            href: '/admin/requests',             icon: 'lucide:inbox',       icolor: '#2563eb' },
   { label: 'Акции',      desc: 'Спецпредложения и промокоды',            href: '/admin/promotions',           icon: 'lucide:percent',     icolor: '#9333ea' },
-  { label: 'Портфолио',  desc: 'Галерея выполненных работ',              href: '/admin/portfolio',            icon: 'lucide:image',       icolor: '#16a34a' },
-  { label: 'Галерея',    desc: 'Фото в разделе «Галерея» на страницах', href: '/admin/catalog/page-gallery', icon: 'lucide:layout-grid', icolor: '#0d9488' },
   { label: 'Каталог',    desc: 'Категории и страницы каталога',          href: '/admin/catalog',              icon: 'lucide:grid-2x2',    icolor: '#0891b2' },
   { label: 'Настройки',  desc: 'Информация о сайте и прочее',            href: '/admin/settings/site',        icon: 'lucide:settings',    icolor: '#6b7280' },
 ]

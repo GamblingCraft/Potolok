@@ -6,7 +6,11 @@ export function useSite() {
   const { data } = useAsyncData<SiteConfig>(
     'cms-site',
     () => $fetch<SiteConfig>('/api/cms/site'),
-    { default: () => ({ ...defaultSite }) as SiteConfig },
+    {
+      default: () => ({ ...defaultSite }) as SiteConfig,
+      // Всегда перезапрашиваем при монтировании компонента (не берём из SSR-кэша)
+      getCachedData: () => undefined,
+    },
   )
   const s = reactive({ ...defaultSite } as SiteConfig)
   watchEffect(() => {

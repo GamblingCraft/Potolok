@@ -358,10 +358,13 @@
         <a :href="'tel:' + site.phoneRaw" class="mobile-menu__callback-phone">{{ site.phone }}</a>
         <button class="nav-btn" @click="mobileOpen = false; $emit('openCallback')">Заказать звонок</button>
         <div class="mobile-menu__socials">
-          <a href="https://t.me/propotolok" target="_blank" class="mobile-menu__social mobile-menu__social--tg" aria-label="Telegram">
+          <a v-if="site.telegram" :href="site.telegram" target="_blank" class="mobile-menu__social mobile-menu__social--tg" aria-label="Telegram">
             <Icon name="simple-icons:telegram" size="22" />
           </a>
-          <a href="https://maxim.ru" target="_blank" class="mobile-menu__social mobile-menu__social--max" aria-label="MAX">
+          <a v-if="site.whatsapp" :href="site.whatsapp" target="_blank" class="mobile-menu__social mobile-menu__social--wa" aria-label="WhatsApp">
+            <Icon name="simple-icons:whatsapp" size="22" />
+          </a>
+          <a v-if="site.vk" :href="site.vk" target="_blank" class="mobile-menu__social mobile-menu__social--vk" aria-label="ВКонтакте">
             <Icon name="simple-icons:vk" size="22" />
           </a>
         </div>

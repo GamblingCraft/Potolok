@@ -24,6 +24,19 @@
             <span>Получить консультацию, подобрать материал или оформить вызов мастера, Вы можете по телефону:</span>
             <a :href="'tel:' + site.phoneRaw">{{ site.phone }}</a>
           </div>
+
+          <div class="footer__socials">
+            <a v-if="site.telegram" :href="site.telegram" target="_blank" class="footer__soc" aria-label="Telegram">
+              <Icon name="simple-icons:telegram" size="18" />
+            </a>
+            <a v-if="site.vk" :href="site.vk" target="_blank" class="footer__soc" aria-label="ВКонтакте">
+              <Icon name="simple-icons:vk" size="18" />
+            </a>
+            <a v-if="site.whatsapp" :href="site.whatsapp" target="_blank" class="footer__soc" aria-label="WhatsApp">
+              <Icon name="simple-icons:whatsapp" size="18" />
+            </a>
+          </div>
+
           <div class="footer__callme nav-btn" @click="$emit('openCallback')">Заказать звонок</div>
         </div>
 
@@ -132,3 +145,28 @@
 defineEmits(['openCallback'])
 const site = useSite()
 </script>
+
+<style scoped>
+.footer__socials {
+  display: flex;
+  gap: 10px;
+  margin: 16px 0 4px;
+}
+.footer__soc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: #9ca3af;
+  transition: background 0.2s, color 0.2s;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+.footer__soc:hover {
+  background: var(--accent);
+  color: #13131a;
+}
+</style>
