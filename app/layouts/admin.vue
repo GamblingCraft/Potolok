@@ -46,7 +46,6 @@ const seoItems = [
 const settingsItems = [
   { label: 'Информация',    href: '/admin/settings/site',    icon: 'lucide:building-2' },
   { label: 'Цены',          href: '/admin/settings/prices',  icon: 'lucide:tag' },
-  { label: 'Контакты',      href: '/admin/contacts',         icon: 'lucide:map-pin' },
 ]
 
 // Auto-open section based on route
@@ -178,6 +177,12 @@ const newRequestsCount = computed(() =>
           </NuxtLink>
           <NuxtLink to="/admin/about/certificates" class="adm-sub__link" :class="active('/admin/about/certificates') && 'adm-sub__link--on'">
             <Icon name="lucide:award" class="adm-sub__ic" />Сертификаты
+          </NuxtLink>
+          <NuxtLink to="/admin/about/gallery" class="adm-sub__link" :class="active('/admin/about/gallery') && 'adm-sub__link--on'">
+            <Icon name="lucide:images" class="adm-sub__ic" />Галерея
+          </NuxtLink>
+          <NuxtLink to="/admin/about/hero" class="adm-sub__link" :class="active('/admin/about/hero') && 'adm-sub__link--on'">
+            <Icon name="lucide:image" class="adm-sub__ic" />Hero-изображение
           </NuxtLink>
         </div>
 

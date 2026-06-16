@@ -8,7 +8,6 @@ export function useSite() {
     () => $fetch<SiteConfig>('/api/cms/site'),
     {
       default: () => ({ ...defaultSite }) as SiteConfig,
-      // Всегда перезапрашиваем при монтировании компонента (не берём из SSR-кэша)
       getCachedData: () => undefined,
     },
   )

@@ -142,6 +142,42 @@
       </div>
     </section>
 
+    <!-- ═══ ГАЛЕРЕЯ ═══ -->
+    <section v-if="gallery.length" class="ab-section ab-section--gray ab-gallery-section">
+      <div class="container">
+        <div class="ab-section-head">
+          <div class="ab-section-pretitle ab-section-pretitle--dark">Фотографии</div>
+          <h2 class="ab-section-title">Наш офис и команда</h2>
+        </div>
+        <div class="ab-gallery-grid">
+          <div
+            v-for="photo in gallery" :key="photo.id"
+            class="ab-gallery-item"
+            @click="lightbox = { img: photo.img, title: photo.title }"
+          >
+            <img :src="photo.img" :alt="photo.title" loading="lazy" class="ab-gallery-img"/>
+            <div class="ab-gallery-overlay">
+              <Icon name="lucide:zoom-in" size="22"/>
+              <span v-if="photo.title" class="ab-gallery-caption">{{ photo.title }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Лайтбокс -->
+    <Teleport to="body">
+      <Transition name="ab-lb">
+        <div v-if="lightbox" class="ab-lb" @click.self="lightbox = null">
+          <button class="ab-lb__close" @click="lightbox = null">
+            <Icon name="lucide:x" size="22"/>
+          </button>
+          <img :src="lightbox.img" :alt="lightbox.title" class="ab-lb__img"/>
+          <div v-if="lightbox.title" class="ab-lb__caption">{{ lightbox.title }}</div>
+        </div>
+      </Transition>
+    </Teleport>
+
     <!-- ═══ ПАРТНЁРЫ ═══ -->
     <section class="ab-section ab-section--gray">
       <div class="container">
@@ -224,8 +260,11 @@
 
 <script setup lang="ts">
 usePageSeoMeta('o-kompanii')
+import { usePageGallery } from '~/composables/usePageContent'
 
 const callbackOpen = ref(false)
+const lightbox = ref<{ img: string; title: string } | null>(null)
+const gallery = ref(await usePageGallery('o-kompanii'))
 
 const stats = [
   { icon: 'lucide:calendar',      val: '15+ лет',   label: 'на рынке Иркутска' },
@@ -526,6 +565,63 @@ const schemaOrg = computed(() => JSON.stringify({
 }
 .ab-cta__btn-outline:hover { border-color: var(--dark); background: rgba(0,0,0,.06); }
 
+/* ═══ Галерея ═══ */
+.ab-gallery-section { padding-bottom: 72px; }
+.ab-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.ab-gallery-item {
+  position: relative; overflow: hidden;
+  border-radius: 14px; cursor: pointer;
+  aspect-ratio: 4/3;
+  background: #f0f0f0;
+}
+.ab-gallery-img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .35s ease;
+}
+.ab-gallery-item:hover .ab-gallery-img { transform: scale(1.06); }
+.ab-gallery-overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.35);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 8px; color: #fff;
+  opacity: 0; transition: opacity .25s;
+}
+.ab-gallery-item:hover .ab-gallery-overlay { opacity: 1; }
+.ab-gallery-caption { font-size: 13px; font-weight: 600; text-align: center; padding: 0 12px; }
+
+/* Лайтбокс */
+.ab-lb {
+  position: fixed; inset: 0; z-index: 9999;
+  background: rgba(0,0,0,.88);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 20px;
+}
+.ab-lb__close {
+  position: absolute; top: 20px; right: 24px;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(255,255,255,.12); border: none;
+  color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: background .15s;
+}
+.ab-lb__close:hover { background: rgba(255,255,255,.22); }
+.ab-lb__img {
+  max-width: 90vw; max-height: 82vh;
+  object-fit: contain; border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.5);
+}
+.ab-lb__caption {
+  margin-top: 14px; color: rgba(255,255,255,.7);
+  font-size: 14px; font-weight: 500;
+}
+.ab-lb-enter-active, .ab-lb-leave-active { transition: opacity .2s; }
+.ab-lb-enter-from, .ab-lb-leave-to { opacity: 0; }
+
 /* ═══ Responsive ═══ */
 @media (max-width: 1200px) {
   .ab-steps  { grid-template-columns: repeat(3, 1fr); }
@@ -541,6 +637,7 @@ const schemaOrg = computed(() => JSON.stringify({
   .ab-guarantee { grid-template-columns: 1fr; }
 }
 @media (max-width: 768px) {
+  .ab-gallery-grid { grid-template-columns: repeat(2, 1fr); }
   .ab-why-grid  { grid-template-columns: 1fr 1fr; }
   .ab-team      { grid-template-columns: 1fr 1fr; }
   .ab-brands    { grid-template-columns: 1fr; }
@@ -550,6 +647,7 @@ const schemaOrg = computed(() => JSON.stringify({
   .ab-cta__inner { flex-direction: column; align-items: flex-start; }
 }
 @media (max-width: 480px) {
+  .ab-gallery-grid { grid-template-columns: 1fr 1fr; }
   .ab-stats__grid { grid-template-columns: repeat(2, 1fr); }
   .ab-why-grid    { grid-template-columns: 1fr; }
   .ab-team        { grid-template-columns: 1fr; }

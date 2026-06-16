@@ -4,6 +4,8 @@ definePageMeta({ layout: 'admin', middleware: 'admin-auth' })
 interface Photo { id: number; img: string; title: string }
 
 const slugMeta: Record<string, { label: string; group: string }> = {
+  'index':      { label: 'Главная страница', group: 'Другие' },
+  'o-kompanii': { label: 'О компании',      group: 'Другие' },
   'matovye-natyazhnye-potolki':         { label: 'Матовые',           group: 'Фактуры' },
   'glyancevye-natyazhnye-potolki':      { label: 'Глянцевые',         group: 'Фактуры' },
   'satinovye-natyazhnye-potolki':       { label: 'Сатиновые',         group: 'Фактуры' },

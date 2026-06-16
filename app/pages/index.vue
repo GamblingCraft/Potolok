@@ -235,6 +235,30 @@
     </div>
   </section>
 
+  <!-- ═══ ГАЛЕРЕЯ ═══ -->
+  <section v-if="gallery.length" class="idx-section idx-gallery">
+    <div class="container">
+      <div class="idx-head">
+        <div class="idx-pretitle">Наши работы</div>
+        <h2 class="idx-title">Фотогалерея натяжных потолков</h2>
+        <p class="idx-desc">Реальные объекты в Иркутске — нажмите на фото для просмотра</p>
+      </div>
+      <div class="idx-gallery-grid">
+        <div
+          v-for="photo in gallery" :key="photo.id"
+          class="idx-gallery-item"
+          @click="openLightbox(photo.img, photo.title)"
+        >
+          <img :src="photo.img" :alt="photo.title" loading="lazy" class="idx-gallery-img"/>
+          <div class="idx-gallery-overlay">
+            <Icon name="lucide:zoom-in" size="22"/>
+            <span v-if="photo.title" class="idx-gallery-caption">{{ photo.title }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══ КАК МЫ РАБОТАЕМ ═══ -->
   <section class="idx-section idx-steps">
     <div class="container">
@@ -431,7 +455,9 @@ const { heroImg } = useCatalogHeroes()
 usePageSeoMeta('index')
 import { promotions as defaultPromotions } from '~/data/promotions'
 import type { Review } from '~/data/reviews'
-import { portfolio } from '~/data/portfolio'
+import { portfolio as defaultPortfolio } from '~/data/portfolio'
+import type { PortfolioItem } from '~/data/portfolio'
+import { usePageGallery } from '~/composables/usePageContent'
 import { useCatalogPrices } from '~/composables/useCatalogPrices'
 import type { Promotion } from '~/data/promotions'
 
@@ -453,7 +479,14 @@ const lightbox = reactive({ open: false, img: '', title: '' })
 const promoCards = computed(() =>
   (promotionsData.value ?? defaultPromotions).filter(p => p.active && p.featured).slice(0, 3)
 )
-const portfolioCards = portfolio.slice(0, 6)
+const gallery = ref(await usePageGallery('index'))
+
+const { data: portfolioData } = await useAsyncData<PortfolioItem[]>(
+  'index-portfolio',
+  () => $fetch<PortfolioItem[]>('/api/cms/portfolio'),
+  { default: () => defaultPortfolio },
+)
+const portfolioCards = computed(() => (portfolioData.value ?? defaultPortfolio).slice(0, 6))
 
 // Отзывы из API
 const { data: reviewsData } = await useAsyncData<Review[]>(
@@ -610,7 +643,7 @@ function submitForm() {
 .hero__bg-placeholder {
   position: absolute;
   inset: 0;
-  background-image: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1600&q=80');
+  background-image: url('/img/hero.webp');
   background-size: cover;
   background-position: center;
   z-index: 0;
@@ -1053,6 +1086,43 @@ function submitForm() {
 .port-card__meta span { font-size: 11px; color: rgba(255,255,255,.65); background: rgba(255,255,255,.1); padding: 2px 8px; border-radius: 10px; }
 .port-card__price { font-size: 16px; font-weight: 800; color: var(--accent); }
 
+/* ── ГАЛЕРЕЯ ── */
+.idx-gallery { background: #fff; }
+.idx-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+.idx-gallery-item {
+  position: relative;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  border-radius: 12px;
+  cursor: pointer;
+  background: #f0f0f0;
+}
+.idx-gallery-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .4s ease;
+  display: block;
+}
+.idx-gallery-item:hover .idx-gallery-img { transform: scale(1.07); }
+.idx-gallery-overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.4);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 8px; color: #fff;
+  opacity: 0; transition: opacity .2s;
+}
+.idx-gallery-item:hover .idx-gallery-overlay { opacity: 1; }
+.idx-gallery-caption {
+  font-size: 13px; font-weight: 600;
+  text-align: center; padding: 0 12px;
+  line-height: 1.35;
+}
+
 /* ── ШАГИ ── */
 .idx-steps { background: #141414; }
 .idx-steps .idx-pretitle { background: rgba(245,200,0,.15); color: var(--accent); }
@@ -1234,6 +1304,7 @@ function submitForm() {
 /* ── RESPONSIVE ── */
 @media (max-width: 1100px) {
   .port-grid { grid-template-columns: repeat(2, 1fr); }
+  .idx-gallery-grid { grid-template-columns: repeat(3, 1fr); }
 }
 @media (max-width: 900px) {
   .steps-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1245,6 +1316,7 @@ function submitForm() {
   .idx-title { font-size: 26px; }
   .promo-grid { grid-template-columns: 1fr; }
   .port-grid  { grid-template-columns: repeat(2, 1fr); }
+  .idx-gallery-grid { grid-template-columns: repeat(2, 1fr); }
   .reviews-grid { grid-template-columns: 1fr; }
   .idx-head-row { flex-direction: column; }
   .idx-rating-badges { justify-content: center; }

@@ -46,9 +46,9 @@ export const site = {
   ],
 
   // ─── Карта ────────────────────────────────────────────────────
-  mapLat:   52.2978,
-  mapLng:   104.2964,
-  mapEmbed: 'https://yandex.ru/map-widget/v1/?um=constructor%3A&source=constructor&width=100%25&height=100%25',
+  mapLat:   52.276317,
+  mapLng:   104.352600,
+  mapEmbed: 'https://yandex.ru/map-widget/v1/?ll=104.352600%2C52.276317&z=16&pt=104.352600%2C52.276317%2Cpm2rdm&lang=ru_RU',
 
   // ─── Реквизиты ────────────────────────────────────────────────
   inn:    '3800000000',
@@ -81,4 +81,11 @@ export const site = {
 
   // ─── Цены ─────────────────────────────────────────────────────
   priceFrom: 159,   // минимальная цена за м²
+
+  // ─── Филиалы ──────────────────────────────────────────────────
+  branches: [
+    { city: 'Иркутск',  address: 'ул. Ширямова, 4а',         note: 'Главный офис', main: true  },
+    { city: 'Иркутск',  address: 'ул. Сергеева, 3 ст14',     note: '',             main: false },
+    { city: 'Ангарск',  address: '29-й микрорайон, 26',       note: '',             main: false },
+  ],
 }

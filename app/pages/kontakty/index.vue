@@ -98,6 +98,31 @@
       </div>
     </section>
 
+    <!-- ═══ BRANCHES ═══ -->
+    <section v-if="company.branches && company.branches.length" class="ct-branches-section">
+      <div class="container">
+        <p class="ct-pretitle" style="margin-bottom:10px">Наши офисы</p>
+        <h2 class="ct-branches-title">Где нас найти</h2>
+        <div class="ct-branches-grid">
+          <div
+            v-for="(b, i) in company.branches" :key="i"
+            class="ct-branch-card"
+            :class="{ 'ct-branch-card--main': b.main }"
+          >
+            <div class="ct-branch-card__icon">
+              <Icon name="lucide:map-pin" size="18" />
+            </div>
+            <div class="ct-branch-card__body">
+              <div class="ct-branch-card__city">{{ b.city }}</div>
+              <div class="ct-branch-card__addr">{{ b.address }}</div>
+              <div v-if="b.note" class="ct-branch-card__note">{{ b.note }}</div>
+            </div>
+            <span v-if="b.main" class="ct-branch-card__badge">Главный</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ═══ FORM + REQUISITES ═══ -->
     <section class="ct-bottom">
       <div class="container ct-bottom__grid">
@@ -205,7 +230,8 @@ const company = computed(() => ({
   ogrn:     site.ogrn,
   mapLat:   site.mapLat,
   mapLng:   site.mapLng,
-  mapEmbed: site.mapEmbed,
+  mapEmbed:  site.mapEmbed,
+  branches:  site.branches ?? [],
 }))
 
 usePageSeoMeta('kontakty')
@@ -459,13 +485,60 @@ const schemaOrg = computed(() => JSON.stringify({
   font-size: 12.5px; font-weight: 600; color: var(--dark);
 }
 
+/* ═══ BRANCHES ═══ */
+.ct-branches-section { background: #f7f8fa; padding: 52px 0 56px; border-top: 1px solid #eee; }
+.ct-branches-title {
+  font-size: clamp(26px, 3.5vw, 38px); font-weight: 900; color: var(--dark);
+  font-family: 'Gilroy', sans-serif; margin-bottom: 28px; line-height: 1.1;
+}
+.ct-branches-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.ct-branch-card {
+  position: relative;
+  background: #fff; border-radius: 18px;
+  padding: 22px 22px 22px 20px;
+  display: flex; align-items: flex-start; gap: 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+  border: 1.5px solid transparent;
+  transition: box-shadow .2s;
+}
+.ct-branch-card--main {
+  border-color: var(--accent);
+}
+.ct-branch-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,.1); }
+.ct-branch-card__icon {
+  flex-shrink: 0;
+  width: 38px; height: 38px; border-radius: 10px;
+  background: #f0f0f0;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--dark); margin-top: 2px;
+}
+.ct-branch-card--main .ct-branch-card__icon {
+  background: rgba(245,200,0,.15); color: var(--accent);
+}
+.ct-branch-card__body { flex: 1; }
+.ct-branch-card__city { font-size: 11px; font-weight: 700; color: #9ca3af; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 4px; }
+.ct-branch-card__addr { font-size: 15px; font-weight: 700; color: var(--dark); line-height: 1.35; }
+.ct-branch-card__note { font-size: 12px; color: #9ca3af; margin-top: 4px; }
+.ct-branch-card__badge {
+  position: absolute; top: 14px; right: 14px;
+  background: var(--accent); color: var(--dark);
+  font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .5px;
+  padding: 3px 9px; border-radius: 20px;
+}
+
 /* ═══ Responsive ═══ */
 @media (max-width: 1100px) {
   .ct-cards-row { grid-template-columns: 1fr 1fr; }
   .ct-bottom__grid { grid-template-columns: 1fr; }
+  .ct-branches-grid { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 680px) {
   .ct-cards-row { grid-template-columns: 1fr; }
+  .ct-branches-grid { grid-template-columns: 1fr; }
   .ct-hero__title { font-size: 34px; }
   .ct-map-head { flex-direction: column; align-items: flex-start; }
   .ct-form__row { grid-template-columns: 1fr; }
