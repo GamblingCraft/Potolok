@@ -115,6 +115,13 @@ function addItem() {
   startEdit(item)
 }
 
+function addMultiple(items: { img: string; title: string }[]) {
+  const list   = photosMap.value[activeSlug.value] ?? []
+  let   nextId = Math.max(0, ...list.map(i => i.id)) + 1
+  const newItems = items.map(it => ({ id: nextId++, img: it.img, title: it.title }))
+  photosMap.value[activeSlug.value] = [...newItems, ...list]
+}
+
 // ── Save ────────────────────────────────────────────────
 const saved  = ref(false)
 const saving = ref(false)
@@ -207,6 +214,9 @@ async function save() {
             </button>
           </div>
         </div>
+
+        <!-- Multi-upload zone -->
+        <AdminGalleryMultiUpload @add="addMultiple" />
 
         <!-- Empty state -->
         <div v-if="activePhotos.length === 0" class="bg-white rounded-xl border-2 border-dashed border-gray-200 flex flex-col items-center justify-center py-16 text-gray-400 gap-3">

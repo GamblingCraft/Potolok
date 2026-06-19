@@ -88,7 +88,7 @@
           <NuxtLink to="/catalog/faktury/satinovye-natyazhnye-potolki">Сатиновые</NuxtLink>
           <NuxtLink to="/catalog/faktury/tkanevye-natyazhnye-potolki">Тканевые</NuxtLink>
           <NuxtLink to="/catalog/faktury/fakturnye-natyazhnye-potolki">Фактурные</NuxtLink>
-          <NuxtLink to="/catalog/faktury/besshovnye-natyazhnye-potolki">Бесшовные</NuxtLink>
+          <NuxtLink to="/catalog/vidy/besshovnye-natyazhnye-potolki">Бесшовные</NuxtLink>
           <NuxtLink to="/catalog/faktury/gipoallergennye-natyazhnye-potolki">Гипоаллергенные</NuxtLink>
           <NuxtLink to="/catalog/faktury/negoryuchie-natyazhnye-potolki">Негорючие</NuxtLink>
 

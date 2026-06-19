@@ -37,6 +37,12 @@ function addItem() {
   startEdit(item)
 }
 
+function addMultiple(items: { img: string; title: string }[]) {
+  let nextId = Math.max(0, ...photos.value.map(i => i.id)) + 1
+  const newItems = items.map(it => ({ id: nextId++, img: it.img, title: it.title }))
+  photos.value = [...newItems, ...photos.value]
+}
+
 const saved  = ref(false)
 const saving = ref(false)
 async function save() {
@@ -72,6 +78,9 @@ async function save() {
         </button>
       </div>
     </div>
+
+    <!-- Multi-upload zone -->
+    <AdminGalleryMultiUpload @add="addMultiple" />
 
     <!-- Empty state -->
     <div v-if="photos.length === 0" class="adm-card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px;gap:14px;border:2px dashed #e8eaed;background:#fafafa">

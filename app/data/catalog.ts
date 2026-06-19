@@ -27,11 +27,11 @@ export const PRICES = {
   satinovye:       189,   // Сатиновые
   tkanevye:        319,   // Тканевые
   fakturnye:       259,   // Фактурные
-  besshovnye:      229,   // Бесшовные
   gipoallergennye: 279,   // Гипоаллергенные
   negoryuchie:     299,   // Негорючие
 
   // ── Виды (ДОПЛАТА к базовой цене), ₽/м² ───────────────
+  extra_besshovnye:    70,    // Бесшовные
   extra_paryashchie:   180,   // Парящий
   extra_podsvetka:     220,   // С подсветкой
   extra_dvuhuroven:    350,   // Двухуровневый
@@ -120,16 +120,6 @@ export const faktury = [
     mountPrice: 0,
     badge: null,
     img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=600&q=75',
-  },
-  {
-    id: 'bess',
-    catalogKey: 'besshovnye',
-    slug: '/catalog/faktury/besshovnye-natyazhnye-potolki',
-    title: 'Бесшовные',
-    price: PRICES.besshovnye,
-    mountPrice: 0,
-    badge: null,
-    img: 'https://images.unsplash.com/photo-1600573472559-240e53e0e27a?w=600&q=75',
   },
   {
     id: 'hypo',
@@ -276,10 +266,10 @@ export const vidy = [
   },
   {
     id: 'seamless2',
-    catalogKey: 'besshovnye-vid',
+    catalogKey: 'besshovnye',
     slug: '/catalog/vidy/besshovnye-natyazhnye-potolki',
     title: 'Бесшовные',
-    extra: 0,
+    extra: PRICES.extra_besshovnye,
     badge: null,
     img: 'https://images.unsplash.com/photo-1600573472559-240e53e0e27a?w=600&q=75',
   },

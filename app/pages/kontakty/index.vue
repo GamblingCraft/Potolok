@@ -6,7 +6,7 @@
       <div class="container ct-hero__inner">
         <p class="ct-pretitle">Свяжитесь с нами</p>
         <h1 class="ct-hero__title">Мы всегда <span class="ct-hero__accent">на связи</span></h1>
-        <p class="ct-hero__desc">Оставьте заявку или напишите в удобный мессенджер — ответим в течение 15 минут и обсудим ваше событие</p>
+        <p class="ct-hero__desc">Оставьте заявку или напишите в удобный мессенджер — ответим в течение 15 минут</p>
       </div>
     </section>
 
@@ -20,7 +20,7 @@
             <div class="ct-card__icon-wrap">
               <Icon name="lucide:map-pin" size="22" class="ct-card__icon" />
             </div>
-            <div class="ct-card__label">Адрес студии</div>
+            <div class="ct-card__label">Адрес</div>
             <div class="ct-card__value">{{ company.address }}</div>
             <button class="ct-card__link" @click="scrollToMap">
               Построить маршрут <Icon name="lucide:arrow-right" size="14" />
@@ -101,8 +101,8 @@
     <!-- ═══ BRANCHES ═══ -->
     <section v-if="company.branches && company.branches.length" class="ct-branches-section">
       <div class="container">
-        <p class="ct-pretitle" style="margin-bottom:10px">Наши офисы</p>
-        <h2 class="ct-branches-title">Где нас найти</h2>
+        <p class="ct-pretitle" style="margin-bottom:10px">Филиалы</p>
+        <h2 class="ct-branches-title">Наши офисы</h2>
         <div class="ct-branches-grid">
           <div
             v-for="(b, i) in company.branches" :key="i"

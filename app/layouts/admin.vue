@@ -149,7 +149,7 @@ const newRequestsCount = computed(() =>
             <Icon name="lucide:grid-2x2" class="adm-sub__ic" />Все услуги
           </NuxtLink>
           <NuxtLink
-            v-for="svc in services.slice(0, 8)"
+            v-for="svc in services"
             :key="svc.id"
             :to="`/admin/services/${svc.slug}`"
             class="adm-sub__link"

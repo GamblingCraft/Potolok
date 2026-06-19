@@ -24,6 +24,9 @@ const callbackOpen = ref(false)
 const route = useRoute()
 const { crumbs } = useBreadcrumbs()
 
+const { origin } = useRequestURL()
+useHead({ link: computed(() => [{ rel: 'canonical', href: origin + route.path }]) })
+
 // После каждой SPA-навигации сбрасываем кэш site-данных,
 // чтобы изменения из админки сразу отражались в хедере/футере
 const router = useRouter()

@@ -51,6 +51,11 @@ function removeGalItem(id: number) {
   gallery.value = gallery.value.filter(i => i.id !== id)
   if (editingGalId.value === id) editingGalId.value = null
 }
+function addMultipleGal(items: { img: string; title: string }[]) {
+  let nextId = Math.max(0, ...gallery.value.map(i => i.id), 0) + 1
+  const newItems = items.map(it => ({ id: nextId++, src: it.img, alt: it.title }))
+  gallery.value = [...newItems, ...gallery.value]
+}
 
 // FAQ — load from storage (falls back to pagesInfo defaults via API)
 interface FaqItem { q: string; a: string }
@@ -206,6 +211,7 @@ async function save() {
 
     <!-- Gallery Tab -->
     <div v-if="tab === 'gallery'" style="display:flex;flex-direction:column;gap:14px">
+      <AdminGalleryMultiUpload @add="addMultipleGal" />
       <div style="display:flex;justify-content:space-between;align-items:center">
         <p class="adm-page-sub">{{ gallery.length }} фото в галерее</p>
         <button class="adm-btn adm-btn--primary" @click="addGalItem">

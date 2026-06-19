@@ -453,6 +453,7 @@
 <script setup lang="ts">
 const { heroImg } = useCatalogHeroes()
 usePageSeoMeta('index')
+import { faktury, vidy } from '~/data/catalog'
 import { promotions as defaultPromotions } from '~/data/promotions'
 import type { Review } from '~/data/reviews'
 import { portfolio as defaultPortfolio } from '~/data/portfolio'
@@ -569,16 +570,12 @@ const faqs = [
   { q: 'Можно ли оплатить в рассрочку?',                  a: 'Да. Оформляем рассрочку 0% на срок до 12 месяцев прямо на замере. Первый взнос — 0 рублей. Монтаж сразу после подписания договора.' },
 ]
 
-const catalog = computed(() => [
-  { slug: '/catalog/faktury/matovye-natyazhnye-potolki',           title: 'Матовые',         price: _prices.value?.['matovye']     ?? 159, badge: 'Хит',   img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=75' },
-  { slug: '/catalog/faktury/glyancevye-natyazhnye-potolki',        title: 'Глянцевые',       price: _prices.value?.['glyancevye']  ?? 209, badge: null,    img: 'https://images.unsplash.com/photo-1616046229478-9901c5536a45?w=600&q=75' },
-  { slug: '/catalog/faktury/satinovye-natyazhnye-potolki',         title: 'Сатиновые',       price: _prices.value?.['satinovye']   ?? 189, badge: null,    img: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=600&q=75' },
-  { slug: '/catalog/faktury/tkanevye-natyazhnye-potolki',          title: 'Тканевые',        price: _prices.value?.['tkanevye']    ?? 319, badge: null,    img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=600&q=75' },
-  { slug: '/catalog/vidy/paryashchie-natyazhnye-potolki',          title: 'Парящий потолок', price: _prices.value?.['paryashchie'] ?? 350, badge: 'Тренд', img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=75' },
-  { slug: '/catalog/vidy/natyazhnye-potolki-s-podsvetkoy',         title: 'С подсветкой',    price: _prices.value?.['podsvetka']   ?? 320, badge: null,    img: 'https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=600&q=75' },
-  { slug: '/catalog/vidy/dvuhurovnevye-natyazhnye-potolki',        title: 'Двухуровневые',   price: _prices.value?.['dvuhuroven']  ?? 450, badge: null,    img: 'https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=600&q=75' },
-  { slug: '/catalog/vidy/natyazhnye-potolki-s-fotopechatyu',       title: 'Фотопечать',      price: _prices.value?.['fotopechat']  ?? 550, badge: null,    img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=600&q=75' },
-])
+const catalog = computed(() => {
+  const besshovnye = vidy.find(v => v.catalogKey === 'besshovnye')
+  const items = faktury.map(f => ({ slug: f.slug, title: f.title, price: _prices.value?.[f.catalogKey] ?? f.price, badge: f.badge, img: f.img }))
+  if (besshovnye) items.push({ slug: besshovnye.slug, title: besshovnye.title, price: (_prices.value?.['matovye'] ?? 159) + besshovnye.extra, badge: besshovnye.badge, img: besshovnye.img })
+  return items
+})
 
 const roomCards = [
   { to: '/catalog/po-pomescheniyu/natyazhnye-potolki-v-gostinoy',      title: 'Гостиная',    img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=400&q=70' },

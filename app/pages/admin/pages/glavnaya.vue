@@ -62,6 +62,12 @@ function addItem() {
   startEdit(item)
 }
 
+function addMultiple(items: { img: string; title: string }[]) {
+  let nextId = Math.max(0, ...photos.value.map(i => i.id)) + 1
+  const newItems = items.map(it => ({ id: nextId++, img: it.img, title: it.title }))
+  photos.value = [...newItems, ...photos.value]
+}
+
 const galSaved  = ref(false)
 const galSaving = ref(false)
 async function saveGallery() {
@@ -128,6 +134,9 @@ const tab = ref<'hero' | 'gallery'>('gallery')
           {{ galSaved ? 'Сохранено!' : galSaving ? 'Сохранение…' : 'Сохранить галерею' }}
         </button>
       </div>
+
+      <!-- Multi-upload zone -->
+      <AdminGalleryMultiUpload @add="addMultiple" />
 
       <!-- Empty -->
       <div v-if="photos.length === 0" class="adm-card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:56px;gap:14px;border:2px dashed #e8eaed;background:#fafafa">

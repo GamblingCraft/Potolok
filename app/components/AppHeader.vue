@@ -112,7 +112,7 @@
                 <NuxtLink to="/catalog/faktury/satinovye-natyazhnye-potolki" @click="megaOpen = false">Сатиновые</NuxtLink>
                 <NuxtLink to="/catalog/faktury/tkanevye-natyazhnye-potolki" @click="megaOpen = false">Тканевые</NuxtLink>
                 <NuxtLink to="/catalog/faktury/fakturnye-natyazhnye-potolki" @click="megaOpen = false">Фактурные</NuxtLink>
-                <NuxtLink to="/catalog/faktury/besshovnye-natyazhnye-potolki" @click="megaOpen = false">Бесшовные</NuxtLink>
+                <NuxtLink to="/catalog/vidy/besshovnye-natyazhnye-potolki" @click="megaOpen = false">Бесшовные</NuxtLink>
                 <NuxtLink to="/catalog/faktury/gipoallergennye-natyazhnye-potolki" @click="megaOpen = false">Гипоаллергенные</NuxtLink>
                 <NuxtLink to="/catalog/faktury/negoryuchie-natyazhnye-potolki" @click="megaOpen = false">Негорючие</NuxtLink>
               </div>
@@ -233,7 +233,7 @@
             <NuxtLink to="/catalog/faktury/satinovye-natyazhnye-potolki" @click="mobileOpen = false">Сатиновые</NuxtLink>
             <NuxtLink to="/catalog/faktury/tkanevye-natyazhnye-potolki" @click="mobileOpen = false">Тканевые</NuxtLink>
             <NuxtLink to="/catalog/faktury/fakturnye-natyazhnye-potolki" @click="mobileOpen = false">Фактурные</NuxtLink>
-            <NuxtLink to="/catalog/faktury/besshovnye-natyazhnye-potolki" @click="mobileOpen = false">Бесшовные</NuxtLink>
+            <NuxtLink to="/catalog/vidy/besshovnye-natyazhnye-potolki" @click="mobileOpen = false">Бесшовные</NuxtLink>
             <NuxtLink to="/catalog/faktury/gipoallergennye-natyazhnye-potolki" @click="mobileOpen = false">Гипоаллергенные</NuxtLink>
             <NuxtLink to="/catalog/faktury/negoryuchie-natyazhnye-potolki" @click="mobileOpen = false">Негорючие</NuxtLink>
           </div>

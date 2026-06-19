@@ -62,6 +62,11 @@ function deleteGalItem(id: number) {
   gallery.value = gallery.value.filter(i => i.id !== id)
   if (editGallId.value === id) editGallId.value = null
 }
+function addMultipleGallery(items: { img: string; title: string }[]) {
+  let nextId = Math.max(0, ...gallery.value.map(i => i.id), 0) + 1
+  const newItems = items.map(it => ({ id: nextId++, img: it.img, title: it.title, area: 0, room: '', price: 0, details: [] }))
+  gallery.value = [...newItems, ...gallery.value]
+}
 
 // ── Portfolio (Готовые работы) ────────────────────────
 const { data: portfolioApiData, refresh: refreshPortfolio } = await useAsyncData(
@@ -329,6 +334,7 @@ async function save() {
 
     <!-- ── GALLERY (Фотогалерея страницы) ── -->
     <div v-if="tab === 'gallery'">
+      <AdminGalleryMultiUpload @add="addMultipleGallery" style="margin-bottom:12px" />
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
         <p style="font-size:13px;color:#6b7280;margin:0">Фотогалерея — дополнительные фото для страницы (отдельно от готовых работ).</p>
         <button class="adm-btn adm-btn--primary" @click="addGalleryItem">

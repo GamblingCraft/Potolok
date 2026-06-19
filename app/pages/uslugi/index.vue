@@ -52,7 +52,7 @@
           >
             <!-- Фото -->
             <div class="sv-card__img-wrap">
-              <div class="sv-card__img" :style="{ backgroundImage: `url('${service.img}')` }"></div>
+              <div class="sv-card__img" :style="{ backgroundImage: `url('${heroImg(service)}')` }"></div>
               <div class="sv-card__overlay"></div>
               <div class="sv-card__badge" v-if="service.badge">{{ service.badge }}</div>
               <div class="sv-card__duration">
@@ -178,6 +178,7 @@
 <script setup lang="ts">
 const site = useSite()
 import { services, serviceCategories } from '~/data/services'
+const { heroImg } = useCatalogHeroes()
 
 usePageSeoMeta('uslugi')
 

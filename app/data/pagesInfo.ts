@@ -970,7 +970,7 @@ export const pagesInfo: Record<string, PageInfo> = {
   { title: 'Гарантия 12 лет', desc: 'На всё по договору.' },
 ],
     seoLinks: [
-  { to: '/catalog/faktury/besshovnye-natyazhnye-potolki', label: 'Бесшовные' },
+  { to: '/catalog/vidy/besshovnye-natyazhnye-potolki', label: 'Бесшовные' },
   { to: '/catalog/vidy/paryashchie-natyazhnye-potolki', label: 'Парящие' },
   { to: '/catalog/vidy/dvuhurovnevye-natyazhnye-potolki', label: 'Двухуровневые' },
   { to: '/catalog/po-pomescheniyu', label: 'Все помещения' },
