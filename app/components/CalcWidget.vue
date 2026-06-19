@@ -284,6 +284,7 @@ import { promoCodes as defaultCodes, type PromoCode } from '~/data/promotions'
 import { useCatalogPrices } from '~/composables/useCatalogPrices'
 
 const _prices = await useCatalogPrices()
+const { heroImg } = useCatalogHeroes()
 const { data: codesData } = await useAsyncData<PromoCode[]>(
   'calc-promo-codes',
   () => $fetch<PromoCode[]>('/api/cms/promo-codes'),
@@ -299,12 +300,12 @@ const textures = computed(() => faktury.map(f => ({
   name: f.title,
   price: _prices.value?.[f.catalogKey] ?? f.price,
   mountPrice: f.mountPrice,
-  img: f.img,
+  img: heroImg(f),
 })))
 const views = computed(() => vidyData.map(v => {
   const base = _prices.value?.['base'] ?? 159
   const total = _prices.value?.[v.catalogKey ?? ''] ?? (base + (v.extra ?? 0))
-  return { id: v.id, name: v.title, extra: total - base, img: v.img }
+  return { id: v.id, name: v.title, extra: total - base, img: heroImg(v) }
 }))
 const colors   = tsvetaData.map(c => ({ id: c.id, name: c.title, hex: c.hex, extra: c.extra ?? 0 }))
 const extras   = extraWorks

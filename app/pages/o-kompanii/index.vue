@@ -250,10 +250,6 @@
 
     <ModalCallback v-model="callbackOpen"/>
 
-    <!-- Schema.org Organization -->
-    <Head>
-      <Script type="application/ld+json">{{ schemaOrg }}</Script>
-    </Head>
 
   </div>
 </template>
@@ -378,6 +374,8 @@ const schemaOrg = computed(() => JSON.stringify({
   slogan: 'Натяжные потолки полного цикла',
   knowsAbout: ['Натяжные потолки', 'Монтаж потолков', 'Парящие потолки', 'Дизайн интерьера'],
 }))
+
+useHead({ script: [{ type: 'application/ld+json', innerHTML: schemaOrg }] })
 </script>
 
 <style scoped>

@@ -197,10 +197,6 @@
       </div>
     </section>
 
-    <!-- Schema.org -->
-    <Head>
-      <Script type="application/ld+json">{{ schemaOrg }}</Script>
-    </Head>
 
   </div>
 </template>
@@ -289,6 +285,8 @@ const schemaOrg = computed(() => JSON.stringify({
   priceRange: '₽₽',
   url: site.siteUrl,
 }))
+
+useHead({ script: [{ type: 'application/ld+json', innerHTML: schemaOrg }] })
 </script>
 
 <style scoped>

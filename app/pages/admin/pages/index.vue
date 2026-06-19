@@ -2,6 +2,7 @@
 definePageMeta({ layout: 'admin', middleware: 'admin-auth' })
 
 const pages = [
+  { title: 'Главная',        href: '/',               icon: 'lucide:home',        adminHref: '/admin/pages/glavnaya' },
   { title: 'Отзывы',         href: '/otzyvy',         icon: 'lucide:star',        adminHref: '/admin/reviews' },
   { title: 'Акции',          href: '/akcii',          icon: 'lucide:percent',     adminHref: '/admin/promotions' },
   { title: 'FAQ',            href: '/voprosy-otvety', icon: 'lucide:help-circle', adminHref: '/admin/faq' },

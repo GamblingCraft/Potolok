@@ -6,6 +6,8 @@ import { faktury, vidy, brendy, tsveta, pomeshcheniya } from '~/data/catalog'
 type Section = 'faktury' | 'vidy' | 'brendy' | 'tsveta' | 'pomeshcheniya'
 const activeSection = ref<Section>('faktury')
 
+const { heroImg } = useCatalogHeroes()
+
 const sections: { key: Section; label: string; icon: string }[] = [
   { key: 'faktury',     label: 'Фактуры',         icon: 'lucide:layers' },
   { key: 'vidy',        label: 'Виды / Технологии',icon: 'lucide:sparkles' },
@@ -51,7 +53,7 @@ function pageHref(item: typeof faktury[0]) {
 
           <!-- Thumbnail -->
           <div style="width:44px;height:44px;border-radius:9px;overflow:hidden;flex-shrink:0;background:#f4f5f7;border:1px solid #e8eaed">
-            <img v-if="item.img" :src="item.img" :alt="item.title" style="width:100%;height:100%;object-fit:cover" loading="lazy" />
+            <img v-if="item.img" :src="heroImg(item)" :alt="item.title" style="width:100%;height:100%;object-fit:cover" loading="lazy" />
             <div v-else style="width:100%;height:100%;display:flex;align-items:center;justify-content:center">
               <Icon name="lucide:image" style="width:18px;height:18px;color:#d1d5db" />
             </div>

@@ -189,10 +189,6 @@
       </div>
     </section>
 
-    <!-- JSON-LD FAQ Schema -->
-    <Head>
-      <Script type="application/ld+json">{{ faqSchema }}</Script>
-    </Head>
 
   </div>
 </template>
@@ -263,6 +259,8 @@ const faqSchema = computed(() => JSON.stringify({
     acceptedAnswer: { '@type': 'Answer', text: f.a },
   })),
 }))
+
+useHead({ script: [{ type: 'application/ld+json', innerHTML: faqSchema }] })
 
 /* Accordion helpers */
 function onEnter(el: Element) {

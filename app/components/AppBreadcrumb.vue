@@ -51,10 +51,6 @@
 
   </nav>
 
-  <!-- JSON-LD BreadcrumbList -->
-  <Head>
-    <Script type="application/ld+json">{{ schema }}</Script>
-  </Head>
 </template>
 
 <script setup lang="ts">
@@ -87,6 +83,8 @@ const schema = computed(() => JSON.stringify({
     })),
   ],
 }))
+
+useHead({ script: [{ type: 'application/ld+json', innerHTML: schema }] })
 </script>
 
 <style>

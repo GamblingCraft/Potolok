@@ -276,10 +276,6 @@
       </Transition>
     </Teleport>
 
-    <!-- JSON-LD AggregateRating -->
-    <Head>
-      <Script type="application/ld+json">{{ schemaOrg }}</Script>
-    </Head>
 
   </div>
 </template>
@@ -395,6 +391,8 @@ const schemaOrg = computed(() => JSON.stringify({
     reviewBody: r.text,
   })),
 }))
+
+useHead({ script: [{ type: 'application/ld+json', innerHTML: schemaOrg }] })
 </script>
 
 <style scoped>

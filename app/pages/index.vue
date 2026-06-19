@@ -239,7 +239,7 @@
   <section v-if="gallery.length" class="idx-section idx-gallery">
     <div class="container">
       <div class="idx-head">
-        <div class="idx-pretitle">Наши работы</div>
+        <div class="idx-pretitle">Фото</div>
         <h2 class="idx-title">Фотогалерея натяжных потолков</h2>
         <p class="idx-desc">Реальные объекты в Иркутске — нажмите на фото для просмотра</p>
       </div>

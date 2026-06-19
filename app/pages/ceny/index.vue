@@ -270,10 +270,6 @@
 
     <ModalCallback v-model="callbackOpen" />
 
-    <!-- JSON-LD -->
-    <Head>
-      <Script type="application/ld+json">{{ schemaOrg }}</Script>
-    </Head>
 
   </div>
 </template>
@@ -400,6 +396,8 @@ const schemaOrg = computed(() => JSON.stringify({
   priceCurrency: 'RUB',
   eligibleRegion: { '@type': 'Place', name: 'Иркутск' },
 }))
+
+useHead({ script: [{ type: 'application/ld+json', innerHTML: schemaOrg }] })
 </script>
 
 <style scoped>
