@@ -5,7 +5,7 @@
          HERO
     ══════════════════════════════════════ -->
     <section class="ms-hero">
-      <div class="ms-hero__bg" :style="{ backgroundImage: `url('${heroImg}')` }"></div>
+      <NuxtImg class="ms-hero__bg" :src="heroImg" alt="" fetchpriority="high" loading="eager" width="1200" height="580" sizes="100vw" />
       <div class="ms-hero__overlay"></div>
       <div class="container ms-hero__inner">
         <div class="ms-hero__content">

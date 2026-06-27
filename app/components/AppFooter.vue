@@ -5,7 +5,7 @@
 
         <div class="footer__item footer__item--cont">
           <NuxtLink to="/" class="footer__logo">
-            <img class="footer__logo-img" src="/img/logo.png" alt="ПроПотолок — натяжные потолки Иркутск">
+            <AppLogo class="footer__logo-img" style="color: white" />
           </NuxtLink>
 
           <div class="footer__h1">Контакты</div>

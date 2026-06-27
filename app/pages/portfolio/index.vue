@@ -151,6 +151,36 @@
           </div>
         </div>
 
+        <!-- SEO-текст под CTA -->
+        <div class="pf-intro">
+          <p class="pf-intro__text">
+            Здесь собраны реальные проекты нашей команды — натяжные потолки, которые мы установили в квартирах, домах и офисах Иркутска. Для каждого объекта показываем фотографии в нескольких ракурсах, тип полотна, площадь, перечень работ и итоговую стоимость с монтажом. Никаких рендеров и стоковых картинок — только то, что сделали наши мастера.
+          </p>
+          <div class="pf-intro__advantages">
+            <div class="pf-intro__adv">
+              <div class="pf-intro__adv-icon"><Icon name="lucide:camera" size="20"/></div>
+              <div>
+                <div class="pf-intro__adv-title">Реальные фото</div>
+                <div class="pf-intro__adv-desc">Съёмка на объекте после монтажа — видите точный результат</div>
+              </div>
+            </div>
+            <div class="pf-intro__adv">
+              <div class="pf-intro__adv-icon"><Icon name="lucide:receipt" size="20"/></div>
+              <div>
+                <div class="pf-intro__adv-title">Цены без скрытых доплат</div>
+                <div class="pf-intro__adv-desc">Указана полная стоимость проекта включая монтаж и материалы</div>
+              </div>
+            </div>
+            <div class="pf-intro__adv">
+              <div class="pf-intro__adv-icon"><Icon name="lucide:sliders-horizontal" size="20"/></div>
+              <div>
+                <div class="pf-intro__adv-title">Фильтр по помещению</div>
+                <div class="pf-intro__adv-desc">Смотрите только кухни, спальни или гостиные — удобно для выбора</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -211,6 +241,32 @@ function formatDate(d: string) {
 .pf-hero__desc {
   font-size: 16px; color: rgba(255,255,255,.45);
   margin-bottom: 28px;
+}
+
+/* SEO intro — под CTA, на светлом фоне */
+.pf-intro { margin-top: 40px; padding-top: 40px; border-top: 1px solid #eee; }
+.pf-intro__text {
+  font-size: 15px; color: #666; line-height: 1.75;
+  max-width: 760px; margin-bottom: 24px;
+}
+.pf-intro__advantages {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+}
+.pf-intro__adv {
+  display: flex; gap: 14px; align-items: flex-start;
+  background: #fff;
+  border: 1.5px solid #eee;
+  border-radius: 14px; padding: 16px 18px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.04);
+}
+.pf-intro__adv-icon {
+  color: var(--accent); flex-shrink: 0; margin-top: 2px;
+}
+.pf-intro__adv-title {
+  font-size: 14px; font-weight: 700; color: var(--dark); margin-bottom: 4px;
+}
+.pf-intro__adv-desc {
+  font-size: 13px; color: var(--gray); line-height: 1.5;
 }
 
 /* Фильтры */
@@ -399,6 +455,9 @@ function formatDate(d: string) {
   .pf-case__main-img { min-height: 260px; }
   .pf-case__params { grid-template-columns: repeat(2, 1fr); }
   .pf-case__info { padding: 24px; }
+}
+@media (max-width: 768px) {
+  .pf-intro__advantages { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
   .pf-hero__title { font-size: 28px; }

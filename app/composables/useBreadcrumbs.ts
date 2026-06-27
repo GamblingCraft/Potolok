@@ -48,6 +48,7 @@ const segmentTitles: Record<string, string> = {
   'mnogourovenye-natyazhnye-potolki':            'Многоуровневые',
   'konturnye-natyazhnye-potolki':                'Контурные',
   'krivolinejnye-natyazhnye-potolki':            'Криволинейные',
+  'natyazhnye-potolki-beton':                    'Потолок «бетон»',
   'besshchelevye-natyazhnye-potolki':            'Бесщелевые',
 
   // Цвета

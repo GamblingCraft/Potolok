@@ -57,6 +57,7 @@ function buildEntries(): SitemapEntry[] {
     url('/catalog/vidy/natyazhnye-potolki-s-fotopechatyu',        '0.7', 'monthly'),
     url('/catalog/vidy/natyazhnye-potolki-zvezdnoe-nebo',         '0.7', 'monthly'),
     url('/catalog/vidy/natyazhnye-potolki-so-svetovymi-liniyami', '0.7', 'monthly'),
+    url('/catalog/vidy/natyazhnye-potolki-beton',                  '0.7', 'monthly'),
     url('/catalog/vidy/natyazhnye-potolki-s-podsvetkoy',          '0.7', 'monthly'),
     url('/catalog/vidy/konturnye-natyazhnye-potolki',             '0.7', 'monthly'),
     url('/catalog/vidy/krivolinejnye-natyazhnye-potolki',         '0.7', 'monthly'),

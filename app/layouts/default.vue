@@ -1,6 +1,6 @@
 <template>
   <div>
-    <TopBanner />
+    <LazyTopBanner />
     <AppHeader @open-callback="callbackOpen = true" />
 
     <!-- Хлебные крошки — автоматически на всех страницах кроме главной -->
@@ -13,9 +13,9 @@
     <main><slot /></main>
     <AppFooter @open-callback="callbackOpen = true" />
 
-    <ModalCallback v-model="callbackOpen" />
-    <CookieBanner />
-    <QuizWidget />
+    <LazyModalCallback v-model="callbackOpen" />
+    <LazyCookieBanner />
+    <LazyQuizWidget />
   </div>
 </template>
 

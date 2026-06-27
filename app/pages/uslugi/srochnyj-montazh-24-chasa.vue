@@ -3,7 +3,7 @@
 
     <!-- HERO -->
     <section class="ms-hero">
-      <div class="ms-hero__bg" :style="{ backgroundImage: `url('${heroImg}')` }"></div>
+      <NuxtImg class="ms-hero__bg" :src="heroImg" alt="" fetchpriority="high" loading="eager" width="1200" height="580" sizes="100vw" />
       <div class="ms-hero__overlay"></div>
       <div class="container ms-hero__inner">
         <div class="ms-hero__content">
@@ -346,7 +346,7 @@ function submitHero() { callbackOpen.value = true }
 
 /* HERO */
 .ms-hero { position: relative; min-height: 520px; display: flex; align-items: center; }
-.ms-hero__bg { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 0; }
+.ms-hero__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: 0; display: block; }
 .ms-hero__overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.6) 60%, rgba(0,0,0,.3) 100%); z-index: 1; }
 .ms-hero__inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr auto; gap: 60px; align-items: center; padding-top: 60px; padding-bottom: 60px; }
 .ms-hero__content { max-width: 620px; }

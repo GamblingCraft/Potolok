@@ -2,7 +2,7 @@
   <div>
 
     <section class="gp-hero">
-      <div class="gp-hero__bg"></div>
+      <NuxtImg class="gp-hero__bg" src="https://images.unsplash.com/photo-1600210491892-03d54079b6ac?w=1600&q=80" alt="" fetchpriority="high" loading="eager" width="1600" height="580" sizes="100vw" />
       <div class="gp-hero__overlay"></div>
       <div class="container gp-hero__inner">
         <div class="gp-hero__content">
@@ -313,7 +313,7 @@ const faqs = [
 .gp-check { color: var(--accent); flex-shrink: 0; }
 .gp-section { padding: 72px 0; }
 .gp-hero { position: relative; min-height: 520px; display: flex; align-items: center; }
-.gp-hero__bg { position: absolute; inset: 0; background-image: url('https://images.unsplash.com/photo-1600210491892-03d54079b6ac?w=1600&q=80'); background-size: cover; background-position: center; z-index: 0; }
+.gp-hero__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: 0; display: block; }
 .gp-hero__overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.85) 0%, rgba(0,0,0,.65) 60%, rgba(0,0,0,.35) 100%); z-index: 1; }
 .gp-hero__inner { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr auto; gap: 60px; align-items: center; padding-top: 60px; padding-bottom: 60px; }
 .gp-hero__content { max-width: 620px; }

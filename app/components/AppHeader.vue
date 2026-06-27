@@ -13,7 +13,7 @@
       <div class="header-1">
 
         <NuxtLink to="/" class="header__logo">
-          <img class="header__logo-img" src="/img/logo.png" alt="ПроПотолок — натяжные потолки Иркутск">
+          <AppLogo class="header__logo-img" />
         </NuxtLink>
 
         <nav
@@ -208,7 +208,7 @@
 
       <div class="mobile-menu__header">
         <NuxtLink to="/" @click="mobileOpen = false">
-          <img src="/img/logo.png" alt="ПроПотолок" class="mobile-menu__logo-img" />
+          <AppLogo class="mobile-menu__logo-img" style="color: white" alt="ПроПотолок" />
         </NuxtLink>
         <span class="mobile-menu__close" @click="mobileOpen = false">
           <Icon name="lucide:x" size="20" />

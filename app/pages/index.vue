@@ -1,6 +1,15 @@
 <template>
   <section class="hero">
-      <div class="hero__bg-placeholder"></div>
+      <NuxtImg
+        src="/img/hero.webp"
+        alt=""
+        class="hero__bg-img"
+        fetchpriority="high"
+        loading="eager"
+        width="1920"
+        height="580"
+        sizes="100vw"
+      />
       <div class="hero__overlay"></div>
       <div class="container hero__container">
 
@@ -453,6 +462,56 @@
 <script setup lang="ts">
 const { heroImg } = useCatalogHeroes()
 usePageSeoMeta('index')
+
+useHead({
+  script: [{
+    type: 'application/ld+json',
+    innerHTML: JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'LocalBusiness',
+      '@id': 'https://пропотолок.рф/#business',
+      name: 'ПроПотолок',
+      description: 'Натяжные потолки в Иркутске — монтаж, замер, гарантия 12 лет. Работаем с 2009 года.',
+      url: 'https://пропотолок.рф',
+      logo: 'https://пропотолок.рф/img/logo.png',
+      image: 'https://пропотолок.рф/img/hero.webp',
+      telephone: '+73952000000',
+      email: 'info@пропотолок.рф',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'ул. Ширямова, 4а',
+        addressLocality: 'Иркутск',
+        addressRegion: 'Иркутская область',
+        postalCode: '664000',
+        addressCountry: 'RU',
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: 52.276317,
+        longitude: 104.352600,
+      },
+      openingHoursSpecification: [
+        { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday'], opens: '09:00', closes: '20:00' },
+        { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Saturday'], opens: '10:00', closes: '18:00' },
+      ],
+      priceRange: 'от 159 ₽/м²',
+      currenciesAccepted: 'RUB',
+      paymentAccepted: 'Наличные, карта, перевод',
+      areaServed: { '@type': 'City', name: 'Иркутск' },
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: '4.9',
+        reviewCount: '190',
+        bestRating: '5',
+        worstRating: '1',
+      },
+      sameAs: [
+        'https://vk.com/propotolok',
+        'https://wa.me/73952000000',
+      ],
+    }),
+  }],
+})
 import { faktury, vidy } from '~/data/catalog'
 import { promotions as defaultPromotions } from '~/data/promotions'
 import type { Review } from '~/data/reviews'
@@ -637,12 +696,13 @@ function submitForm() {
   display: flex;
   flex-direction: column;
 }
-.hero__bg-placeholder {
+.hero__bg-img {
   position: absolute;
   inset: 0;
-  background-image: url('/img/hero.webp');
-  background-size: cover;
-  background-position: center;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   z-index: 0;
 }
 .hero__overlay {
@@ -664,23 +724,18 @@ function submitForm() {
 .hero__content { max-width: 620px; flex: 1; }
 
 .hero__pretitle {
-  display: inline-block;
-  background: var(--accent);
-  color: var(--dark);
-  font-size: 13px;
-  font-weight: 700;
-  padding: 4px 14px;
-  border-radius: 20px;
-  margin-bottom: 18px;
-  text-transform: uppercase;
-  letter-spacing: .5px;
-}
-.hero__title {
   font-size: 48px;
   font-weight: 800;
   color: #fff;
   line-height: 1.15;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
+}
+.hero__title {
+  font-size: 22px;
+  font-weight: 600;
+  color: rgba(255,255,255,.75);
+  line-height: 1.3;
+  margin-bottom: 22px;
 }
 .hero__text {
   font-size: 18px;
@@ -719,6 +774,7 @@ function submitForm() {
 }
 .hero__title-price {
   color: var(--accent);
+  font-weight: 700;
   white-space: nowrap;
 }
 .hero__text-accent {
@@ -807,11 +863,12 @@ function submitForm() {
 
 @media (max-width: 900px) {
   .hero__badge { display: none; }
-  .hero__title { font-size: 36px; }
+  .hero__pretitle { font-size: 36px; }
 }
 @media (max-width: 640px) {
   .hero__container { padding-top: 40px; }
-  .hero__title { font-size: 28px; }
+  .hero__pretitle { font-size: 28px; }
+  .hero__title { font-size: 17px; }
   .hero__text { font-size: 15px; }
   .hero__form { flex-direction: column; }
   .hero__input, .hero__submit { width: 100%; }

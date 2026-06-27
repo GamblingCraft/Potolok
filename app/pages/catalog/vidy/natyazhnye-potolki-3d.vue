@@ -1,7 +1,7 @@
 <template>
   <div itemscope itemtype="https://schema.org/Product">
     <section class="cp-hero">
-      <div class="cp-hero__bg" style="background-image:url('https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=1200&q=80')"></div>
+      <img class="cp-hero__bg" src="https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=1200&q=80" alt="" fetchpriority="high" decoding="async" width="1200" height="580"/>
       <div class="cp-hero__overlay"></div>
       <div class="container cp-hero__inner">
         <div class="cp-hero__content">
@@ -268,7 +268,7 @@ function maskPhone(e: Event) {
 .cp-h2 { font-size: 30px; font-weight: 800; color: var(--dark); margin: 0 0 10px; line-height: 1.2; }
 .cp-h2--center { text-align: center; }
 .cp-hero { position: relative; min-height: 480px; display: flex; align-items: center; }
-.cp-hero__bg { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 0; }
+.cp-hero__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; z-index: 0; display: block; }
 .cp-hero__overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.55) 55%, rgba(0,0,0,.2) 100%); z-index: 1; }
 .cp-hero__inner { position: relative; z-index: 2; padding-top: 56px; padding-bottom: 56px; }
 .cp-hero__content { max-width: 620px; }

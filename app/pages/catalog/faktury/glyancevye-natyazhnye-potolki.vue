@@ -5,7 +5,7 @@
          HERO / BANNER
     ══════════════════════════════════════ -->
     <section class="cp-hero">
-      <div class="cp-hero__bg" :style="{ backgroundImage: `url('${heroImg}')` }"></div>
+      <NuxtImg class="cp-hero__bg" :src="heroImg" alt="" fetchpriority="high" loading="eager" width="1200" height="580" sizes="100vw" />
       <div class="cp-hero__overlay"></div>
       <div class="container cp-hero__inner">
         <div class="cp-hero__content">
@@ -375,8 +375,8 @@ onMounted(() => {
   position: relative; min-height: 480px; display: flex; align-items: center;
 }
 .cp-hero__bg {
-  position: absolute; inset: 0;
-  background-size: cover; background-position: center; z-index: 0;
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: center; z-index: 0; display: block;
 }
 .cp-hero__overlay {
   position: absolute; inset: 0;
