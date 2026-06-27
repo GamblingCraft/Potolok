@@ -68,7 +68,7 @@ export const site = {
   // ─── SEO / мета ───────────────────────────────────────────────
   siteUrl:    'https://пропотолок.рф',
   siteDomain: 'пропотолок.рф',
-  ogImage:    '/img/og-image.jpg',
+  ogImage:    '/hero.webp',
 
   // ─── Ключевые цифры (для hero, футер и т.д.) ─────────────────
   stats: {

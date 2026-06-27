@@ -15,7 +15,7 @@
           <div class="gp-facts">
             <div class="gp-fact"><Icon name="lucide:shield-check" size="15" class="gp-fact__icon"/>Гарантия 12 лет</div>
             <div class="gp-fact"><Icon name="lucide:clock" size="15" class="gp-fact__icon"/>Монтаж за 1 день</div>
-            <div class="gp-fact"><Icon name="lucide:banknote" size="15" class="gp-fact__icon"/>Без предоплаты</div>
+            <div class="gp-fact"><Icon name="lucide:banknote" size="15" class="gp-fact__icon"/>Оплата после</div>
             <div class="gp-fact"><Icon name="lucide:ruler" size="15" class="gp-fact__icon"/>Замер бесплатно</div>
           </div>
           <form class="gp-hero__form" @submit.prevent="submitHero">
@@ -279,7 +279,7 @@ const priceCards = [
 const steps = [
   { icon: 'lucide:phone-call', title: 'Заявка', desc: 'Оставьте заявку или позвоните. Ответим в течение 15 минут.', time: '15 минут' },
   { icon: 'lucide:ruler', title: 'Бесплатный замер', desc: 'Приедем с образцами, измерим и рассчитаем стоимость на месте.', time: 'В день обращения' },
-  { icon: 'lucide:file-signature', title: 'Договор', desc: 'Фиксируем стоимость и сроки. Никакой предоплаты.', time: 'На месте' },
+  { icon: 'lucide:file-signature', title: 'Договор', desc: 'Фиксируем стоимость и сроки в договоре.', time: 'На месте' },
   { icon: 'lucide:hammer', title: 'Монтаж', desc: 'Мастера монтируют потолок за 1 день. Накрывают мебель, убирают после.', time: '1 день' },
   { icon: 'lucide:clipboard-check', title: 'Приёмка', desc: 'Принимаете работу, подписываете акт, производите оплату.', time: 'После монтажа' },
 ]

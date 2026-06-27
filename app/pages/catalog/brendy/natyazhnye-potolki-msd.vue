@@ -10,7 +10,7 @@
           <h1 class="cp-hero__title" itemprop="name">Натяжные потолки MSD в&nbsp;Иркутске</h1>
           <p class="cp-hero__price">
             Акция: <span>3-й потолок в подарок!</span> Гарантия 12 лет.<br>
-            Монтаж за 1 день. Без предоплаты.
+            Монтаж за 1 день. Оплата после приёмки.
           </p>
           <div class="cp-hero__price-badge" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
             <meta itemprop="priceCurrency" content="RUB"/>
@@ -76,6 +76,9 @@
         </div>
       </div>
     </section>
+
+    <!-- ГОТОВЫЕ РАБОТЫ -->
+    <CpWorksSection :works="worksWithPrice" @lightbox="openLightbox" />
 
     <section class="cp-calc-cta">
       <div class="container cp-calc-cta__inner">
@@ -273,7 +276,7 @@ const whyCards = [
   { icon: 'lucide:badge-check', title: 'Сертификаты MSD', desc: 'На все серии полотен есть санитарно-эпидемиологические заключения и сертификаты качества.' },
   { icon: 'lucide:shield-check', title: 'Гарантия 12 лет', desc: 'Письменная гарантия на полотно и монтаж по договору. Без мелкого шрифта.' },
   { icon: 'lucide:globe', title: 'Большой выбор', desc: 'Classic, Evolution, Premium — три серии под разные задачи и бюджеты. Всё в наличии на складе.' },
-  { icon: 'lucide:banknote', title: 'Без предоплаты', desc: 'Оплата только после монтажа и вашей приёмки. Наличными, картой или безналом.' },
+  { icon: 'lucide:banknote', title: 'Оплата после', desc: 'Платите только после приёмки готовой работы: наличными, картой или переводом.' },
   { icon: 'lucide:hammer', title: 'Монтаж за 1 день', desc: 'Всю квартиру монтируем за один день. Мастера убирают за собой после работы.' },
 ]
 

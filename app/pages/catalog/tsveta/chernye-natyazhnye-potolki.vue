@@ -8,7 +8,7 @@
         <div class="cp-hero__content">
           <div class="cp-pretitle">Цвет потолка</div>
           <h1 class="cp-hero__title" itemprop="name">Чёрные натяжные потолки в&nbsp;Иркутске</h1>
-          <p class="cp-hero__price">Акция: <span>3-й потолок в подарок!</span> Гарантия 12 лет.<br>Потолки без запаха. Монтаж за 1 день. Без предоплаты.</p>
+          <p class="cp-hero__price">Акция: <span>3-й потолок в подарок!</span> Гарантия 12 лет.<br>Потолки без запаха. Монтаж за 1 день. Оплата после приёмки.</p>
           <div class="cp-hero__price-badge" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
             <meta itemprop="priceCurrency" content="RUB"/><meta itemprop="price" :content="String(price)"/>
             от <strong>{{ price }} ₽/м²</strong> — монтаж включён
@@ -63,36 +63,8 @@
       </div>
     </section>
 
-    <section class="cp-section cp-works" v-if="worksWithPrice.length">
-      <div class="container">
-        <div class="cp-section-head">
-          <div class="cp-pretitle cp-pretitle--dark">Реальные проекты</div>
-          <h2 class="cp-h2 cp-h2--center">Чёрные натяжные потолки — фото работ с ценами</h2>
-          <p class="cp-section-desc">Примеры монтажа чёрных потолков в квартирах и коммерческих объектах Иркутска</p>
-        </div>
-        <div class="cp-works-grid">
-          <div class="cp-work-card" v-for="w in visibleWorks" :key="w.id">
-            <div class="cp-work-card__img-wrap" @click="openLightbox(w.img, w.title)">
-              <img :src="w.img" :alt="w.title" class="cp-work-card__img" loading="lazy"/>
-              <div class="cp-work-card__zoom"><Icon name="lucide:zoom-in" size="18"/></div>
-            </div>
-            <div class="cp-work-card__body">
-              <div class="cp-work-card__title">{{ w.title }}</div>
-              <div class="cp-work-card__details" v-if="w.details?.length">
-                <span v-for="d in w.details" :key="d" class="cp-work-card__detail">{{ d }}</span>
-              </div>
-              <div class="cp-work-card__footer">
-                <div class="cp-work-card__area" v-if="w.area">{{ w.area }} м²</div>
-                <div class="cp-work-card__price" v-if="w.price">{{ fmt(w.price) }} ₽</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="cp-works-more" v-if="worksWithPrice.length > visibleWorksCount">
-          <button class="cp-more-btn" @click="visibleWorksCount += 4"><Icon name="lucide:chevron-down" size="16"/>Смотреть ещё</button>
-        </div>
-      </div>
-    </section>
+    <!-- ГОТОВЫЕ РАБОТЫ -->
+    <CpWorksSection :works="worksWithPrice" @lightbox="openLightbox" />
 
     <section class="cp-calc-cta">
       <div class="container cp-calc-cta__inner">
@@ -254,7 +226,7 @@ const whyCards = [
   { icon: 'lucide:badge-check', title: 'Сертифицированные материалы', desc: 'Все чёрные полотна прошли проверку: MSD, Bauf — документы предоставим по запросу.' },
   { icon: 'lucide:shield-check', title: 'Гарантия 12 лет', desc: 'Письменная гарантия по договору на полотно и монтажные работы.' },
   { icon: 'lucide:leaf', title: 'Без вредных веществ', desc: 'Полотна гипоаллергенны и не выделяют запаха при нагреве помещения.' },
-  { icon: 'lucide:banknote', title: 'Без предоплаты', desc: 'Оплата только после монтажа и вашей приёмки.' },
+  { icon: 'lucide:banknote', title: 'Оплата после', desc: 'Оплата только после монтажа и вашей приёмки.' },
   { icon: 'lucide:hammer', title: 'Монтаж без нагрева', desc: 'Метод холодного натяжения — без тепловых пушек, без пыли, аккуратно.' },
 ]
 

@@ -7,7 +7,7 @@
         <div class="cp-hero__content">
           <div class="cp-pretitle">Производитель полотен</div>
           <h1 class="cp-hero__title" itemprop="name">Натяжные потолки Cerutti в&nbsp;Иркутске</h1>
-          <p class="cp-hero__price">Акция: <span>3-й потолок в подарок!</span> Гарантия 12 лет.<br>Монтаж за 1 день. Без предоплаты.</p>
+          <p class="cp-hero__price">Акция: <span>3-й потолок в подарок!</span> Гарантия 12 лет.<br>Монтаж за 1 день. Оплата после приёмки.</p>
           <div class="cp-hero__price-badge" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
             <meta itemprop="priceCurrency" content="RUB"/><meta itemprop="price" :content="String(price)"/>
             от <strong>{{ price }} ₽/м²</strong> — монтаж включён
@@ -66,6 +66,9 @@
         </div>
       </div>
     </section>
+
+    <!-- ГОТОВЫЕ РАБОТЫ -->
+    <CpWorksSection :works="worksWithPrice" @lightbox="openLightbox" />
 
     <section class="cp-calc-cta">
       <div class="container cp-calc-cta__inner">
@@ -242,7 +245,7 @@ const whyCards = [
   { icon: 'lucide:sparkles', title: 'Ровное покрытие', desc: 'Безупречно ровная поверхность — идеальная геометрия без волн и неровностей.' },
   { icon: 'lucide:shield-check', title: 'Гарантия 12 лет', desc: 'Письменная гарантия по договору на полотно и монтаж. Без ограничений.' },
   { icon: 'lucide:droplets', title: 'Влагозащита', desc: 'Влагозащитный лак и высокопрочное покрытие защищают от протечек и случайного попадания воды.' },
-  { icon: 'lucide:banknote', title: 'Без предоплаты', desc: 'Оплата после монтажа и вашей приёмки. Наличными, картой или безналом.' },
+  { icon: 'lucide:banknote', title: 'Оплата после', desc: 'Платите только после приёмки готовой работы: наличными, картой или переводом.' },
   { icon: 'lucide:leaf', title: 'Экология', desc: 'Экологичное производство с минимизацией отходов — ответственный выбор для тех, кто думает о природе.' },
 ]
 function maskPhone(e: Event) {

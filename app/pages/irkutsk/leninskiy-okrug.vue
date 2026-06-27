@@ -15,7 +15,7 @@
           <div class="gp-facts">
             <div class="gp-fact"><Icon name="lucide:shield-check" size="15" class="gp-fact__icon"/>Гарантия 12 лет</div>
             <div class="gp-fact"><Icon name="lucide:clock" size="15" class="gp-fact__icon"/>Монтаж за 1 день</div>
-            <div class="gp-fact"><Icon name="lucide:banknote" size="15" class="gp-fact__icon"/>Без предоплаты</div>
+            <div class="gp-fact"><Icon name="lucide:banknote" size="15" class="gp-fact__icon"/>Оплата после</div>
             <div class="gp-fact"><Icon name="lucide:ruler" size="15" class="gp-fact__icon"/>Замер бесплатно</div>
           </div>
           <form class="gp-hero__form" @submit.prevent="submitHero">
@@ -185,7 +185,7 @@
             <h3>Почему натяжной потолок лучше побелки и штукатурки</h3>
             <p>Выравнивание потолка штукатуркой в квартире 60 м² стоит от 30 000 ₽ и занимает неделю с учётом сушки. Натяжной потолок той же площади — от 9 540 ₽ при цене 159 ₽/м², монтаж за 1 день. И результат гарантирован на 12 лет.</p>
             <h3>Гарантия и надёжность</h3>
-            <p>Мы работаем официально — договор, акт выполненных работ, гарантийный талон. Никакой предоплаты: платите только после того, как примете работу и останетесь довольны.</p>
+            <p>Мы работаем официально — договор, акт выполненных работ, гарантийный талон. Платите только после того, как примете работу и останетесь довольны.</p>
           </div>
           <div class="gp-seo-links">
             <div class="gp-seo-links__title">Микрорайоны и улицы</div>
@@ -280,7 +280,7 @@ const priceCards = [
 const steps = [
   { icon: 'lucide:phone-call', title: 'Заявка', desc: 'Оставьте заявку или позвоните. Ответим в течение 15 минут.', time: '15 минут' },
   { icon: 'lucide:ruler', title: 'Бесплатный замер', desc: 'Приедем с образцами, измерим и рассчитаем стоимость на месте.', time: 'В день обращения' },
-  { icon: 'lucide:file-signature', title: 'Договор', desc: 'Фиксируем стоимость и сроки. Никакой предоплаты.', time: 'На месте' },
+  { icon: 'lucide:file-signature', title: 'Договор', desc: 'Фиксируем стоимость и сроки в договоре.', time: 'На месте' },
   { icon: 'lucide:hammer', title: 'Монтаж', desc: 'Мастера монтируют потолок за 1 день. Накрывают мебель, убирают после.', time: '1 день' },
   { icon: 'lucide:clipboard-check', title: 'Приёмка', desc: 'Принимаете работу, подписываете акт, производите оплату.', time: 'После монтажа' },
 ]

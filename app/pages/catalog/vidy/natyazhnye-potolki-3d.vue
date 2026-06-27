@@ -61,36 +61,8 @@
       </div>
     </section>
 
-    <section class="cp-section cp-works" v-if="worksWithPrice.length">
-      <div class="container">
-        <div class="cp-section-head">
-          <div class="cp-pretitle cp-pretitle--dark">Реальные проекты</div>
-          <h2 class="cp-h2 cp-h2--center">Готовые работы с ценами и описанием</h2>
-          <p class="cp-section-desc">Материалы сертифицированы, имеем все необходимые документы.</p>
-        </div>
-        <div class="cp-works-grid">
-          <div class="cp-work-card" v-for="w in visibleWorks" :key="w.id">
-            <div class="cp-work-card__img-wrap" @click="openLightbox(w.img, w.title)">
-              <img :src="w.img" :alt="w.title" class="cp-work-card__img" loading="lazy"/>
-              <div class="cp-work-card__zoom"><Icon name="lucide:zoom-in" size="18"/></div>
-            </div>
-            <div class="cp-work-card__body">
-              <div class="cp-work-card__title">{{ w.title }}</div>
-              <div class="cp-work-card__details" v-if="w.details?.length">
-                <span v-for="d in w.details" :key="d" class="cp-work-card__detail">{{ d }}</span>
-              </div>
-              <div class="cp-work-card__footer">
-                <div class="cp-work-card__area" v-if="w.area">{{ w.area }} м²</div>
-                <div class="cp-work-card__price" v-if="w.price">{{ fmt(w.price) }} ₽</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="cp-works-more" v-if="worksWithPrice.length > visibleWorksCount">
-          <button class="cp-more-btn" @click="visibleWorksCount += 4"><Icon name="lucide:chevron-down" size="16"/>Смотреть ещё</button>
-        </div>
-      </div>
-    </section>
+    <!-- ГОТОВЫЕ РАБОТЫ -->
+    <CpWorksSection :works="worksWithPrice" @lightbox="openLightbox" />
 
     <section class="cp-section cp-gallery" v-if="gallery.length">
       <div class="container">
@@ -165,7 +137,7 @@
         <div class="cp-seo-inner">
           <div class="cp-seo-content">
             <h2>3D натяжные потолки в Иркутске — цены с установкой под ключ</h2>
-            <p>Компания <strong>ПроПотолок</strong> устанавливает 3D натяжные потолки в Иркутске. Работаем с одноуровневыми и многоуровневыми конструкциями. Поможем выбрать изображение или напечатаем по вашему макету. Без предоплаты, гарантия 12 лет.</p>
+            <p>Компания <strong>ПроПотолок</strong> устанавливает 3D натяжные потолки в Иркутске. Работаем с одноуровневыми и многоуровневыми конструкциями. Поможем выбрать изображение или напечатаем по вашему макету. Оплата после приёмки, гарантия 12 лет.</p>
             <h3>Освещение для 3D потолка</h3>
             <p>Для усиления эффекта используем светодиодные ленты и точечные светильники. При правильном освещении объёмный рисунок смотрится особенно выразительно. Устанавливаем закладные и подключаем подсветку в рамках одного монтажа.</p>
             <h3>Монтаж в Иркутске — замер бесплатно</h3>
@@ -269,7 +241,7 @@ const whyCards = [
   { icon: 'lucide:badge-check',   title: 'Сертификаты',          desc: 'На все фактуры предоставим сертификаты соответствия по запросу.' },
   { icon: 'lucide:shield-check',  title: 'Гарантия 12 лет',      desc: 'Письменная гарантия по договору на 12 лет.' },
   { icon: 'lucide:globe',         title: 'Европейские материалы', desc: 'MSD, Bauf, Descor, Clipso — премиальные полотна на складе.' },
-  { icon: 'lucide:banknote',      title: 'Без предоплаты',       desc: 'Оплата после монтажа и вашей приёмки.' },
+  { icon: 'lucide:banknote',      title: 'Оплата после',       desc: 'Платите только после приёмки готовой работы: наличными, картой или переводом.' },
   { icon: 'lucide:hammer',        title: 'Быстрый монтаж',       desc: 'Стандартная комната — 1 день, без пыли и шума.' },
 ]
 

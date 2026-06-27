@@ -7,7 +7,7 @@
         <div class="cp-hero__content">
           <div class="cp-pretitle">Натяжные потолки</div>
           <h1 class="cp-hero__title" itemprop="name">Натяжные потолки на балкон в Иркутске</h1>
-          <p class="cp-hero__price">Акция: <span>3-й потолок в подарок!</span> Гарантия 12 лет.<br>Потолки без запаха. Монтаж за 1 день. Без предоплаты.</p>
+          <p class="cp-hero__price">Акция: <span>3-й потолок в подарок!</span> Гарантия 12 лет.<br>Потолки без запаха. Монтаж за 1 день. Оплата после приёмки.</p>
           <div class="cp-hero__price-badge" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
             <meta itemprop="priceCurrency" content="RUB"/><meta itemprop="price" :content="String(price)"/>
             от <strong>{{ price }} ₽/м²</strong> — монтаж включён
@@ -60,36 +60,8 @@
         </div>
       </div>
     </section>
-    <section class="cp-section cp-works" v-if="worksWithPrice.length">
-      <div class="container">
-        <div class="cp-section-head">
-          <div class="cp-pretitle cp-pretitle--dark">Реальные проекты</div>
-          <h2 class="cp-h2 cp-h2--center">Готовые работы с ценами и описанием</h2>
-          <p class="cp-section-desc">Материалы сертифицированы, имеем все необходимые документы.</p>
-        </div>
-        <div class="cp-works-grid">
-          <div class="cp-work-card" v-for="w in visibleWorks" :key="w.id">
-            <div class="cp-work-card__img-wrap" @click="openLightbox(w.img, w.title)">
-              <img :src="w.img" :alt="w.title" class="cp-work-card__img" loading="lazy"/>
-              <div class="cp-work-card__zoom"><Icon name="lucide:zoom-in" size="18"/></div>
-            </div>
-            <div class="cp-work-card__body">
-              <div class="cp-work-card__title">{{ w.title }}</div>
-              <div class="cp-work-card__details" v-if="w.details?.length">
-                <span v-for="d in w.details" :key="d" class="cp-work-card__detail">{{ d }}</span>
-              </div>
-              <div class="cp-work-card__footer">
-                <div class="cp-work-card__area" v-if="w.area">{{ w.area }} м²</div>
-                <div class="cp-work-card__price" v-if="w.price">{{ fmt(w.price) }} ₽</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="cp-works-more" v-if="worksWithPrice.length > visibleWorksCount">
-          <button class="cp-more-btn" @click="visibleWorksCount += 4"><Icon name="lucide:chevron-down" size="16"/>Смотреть ещё</button>
-        </div>
-      </div>
-    </section>
+    <!-- ГОТОВЫЕ РАБОТЫ -->
+    <CpWorksSection :works="worksWithPrice" @lightbox="openLightbox" />
     <section class="cp-calc-cta">
       <div class="container cp-calc-cta__inner">
         <div class="cp-calc-cta__icon"><Icon name="lucide:calculator" size="28"/></div>
@@ -162,7 +134,7 @@
             <h3>Морозостойкий ПВХ</h3>
             <p>Специальный ПВХ работает при температурах от -5 до +70°C — подходит для застеклённых и незастеклённых балконов.</p>
             <h3>Монтаж за 1–2 часа</h3>
-            <p>Балкон 4–8 м² монтируется за 1–2 часа. Оплата после монтажа, без предоплаты.</p>
+            <p>Балкон 4–8 м² монтируется за 1–2 часа. Оплата после монтажа, оплата после приёмки.</p>
           </div>
           <div class="cp-seo-links">
             <div class="cp-seo-links__title">Смотрите также</div>
@@ -242,7 +214,7 @@ const whyCards = [
   { icon: 'lucide:badge-check', title: 'Сертификаты', desc: 'На все фактуры, светильники и расходники предоставим сертификаты соответствия по запросу.' },
   { icon: 'lucide:shield-check', title: 'Гарантия 12 лет', desc: 'Не сомневаемся в качестве материалов — даём письменную гарантию по договору на 12 лет.' },
   { icon: 'lucide:globe', title: 'Европейские материалы', desc: 'MSD, Bauf (Германия), Descor, Clipso — премиальные полотна всегда в наличии на складе.' },
-  { icon: 'lucide:banknote', title: 'Без предоплаты', desc: 'Оплата после монтажа и вашей приёмки. Наличными, картой или безналом.' },
+  { icon: 'lucide:banknote', title: 'Оплата после', desc: 'Платите только после приёмки готовой работы: наличными, картой или переводом.' },
   { icon: 'lucide:hammer', title: 'Безопасный монтаж', desc: 'Метод холодного натяжения — без нагрева, без пыли, без необходимости выносить мебель.' },
 ]
 

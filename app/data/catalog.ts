@@ -36,6 +36,7 @@ export const PRICES = {
   extra_podsvetka:     220,   // С подсветкой
   extra_dvuhuroven:    350,   // Двухуровневый
   extra_fotopechat:    400,   // Фотопечать
+  extra_beton:         400,   // Потолок «бетон»
   extra_zvezdnoe:      500,   // Звёздное небо
   extra_linii:         280,   // Световые линии
   extra_tenevye:       200,   // Теневой
@@ -263,6 +264,15 @@ export const vidy = [
     extra: PRICES.extra_fotopechat,
     badge: null,
     img: 'https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=600&q=75',
+  },
+  {
+    id: 'beton',
+    catalogKey: 'beton',
+    slug: '/catalog/vidy/natyazhnye-potolki-beton',
+    title: 'Потолок «бетон»',
+    extra: PRICES.extra_beton,
+    badge: 'Новинка',
+    img: 'https://images.unsplash.com/photo-1604014237800-1c9102c219da?w=600&q=75',
   },
   {
     id: 'seamless2',

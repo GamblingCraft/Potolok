@@ -1,5 +1,6 @@
 import { defaultSeoMeta } from '~/data/seoMeta'
 import type { SeoMetaMap } from '~/data/seoMeta'
+import { site } from '~/data/site'
 
 // Slug → catalog price key (catalogKey in prices.ts)
 const SLUG_PRICE_KEY: Record<string, string> = {
@@ -70,8 +71,11 @@ export function usePageSeoMeta(slug: string) {
       description:   replace(raw.description ?? ''),
       ogTitle:       replace(raw.ogTitle ?? raw.title ?? ''),
       ogDescription: replace(raw.ogDescription ?? raw.description ?? ''),
+      ogImage:       raw.ogImage ?? site.ogImage,
     }
   })
+
+  const route = useRoute()
 
   useHead({
     title: computed(() => meta.value.title),
@@ -79,6 +83,10 @@ export function usePageSeoMeta(slug: string) {
       { name: 'description',        content: computed(() => meta.value.description) as any },
       { property: 'og:title',       content: computed(() => meta.value.ogTitle) as any },
       { property: 'og:description', content: computed(() => meta.value.ogDescription) as any },
+      { property: 'og:image',       content: computed(() => site.siteUrl + meta.value.ogImage) as any },
+      { property: 'og:url',         content: computed(() => site.siteUrl + route.path) as any },
+      { property: 'og:type',        content: 'website' },
+      { property: 'og:locale',      content: 'ru_RU' },
     ],
   })
 }

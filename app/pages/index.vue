@@ -59,7 +59,7 @@
         <div class="hero__fact">
           <Icon name="lucide:banknote" size="26" class="hero__fact-icon" />
           <div>
-            <div class="hero__fact-val">Без предоплаты</div>
+            <div class="hero__fact-val">Оплата после</div>
             <div class="hero__fact-label">оплата после монтажа</div>
           </div>
         </div>
@@ -534,7 +534,7 @@ const steps = [
 
 const whyCards = [
   { icon: 'lucide:shield-check',  title: 'Гарантия 12 лет',         desc: 'Письменная гарантия по договору на полотно и монтаж. Без ограничений и мелкого шрифта.' },
-  { icon: 'lucide:banknote',      title: 'Без предоплаты',           desc: 'Оплата только после монтажа и вашей приёмки работы. Наличными, картой или безналом.' },
+  { icon: 'lucide:banknote',      title: 'Оплата после',           desc: 'Платите только после приёмки готовой работы: наличными, картой или переводом.' },
   { icon: 'lucide:ruler',         title: 'Бесплатный замер',         desc: 'Замерщик приедет в любой район Иркутска бесплатно и привезёт образцы всех фактур.' },
   { icon: 'lucide:leaf',          title: 'Без запаха',               desc: 'Монтаж методом холодного натяжения. Въезжать можно сразу после завершения работ.' },
   { icon: 'lucide:globe',         title: 'Европейские материалы',    desc: 'Работаем с MSD, Bauf, Pongs, Clipso, Cerutti — сертифицированные полотна в наличии на складе.' },

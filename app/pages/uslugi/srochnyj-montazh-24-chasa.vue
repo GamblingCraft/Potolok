@@ -252,7 +252,7 @@ const heroFacts = [
   { icon: 'lucide:zap',           text: 'Выезд за 2–4 часа' },
   { icon: 'lucide:calendar',      text: 'Ежедневно 8:00–22:00' },
   { icon: 'lucide:shield-check',  text: 'Гарантия 12 лет' },
-  { icon: 'lucide:banknote',      text: 'Без предоплаты' },
+  { icon: 'lucide:banknote',      text: 'Оплата после' },
   { icon: 'lucide:hammer',        text: 'Монтаж за 1 день' },
 ]
 
@@ -285,7 +285,7 @@ const asideItems = [
   'Выезд за 2–4 часа',
   'Ежедневно 8:00–22:00',
   'Монтаж в тот же день',
-  'Без предоплаты',
+  'Оплата после приёмки',
   'Гарантия 12 лет',
 ]
 

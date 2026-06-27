@@ -7,7 +7,7 @@
         <div class="cp-hero__content">
           <div class="cp-pretitle">Производитель полотен</div>
           <h1 class="cp-hero__title" itemprop="name">Натяжные потолки Bauf в&nbsp;Иркутске</h1>
-          <p class="cp-hero__price">Акция: <span>3-й потолок в подарок!</span> Гарантия 12 лет.<br>Монтаж за 1 день. Без предоплаты.</p>
+          <p class="cp-hero__price">Акция: <span>3-й потолок в подарок!</span> Гарантия 12 лет.<br>Монтаж за 1 день. Оплата после приёмки.</p>
           <div class="cp-hero__price-badge" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
             <meta itemprop="priceCurrency" content="RUB"/><meta itemprop="price" :content="String(price)"/>
             от <strong>{{ price }} ₽/м²</strong> — монтаж включён
@@ -66,6 +66,9 @@
         </div>
       </div>
     </section>
+
+    <!-- ГОТОВЫЕ РАБОТЫ -->
+    <CpWorksSection :works="worksWithPrice" @lightbox="openLightbox" />
 
     <section class="cp-calc-cta">
       <div class="container cp-calc-cta__inner">
@@ -242,7 +245,7 @@ const whyCards = [
   { icon: 'lucide:badge-check', title: '4 сертификата качества', desc: 'Международные сертификаты экологичности, безопасности и термоустойчивости.' },
   { icon: 'lucide:shield-check', title: 'Гарантия 12 лет', desc: 'Письменная гарантия по договору на полотно и монтаж. Без ограничений.' },
   { icon: 'lucide:droplets', title: 'Влагостойкое', desc: 'Специальная пропитка — подходит для ванных, кухонь, бассейнов. Удерживает 100 л/м².' },
-  { icon: 'lucide:banknote', title: 'Без предоплаты', desc: 'Оплата после монтажа и вашей приёмки. Наличными, картой или безналом.' },
+  { icon: 'lucide:banknote', title: 'Оплата после', desc: 'Платите только после приёмки готовой работы: наличными, картой или переводом.' },
   { icon: 'lucide:flag', title: 'Немецкие технологии', desc: 'Производство по стандартам Германии — стабильное качество в каждом рулоне.' },
 ]
 function maskPhone(e: Event) {

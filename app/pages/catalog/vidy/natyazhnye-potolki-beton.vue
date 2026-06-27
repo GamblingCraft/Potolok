@@ -1,13 +1,13 @@
 <template>
   <div itemscope itemtype="https://schema.org/Product">
     <section class="cp-hero">
-      <div class="cp-hero__bg" style="background-image:url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=1200&q=80')"></div>
+      <div class="cp-hero__bg" style="background-image:url('https://images.unsplash.com/photo-1604014237800-1c9102c219da?w=1200&q=80')"></div>
       <div class="cp-hero__overlay"></div>
       <div class="container cp-hero__inner">
         <div class="cp-hero__content">
-          <div class="cp-pretitle">Вид и технология</div>
-          <h1 class="cp-hero__title" itemprop="name">Бесщелевые натяжные потолки в&nbsp;Иркутске</h1>
-          <p class="cp-hero__price">Акция: <span>3-й потолок в подарок!</span> Гарантия 12 лет.<br>Монтаж без зазоров. Монтаж за 1 день. Оплата после приёмки.</p>
+          <div class="cp-pretitle">Эффект бетона</div>
+          <h1 class="cp-hero__title" itemprop="name">Натяжной потолок под бетон в&nbsp;Иркутске</h1>
+          <p class="cp-hero__price">Акция: <span>3-й потолок в подарок!</span> Гарантия 12 лет.<br>Фотопечать лофт-бетона — 1 день монтажа. Оплата после приёмки.</p>
           <div class="cp-hero__price-badge" itemprop="offers" itemscope itemtype="https://schema.org/Offer">
             <meta itemprop="priceCurrency" content="RUB"/><meta itemprop="price" :content="String(price)"/>
             от <strong>{{ price }} ₽/м²</strong> — монтаж включён
@@ -26,13 +26,23 @@
       <div class="container">
         <div class="cp-two-col">
           <div class="cp-main">
-            <h2 class="cp-h2">Бесщелевые натяжные потолки в Иркутске — технология Kraab</h2>
+            <h2 class="cp-h2">Натяжной потолок под бетон — лофт-эффект без штукатурки</h2>
             <div class="cp-text" itemprop="description">
-              <p>Бесщелевой натяжной потолок — современное решение, при котором полотно примыкает к стене вплотную, не оставляя ни зазоров, ни щелей. Конструкция схожа с гипсокартоном по внешнему виду, но превосходит его по скорости монтажа и возможности демонтажа.</p>
-              <p>Устанавливаем две системы бесщелевого крепления: <strong>Kraab</strong> — профиль с круглым шнуром, даёт мягкое округлое примыкание; <strong>Шток</strong> — прижимной механизм, примыкание более плотное и прямое. Обе системы подходят для ванных, кухонь, коридоров и спален.</p>
-              <h3>Особенности монтажа в Иркутске</h3>
-              <p>Для правильной установки важны ровные стены, места под светильники требуют закладных панелей, а помещение перед монтажом прогревается — ПВХ-плёнка становится эластичной. Материалы — только ПВХ; фактуры матовые, глянцевые, сатиновые. На полотно можно нанести фотопечать любого изображения.</p>
-              <h3>Преимущества бесщелевых натяжных потолков</h3>
+              <p>Потолок «под бетон» — это натяжное полотно с фотопечатью высокого разрешения, которое воспроизводит текстуру бетонной плиты настолько точно, что отличить от настоящего бетона можно только на ощупь. Популярное решение для лофт-интерьеров, студий, кухонь-гостиных и коммерческих помещений.</p>
+              <p>В отличие от декоративной штукатурки «под бетон», натяжной потолок монтируется за 1 день, не требует подготовки основания и скрывает любые коммуникации. Никакой пыли, грязи и дополнительных работ.</p>
+
+              <div class="cp-beton-badge">
+                <div class="cp-beton-badge__icon"><Icon name="lucide:printer" size="20"/></div>
+                <div>
+                  <div class="cp-beton-badge__title">Только 3 принтера в России</div>
+                  <div class="cp-beton-badge__desc">способны печатать текстуру бетона с фотореалистичной передачей зернистости, трещин и оттенков. Мы работаем с одним из них — разрешение печати от 1200 dpi.</div>
+                </div>
+              </div>
+
+              <h3>Как это работает</h3>
+              <p>Изображение бетонной текстуры наносится прямой печатью на ПВХ-полотно или ткань. Принтер воспроизводит глубину рисунка, оттенки серого, характерные трещины и поры — точно как у настоящего промышленного бетона. После монтажа полотно натягивается без швов и создаёт полную иллюзию монолитного перекрытия.</p>
+
+              <h3>Преимущества перед штукатуркой «под бетон»</h3>
               <ul class="cp-list">
                 <li v-for="adv in advantages" :key="adv.title"><strong>{{ adv.title }}.</strong> {{ adv.desc }}</li>
               </ul>
@@ -41,7 +51,7 @@
           <aside class="cp-aside">
             <div class="cp-aside-card">
               <div class="cp-aside-card__title">Вызвать замерщика</div>
-              <p class="cp-aside-card__desc">Замерщик приедет бесплатно, покажет образцы, рассчитает стоимость и оформит договор</p>
+              <p class="cp-aside-card__desc">Замерщик приедет бесплатно, покажет образцы текстур бетона, рассчитает стоимость и оформит договор</p>
               <div class="cp-aside-price">от <strong>{{ price }} ₽</strong><span>/м²</span></div>
               <ul class="cp-aside-list">
                 <li v-for="i in asideItems" :key="i"><Icon name="lucide:check-circle" size="14" class="cp-check"/>{{ i }}</li>
@@ -69,7 +79,7 @@
       <div class="container">
         <div class="cp-section-head">
           <div class="cp-pretitle cp-pretitle--dark">Фотогалерея</div>
-          <h2 class="cp-h2 cp-h2--center">Фотографии бесщелевых натяжных потолков</h2>
+          <h2 class="cp-h2 cp-h2--center">Фотографии натяжных потолков под бетон</h2>
           <p class="cp-section-desc">Наши реализованные проекты в Иркутске — нажмите на фото для просмотра</p>
         </div>
         <div class="cp-gallery-grid">
@@ -81,11 +91,41 @@
       </div>
     </section>
 
+    <!-- Сравнение: бетон vs штукатурка -->
+    <section class="cp-section cp-compare">
+      <div class="container">
+        <div class="cp-section-head">
+          <div class="cp-pretitle cp-pretitle--dark">Сравнение</div>
+          <h2 class="cp-h2 cp-h2--center">Натяжной «бетон» vs декоративная штукатурка</h2>
+        </div>
+        <div class="cp-compare-grid">
+          <div class="cp-compare-col cp-compare-col--win">
+            <div class="cp-compare-col__head">
+              <Icon name="lucide:check-circle" size="20"/>
+              Натяжной потолок «бетон»
+            </div>
+            <ul>
+              <li v-for="p in pros" :key="p"><Icon name="lucide:check" size="14"/>{{ p }}</li>
+            </ul>
+          </div>
+          <div class="cp-compare-col">
+            <div class="cp-compare-col__head">
+              <Icon name="lucide:x-circle" size="20"/>
+              Декоративная штукатурка
+            </div>
+            <ul>
+              <li v-for="c in cons" :key="c"><Icon name="lucide:x" size="14"/>{{ c }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="cp-calc-cta">
       <div class="container cp-calc-cta__inner">
         <div class="cp-calc-cta__icon"><Icon name="lucide:calculator" size="28"/></div>
         <div>
-          <div class="cp-calc-cta__title">Рассчитайте стоимость бесщелевого потолка онлайн</div>
+          <div class="cp-calc-cta__title">Рассчитайте стоимость потолка «бетон» онлайн</div>
           <p class="cp-calc-cta__desc">Укажите площадь и дополнительные работы — калькулятор покажет предварительную цену за 1 минуту</p>
         </div>
         <NuxtLink to="/kalkulyator" class="nav-btn cp-calc-cta__btn"><Icon name="lucide:arrow-right" size="16"/>Открыть калькулятор</NuxtLink>
@@ -96,7 +136,7 @@
       <div class="container">
         <div class="cp-section-head">
           <div class="cp-pretitle cp-pretitle--dark">Выгодные условия</div>
-          <h2 class="cp-h2 cp-h2--center">Акции и скидки на бесщелевые потолки</h2>
+          <h2 class="cp-h2 cp-h2--center">Акции и скидки на потолки «под бетон»</h2>
         </div>
         <CpPromoCards @callback="callbackOpen = true" />
       </div>
@@ -122,7 +162,7 @@
       <div class="container">
         <div class="cp-section-head">
           <div class="cp-pretitle cp-pretitle--dark">Вопросы и ответы</div>
-          <h2 class="cp-h2 cp-h2--center">Частые вопросы про бесщелевые натяжные потолки</h2>
+          <h2 class="cp-h2 cp-h2--center">Частые вопросы про натяжной потолок «бетон»</h2>
         </div>
         <div class="cp-faq-list">
           <div class="cp-faq-item" v-for="(q, i) in faqItems" :key="q.q" itemprop="mainEntity" itemscope itemtype="https://schema.org/Question" :class="{ open: faqOpen === i }" @click="faqOpen = faqOpen === i ? -1 : i">
@@ -137,12 +177,12 @@
       <div class="container">
         <div class="cp-seo-inner">
           <div class="cp-seo-content">
-            <h2>Бесщелевые натяжные потолки в Иркутске — цены с установкой</h2>
-            <p>Компания <strong>ПроПотолок</strong> монтирует бесщелевые натяжные потолки по системам Kraab и Шток в Иркутске. Материалы сертифицированы Роспотребнадзором. Оплата после приёмки, гарантия 12 лет.</p>
-            <h3>Какие помещения подходят</h3>
-            <p>Бесщелевые потолки устанавливаем в ванных комнатах, кухнях, коридорах, спальнях и гостиных. Система устойчива к влаге, подходит для помещений с повышенной влажностью. Также выполняем монтаж в частных домах по Иркутскому району.</p>
-            <h3>Монтаж в Иркутске — цена под ключ</h3>
-            <p>Замер бесплатный. Монтаж — 1 день. Оплата после приёмки. Гарантия 12 лет по договору. Дополнительно устанавливаем скрытые карнизы, закладные, LED-ленты.</p>
+            <h2>Натяжной потолок «бетон» в Иркутске — цены с установкой под ключ</h2>
+            <p>Компания <strong>ПроПотолок</strong> устанавливает натяжные потолки с эффектом бетона в Иркутске. Работаем с фотопечатью высокого разрешения — один из трёх принтеров в России, способных передать фотореалистичную текстуру промышленного бетона. Оплата после приёмки, гарантия 12 лет.</p>
+            <h3>Где применяется</h3>
+            <p>Потолок «под бетон» идеально вписывается в лофт-интерьеры, квартиры-студии, кухни-гостиные, офисы, шоу-румы и заведения общественного питания. Сочетается с металлом, деревом, кирпичом и бетонными стенами.</p>
+            <h3>Монтаж в Иркутске — замер бесплатно</h3>
+            <p>Выезжаем по всему Иркутску и Иркутскому району. Привезём образцы текстур бетона на дом. Монтаж — 1 день. Оплата после приёмки работ.</p>
           </div>
           <div class="cp-seo-links">
             <div class="cp-seo-links__title">Смотрите также</div>
@@ -157,8 +197,8 @@
     <section class="cp-cta">
       <div class="container cp-cta__inner">
         <div>
-          <h2 class="cp-cta__title">Хотите бесщелевой натяжной потолок?</h2>
-          <p class="cp-cta__desc">Вызовите замерщика — приедет бесплатно, покажет образцы и рассчитает стоимость на месте</p>
+          <h2 class="cp-cta__title">Хотите потолок «под бетон»?</h2>
+          <p class="cp-cta__desc">Вызовите замерщика — привезёт образцы текстур, рассчитает стоимость и оформит договор прямо на месте</p>
         </div>
         <div class="cp-cta__btns">
           <button class="nav-btn cp-cta__btn" @click="callbackOpen = true"><Icon name="lucide:phone-call" size="16"/>Заказать звонок</button>
@@ -188,62 +228,100 @@ import type { GalleryItem } from '~/data/gallery'
 import { usePageContent, usePageGallery, usePagePortfolio } from '~/composables/usePageContent'
 import { useCatalogPrices } from '~/composables/useCatalogPrices'
 
-const _content = await usePageContent('besshchelevye-natyazhnye-potolki')
+const _content = await usePageContent('natyazhnye-potolki-beton')
 const faqItems = ref(_content.faqItems ?? [
-  { q: 'Чем бесщелевая система Kraab отличается от обычной?', a: 'Система Kraab идеально примыкает к стене, не оставляя ни единого зазора и щели. Профиль состоит из двух частей — направляющей и круглого шнура, который после фиксации прижимает полотно к стене. В любой момент потолок можно снять и установить повторно.' },
-  { q: 'В чём разница между Kraab и Шток?', a: 'Kraab — шнур округлой формы, примыкание мягкое и закруглённое. Шток — прижимной механизм, примыкание более плотное и прямое. При работе со Штоком важна точность раскроя: ошибку скорректировать сложнее.' },
-  { q: 'Можно ли установить бесщелевой потолок в ванной?', a: 'Да. Бесщелевое ПВХ-полотно устойчиво к влаге, конденсата не образует. Устанавливаем в ванных комнатах и помещениях с повышенной влажностью без ограничений.' },
-  { q: 'Можно ли встроить карниз в бесщелевой потолок?', a: 'Да. В бесщелевую систему встраивается скрытый карниз для штор. Поверхность потолка при этом остаётся аккуратной — карниз не виден снаружи.' },
-  { q: 'Будет ли подавление шума в бесщелевом потолке?', a: 'Полотно может частично поглощать небольшие звуковые волны и снижать эхо. Если нужна полноценная шумоизоляция — можно дополнительно установить звукоизоляционный слой перед монтажом.' },
+  {
+    q: 'Отличается ли натяжной потолок «бетон» от настоящего бетонного?',
+    a: 'Визуально — практически нет. Разрешение печати от 1200 dpi воспроизводит текстуру, зернистость и оттенки настоящего бетона. Отличие только на ощупь: натяжное полотно мягкое и гладкое.',
+  },
+  {
+    q: 'Сколько принтеров в России умеют печатать реалистичный бетон?',
+    a: 'Только 3 принтера в стране обеспечивают нужное разрешение и цветопередачу для фотореалистичной текстуры промышленного бетона. Мы работаем с одним из них — это гарантирует качество изображения.',
+  },
+  {
+    q: 'Можно ли выбрать оттенок бетона? Тёмный, светлый, с трещинами?',
+    a: 'Да. В каталоге десятки вариантов: светлый лофт-бетон, тёмный промышленный, состаренный с патиной, с видимой арматурой и характерными трещинами. Также можем напечатать по вашему референсу.',
+  },
+  {
+    q: 'Подойдёт ли потолок «под бетон» для спальни?',
+    a: 'Да, особенно в сочетании с деревянными элементами и мягким освещением. Для спальни рекомендуем светло-серый или «состаренный» бетон — выглядит дорого и уютно, не давит психологически.',
+  },
+  {
+    q: 'Выгорает ли рисунок со временем?',
+    a: 'Нет. Пигменты для печати на ПВХ-полотне устойчивы к ультрафиолету. За 12 лет гарантийного срока рисунок не потеряет чёткость и насыщенность.',
+  },
 ])
 const advantages = ref(_content.advantages ?? [
-  { title: 'Нет зазоров и щелей', desc: 'Система Kraab прижимает полотно к стене вплотную — граница полностью скрыта, как у гипсокартона.' },
-  { title: 'Можно снять и поставить', desc: 'В любой момент потолок снимается для ремонта и устанавливается повторно без потери качества.' },
-  { title: 'Чёткий обход элементов', desc: 'Система огибает трубы, люстры, кондиционеры — края остаются ровными без зазоров.' },
-  { title: 'Быстрый монтаж', desc: 'Монтаж за 1 день без пыли и мусора. Работаем в жилых квартирах без выноса мебели.' },
-  { title: 'Без плинтусов', desc: 'Ровная плоскость без декоративных вставок и багетов — потолок смотрится монолитно.' },
-  { title: 'Долгий срок службы', desc: 'Гарантия 12 лет по договору. Полотно не провисает, не теряет цвет.' },
+  { title: 'Монтаж за 1 день',         desc: 'Против 3–7 дней нанесения и сушки декоративной штукатурки — со всей грязью и пылью.' },
+  { title: 'Никакой подготовки потолка', desc: 'Монтируем прямо поверх старого покрытия, скрываем трещины, перепады и коммуникации.' },
+  { title: 'Фотореалистичность',         desc: 'Печать 1200+ dpi — зернистость, поры, трещины и оттенки серого как у настоящего бетона.' },
+  { title: 'Можно мыть',                desc: 'Полотно протирается влажной тряпкой. Штукатурка боится влаги и механических воздействий.' },
+  { title: 'Гарантия 12 лет',           desc: 'Письменная гарантия на полотно, крепёж и монтажные работы по договору.' },
+  { title: 'Цена ниже',                 desc: 'Декоративная штукатурка с эффектом бетона стоит дороже в материале и работе.' },
 ])
 const seoLinks = ref(_content.seoLinks ?? [
-  { to: '/catalog/vidy/tenevye-natyazhnye-potolki', label: 'Теневые натяжные потолки' },
-  { to: '/catalog/vidy/paryashchie-natyazhnye-potolki', label: 'Парящие натяжные потолки' },
+  { to: '/catalog/vidy/natyazhnye-potolki-s-fotopechatyu', label: 'Потолки с фотопечатью' },
+  { to: '/catalog/vidy/natyazhnye-potolki-3d', label: '3D натяжные потолки' },
   { to: '/catalog/faktury/matovye-natyazhnye-potolki', label: 'Матовые натяжные потолки' },
-  { to: '/catalog/faktury/satinovye-natyazhnye-potolki', label: 'Сатиновые натяжные потолки' },
+  { to: '/catalog/faktury/tkanevye-natyazhnye-potolki', label: 'Тканевые потолки' },
 ])
 
-const gallery = ref(await usePageGallery('besshchelevye-natyazhnye-potolki'))
-const portfolio = ref(await usePagePortfolio('besshchelevye-natyazhnye-potolki'))
+const gallery = ref(await usePageGallery('natyazhnye-potolki-beton'))
+const portfolio = ref(await usePagePortfolio('natyazhnye-potolki-beton'))
 const _prices = await useCatalogPrices()
-const price = computed(() => _prices.value?.['tenevye'] ?? 300)
+const price = computed(() => _prices.value?.['beton'] ?? 550)
 
-const otherVidy = vidy.filter(v => v.id !== 'base' && v.slug !== '/catalog/vidy/besshchelevye-natyazhnye-potolki').map(v => ({ id: v.id, slug: v.slug, title: v.title }))
+const otherVidy = vidy.filter(v => v.slug !== '/catalog/vidy/natyazhnye-potolki-beton').map(v => ({ id: v.id, slug: v.slug, title: v.title }))
 const worksWithPrice = portfolio.value.filter(g => g.price)
 
-usePageSeoMeta('besshchelevye-natyazhnye-potolki')
+useHead({
+  title: 'Натяжной потолок под бетон в Иркутске — цены с монтажом | ПроПотолок',
+  meta: [
+    { name: 'description', content: `Натяжной потолок с эффектом бетона в Иркутске от ${price.value} ₽/м² с монтажом. Фотопечать 1200 dpi — только 3 принтера в России. Монтаж за 1 день, гарантия 12 лет. Бесплатный замер.` },
+    { property: 'og:type', content: 'product' },
+  ],
+})
 
 const callbackOpen = ref(false)
 const faqOpen = ref(-1)
 const formName = ref('')
 const formPhone = ref('')
-const visibleWorksCount = ref(4)
 const lightbox = reactive({ open: false, img: '', title: '' })
-const visibleWorks = computed(() => worksWithPrice.slice(0, visibleWorksCount.value))
 function openLightbox(img: string, title: string) { lightbox.img = img; lightbox.title = title; lightbox.open = true }
-function fmt(n: number) { return n.toLocaleString('ru-RU') }
+
 onMounted(() => {
   const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') lightbox.open = false }
   document.addEventListener('keydown', onKey)
   onUnmounted(() => document.removeEventListener('keydown', onKey))
 })
 
-const asideItems = ['Бесплатный замер на дому', 'Монтаж включён в цену', 'Гарантия 12 лет по договору', 'Оплата после монтажа', 'Работаем в выходные']
+const asideItems = ['Бесплатный замер на дому', 'Образцы текстур бетона на выбор', 'Монтаж включён в цену', 'Гарантия 12 лет по договору', 'Оплата после приёмки']
+
 const whyCards = [
-  { icon: 'lucide:minimize-2',    title: 'Нет зазоров',          desc: 'Идеально чистое примыкание к стене — не видно ни профиля, ни шва.' },
-  { icon: 'lucide:badge-check',   title: 'Сертификаты',          desc: 'На все фактуры предоставим сертификаты соответствия по запросу.' },
-  { icon: 'lucide:shield-check',  title: 'Гарантия 12 лет',      desc: 'Письменная гарантия по договору на 12 лет.' },
-  { icon: 'lucide:globe',         title: 'Европейские материалы', desc: 'MSD, Bauf, Descor, Clipso — премиальные полотна на складе.' },
-  { icon: 'lucide:banknote',      title: 'Оплата после',       desc: 'Платите только после приёмки готовой работы: наличными, картой или переводом.' },
-  { icon: 'lucide:hammer',        title: 'Быстрый монтаж',       desc: 'Стандартная комната — 1 день, без пыли и шума.' },
+  { icon: 'lucide:printer',       title: '3 принтера в России',   desc: 'Работаем с одним из трёх принтеров в стране, способных печатать фотореалистичную текстуру бетона с разрешением 1200+ dpi.' },
+  { icon: 'lucide:badge-check',   title: 'Сертификаты',           desc: 'На все полотна и расходники предоставим сертификаты соответствия по запросу.' },
+  { icon: 'lucide:shield-check',  title: 'Гарантия 12 лет',       desc: 'Письменная гарантия по договору. Рисунок не выгорает, не смывается и не трескается.' },
+  { icon: 'lucide:palette',       title: 'Десятки текстур',       desc: 'Светлый, тёмный, состаренный, с арматурой — привезём образцы на замер.' },
+  { icon: 'lucide:banknote',      title: 'Оплата после',          desc: 'Платите только после приёмки готовой работы: наличными, картой или переводом.' },
+  { icon: 'lucide:hammer',        title: 'Монтаж за 1 день',      desc: 'Комнату монтируем за 2–4 часа без пыли, грязи и шума.' },
+]
+
+const pros = [
+  'Монтаж за 1 день без пыли и грязи',
+  'Не нужна подготовка основания',
+  'Скрывает коммуникации и дефекты',
+  'Фотореалистичная текстура 1200 dpi',
+  'Можно мыть влажной тряпкой',
+  'Гарантия 12 лет по договору',
+  'Цена ниже, чем у штукатурки',
+]
+const cons = [
+  'Нанесение 3–7 дней + сушка',
+  'Требует идеально ровного основания',
+  'Много пыли и строительного мусора',
+  'Боится влаги и царапин',
+  'Сложно отремонтировать участок',
+  'Стоит дороже в работе и материале',
 ]
 
 function maskPhone(e: Event) {
@@ -269,9 +347,11 @@ function maskPhone(e: Event) {
 .cp-h2 { font-size: 30px; font-weight: 800; color: var(--dark); margin: 0 0 10px; line-height: 1.2; }
 .cp-h2--center { text-align: center; }
 .cp-section-desc { font-size: 15px; color: var(--gray); max-width: 560px; margin: 0 auto; line-height: 1.6; }
+
+/* HERO */
 .cp-hero { position: relative; min-height: 480px; display: flex; align-items: center; }
 .cp-hero__bg { position: absolute; inset: 0; background-size: cover; background-position: center; z-index: 0; }
-.cp-hero__overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.82) 0%, rgba(0,0,0,.55) 55%, rgba(0,0,0,.2) 100%); z-index: 1; }
+.cp-hero__overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.85) 0%, rgba(0,0,0,.6) 55%, rgba(0,0,0,.25) 100%); z-index: 1; }
 .cp-hero__inner { position: relative; z-index: 2; padding-top: 56px; padding-bottom: 56px; }
 .cp-hero__content { max-width: 620px; }
 .cp-hero__title { font-size: 42px; font-weight: 900; color: #fff; line-height: 1.15; margin-bottom: 14px; }
@@ -283,6 +363,8 @@ function maskPhone(e: Event) {
 .cp-inp { flex: 1; min-width: 160px; padding: 13px 16px; border: none; border-radius: 10px; font-size: 15px; font-family: var(--font); color: var(--dark); outline: none; background: rgba(255,255,255,.95); }
 .cp-hero__btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px; font-size: 15px; border-radius: 10px; white-space: nowrap; }
 .cp-policy { font-size: 11px; color: rgba(255,255,255,.35); margin: 0; }
+
+/* ОПИСАНИЕ */
 .cp-about { background: #fff; }
 .cp-two-col { display: grid; grid-template-columns: 1fr 300px; gap: 56px; align-items: start; }
 .cp-text h3 { font-size: 17px; font-weight: 700; color: var(--dark); margin: 22px 0 8px; }
@@ -290,7 +372,20 @@ function maskPhone(e: Event) {
 .cp-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
 .cp-list li { font-size: 14px; color: #555; line-height: 1.6; padding-left: 16px; position: relative; }
 .cp-list li::before { content: '—'; position: absolute; left: 0; color: var(--accent); }
-.cp-aside-card { background: #fff; border: 2px solid var(--accent); border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+
+/* Бейдж "3 принтера" */
+.cp-beton-badge {
+  display: flex; gap: 14px; align-items: flex-start;
+  background: #1a1a1a; border-radius: 14px; padding: 18px 20px;
+  margin: 20px 0; border-left: 4px solid var(--accent);
+}
+.cp-beton-badge__icon { width: 40px; height: 40px; flex-shrink: 0; background: var(--accent); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #000; }
+.cp-beton-badge__title { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+.cp-beton-badge__desc  { font-size: 13px; color: rgba(255,255,255,.6); line-height: 1.6; }
+
+/* САЙДБАР */
+.cp-aside { position: sticky; top: 100px; display: flex; flex-direction: column; gap: 20px; }
+.cp-aside-card { background: #fff; border: 2px solid var(--accent); border-radius: 16px; padding: 24px; }
 .cp-aside-card__title { font-size: 16px; font-weight: 800; color: var(--dark); margin-bottom: 8px; }
 .cp-aside-card__desc { font-size: 13px; color: var(--gray); line-height: 1.6; margin-bottom: 16px; }
 .cp-aside-price { font-size: 22px; font-weight: 900; color: var(--dark); margin-bottom: 4px; }
@@ -304,24 +399,44 @@ function maskPhone(e: Event) {
 .cp-aside-nav__title { font-size: 12px; font-weight: 700; color: var(--gray); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 10px; }
 .cp-aside-nav__link { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--dark); text-decoration: none; padding: 6px 0; border-bottom: 1px solid #eee; }
 .cp-aside-nav__link:last-child { border-bottom: none; }
+
+/* СРАВНЕНИЕ */
+.cp-compare { background: #fff; }
+.cp-compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 860px; margin: 0 auto; }
+.cp-compare-col { border-radius: 16px; border: 1.5px solid #eee; overflow: hidden; }
+.cp-compare-col--win { border-color: var(--accent); }
+.cp-compare-col__head { display: flex; align-items: center; gap: 10px; padding: 16px 20px; font-size: 15px; font-weight: 800; color: var(--dark); background: #f7f7f7; border-bottom: 1.5px solid #eee; }
+.cp-compare-col--win .cp-compare-col__head { background: #fffbe6; border-color: var(--accent); color: var(--dark); }
+.cp-compare-col ul { list-style: none; padding: 16px 20px; margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.cp-compare-col li { display: flex; align-items: center; gap: 10px; font-size: 14px; color: #555; }
+.cp-compare-col--win li { color: var(--dark); font-weight: 500; }
+
+/* КАЛЬКУЛЯТОР CTA */
 .cp-calc-cta { background: var(--dark); padding: 32px 0; }
 .cp-calc-cta__inner { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
 .cp-calc-cta__icon { color: var(--accent); flex-shrink: 0; }
 .cp-calc-cta__title { font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 4px; }
 .cp-calc-cta__desc { font-size: 13px; color: rgba(255,255,255,.5); }
 .cp-calc-cta__btn { margin-left: auto; flex-shrink: 0; }
+
+/* ПОЧЕМУ МЫ */
 .cp-why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
 .cp-why-card { background: #fff; border-radius: 12px; padding: 20px; border: 1px solid #eee; }
 .cp-why-card__icon { width: 40px; height: 40px; background: #fffbe6; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--accent); margin-bottom: 12px; }
 .cp-why-card__title { font-size: 14px; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
 .cp-why-card__desc { font-size: 13px; color: var(--gray); line-height: 1.6; }
+
+/* FAQ */
+.cp-faq { background: #f7f7f7; }
 .cp-faq-list { display: flex; flex-direction: column; gap: 8px; max-width: 800px; margin: 0 auto; }
 .cp-faq-item { background: #fff; border-radius: 12px; border: 1px solid #eee; overflow: hidden; cursor: pointer; }
 .cp-faq-item__q { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 20px; font-size: 15px; font-weight: 600; color: var(--dark); }
 .cp-faq-item__arrow { flex-shrink: 0; color: var(--gray); }
 .cp-faq-item__a { max-height: 0; overflow: hidden; transition: max-height .3s ease; padding: 0 20px; font-size: 14px; color: #555; line-height: 1.7; }
 .cp-faq-item.open .cp-faq-item__a { max-height: 300px; padding-bottom: 16px; }
-.cp-seo { background: #f7f7f7; }
+
+/* SEO */
+.cp-seo { background: #fff; }
 .cp-seo-inner { display: grid; grid-template-columns: 1fr 260px; gap: 40px; }
 .cp-seo-content h2 { font-size: 20px; font-weight: 800; color: var(--dark); margin: 0 0 12px; }
 .cp-seo-content h3 { font-size: 16px; font-weight: 700; color: var(--dark); margin: 20px 0 6px; }
@@ -329,6 +444,8 @@ function maskPhone(e: Event) {
 .cp-seo-links__title { font-size: 13px; font-weight: 700; color: var(--gray); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 12px; }
 .cp-seo-link { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--dark); text-decoration: none; padding: 6px 0; border-bottom: 1px solid #eee; }
 .cp-seo-link:last-child { border-bottom: none; }
+
+/* CTA */
 .cp-cta { background: var(--accent); padding: 56px 0; }
 .cp-cta__inner { display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
 .cp-cta__title { font-size: 28px; font-weight: 900; color: var(--dark); margin: 0 0 8px; }
@@ -336,49 +453,37 @@ function maskPhone(e: Event) {
 .cp-cta__btns { display: flex; gap: 12px; flex-wrap: wrap; }
 .cp-cta__btn { background: var(--dark); color: #fff; }
 .cp-cta__outline { display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px; font-size: 15px; font-weight: 700; font-family: var(--font); border: 2px solid rgba(0,0,0,.3); border-radius: 50px; color: var(--dark); text-decoration: none; }
-.cp-works { background: #f7f7f7; }
-.cp-works-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
-.cp-work-card { background: #fff; border-radius: 14px; overflow: hidden; border: 1px solid #eee; display: flex; flex-direction: column; }
-.cp-work-card__img-wrap { position: relative; aspect-ratio: 4/3; overflow: hidden; cursor: pointer; background: #f0f0f0; }
-.cp-work-card__img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
-.cp-work-card__img-wrap:hover .cp-work-card__img { transform: scale(1.07); }
-.cp-work-card__zoom { position: absolute; inset: 0; background: rgba(0,0,0,.3); display: flex; align-items: center; justify-content: center; color: #fff; opacity: 0; transition: opacity .2s; }
-.cp-work-card__img-wrap:hover .cp-work-card__zoom { opacity: 1; }
-.cp-work-card__body { padding: 14px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
-.cp-work-card__title { font-size: 14px; font-weight: 700; color: var(--dark); }
-.cp-work-card__details { display: flex; flex-wrap: wrap; gap: 4px; }
-.cp-work-card__detail { font-size: 11px; background: #f0f0f0; border-radius: 20px; padding: 2px 10px; color: #666; }
-.cp-work-card__footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
-.cp-work-card__area { font-size: 12px; color: var(--gray); }
-.cp-work-card__price { font-size: 15px; font-weight: 800; color: var(--dark); }
-.cp-works-more { text-align: center; }
-.cp-more-btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 24px; font-size: 14px; font-weight: 700; background: none; border: 2px solid #ddd; border-radius: 50px; color: var(--dark); cursor: pointer; font-family: var(--font); transition: border-color .15s; }
-.cp-more-btn:hover { border-color: var(--accent); }
-.cp-gallery { background: #fff; }
+
+/* ГАЛЕРЕЯ */
+.cp-gallery { background: #f7f7f7; }
 .cp-gallery-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
-.cp-gallery-item { position: relative; aspect-ratio: 4/3; overflow: hidden; border-radius: 10px; cursor: pointer; background: #f0f0f0; }
+.cp-gallery-item { position: relative; aspect-ratio: 4/3; overflow: hidden; border-radius: 10px; cursor: pointer; background: #e8e8e8; }
 .cp-gallery-img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
 .cp-gallery-item:hover .cp-gallery-img { transform: scale(1.07); }
 .cp-gallery-overlay { position: absolute; inset: 0; background: rgba(0,0,0,.35); display: flex; align-items: center; justify-content: center; color: #fff; opacity: 0; transition: opacity .2s; }
 .cp-gallery-item:hover .cp-gallery-overlay { opacity: 1; }
+
+/* LIGHTBOX */
 .cp-lightbox { position: fixed; inset: 0; z-index: 600; background: rgba(0,0,0,.85); display: flex; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(4px); }
 .cp-lightbox__box { position: relative; max-width: 1000px; width: 100%; max-height: 90vh; display: flex; flex-direction: column; }
-.cp-lightbox__close { position: absolute; top: -44px; right: 0; background: rgba(255,255,255,.15); border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; color: #fff; display: flex; align-items: center; justify-content: center; transition: background .15s; }
-.cp-lightbox__close:hover { background: rgba(255,255,255,.25); }
+.cp-lightbox__close { position: absolute; top: -44px; right: 0; background: rgba(255,255,255,.15); border: none; border-radius: 50%; width: 36px; height: 36px; cursor: pointer; color: #fff; display: flex; align-items: center; justify-content: center; }
 .cp-lightbox__img { width: 100%; height: auto; max-height: 80vh; object-fit: contain; border-radius: 10px; display: block; }
 .cp-lightbox__title { text-align: center; color: rgba(255,255,255,.7); font-size: 14px; margin-top: 12px; }
 .lb-enter-active, .lb-leave-active { transition: opacity .2s; }
 .lb-enter-from, .lb-leave-to { opacity: 0; }
-@media (max-width: 1100px) { .cp-works-grid { grid-template-columns: repeat(3, 1fr); } .cp-gallery-grid { grid-template-columns: repeat(3, 1fr); } }
+
+@media (max-width: 1100px) { .cp-gallery-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 900px) {
   .cp-two-col { grid-template-columns: 1fr; }
+  .cp-aside { position: static; }
   .cp-why-grid { grid-template-columns: 1fr 1fr; }
   .cp-seo-inner { grid-template-columns: 1fr; }
-  .cp-works-grid { grid-template-columns: repeat(2, 1fr); }
+  .cp-compare-grid { grid-template-columns: 1fr; }
   .cp-gallery-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 600px) {
   .cp-hero__title { font-size: 28px; }
   .cp-why-grid { grid-template-columns: 1fr; }
+  .cp-gallery-grid { grid-template-columns: repeat(2, 1fr); }
 }
 </style>

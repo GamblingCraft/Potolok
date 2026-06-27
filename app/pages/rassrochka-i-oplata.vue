@@ -6,12 +6,12 @@
         <div>
           <div class="ov-pretitle">Удобные условия</div>
           <h1 class="ov-hero__title">Способы оплаты</h1>
-          <p class="ov-hero__desc">Принимаем оплату наиболее популярными способами. Без предоплаты — оплата после монтажа и вашей приёмки работы.</p>
+          <p class="ov-hero__desc">Принимаем оплату наиболее популярными способами. Оплата после монтажа и вашей приёмки работы.</p>
         </div>
         <div class="ov-hero__note">
           <Icon name="lucide:shield-check" size="28" class="ov-hero__note-icon"/>
           <div>
-            <div class="ov-hero__note-title">Без предоплаты</div>
+            <div class="ov-hero__note-title">Оплата после</div>
             <div class="ov-hero__note-text">Оплата производится только после монтажа и вашей приёмки работы</div>
           </div>
         </div>
